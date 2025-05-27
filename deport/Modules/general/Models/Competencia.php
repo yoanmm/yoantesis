@@ -1,0 +1,204 @@
+<?php
+/**Generate by ASGENS
+*@author Yoan  
+*@date Sat May 10 00:07:04 GMT-04:00 2025  
+*@time Sat May 10 00:07:04 GMT-04:00 2025  
+*/
+namespace Modules\general\Models;
+
+
+use App\Models\BaseModel;
+
+use Illuminate\Support\Carbon;
+
+/**
+ * Este es la clase modelo para la tabla competencia.
+ *
+ * Los siguientes son los campos de la tabla 'competencia':
+ * @property integer $id_competencia
+ * @property integer $id_evento
+ * @property integer $id_deporte
+ * @property integer $id_supervisor
+ * @property string $resultado_competencia
+ * @property boolean $terminado
+ * @property Carbon $fin_inscripcion
+
+ * Los siguientes son las relaciones de este modelo :
+
+ * @property Deporte $deporte
+ * @property Persona_arbitro $supervisor
+ * @property Evento_deportivo $evento
+ * @property Congresillo_deporte[] $array_congresillo_deporte
+ * @property Equipo[] $array_equipo
+ * @property Juego[] $array_juego
+ * @property Sancion[] $array_sancion
+ **/
+
+
+
+class Competencia extends BaseModel 
+{
+ /**
+     * The table associated with the model.
+     *
+     * @var string
+     */
+    protected $table = 'competencia';
+
+   /**
+     * The connection name for the model.
+     *
+     * @var string|null
+     */
+    protected $connection = 'db';
+
+    /**
+     * The primarykey associated with the table-model.
+     *
+     * @var integer
+     */
+    protected $primaryKey = 'id_competencia';
+
+    /**
+     * Indicates if the model should be timestamped.
+     *
+     * @var bool
+     */
+
+    public $timestamps = false;
+
+
+    /**
+     * The "type" of the auto-incrementing ID.
+     *
+     * @var string
+     */
+    protected $keyType = 'integer';
+
+    const RELATIONS = ['deporte','supervisor','evento','array_congresillo_deporte','array_equipo','array_juego','array_sancion'];
+/**
+     * The number of models to return for pagination.
+     *
+     * @var int
+     */
+    protected $perPage = 15;
+
+    protected $appends = [];
+
+    /**
+     * Model Class Name
+     *
+     * @var string
+     */
+    const MODEL = 'Competencia';
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+      'id_competencia',
+      'id_evento',
+      'id_deporte',
+      'id_supervisor',
+      'resultado_competencia',
+      'terminado',
+      'fin_inscripcion'
+    ];
+
+	 /**
+     * Get the Deporte
+     */
+	  public function deporte()
+		{
+			return $this->belongsTo(Deporte::class,'id_deporte','id_deporte');
+		}
+
+	 /**
+     * Get the Persona_arbitro
+     */
+	  public function supervisor()
+		{
+			return $this->belongsTo(Persona_arbitro::class,'id_supervisor','id_supervisor');
+		}
+
+	 /**
+     * Get the Evento_deportivo
+     */
+	  public function evento()
+		{
+			return $this->belongsTo(Evento_deportivo::class,'id_evento','id_evento');
+		}
+
+
+	 /**
+     * 
+     * Get array_congresillo_deporte
+     */
+	  public function array_congresillo_deporte()
+		{
+			return $this->hasMany(Congresillo_deporte::class,'id_competencia','id_competencia');
+		}
+
+	 /**
+     * 
+     * Get array_equipo
+     */
+	  public function array_equipo()
+		{
+			return $this->hasMany(Equipo::class,'id_competencia','id_competencia');
+		}
+
+	 /**
+     * 
+     * Get array_juego
+     */
+	  public function array_juego()
+		{
+			return $this->hasMany(Juego::class,'id_competencia','id_competencia');
+		}
+
+	 /**
+     * 
+     * Get array_sancion
+     */
+	  public function array_sancion()
+		{
+			return $this->hasMany(Sancion::class,'id_competencia','id_competencia');
+		}
+
+
+    protected function rules($scenario='create')
+    {
+          $rules=[
+            'create'=>[
+                'id_evento' =>'nullable|exists:'.$this->connection.'.evento_deportivo,id_evento',
+                'id_deporte' =>'nullable|exists:'.$this->connection.'.deporte,id_deporte',
+                'id_supervisor' =>'nullable|exists:'.$this->connection.'.persona_arbitro,id_supervisor',
+                'resultado_competencia' =>'nullable',
+                'terminado' =>'nullable|boolean',
+                'fin_inscripcion' =>'nullable|date'
+            ],
+            'update'=>[
+                'id_competencia' =>'required|unique:'.$this->connection.'.competencia,id_competencia,'.$this->id_competencia.',id_competencia',
+                'id_evento' =>'nullable|exists:'.$this->connection.'.evento_deportivo,id_evento',
+                'id_deporte' =>'nullable|exists:'.$this->connection.'.deporte,id_deporte',
+                'id_supervisor' =>'nullable|exists:'.$this->connection.'.persona_arbitro,id_supervisor',
+                'resultado_competencia' =>'nullable',
+                'terminado' =>'nullable|boolean',
+                'fin_inscripcion' =>'nullable|date'
+            ]
+        ];
+        if(!isset($rules[$scenario]))
+            throw new \Exception('Scenario '.$scenario.' not exist');
+        return $rules[$scenario];
+    }
+
+ protected static function boot()
+    {
+        parent::boot(); // TODO: Change the autogenerated stub
+
+    }
+
+}
+
