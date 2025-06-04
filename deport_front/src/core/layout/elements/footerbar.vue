@@ -1,6 +1,6 @@
 <template>
   <footer class="footer d-flex justify-content-center align-items-center">
-    <p class="pt-3">ASISTUR &copy; Copyright 2021. All rights reserved.</p>
+    <p class="pt-3">Atlexus &copy; Copyright 2025. Todos los derechos reservados.</p>
   </footer>
 </template>
 

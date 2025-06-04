@@ -1,122 +1,124 @@
 <template>
-  <div class="login p-50" @keyup.enter="submitForm">
-    <div v-if="error" class="alert alert-icon"
-         style="color:#ee5b5b;background-color:white;font-weight: bold;text-align: center" role="alert">
-      <i class="fa fa-info-circle"></i><span style="margin: 1rem">{{ message_error }}</span>
-    </div>
-
-    <!-- Formulario de Login -->
-    <tc-form
-        v-if="!forgotPasswordMode"
-        nested="user"
-        :vobject="$v"
-        ref="form"
-        class="mt-3 mt-sm-5"
-    >
-      <div class="row">
-        <div class="col-12">
-          <tc-form-item>
-            <label class="control-label">Nombre de Usuario<span class="required_field">*</span></label>
-            <tc-input type="text" v-model.trim="user.username" name="username" placeholder="Username"
-                      class="login-input"/>
-          </tc-form-item>
-        </div>
-        <div class="col-12">
-          <tc-form-item>
-            <label class="control-label">Contraseña<span class="required_field">*</span></label>
-            <tc-input type="password" name="password" v-model="user.password" placeholder="Password"/>
-          </tc-form-item>
-        </div>
-        <div class="col-12">
-          <div class="d-block d-sm-flex align-items-center">
-            <a @click="toggleForgotPassword" class="ml-auto" style="cursor: pointer; color:#011058;">
-              ¿Olvidó su contraseña?
-            </a>
-          </div>
-        </div>
-
-
+  <div class="login-page-wrapper" @keyup.enter="submitForm">
+    <div class="login-container">
+      <!-- Panel izquierdo decorativo -->
+      <div class="login-info-panel">
+        <img
+          src="/static/assets/img/atlexus_logo.png"
+          alt="Atlexus Logo"
+          class="img-fluid"
+        />
       </div>
-    </tc-form>
 
-    <!-- Formulario de Recuperación de Contraseña -->
-    <tc-form v-else>
-      <div class="row">
-        <div class="col-12">
-          <tc-form-item>
-            <label class="control-label">Correo Electrónico<span class="required_field">*</span></label>
-            <tc-input type="email" v-model="recoveryEmail" name="email" placeholder="Correo Electrónico"/>
-          </tc-form-item>
+      <!-- Panel derecho funcional -->
+      <div class="login-form-panel">
+        <div class="text-center">
+          <p class="form-subtitle font-semibold">Bienvenido</p>
+          <p class="text-base text-gray-600 mt-1">
+            Por favor, inicie sesión para continuar
+          </p>
         </div>
-        <div class="col-12">
-          <div class="d-block d-sm-flex align-items-center">
-            <a @click="toggleForgotPassword" class="ml-auto" style="cursor: pointer; color:#011058;">
-              Volver al inicio de sesión
-            </a>
-          </div>
-        </div>
-      </div>
-    </tc-form>
 
-    <div class="col-12 mt-3">
-      <a-button
+        <!-- Alerta de error -->
+        <div v-if="error" class="login-error">
+          <i class="fa fa-info-circle"></i> {{ message_error }}
+        </div>
+
+        <!-- Formulario de Login -->
+        <tc-form
           v-if="!forgotPasswordMode"
+          nested="user"
+          :vobject="$v"
+          ref="form"
+        >
+          <tc-form-item>
+            <tc-input
+              type="text"
+              v-model.trim="user.username"
+              name="username"
+              placeholder="Email"
+              class="w-full py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+          </tc-form-item>
+          <tc-form-item>
+            <tc-input
+              type="password"
+              v-model="user.password"
+              name="password"
+              placeholder="Password"
+              class="w-full py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+          </tc-form-item>
+
+          <!-- <div class="form-footer">
+            <a @click="toggleForgotPassword" class="forgot-link">Forgot?</a>
+          </div> -->
+        </tc-form>
+
+        <!-- Formulario de recuperación -->
+        <!-- <tc-form v-else>
+          <tc-form-item>
+            <tc-input
+              type="email"
+              v-model="recoveryEmail"
+              name="email"
+              placeholder="Correo Electrónico"
+              class="login-input"
+            />
+          </tc-form-item>
+          <div class="form-footer">
+            <a @click="toggleForgotPassword" class="forgot-link">Volver al inicio de sesión</a>
+          </div>
+        </tc-form> -->
+
+        <!-- Botón -->
+        <a-button
           type="button"
-          class="btn btn-login text-uppercase"
           :loading="loading"
-          @click="login_action"
-      >
-        Entrar
-      </a-button>
-      <a-button
-          v-else
-          type="button"
-          class="btn btn-login text-uppercase"
-          :loading="loading"
-          @click="sendRecoveryEmail"
-      >
-        Enviar
-      </a-button>
+          @click="submitForm"
+          class="w-full py-2 rounded-md border-blue-500 text-blue-500 font-bold hover:bg-blue-50 focus:outline-none focus:ring-2 focus:ring-blue-300"
+        >
+          {{ forgotPasswordMode ? "Enviar" : "Entrar" }}
+        </a-button>
+
+        <!-- <p class="signup-text">Don’t have account? <a href="#">Sign up</a></p> -->
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-import {required} from 'vuelidate/lib/validators';
-import axios from "axios";
+import { required } from "vuelidate/lib/validators";
 import SpinnerLoading from "../../shared/loading/SpinnerLoading.vue";
 import * as utils from "../../../helpers/helpers/utils";
 
 export default {
   name: "login",
-  components: {SpinnerLoading},
+  components: { SpinnerLoading },
   inject: {
     login: {
-      default: () => {
-      }
-    }
+      default: () => {},
+    },
   },
+
   validations: {
     user: {
-      username: {required},
-      password: {required},
+      username: { required },
+      password: { required },
     },
   },
   data() {
     return {
       user: {
-        username: '',
-        password: '',
+        username: "",
+        password: "",
       },
-      recoveryEmail: '',
+      recoveryEmail: "",
       forgotPasswordMode: false,
       error: false,
       loading: false,
-      message_error: 'Error en usuario y contraseña',
+      message_error: "Error en usuario y contraseña",
     };
-  },
-  mounted() {
-
   },
   methods: {
     submitForm() {
@@ -132,18 +134,20 @@ export default {
     async login_action() {
       this.error = false;
       this.loading = true;
-
-        if (this.$refs.form.validate()) {
-          await this.$store.site.login(this.user).then(() => {
+      if (this.$refs.form.validate()) {
+        await this.$store.site
+          .login(this.user)
+          .then(() => {
             this.login();
-          }).catch((error) => {
-            this.message_error = error.response?.status === 422
-                ? 'Error en usuario y contraseña'
-                : 'Error desconocido, contacte al administrador';
+          })
+          .catch((error) => {
+            this.message_error =
+              error.response?.status === 422
+                ? "Error en usuario y contraseña"
+                : "Error desconocido, contacte al administrador";
             this.error = true;
           });
-        }
-
+      }
       this.loading = false;
       await this.captcha_refresh();
     },
@@ -151,21 +155,72 @@ export default {
       this.loading = true;
       try {
         await this.$store.site.passwordRecovery({ email: this.recoveryEmail });
-        utils.openNotificationWithIcon("success", "Correo Enviado", "Por favor revise su correo electrónico.");
+        utils.openNotificationWithIcon(
+          "success",
+          "Correo Enviado",
+          "Por favor revise su correo electrónico."
+        );
         this.toggleForgotPassword();
       } catch (error) {
-        const errorMessage = error.response?.data?.message || "No se pudo enviar el correo.";
+        const errorMessage =
+          error.response?.data?.message || "No se pudo enviar el correo.";
         utils.openNotificationWithIcon("error", "Error", errorMessage);
       } finally {
         this.loading = false;
       }
-    }
-
-  }
+    },
+  },
 };
 </script>
 
-
 <style scoped>
+.login-page-wrapper {
+  height: 100vh;
+  background: linear-gradient(to right, #d3e0f3, #e5ecfb);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "Segoe UI", sans-serif;
+}
 
+.login-container {
+  display: flex;
+  width: 850px;
+  max-width: 100%;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.login-info-panel {
+  flex: 1;
+  background: linear-gradient(to bottom right, #578ca2, #7cc3f0);
+  color: white;
+  padding: 3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.login-form-panel {
+  flex: 1;
+  padding: 3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.form-subtitle {
+  font-size: 1.3rem;
+  color: #888;
+}
+
+.login-error {
+  background: #ffe6e6;
+  color: #c0392b;
+  font-weight: bold;
+  padding: 0.5rem;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+}
 </style>

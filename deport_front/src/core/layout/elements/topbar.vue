@@ -47,11 +47,11 @@
           </ul>
 
           <ul class="navbar-nav nav-right ml-auto">
-            <div class="mt-20">
+            <!-- <div class="mt-20">
               <span class="mr-2 mb-2 mr-sm-0 mb-sm-0 badge badge-pill badge-primary-inverse">Sistema actualizado {{
                   date
                 }}</span>
-            </div>
+            </div> -->
             <li class="nav-item dropdown d-none">
               <a class="nav-link dropdown-toggle" href="javascript:void(0)" id="navbarDropdown2"
                  role="button"
