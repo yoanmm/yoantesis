@@ -10441,7 +10441,7 @@ p-bottom-0 {
   background: #fb0792;
 }
 .label-inverse {
-  background: #2c2e3e;
+  background: #b0ddf8;
 }
 .label-custom {
   background: #2bcbba;
@@ -13503,7 +13503,7 @@ body.sidebar-mini .app-main .container-fluid {
   }
 }
 .app-main .container-fluid {
-  padding: 95px 30px 60px 30px;
+  padding: 95px 0 60px 200px;
   transition: all 0.3s ease-out;
 }
 @media screen and (min-width: 577px) and (max-width: 767px) {
@@ -13699,7 +13699,7 @@ ol.breadcrumb {
   }
 }
 .top-bar .navbar .navbar-header {
-  background: #2c2e3e;
+  background: #b0ddf8;
   width: 240px;
   -webkit-flex-shrink: 0;
   -ms-flex-negative: 0;
@@ -14629,7 +14629,7 @@ ol.breadcrumb {
   -ms-flex-preferred-size: auto !important;
   flex-basis: auto !important;
   margin-bottom: auto;
-  background: #2c2e3e;
+  background: #b0ddf8;
   height: 100%;
   overflow: hidden;
 }
@@ -14639,7 +14639,7 @@ ol.breadcrumb {
 .app-navbar .sidebar-nav ul.metismenu li a {
   border: none !important;
   padding: 0.9rem 1.6rem;
-  color: #a2a5bd;
+  color: #74616b;
   display: flex;
 }
 .app-navbar .sidebar-nav ul.metismenu li a i {
@@ -14649,7 +14649,7 @@ ol.breadcrumb {
 }
 .app-navbar .sidebar-nav ul.metismenu li a:focus,
 .app-navbar .sidebar-nav ul.metismenu li a:hover {
-  background: #1f212d;
+  background: #b0ddf8;
   color: #fff;
   transition: all 0.3s ease-out;
 }
@@ -14719,7 +14719,7 @@ ol.breadcrumb {
   position: absolute;
   width: 2px;
   height: 100%;
-  background: #37394d;
+  background: #578ca2;
   top: 0;
   left: 30px;
 }
@@ -14728,7 +14728,7 @@ ol.breadcrumb {
   -webkit-transform: rotate(225deg) translateY(-50%);
 }
 .app-navbar .sidebar-nav ul.metismenu li ul {
-  background: #2c2e3e;
+  background: #b0ddf8;
 }
 .app-navbar .sidebar-nav ul.metismenu li ul li a {
   padding: 0.6rem 2rem;
@@ -14816,7 +14816,7 @@ ol.breadcrumb {
   color: #8e54e9;
 }
 .light-sidebar .app-navbar .sidebar-nav ul.metismenu li.active ul:before {
-  background: #f0f2f3;
+  background: #578ca2;
 }
 .light-sidebar .app-navbar .sidebar-nav ul.metismenu li.active ul li a {
   color: #a2a5bd;
@@ -15019,7 +15019,7 @@ ul {
 }
 ol li,
 ul li {
-  color: #a6a9b7;
+  color: #4c4f6b;
 }
 .blockquote.blockquote-reverse {
   text-align: right;
@@ -15714,7 +15714,7 @@ code {
   color: #fff;
 }
 .badge-dark-inverse {
-  background: #2c2e3e;
+  background: #b0ddf8;
   background: rgba(44, 46, 62, 0.1) !important;
   color: #2c2e3e;
 }
@@ -15905,7 +15905,7 @@ code {
   color: #2c2e3e;
 }
 .alert.alert-inverse-dark {
-  background: #2c2e3e;
+  background: #b0ddf8;
   background: rgba(44, 46, 62, 0.3) !important;
   color: #2c2e3e;
 }
@@ -16852,7 +16852,7 @@ code {
   color: #343a40;
 }
 .btn.btn-inverse-dark {
-  background: #2c2e3e;
+  background: #b0ddf8;
   background: rgba(44, 46, 62, 0.1) !important;
   color: #2c2e3e;
 }
