@@ -7,10 +7,10 @@
       <div class="navbar-header d-flex align-items-center">
         <a href="javascript:void(0)" class="mobile-toggle"><i class="ti ti-align-right"></i></a>
         <router-link class="navbar-brand" :to="{name: 'index'}">
-          <img src="/static/assets/img/logo-icon.png" class="img-fluid" alt="logo" width="35px"
+          <img src="/static/assets/img/atlexus_icon.png" class="img-fluid" alt="logo" width="35px"
                height="35px"/>
-          <span class="text-uppercase ml-2 mb-1" style="font-size: 24px">Deporte</span>
-          <img src="/static/assets/img/logo-icon.png" class="img-fluid logo-mobile" alt="logo"/>
+          <span class="text-uppercase ml-2 mb-1" style="font-size: 24px">Atlexus</span>
+          <img src="/static/assets/img/atlexus_icon.png" class="img-fluid logo-mobile" alt="logo"/>
         </router-link>
       </div>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -27,7 +27,7 @@
                 <i class="ti ti-align-right"></i>
               </a>
             </li>
-            <li class="nav-item dropdown" v-for="(item,index) in menu" :key="index">
+            <!-- <li class="nav-item dropdown" v-for="(item,index) in menu" :key="index">
               <a href="javascript:void(0)" class="nav-link " id="navbarDropdownseguridad" role="button"
                  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ item.caption }}
                 <i class="fa fa-angle-down"></i>
@@ -43,7 +43,7 @@
               <a href="javascript:void(0)" class="nav-link expand">
                 <i class="icon-size-fullscreen"></i>
               </a>
-            </li>
+            </li> -->
           </ul>
 
           <ul class="navbar-nav nav-right ml-auto">

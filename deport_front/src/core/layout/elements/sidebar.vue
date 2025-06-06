@@ -2,51 +2,19 @@
   <aside class="app-navbar">
     <!-- begin sidebar-nav -->
     <div class="sidebar-nav scrollbar scroll_light">
-      <ul class="metismenu " id="sidebarNav">
-        <li>
+      <ul class="metismenu" id="sidebarNav">
+        <!-- Recorremos cada sección del menú -->
+        <li v-for="(section, index) in menu" :key="`section-${index}`">
           <a class="has-arrow" href="javascript:void(0)" aria-expanded="false">
-            <i class="nav-icon dashicons dashicons-admin-multisite"></i>
-            <span class="nav-title">Esicuba</span>
+            <!-- Ícono por defecto, puedes personalizarlo por sección con section.icon -->
+            <i class="nav-icon" :class="section.icon || 'ti ti-menu'"></i>
+            <span class="nav-title">{{ section.caption }}</span>
           </a>
           <ul aria-expanded="false">
-            <li><a href='index.html'>Gastos Médicos</a></li>
-            <li><a href='index-ecommerce.html'>Listado gastos médicos Esicuba</a></li>
-            <li><a href='index-car-dealer.html'>Mis Depósitos</a></li>
-            <li><a href='index-stock-market.html'>Solicitar Póliza Schengen</a></li>
-            <li><a href='index-dating.html'>Turoperador</a></li>
-            <li><a href='index-job-portal.html'>Viajes in Esicuba</a></li>
-          </ul>
-        </li>
-        <li>
-          <a class="has-arrow" href="javascript:void(0)" aria-expanded="false">
-            <i class="nav-icon ti ti-money"></i>
-            <span class="nav-title">Facturas</span>
-          </a>
-          <ul aria-expanded="false">
-            <li><a href='index.html'>Facturación viajes In ESEN</a></li>
-            <li><a href='index-ecommerce.html'>Facturación viajes In ESICUBA</a></li>
-            <li><a href='index-car-dealer.html'>Liquidación ESEN Viajes Out</a></li>
-          </ul>
-        </li>
-        <li>
-          <a class="has-arrow" href="javascript:void(0)" aria-expanded="false">
-            <i class="nav-icon fa fa-plane"></i>
-            <span class="nav-title">Esen</span>
-          </a>
-          <ul aria-expanded="false">
-            <li><a href='index.html'>Viajes In ESEN</a></li>
-            <li><a href='index.html'>Viajes In ESEN Retroactivo</a></li>
-            <li><a href='index.html'>Viajes Out ESEN</a></li>
-          </ul>
-        </li>
-        <li>
-          <a class="has-arrow" href="javascript:void(0)" aria-expanded="false">
-            <i class="nav-icon zmdi zmdi-shield-security"></i>
-            <span class="nav-title">Seguridad</span>
-          </a>
-          <ul aria-expanded="false">
-            <li><router-link :to="{name:'roles_list'}" >Roles</router-link></li>
-            <li><router-link :to="{name:'users_list'}" >Usuarios</router-link></li>
+            <!-- Recorremos las rutas internas de cada sección -->
+            <li v-for="(item, idx) in section.routes" :key="`route-${index}-${idx}`">
+              <router-link :to="{ name: item.name }">{{ item.caption }}</router-link>
+            </li>
           </ul>
         </li>
       </ul>
@@ -56,11 +24,40 @@
 </template>
 
 <script>
+import menu from "./menu.json";
+
 export default {
-  name: "sidebar"
-}
+  name: "sidebar",
+  data() {
+    return {
+      menu: menu,
+    };
+  },
+  mounted() {
+    this.access_menu_load();
+  },
+  methods: {
+    access_menu_load() {
+      if (!this.$store.site.user.roles.includes("ROLE_SUPER_ADMIN")) {
+        const user_menu = this.$store.site.user.access_menu;
+
+        this.menu.forEach((section, i) => {
+          if (user_menu.some((m) => m.menu_module === section.caption)) {
+            let filteredRoutes = section.routes.filter((route) =>
+              user_menu.some((m) => m.route === route.path)
+            );
+            section.routes = filteredRoutes;
+          } else {
+            delete this.menu[i];
+          }
+        });
+
+        this.menu = this.menu.filter(Boolean);
+      }
+    },
+  },
+};
 </script>
 
 <style scoped>
-
 </style>

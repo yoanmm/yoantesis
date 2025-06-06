@@ -434,3 +434,28 @@
 #52 C:\\wamp64\\www\\yoantesis\\deport\\public\\index.php(52): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #53 {main}
 "} 
+[2025-06-06 00:44:37] production.ERROR: Database connection [mysql] not configured. {"exception":"[object] (InvalidArgumentException(code: 0): Database connection [mysql] not configured. at C:\\wamp64\\www\\yoantesis\\deport\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\DatabaseManager.php:152)
+[stacktrace]
+#0 C:\\wamp64\\www\\yoantesis\\deport\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\DatabaseManager.php(115): Illuminate\\Database\\DatabaseManager->configuration('mysql')
+#1 C:\\wamp64\\www\\yoantesis\\deport\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\DatabaseManager.php(86): Illuminate\\Database\\DatabaseManager->makeConnection('mysql')
+#2 C:\\wamp64\\www\\yoantesis\\deport\\vendor\\laravel\\framework\\src\\Illuminate\\Support\\Facades\\Schema.php(45): Illuminate\\Database\\DatabaseManager->connection()
+#3 C:\\wamp64\\www\\yoantesis\\deport\\vendor\\laravel\\framework\\src\\Illuminate\\Support\\Facades\\Facade.php(166): Illuminate\\Support\\Facades\\Schema::getFacadeAccessor()
+#4 C:\\wamp64\\www\\yoantesis\\deport\\vendor\\laravel\\framework\\src\\Illuminate\\Support\\Facades\\Facade.php(255): Illuminate\\Support\\Facades\\Facade::getFacadeRoot()
+#5 C:\\wamp64\\www\\yoantesis\\deport\\app\\Providers\\AppServiceProvider.php(27): Illuminate\\Support\\Facades\\Facade::__callStatic('defaultStringLe...', Array)
+#6 C:\\wamp64\\www\\yoantesis\\deport\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php(36): App\\Providers\\AppServiceProvider->boot()
+#7 C:\\wamp64\\www\\yoantesis\\deport\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Util.php(40): Illuminate\\Container\\BoundMethod::Illuminate\\Container\\{closure}()
+#8 C:\\wamp64\\www\\yoantesis\\deport\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php(93): Illuminate\\Container\\Util::unwrapIfClosure(Object(Closure))
+#9 C:\\wamp64\\www\\yoantesis\\deport\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php(37): Illuminate\\Container\\BoundMethod::callBoundMethod(Object(Illuminate\\Foundation\\Application), Array, Object(Closure))
+#10 C:\\wamp64\\www\\yoantesis\\deport\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Container.php(653): Illuminate\\Container\\BoundMethod::call(Object(Illuminate\\Foundation\\Application), Array, Array, NULL)
+#11 C:\\wamp64\\www\\yoantesis\\deport\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(924): Illuminate\\Container\\Container->call(Array)
+#12 C:\\wamp64\\www\\yoantesis\\deport\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(905): Illuminate\\Foundation\\Application->bootProvider(Object(App\\Providers\\AppServiceProvider))
+#13 [internal function]: Illuminate\\Foundation\\Application->Illuminate\\Foundation\\{closure}(Object(App\\Providers\\AppServiceProvider), 29)
+#14 C:\\wamp64\\www\\yoantesis\\deport\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(906): array_walk(Array, Object(Closure))
+#15 C:\\wamp64\\www\\yoantesis\\deport\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Bootstrap\\BootProviders.php(17): Illuminate\\Foundation\\Application->boot()
+#16 C:\\wamp64\\www\\yoantesis\\deport\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(237): Illuminate\\Foundation\\Bootstrap\\BootProviders->bootstrap(Object(Illuminate\\Foundation\\Application))
+#17 C:\\wamp64\\www\\yoantesis\\deport\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(153): Illuminate\\Foundation\\Application->bootstrapWith(Array)
+#18 C:\\wamp64\\www\\yoantesis\\deport\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(137): Illuminate\\Foundation\\Http\\Kernel->bootstrap()
+#19 C:\\wamp64\\www\\yoantesis\\deport\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(111): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
+#20 C:\\wamp64\\www\\yoantesis\\deport\\public\\index.php(52): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
+#21 {main}
+"} 

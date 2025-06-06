@@ -3,11 +3,7 @@
     <div class="login-container">
       <!-- Panel izquierdo decorativo -->
       <div class="login-info-panel">
-        <img
-          src="/static/assets/img/atlexus_logo.png"
-          alt="Atlexus Logo"
-          class="img-fluid"
-        />
+        <img src="/static/assets/img/atlexus_logo.png" alt="Atlexus Logo" class="img-fluid" />
       </div>
 
       <!-- Panel derecho funcional -->
@@ -20,24 +16,17 @@
         </div>
 
         <!-- Alerta de error -->
-        <div v-if="error" class="login-error">
-          <i class="fa fa-info-circle"></i> {{ message_error }}
-        </div>
+        <div v-if="error" class="login-error"><i class="fa fa-info-circle"></i> {{ message_error }}</div>
 
         <!-- Formulario de Login -->
-        <tc-form
-          v-if="!forgotPasswordMode"
-          nested="user"
-          :vobject="$v"
-          ref="form"
-        >
+        <tc-form v-if="!forgotPasswordMode" nested="user" :vobject="$v" ref="form">
           <tc-form-item>
             <tc-input
               type="text"
               v-model.trim="user.username"
               name="username"
               placeholder="Email"
-              class="w-full py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              class="input-login w-full py-2"
             />
           </tc-form-item>
           <tc-form-item>
@@ -46,7 +35,7 @@
               v-model="user.password"
               name="password"
               placeholder="Password"
-              class="w-full py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              class="input-login w-full py-2"
             />
           </tc-form-item>
 
@@ -72,12 +61,7 @@
         </tc-form> -->
 
         <!-- Botón -->
-        <a-button
-          type="button"
-          :loading="loading"
-          @click="submitForm"
-          class="w-full py-2 rounded-md border-blue-500 text-blue-500 font-bold hover:bg-blue-50 focus:outline-none focus:ring-2 focus:ring-blue-300"
-        >
+        <a-button type="button" :loading="loading" @click="submitForm" class="custom-login-button">
           {{ forgotPasswordMode ? "Enviar" : "Entrar" }}
         </a-button>
 
@@ -155,15 +139,10 @@ export default {
       this.loading = true;
       try {
         await this.$store.site.passwordRecovery({ email: this.recoveryEmail });
-        utils.openNotificationWithIcon(
-          "success",
-          "Correo Enviado",
-          "Por favor revise su correo electrónico."
-        );
+        utils.openNotificationWithIcon("success", "Correo Enviado", "Por favor revise su correo electrónico.");
         this.toggleForgotPassword();
       } catch (error) {
-        const errorMessage =
-          error.response?.data?.message || "No se pudo enviar el correo.";
+        const errorMessage = error.response?.data?.message || "No se pudo enviar el correo.";
         utils.openNotificationWithIcon("error", "Error", errorMessage);
       } finally {
         this.loading = false;
@@ -222,5 +201,27 @@ export default {
   padding: 0.5rem;
   border-radius: 4px;
   margin-bottom: 1rem;
+}
+
+.custom-login-button {
+  background-color: #7cc3f0;
+  color: #fafcfc;
+  border: none;
+  border-radius: 0.8rem;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.custom-login-button:hover {
+  background-color: #5fb3e4;
+  color: #fafcfc;
+  cursor: pointer;
+}
+
+.custom-login-button:focus,
+.custom-login-button:active {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(124, 195, 240, 0.4);
+  background-color: #5fb3e4;
+  color: #fafcfc;
 }
 </style>

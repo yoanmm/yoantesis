@@ -1,209 +1,174 @@
 [
   {
-    "caption": "general",
-    "modules": "['general']",
-    "icon": "",
+    "caption": "Gestión deportiva",
+    "modules": "['management']",
+    "icon": "zmdi zmdi-run",
     "routes": [
       {
-        "name": "atleta_estado_list",
-        "module": "general",
-        "caption": "Atleta estado",
+        "name": "evento_deportivo_list",
+        "module": "management",
+        "caption": "Eventos deportivos",
         "icon": "",
-        "path": "/general/atleta_estado_list"
-      },
-      {
-        "name": "atleta_tipo_list",
-        "module": "general",
-        "caption": "Atleta tipo",
-        "icon": "",
-        "path": "/general/atleta_tipo_list"
-      },
-      {
-        "name": "cancha_list",
-        "module": "general",
-        "caption": "Cancha",
-        "icon": "",
-        "path": "/general/cancha_list"
+        "path": "/general/evento_deportivo_list"
       },
       {
         "name": "competencia_list",
-        "module": "general",
-        "caption": "Competencia",
+        "module": "management",
+        "caption": "Competencias",
         "icon": "",
         "path": "/general/competencia_list"
       },
       {
-        "name": "congresillo_asistencia_list",
-        "module": "general",
-        "caption": "Congresillo asistencia",
-        "icon": "",
-        "path": "/general/congresillo_asistencia_list"
-      },
-      {
-        "name": "congresillo_deporte_list",
-        "module": "general",
-        "caption": "Congresillo deporte",
-        "icon": "",
-        "path": "/general/congresillo_deporte_list"
-      },
-      {
         "name": "delegacion_list",
-        "module": "general",
-        "caption": "Delegacion",
+        "module": "management",
+        "caption": "Delegaciones",
         "icon": "",
         "path": "/general/delegacion_list"
       },
       {
-        "name": "delegacion_evento_list",
-        "module": "general",
-        "caption": "Delegacion evento",
-        "icon": "",
-        "path": "/general/delegacion_evento_list"
-      },
-      {
-        "name": "delegacion_regla_list",
-        "module": "general",
-        "caption": "Delegacion regla",
-        "icon": "",
-        "path": "/general/delegacion_regla_list"
-      },
-      {
-        "name": "delegacion_tipo_list",
-        "module": "general",
-        "caption": "Delegacion tipo",
-        "icon": "",
-        "path": "/general/delegacion_tipo_list"
-      },
-      {
-        "name": "deporte_list",
-        "module": "general",
-        "caption": "Deporte",
-        "icon": "",
-        "path": "/general/deporte_list"
-      },
-      {
-        "name": "deporte_categoria_puntuacion_list",
-        "module": "general",
-        "caption": "Deporte categoria puntuacion",
-        "icon": "",
-        "path": "/general/deporte_categoria_puntuacion_list"
-      },
-      {
-        "name": "deporte_regla_list",
-        "module": "general",
-        "caption": "Deporte regla",
-        "icon": "",
-        "path": "/general/deporte_regla_list"
-      },
-      {
         "name": "equipo_list",
-        "module": "general",
+        "module": "management",
         "caption": "Equipo",
         "icon": "",
         "path": "/general/equipo_list"
       },
       {
-        "name": "equipo_atleta_list",
-        "module": "general",
-        "caption": "Equipo atleta",
+        "name": "persona_atleta_list",
+        "module": "management",
+        "caption": "Atletas",
         "icon": "",
-        "path": "/general/equipo_atleta_list"
+        "path": "/general/persona_atleta_list"
       },
       {
-        "name": "equipo_estado_list",
-        "module": "general",
-        "caption": "Equipo estado",
+        "name": "persona_arbitro_list",
+        "module": "management",
+        "caption": "Árbitros",
         "icon": "",
-        "path": "/general/equipo_estado_list"
-      },
-      {
-        "name": "evento_deportivo_list",
-        "module": "general",
-        "caption": "Evento deportivo",
-        "icon": "",
-        "path": "/general/evento_deportivo_list"
-      },
-      {
-        "name": "evento_deportivo_regla_list",
-        "module": "general",
-        "caption": "Evento deportivo regla",
-        "icon": "",
-        "path": "/general/evento_deportivo_regla_list"
+        "path": "/general/persona_arbitro_list"
       },
       {
         "name": "juego_list",
-        "module": "general",
-        "caption": "Juego",
+        "module": "management",
+        "caption": "Juegos",
         "icon": "",
         "path": "/general/juego_list"
       },
       {
-        "name": "juego_delegacion_list",
-        "module": "general",
-        "caption": "Juego delegacion",
+        "name": "congresillo_deporte_list",
+        "module": "management",
+        "caption": "Congresillos",
         "icon": "",
-        "path": "/general/juego_delegacion_list"
+        "path": "/general/congresillo_deporte_list"
+      }
+    ]
+  },
+  {
+    "caption": "Comisión disciplinaria",
+    "modules": "['dicipline']",
+    "icon": "zmdi zmdi-library",
+    "routes": [
+      {
+        "name": "sancion_list",
+        "module": "dicipline",
+        "caption": "Sanción",
+        "icon": "",
+        "path": "/general/sancion_list"
+      },
+      {
+        "name": "reclamacion_list",
+        "module": "general",
+        "caption": "Reclamación",
+        "icon": "",
+        "path": "/general/reclamacion_list"
+      }
+    ]
+  },
+  {
+    "caption": "Configuración",
+    "modules": "['config']",
+    "icon": "zmdi zmdi-settings",
+    "routes": [
+      {
+        "name": "atleta_estado_list",
+        "module": "config",
+        "caption": "Estado del atleta",
+        "icon": "",
+        "path": "/general/atleta_estado_list"
+      },
+      {
+        "name": "atleta_tipo_list",
+        "module": "config",
+        "caption": "Tipos de atleta",
+        "icon": "",
+        "path": "/general/atleta_tipo_list"
+      },
+      {
+        "name": "cancha_list",
+        "module": "config",
+        "caption": "Canchas",
+        "icon": "",
+        "path": "/general/cancha_list"
+      },
+      {
+        "name": "delegacion_tipo_list",
+        "module": "config",
+        "caption": "Tipo de delegación",
+        "icon": "",
+        "path": "/general/delegacion_tipo_list"
+      },
+      {
+        "name": "deporte_list",
+        "module": "config",
+        "caption": "Deportes",
+        "icon": "",
+        "path": "/general/deporte_list"
+      },
+      {
+        "name": "deporte_categoria_puntuacion_list",
+        "module": "config",
+        "caption": "Categoría de puntuación del deporte",
+        "icon": "",
+        "path": "/general/deporte_categoria_puntuacion_list"
+      },
+      {
+        "name": "equipo_estado_list",
+        "module": "config",
+        "caption": "Estado del equipo",
+        "icon": "",
+        "path": "/general/equipo_estado_list"
       },
       {
         "name": "juego_fase_list",
-        "module": "general",
-        "caption": "Juego fase",
+        "module": "config",
+        "caption": "Fase del juego",
         "icon": "",
         "path": "/general/juego_fase_list"
       },
       {
         "name": "persona_list",
-        "module": "general",
-        "caption": "Persona",
+        "module": "config",
+        "caption": "Personas",
         "icon": "",
         "path": "/general/persona_list"
       },
       {
-        "name": "persona_arbitro_list",
-        "module": "general",
-        "caption": "Persona arbitro",
-        "icon": "",
-        "path": "/general/persona_arbitro_list"
-      },
-      {
-        "name": "persona_atleta_list",
-        "module": "general",
-        "caption": "Persona atleta",
-        "icon": "",
-        "path": "/general/persona_atleta_list"
-      },
-      {
-        "name": "reclamacion_list",
-        "module": "general",
-        "caption": "Reclamacion",
-        "icon": "",
-        "path": "/general/reclamacion_list"
-      },
-      {
         "name": "reclamacion_estado_list",
-        "module": "general",
-        "caption": "Reclamacion estado",
+        "module": "config",
+        "caption": "Estado de reclamación",
         "icon": "",
         "path": "/general/reclamacion_estado_list"
-      },
-      {
-        "name": "sancion_list",
-        "module": "general",
-        "caption": "Sancion",
-        "icon": "",
-        "path": "/general/sancion_list"
       }
     ]
   },
   {
-    "caption": "security",
+    "caption": "Seguridad",
     "modules": "['security']",
-    "icon": "",
+    "icon": "zmdi zmdi-shield-security",
     "routes": [
       {
         "name": "log_list",
         "module": "security",
-        "caption": "Log",
+        "caption": "Trazas",
         "icon": "",
         "path": "/security/log_list"
       },
@@ -217,23 +182,9 @@
       {
         "name": "rol_list",
         "module": "security",
-        "caption": "Rol",
+        "caption": "Roles",
         "icon": "",
         "path": "/security/rol_list"
-      },
-      {
-        "name": "rol_permiso_list",
-        "module": "security",
-        "caption": "Rol permiso",
-        "icon": "",
-        "path": "/security/rol_permiso_list"
-      },
-      {
-        "name": "usuario_rol_list",
-        "module": "security",
-        "caption": "Usuario rol",
-        "icon": "",
-        "path": "/security/usuario_rol_list"
       },
       {
         "name": "usuarios_list",
@@ -243,5 +194,11 @@
         "path": "/security/usuarios_list"
       }
     ]
+  },
+  {
+    "caption": "Estadística",
+    "modules": "['statistics']",
+    "icon": "zmdi zmdi-chart",
+    "routes": []
   }
 ]
