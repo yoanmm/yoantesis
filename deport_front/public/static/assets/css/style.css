@@ -14639,18 +14639,18 @@ ol.breadcrumb {
 .app-navbar .sidebar-nav ul.metismenu li a {
   border: none !important;
   padding: 0.9rem 1.6rem;
-  color: #74616b;
+  color: #000E90;
   display: flex;
 }
 .app-navbar .sidebar-nav ul.metismenu li a i {
   margin-right: 10px;
-  color: #4c4f6b;
+  color: #000E90;
   width: 20px;
 }
 .app-navbar .sidebar-nav ul.metismenu li a:focus,
 .app-navbar .sidebar-nav ul.metismenu li a:hover {
   background: #b0ddf8;
-  color: #fff;
+  color: #111;
   transition: all 0.3s ease-out;
 }
 .app-navbar .sidebar-nav ul.metismenu li a .nav-title {
@@ -14672,21 +14672,21 @@ ol.breadcrumb {
   right: 1.5rem;
 }
 .app-navbar .sidebar-nav ul.metismenu li.active a {
-  color: #fff;
+  color: #111;
 }
 .app-navbar .sidebar-nav ul.metismenu li.active a i {
-  color: #fff;
+  color: #111;
 }
 .app-navbar .sidebar-nav ul.metismenu li.active ul {
   position: relative;
 }
 .app-navbar .sidebar-nav ul.metismenu li.active ul li a {
   background: 0 0 !important;
-  color: #a2a5bd;
+  color: #000E90;
 }
 .app-navbar .sidebar-nav ul.metismenu li.active ul li a:focus,
 .app-navbar .sidebar-nav ul.metismenu li.active ul li a:hover {
-  color: #fff !important;
+  color: #111 !important;
 }
 .app-navbar .sidebar-nav ul.metismenu li.active ul li.active a {
   color: #fff !important;
@@ -14819,7 +14819,7 @@ ol.breadcrumb {
   background: #578ca2;
 }
 .light-sidebar .app-navbar .sidebar-nav ul.metismenu li.active ul li a {
-  color: #a2a5bd;
+  color: #111;
 }
 .light-sidebar
   .app-navbar
