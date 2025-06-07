@@ -27,7 +27,7 @@
       </div>
       <!-- end app-container -->
       <!-- begin footer -->
-      <footerbar />
+      <!-- <footerbar /> -->
       <!-- end footer -->
     </div>
     <!-- end app-wrap -->

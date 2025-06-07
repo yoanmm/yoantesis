@@ -53,7 +53,7 @@
                   date
                 }}</span>
             </div> -->
-            <li class="nav-item dropdown d-none">
+            <!-- <li class="nav-item dropdown d-none">
               <a class="nav-link dropdown-toggle" href="javascript:void(0)" id="navbarDropdown2"
                  role="button"
                  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -159,8 +159,8 @@
                   </li>
                 </ul>
               </div>
-            </li>
-            <li class="nav-item dropdown d-none">
+            </li> -->
+            <!-- <li class="nav-item dropdown d-none">
               <a class="nav-link dropdown-toggle" href="javascript:void(0)" id="navbarDropdown3"
                  role="button"
                  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -261,8 +261,8 @@
                   </li>
                 </ul>
               </div>
-            </li>
-            <li class="nav-item d-none">
+            </li> -->
+            <!-- <li class="nav-item d-none">
               <a class="nav-link search" href="javascript:void(0)">
                 <i class="ti ti-search"></i>
               </a>
@@ -281,7 +281,7 @@
                   </form>
                 </div>
               </div>
-            </li>
+            </li> -->
             <li class="nav-item dropdown user-profile">
               <a href="javascript:void(0)" class="nav-link dropdown-toggle " id="navbarDropdown4"
                  role="button"
