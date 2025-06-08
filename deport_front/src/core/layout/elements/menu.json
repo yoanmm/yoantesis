@@ -28,7 +28,7 @@
       {
         "name": "equipo_list",
         "module": "management",
-        "caption": "Equipo",
+        "caption": "Equipos",
         "icon": "",
         "path": "/general/equipo_list"
       },
@@ -70,14 +70,14 @@
       {
         "name": "sancion_list",
         "module": "dicipline",
-        "caption": "Sanción",
+        "caption": "Sanciones",
         "icon": "",
         "path": "/general/sancion_list"
       },
       {
         "name": "reclamacion_list",
         "module": "general",
-        "caption": "Reclamación",
+        "caption": "Reclamaciones",
         "icon": "",
         "path": "/general/reclamacion_list"
       }
@@ -98,7 +98,7 @@
       {
         "name": "atleta_tipo_list",
         "module": "config",
-        "caption": "Tipos de atleta",
+        "caption": "Tipo de atleta",
         "icon": "",
         "path": "/general/atleta_tipo_list"
       },

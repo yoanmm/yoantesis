@@ -2,7 +2,7 @@
   <div>
     <div class="row row-breadcrumb">
       <div class="col-md-6">
-        <h4>Listado de Equipo_estado</h4>
+        <h4>Estado del equipo</h4>
       </div>
       <div class="col-md-5">
         <a-breadcrumb>
@@ -11,10 +11,10 @@
             <router-link :to="{name:'index'}">Inicio</router-link>
           </a-breadcrumb-item>
           <a-breadcrumb-item href="">
-            <span>General</span>
+            <span>Configuración</span>
           </a-breadcrumb-item>
           <a-breadcrumb-item>
-           <span>Equipo_estado</span>
+           <span>Estado del equipo</span>
           </a-breadcrumb-item>
         </a-breadcrumb>
        </div>

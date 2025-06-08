@@ -2,7 +2,7 @@
   <div>
     <div class="row row-breadcrumb">
       <div class="col-md-6">
-        <h4>Listado de Evento Deportivo</h4>
+        <h4>Eventos Deportivos</h4>
       </div>
       <div class="col-md-5">
         <a-breadcrumb>
@@ -14,7 +14,7 @@
             <span>Gestión Deportiva</span>
           </a-breadcrumb-item>
           <a-breadcrumb-item>
-           <span>Evento deportivo</span>
+           <span>Eventos deportivos</span>
           </a-breadcrumb-item>
         </a-breadcrumb>
        </div>

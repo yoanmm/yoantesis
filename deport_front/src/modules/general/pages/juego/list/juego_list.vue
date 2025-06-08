@@ -2,7 +2,7 @@
   <div>
     <div class="row row-breadcrumb">
       <div class="col-md-6">
-        <h4>Listado de Juego</h4>
+        <h4>Juegos</h4>
       </div>
       <div class="col-md-5">
         <a-breadcrumb>
@@ -11,10 +11,10 @@
             <router-link :to="{name:'index'}">Inicio</router-link>
           </a-breadcrumb-item>
           <a-breadcrumb-item href="">
-            <span>General</span>
+            <span>Gestión deportiva</span>
           </a-breadcrumb-item>
           <a-breadcrumb-item>
-           <span>Juego</span>
+           <span>Juegos</span>
           </a-breadcrumb-item>
         </a-breadcrumb>
        </div>

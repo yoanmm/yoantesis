@@ -2,7 +2,7 @@
   <div>
     <div class="row row-breadcrumb">
       <div class="col-md-6">
-        <h4>Listado de Reclamacion</h4>
+        <h4>Reclamaciones</h4>
       </div>
       <div class="col-md-5">
         <a-breadcrumb>
@@ -11,10 +11,10 @@
             <router-link :to="{name:'index'}">Inicio</router-link>
           </a-breadcrumb-item>
           <a-breadcrumb-item href="">
-            <span>General</span>
+            <span>Comisión disciplinaria</span>
           </a-breadcrumb-item>
           <a-breadcrumb-item>
-           <span>Reclamacion</span>
+           <span>Reclamaciones</span>
           </a-breadcrumb-item>
         </a-breadcrumb>
        </div>

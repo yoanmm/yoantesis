@@ -2,7 +2,7 @@
   <div>
     <div class="row row-breadcrumb">
       <div class="col-md-6">
-        <h4>Listado de Deporte_categoria_puntuacion</h4>
+        <h4>Categoría de puntuación del deporte</h4>
       </div>
       <div class="col-md-5">
         <a-breadcrumb>
@@ -11,10 +11,10 @@
             <router-link :to="{name:'index'}">Inicio</router-link>
           </a-breadcrumb-item>
           <a-breadcrumb-item href="">
-            <span>General</span>
+            <span>Configuración</span>
           </a-breadcrumb-item>
           <a-breadcrumb-item>
-           <span>Deporte_categoria_puntuacion</span>
+           <span>Categoría de puntuación del deporte</span>
           </a-breadcrumb-item>
         </a-breadcrumb>
        </div>
