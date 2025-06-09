@@ -24,14 +24,14 @@
                    @input="update_filter_debounce"
                  />
                </a-tooltip>
-               <a-tooltip placement="topLeft" title="Limpiar Filtros">
+               <a-tooltip placement="topLeft" title="Limpiar Filtros" style='margin-left: 10px;'>
                    <a-button
                      style="text-align: end"
                      class="rounded"
                      type="primary"
                      @click="filter=''"
                    >
-                     <i class="fa fa-eraser" style="margin-right: 10px" />Limpiar
+                     <i class="fa fa-eraser" />
                    </a-button>
                </a-tooltip>
              </div>
@@ -50,7 +50,7 @@
                         <a-icon type="file-excel" theme="twoTone" twoToneColor="#52c41a"/>
                      EXCEL
                    </a-menu-item>
-                   <a-menu-item key="2">
+   <a-menu-item key="2">
                      <a-icon type="file-pdf" theme="twoTone" twoToneColor="#c41c33"/>
                      PDF
                    </a-menu-item>

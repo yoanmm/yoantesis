@@ -1,46 +1,42 @@
 <template>
   <div>
     <div class="row row-breadcrumb">
-      <div class="col-md-6">
-        <h4>Congresillos</h4>
-      </div>
-      <div class="col-md-5">
-        <a-breadcrumb>
-          <a-breadcrumb-item href="">
-            <a-icon type="home" />
-            <router-link :to="{name:'index'}">Inicio</router-link>
-          </a-breadcrumb-item>
-          <a-breadcrumb-item href="">
-            <span>Gestión deportiva</span>
-          </a-breadcrumb-item>
-          <a-breadcrumb-item>
-           <span>Congresillos</span>
-          </a-breadcrumb-item>
-        </a-breadcrumb>
-       </div>
-      </div>
-    <div class="container">
-    <div>
-      <div class="row">
-        <div class="col-md-6">
-          <a-button-group style="margin-bottom: 10px">
-            <a-tooltip placement="topLeft" title="Añadir nuevo elemento">
-              <a-button icon="plus" type="primary" @click="show_form">Añadir</a-button>
-            </a-tooltip>
-            <a-tooltip placement="topLeft" title="Eliminar elementos seleccionados">
-              <a-button icon="delete" type="danger" @click="showDeleteConfirm">Eliminar</a-button>
-            </a-tooltip>
-          </a-button-group>
-        </div>
-        <div class="col-md-6" style="text-align: end;">
-        </div>
-      </div>
-     </div>
+      <a-breadcrumb>
+        <a-breadcrumb-item href="">
+          <a-icon type="home" />
+          <router-link :to="{ name: 'index' }">Inicio</router-link>
+        </a-breadcrumb-item>
+        <a-breadcrumb-item href="">
+          <span>Gestión deportiva</span>
+        </a-breadcrumb-item>
+        <a-breadcrumb-item>
+          <span>Congresillos</span>
+        </a-breadcrumb-item>
+      </a-breadcrumb>
     </div>
-   <div>
+    <div class="row col-md-6">
+      <h3>Congresillos</h3>
+    </div>
+    <div class="container">
+      <div>
+        <div class="row">
+          <div class="col-md-6">
+            <a-button-group style="margin-bottom: 10px">
+              <a-tooltip placement="topLeft" title="Añadir nuevo elemento">
+                <a-button icon="plus" type="primary" @click="show_form">Añadir</a-button>
+              </a-tooltip>
+              <a-tooltip placement="topLeft" title="Eliminar elementos seleccionados">
+                <a-button icon="delete" type="danger" @click="showDeleteConfirm">Eliminar</a-button>
+              </a-tooltip>
+            </a-button-group>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div>
       <a-modal
         @cancel="onCloseModal"
-        :title="selected_congresillo_deporte.get_id()?'Actualizar congresillo_deporte':'Añadir congresillo_deporte'"
+        :title="selected_congresillo_deporte.get_id() ? 'Actualizar congresillo_deporte' : 'Añadir congresillo_deporte'"
         class="modal-form"
         width="55rem"
         :visible="show_modal_form"
@@ -50,16 +46,18 @@
         :footer="null"
         :maskClosable="false"
       >
-        <congresillo_deporte_form  :modal=true :model="selected_congresillo_deporte" />
+        <congresillo_deporte_form :modal="true" :model="selected_congresillo_deporte" />
       </a-modal>
-      <congresillo_deporte_table
-       :columns="columns"
-       table_name="Congresillo_deporte"
-       id_table="id_congresillo"
-       ref="congresillo_deporte_table"
-       :params_search="params_search"
-       :paginate="paginate"
-      />
+      <div style="margin-left: 15px">
+        <congresillo_deporte_table
+          :columns="columns"
+          table_name="Congresillo_deporte"
+          id_table="id_congresillo"
+          ref="congresillo_deporte_table"
+          :params_search="params_search"
+          :paginate="paginate"
+        />
+      </div>
     </div>
   </div>
 </template>
@@ -71,40 +69,40 @@ import congresillo_deporte_table from "./congresillo_deporte.table";
 
 export default {
   name: "congresillo_deporte_list",
-    provide: function(){
-      return{
-        close_modal: this.onCloseModal,
-        show_form: this.show_form,
-        load_data: () => {
-           this.$refs.congresillo_deporte_table.load_data()
-        },
-        setSelectedCongresillo_deporte: this.setSelectedCongresillo_deporte
-      }
-    },
+  provide: function() {
+    return {
+      close_modal: this.onCloseModal,
+      show_form: this.show_form,
+      load_data: () => {
+        this.$refs.congresillo_deporte_table.load_data();
+      },
+      setSelectedCongresillo_deporte: this.setSelectedCongresillo_deporte,
+    };
+  },
   data() {
     return {
       data: [],
       self: null,
-      columns: mb.statics('Congresillo_deporte').columns,
-      selected_congresillo_deporte: mb.instance( 'Congresillo_deporte'),
+      columns: mb.statics("Congresillo_deporte").columns,
+      selected_congresillo_deporte: mb.instance("Congresillo_deporte"),
       show_modal_form: false,
-      paginate:false,
-      params_search:{relations:['competencia']},
-      mb
+      paginate: false,
+      params_search: { relations: ["competencia"] },
+      mb,
     };
   },
   components: {
     congresillo_deporte_form,
-    congresillo_deporte_table
+    congresillo_deporte_table,
   },
   methods: {
     setSelectedCongresillo_deporte(model) {
-      this.selected_congresillo_deporte = model
+      this.selected_congresillo_deporte = model;
     },
-    onCloseModal(e,reload_data=false) {
-      this.selected_congresillo_deporte = mb.instance('Congresillo_deporte');
+    onCloseModal(e, reload_data = false) {
+      this.selected_congresillo_deporte = mb.instance("Congresillo_deporte");
       this.show_modal_form = false;
-      reload_data ? this.$refs.congresillo_deporte_table.load_data() : ''
+      reload_data ? this.$refs.congresillo_deporte_table.load_data() : "";
     },
     show_form() {
       this.show_modal_form = !this.show_modal_form;
@@ -129,18 +127,18 @@ export default {
         cancelText: "No",
         async onOk() {
           try {
-            const response = await mb.statics('Congresillo_deporte').delete_by_ids(
-                _this.$refs.congresillo_deporte_table.selectedRowKeys
-              );
-               utils.process_response(response, "deleted");
-              _this.$refs.congresillo_deporte_table.selectedRowKeys=[];
-              _this.$refs.congresillo_deporte_table.load_data();
-            } catch (error) {
-              utils.process_error(error);
-              _this.$refs.congresillo_deporte_table.selectedRowKeys=[];
-            }
+            const response = await mb
+              .statics("Congresillo_deporte")
+              .delete_by_ids(_this.$refs.congresillo_deporte_table.selectedRowKeys);
+            utils.process_response(response, "deleted");
+            _this.$refs.congresillo_deporte_table.selectedRowKeys = [];
+            _this.$refs.congresillo_deporte_table.load_data();
+          } catch (error) {
+            utils.process_error(error);
+            _this.$refs.congresillo_deporte_table.selectedRowKeys = [];
+          }
         },
-        onCancel() {}
+        onCancel() {},
       });
     },
   },
@@ -150,4 +148,3 @@ export default {
 <style>
 @import "congresillo_deporte_list.css";
 </style>
-

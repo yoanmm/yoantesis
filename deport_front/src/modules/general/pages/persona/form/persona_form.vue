@@ -26,6 +26,10 @@
         <label>Genero</label>
         <tc-input placeholder='Ingrese el valor' name='genero' v-model="persona.genero"></tc-input>
       </tc-form-item>
+      <tc-form-item class="form-group mb-0 col-md-6 px-3">
+        <label>Facultad</label>
+        <tc-input placeholder='Ingrese el valor' name='facultad' v-model="persona.facultad"></tc-input>
+      </tc-form-item>
       </tc-form>
     </div>
     <div class="card-footer p-0">
@@ -102,9 +106,15 @@ export default {
       if (this.$refs.form.validate()) {
         this.loading = true;
         const accion=this.persona.get_id() ? "actualizado" : "añadido";
+
+        console.log("Datos de persona a enviar:", JSON.stringify(this.persona, null, 2));
+
         this.persona
           .save()
           .then((response) => {
+            
+            console.log("Respuesta del servidor:", response); // <-- DEBUG
+
             if(utils.process_response(response,accion)) {
               if (!this.model && !and_new && this.modal) {
 

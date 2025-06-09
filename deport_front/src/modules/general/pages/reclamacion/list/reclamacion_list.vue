@@ -1,46 +1,43 @@
 <template>
   <div>
     <div class="row row-breadcrumb">
-      <div class="col-md-6">
-        <h4>Reclamaciones</h4>
+      <div class=" row col-md-6">
+        <h3>Reclamaciones</h3>
       </div>
-      <div class="col-md-5">
-        <a-breadcrumb>
-          <a-breadcrumb-item href="">
-            <a-icon type="home" />
-            <router-link :to="{name:'index'}">Inicio</router-link>
-          </a-breadcrumb-item>
-          <a-breadcrumb-item href="">
-            <span>Comisión disciplinaria</span>
-          </a-breadcrumb-item>
-          <a-breadcrumb-item>
-           <span>Reclamaciones</span>
-          </a-breadcrumb-item>
-        </a-breadcrumb>
-       </div>
-      </div>
-    <div class="container">
-    <div>
-      <div class="row">
-        <div class="col-md-6">
-          <a-button-group style="margin-bottom: 10px">
-            <a-tooltip placement="topLeft" title="Añadir nuevo elemento">
-              <a-button icon="plus" type="primary" @click="show_form">Añadir</a-button>
-            </a-tooltip>
-            <a-tooltip placement="topLeft" title="Eliminar elementos seleccionados">
-              <a-button icon="delete" type="danger" @click="showDeleteConfirm">Eliminar</a-button>
-            </a-tooltip>
-          </a-button-group>
-        </div>
-        <div class="col-md-6" style="text-align: end;">
-        </div>
-      </div>
-     </div>
+      <a-breadcrumb>
+        <a-breadcrumb-item href="">
+          <a-icon type="home" />
+          <router-link :to="{ name: 'index' }">Inicio</router-link>
+        </a-breadcrumb-item>
+        <a-breadcrumb-item href="">
+          <span>Comisión disciplinaria</span>
+        </a-breadcrumb-item>
+        <a-breadcrumb-item>
+          <span>Reclamaciones</span>
+        </a-breadcrumb-item>
+      </a-breadcrumb>
     </div>
-   <div>
+    <div class="container">
+      <div>
+        <div class="row">
+          <div class="col-md-6">
+            <a-button-group style="margin-bottom: 10px">
+              <a-tooltip placement="topLeft" title="Añadir nuevo elemento">
+                <a-button icon="plus" type="primary" @click="show_form">Añadir</a-button>
+              </a-tooltip>
+              <a-tooltip placement="topLeft" title="Eliminar elementos seleccionados">
+                <a-button icon="delete" type="danger" @click="showDeleteConfirm">Eliminar</a-button>
+              </a-tooltip>
+            </a-button-group>
+          </div>
+          <div class="col-md-6" style="text-align: end;"></div>
+        </div>
+      </div>
+    </div>
+    <div>
       <a-modal
         @cancel="onCloseModal"
-        :title="selected_reclamacion.get_id()?'Actualizar reclamacion':'Añadir reclamacion'"
+        :title="selected_reclamacion.get_id() ? 'Actualizar reclamacion' : 'Añadir reclamacion'"
         class="modal-form"
         width="55rem"
         :visible="show_modal_form"
@@ -50,16 +47,18 @@
         :footer="null"
         :maskClosable="false"
       >
-        <reclamacion_form  :modal=true :model="selected_reclamacion" />
+        <reclamacion_form :modal="true" :model="selected_reclamacion" />
       </a-modal>
-      <reclamacion_table
-       :columns="columns"
-       table_name="Reclamacion"
-       id_table="id_reclamacion"
-       ref="reclamacion_table"
-       :params_search="params_search"
-       :paginate="paginate"
-      />
+      <div style="margin-left: 15px">
+        <reclamacion_table
+          :columns="columns"
+          table_name="Reclamacion"
+          id_table="id_reclamacion"
+          ref="reclamacion_table"
+          :params_search="params_search"
+          :paginate="paginate"
+        />
+      </div>
     </div>
   </div>
 </template>
@@ -71,40 +70,40 @@ import reclamacion_table from "./reclamacion.table";
 
 export default {
   name: "reclamacion_list",
-    provide: function(){
-      return{
-        close_modal: this.onCloseModal,
-        show_form: this.show_form,
-        load_data: () => {
-           this.$refs.reclamacion_table.load_data()
-        },
-        setSelectedReclamacion: this.setSelectedReclamacion
-      }
-    },
+  provide: function() {
+    return {
+      close_modal: this.onCloseModal,
+      show_form: this.show_form,
+      load_data: () => {
+        this.$refs.reclamacion_table.load_data();
+      },
+      setSelectedReclamacion: this.setSelectedReclamacion,
+    };
+  },
   data() {
     return {
       data: [],
       self: null,
-      columns: mb.statics('Reclamacion').columns,
-      selected_reclamacion: mb.instance( 'Reclamacion'),
+      columns: mb.statics("Reclamacion").columns,
+      selected_reclamacion: mb.instance("Reclamacion"),
       show_modal_form: false,
-      paginate:false,
-      params_search:{relations:['delegacion','sancion','estado']},
-      mb
+      paginate: false,
+      params_search: { relations: ["delegacion", "sancion", "estado"] },
+      mb,
     };
   },
   components: {
     reclamacion_form,
-    reclamacion_table
+    reclamacion_table,
   },
   methods: {
     setSelectedReclamacion(model) {
-      this.selected_reclamacion = model
+      this.selected_reclamacion = model;
     },
-    onCloseModal(e,reload_data=false) {
-      this.selected_reclamacion = mb.instance('Reclamacion');
+    onCloseModal(e, reload_data = false) {
+      this.selected_reclamacion = mb.instance("Reclamacion");
       this.show_modal_form = false;
-      reload_data ? this.$refs.reclamacion_table.load_data() : ''
+      reload_data ? this.$refs.reclamacion_table.load_data() : "";
     },
     show_form() {
       this.show_modal_form = !this.show_modal_form;
@@ -129,18 +128,18 @@ export default {
         cancelText: "No",
         async onOk() {
           try {
-            const response = await mb.statics('Reclamacion').delete_by_ids(
-                _this.$refs.reclamacion_table.selectedRowKeys
-              );
-               utils.process_response(response, "deleted");
-              _this.$refs.reclamacion_table.selectedRowKeys=[];
-              _this.$refs.reclamacion_table.load_data();
-            } catch (error) {
-              utils.process_error(error);
-              _this.$refs.reclamacion_table.selectedRowKeys=[];
-            }
+            const response = await mb
+              .statics("Reclamacion")
+              .delete_by_ids(_this.$refs.reclamacion_table.selectedRowKeys);
+            utils.process_response(response, "deleted");
+            _this.$refs.reclamacion_table.selectedRowKeys = [];
+            _this.$refs.reclamacion_table.load_data();
+          } catch (error) {
+            utils.process_error(error);
+            _this.$refs.reclamacion_table.selectedRowKeys = [];
+          }
         },
-        onCancel() {}
+        onCancel() {},
       });
     },
   },
@@ -150,4 +149,3 @@ export default {
 <style>
 @import "reclamacion_list.css";
 </style>
-
