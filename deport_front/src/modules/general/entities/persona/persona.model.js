@@ -18,6 +18,7 @@
        apellido
        carnet
        genero
+       facultad
 
     constructor(attributes = null) {
       super();
@@ -28,6 +29,7 @@
         this.apellido = attributes.apellido|| null
         this.carnet = attributes.carnet|| null
         this.genero = attributes.genero|| null
+        this.facultad = attributes.facultad|| null
       }
     }
 
@@ -39,6 +41,7 @@
         this.apellido = attributes.apellido
         this.carnet = attributes.carnet
         this.genero = attributes.genero
+        this.facultad = attributes.facultad
       }
     }
 

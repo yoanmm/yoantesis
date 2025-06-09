@@ -38,5 +38,13 @@
       scopedSlots: {
         customRender: 'action'
       }
+    },
+    {
+      title: 'Facultad',
+      dataIndex: 'facultad',
+      align:'center',
+      key: 'facultad',
+
+      sorter: (a, b) =>  (a.facultad > b.facultad)-(a.facultad < b.facultad)
     }
   ];

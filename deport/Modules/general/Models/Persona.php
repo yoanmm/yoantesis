@@ -20,9 +20,10 @@ use Modules\security\Models\Usuarios;
  * @property string $apellido
  * @property string $carnet
  * @property string $genero
+ * @property string $facultad
+
 
  * Los siguientes son las relaciones de este modelo :
-
  * @property Persona_arbitro[] $array_persona_arbitro
  * @property Persona_atleta[] $array_persona_atleta
  * @property Usuarios[] $array_usuarios
@@ -95,7 +96,8 @@ class Persona extends BaseModel
       'nombre',
       'apellido',
       'carnet',
-      'genero'
+      'genero',
+      'facultad'
     ];
 
 
@@ -134,14 +136,16 @@ class Persona extends BaseModel
                 'nombre' =>'nullable|max:255',
                 'apellido' =>'nullable|max:255',
                 'carnet' =>'nullable|max:255',
-                'genero' =>'nullable|max:255'
+                'genero' =>'nullable|max:255',
+                'facultad' =>'nullable|max:255'
             ],
             'update'=>[
                 'id_persona' =>'required|unique:'.$this->connection.'.persona,id_persona,'.$this->id_persona.',id_persona',
                 'nombre' =>'nullable|max:255',
                 'apellido' =>'nullable|max:255',
                 'carnet' =>'nullable|max:255',
-                'genero' =>'nullable|max:255'
+                'genero' =>'nullable|max:255',
+                'facultad' =>'nullable|max:255'
             ]
         ];
         if(!isset($rules[$scenario]))

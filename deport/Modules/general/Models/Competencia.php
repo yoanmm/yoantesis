@@ -18,7 +18,6 @@ use Illuminate\Support\Carbon;
  * @property integer $id_competencia
  * @property integer $id_evento
  * @property integer $id_deporte
- * @property integer $id_supervisor
  * @property string $resultado_competencia
  * @property boolean $terminado
  * @property Carbon $fin_inscripcion
@@ -26,7 +25,6 @@ use Illuminate\Support\Carbon;
  * Los siguientes son las relaciones de este modelo :
 
  * @property Deporte $deporte
- * @property Persona_arbitro $supervisor
  * @property Evento_deportivo $evento
  * @property Congresillo_deporte[] $array_congresillo_deporte
  * @property Equipo[] $array_equipo
@@ -75,7 +73,7 @@ class Competencia extends BaseModel
      */
     protected $keyType = 'integer';
 
-    const RELATIONS = ['deporte','supervisor','evento','array_congresillo_deporte','array_equipo','array_juego','array_sancion'];
+    const RELATIONS = ['deporte','evento','array_congresillo_deporte','array_equipo','array_juego','array_sancion'];
 /**
      * The number of models to return for pagination.
      *
@@ -100,7 +98,6 @@ class Competencia extends BaseModel
       'id_competencia',
       'id_evento',
       'id_deporte',
-      'id_supervisor',
       'resultado_competencia',
       'terminado',
       'fin_inscripcion'
@@ -114,13 +111,6 @@ class Competencia extends BaseModel
 			return $this->belongsTo(Deporte::class,'id_deporte','id_deporte');
 		}
 
-	 /**
-     * Get the Persona_arbitro
-     */
-	  public function supervisor()
-		{
-			return $this->belongsTo(Persona_arbitro::class,'id_supervisor','id_supervisor');
-		}
 
 	 /**
      * Get the Evento_deportivo
@@ -174,7 +164,6 @@ class Competencia extends BaseModel
             'create'=>[
                 'id_evento' =>'nullable|exists:'.$this->connection.'.evento_deportivo,id_evento',
                 'id_deporte' =>'nullable|exists:'.$this->connection.'.deporte,id_deporte',
-                'id_supervisor' =>'nullable|exists:'.$this->connection.'.persona_arbitro,id_supervisor',
                 'resultado_competencia' =>'nullable',
                 'terminado' =>'nullable|boolean',
                 'fin_inscripcion' =>'nullable|date'
@@ -183,7 +172,6 @@ class Competencia extends BaseModel
                 'id_competencia' =>'required|unique:'.$this->connection.'.competencia,id_competencia,'.$this->id_competencia.',id_competencia',
                 'id_evento' =>'nullable|exists:'.$this->connection.'.evento_deportivo,id_evento',
                 'id_deporte' =>'nullable|exists:'.$this->connection.'.deporte,id_deporte',
-                'id_supervisor' =>'nullable|exists:'.$this->connection.'.persona_arbitro,id_supervisor',
                 'resultado_competencia' =>'nullable',
                 'terminado' =>'nullable|boolean',
                 'fin_inscripcion' =>'nullable|date'
