@@ -1,46 +1,42 @@
 <template>
   <div>
     <div class="row row-breadcrumb">
-      <div class="col-md-6">
-        <h4>Listado de Delegacion_evento</h4>
-      </div>
-      <div class="col-md-5">
-        <a-breadcrumb>
-          <a-breadcrumb-item href="">
-            <a-icon type="home" />
-            <router-link :to="{name:'index'}">Inicio</router-link>
-          </a-breadcrumb-item>
-          <a-breadcrumb-item href="">
-            <span>General</span>
-          </a-breadcrumb-item>
-          <a-breadcrumb-item>
-           <span>Delegacion_evento</span>
-          </a-breadcrumb-item>
-        </a-breadcrumb>
-       </div>
-      </div>
-    <div class="container">
-    <div>
-      <div class="row">
-        <div class="col-md-6">
-          <a-button-group style="margin-bottom: 10px">
-            <a-tooltip placement="topLeft" title="Añadir nuevo elemento">
-              <a-button icon="plus" type="primary" @click="show_form">Añadir</a-button>
-            </a-tooltip>
-            <a-tooltip placement="topLeft" title="Eliminar elementos seleccionados">
-              <a-button icon="delete" type="danger" @click="showDeleteConfirm">Eliminar</a-button>
-            </a-tooltip>
-          </a-button-group>
-        </div>
-        <div class="col-md-6" style="text-align: end;">
-        </div>
-      </div>
-     </div>
+      <a-breadcrumb>
+        <a-breadcrumb-item href="">
+          <a-icon type="home" />
+          <router-link :to="{ name: 'index' }">Inicio</router-link>
+        </a-breadcrumb-item>
+        <a-breadcrumb-item href="">
+          <span>General</span>
+        </a-breadcrumb-item>
+        <a-breadcrumb-item>
+          <span>Delegacion_evento</span>
+        </a-breadcrumb-item>
+      </a-breadcrumb>
     </div>
-   <div>
+    <div class="row col-md-6">
+      <h3>Listado de Delegacion_evento</h3>
+    </div>
+    <div class="container">
+      <div>
+        <div class="row">
+          <div class="col-md-6">
+            <a-button-group style="margin-bottom: 10px">
+              <a-tooltip placement="topLeft" title="Añadir nuevo elemento">
+                <a-button icon="plus" type="primary" @click="show_form">Añadir</a-button>
+              </a-tooltip>
+              <a-tooltip placement="topLeft" title="Eliminar elementos seleccionados">
+                <a-button icon="delete" type="danger" @click="showDeleteConfirm">Eliminar</a-button>
+              </a-tooltip>
+            </a-button-group>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div>
       <a-modal
         @cancel="onCloseModal"
-        :title="selected_delegacion_evento.get_id()?'Actualizar delegacion_evento':'Añadir delegacion_evento'"
+        :title="selected_delegacion_evento.get_id() ? 'Actualizar delegacion_evento' : 'Añadir delegacion_evento'"
         class="modal-form"
         width="55rem"
         :visible="show_modal_form"
@@ -50,16 +46,18 @@
         :footer="null"
         :maskClosable="false"
       >
-        <delegacion_evento_form  :modal=true :model="selected_delegacion_evento" />
+        <delegacion_evento_form :modal="true" :model="selected_delegacion_evento" />
       </a-modal>
-      <delegacion_evento_table
-       :columns="columns"
-       table_name="Delegacion_evento"
-       id_table="id_delegacion_evento"
-       ref="delegacion_evento_table"
-       :params_search="params_search"
-       :paginate="paginate"
-      />
+      <div style="margin-left: 15px">
+        <delegacion_evento_table
+          :columns="columns"
+          table_name="Delegacion_evento"
+          id_table="id_delegacion_evento"
+          ref="delegacion_evento_table"
+          :params_search="params_search"
+          :paginate="paginate"
+        />
+      </div>
     </div>
   </div>
 </template>
@@ -71,40 +69,40 @@ import delegacion_evento_table from "./delegacion_evento.table";
 
 export default {
   name: "delegacion_evento_list",
-    provide: function(){
-      return{
-        close_modal: this.onCloseModal,
-        show_form: this.show_form,
-        load_data: () => {
-           this.$refs.delegacion_evento_table.load_data()
-        },
-        setSelectedDelegacion_evento: this.setSelectedDelegacion_evento
-      }
-    },
+  provide: function() {
+    return {
+      close_modal: this.onCloseModal,
+      show_form: this.show_form,
+      load_data: () => {
+        this.$refs.delegacion_evento_table.load_data();
+      },
+      setSelectedDelegacion_evento: this.setSelectedDelegacion_evento,
+    };
+  },
   data() {
     return {
       data: [],
       self: null,
-      columns: mb.statics('Delegacion_evento').columns,
-      selected_delegacion_evento: mb.instance( 'Delegacion_evento'),
+      columns: mb.statics("Delegacion_evento").columns,
+      selected_delegacion_evento: mb.instance("Delegacion_evento"),
       show_modal_form: false,
-      paginate:false,
-      params_search:{relations:['evento','delegacion']},
-      mb
+      paginate: false,
+      params_search: { relations: ["evento", "delegacion"] },
+      mb,
     };
   },
   components: {
     delegacion_evento_form,
-    delegacion_evento_table
+    delegacion_evento_table,
   },
   methods: {
     setSelectedDelegacion_evento(model) {
-      this.selected_delegacion_evento = model
+      this.selected_delegacion_evento = model;
     },
-    onCloseModal(e,reload_data=false) {
-      this.selected_delegacion_evento = mb.instance('Delegacion_evento');
+    onCloseModal(e, reload_data = false) {
+      this.selected_delegacion_evento = mb.instance("Delegacion_evento");
       this.show_modal_form = false;
-      reload_data ? this.$refs.delegacion_evento_table.load_data() : ''
+      reload_data ? this.$refs.delegacion_evento_table.load_data() : "";
     },
     show_form() {
       this.show_modal_form = !this.show_modal_form;
@@ -129,18 +127,18 @@ export default {
         cancelText: "No",
         async onOk() {
           try {
-            const response = await mb.statics('Delegacion_evento').delete_by_ids(
-                _this.$refs.delegacion_evento_table.selectedRowKeys
-              );
-               utils.process_response(response, "deleted");
-              _this.$refs.delegacion_evento_table.selectedRowKeys=[];
-              _this.$refs.delegacion_evento_table.load_data();
-            } catch (error) {
-              utils.process_error(error);
-              _this.$refs.delegacion_evento_table.selectedRowKeys=[];
-            }
+            const response = await mb
+              .statics("Delegacion_evento")
+              .delete_by_ids(_this.$refs.delegacion_evento_table.selectedRowKeys);
+            utils.process_response(response, "deleted");
+            _this.$refs.delegacion_evento_table.selectedRowKeys = [];
+            _this.$refs.delegacion_evento_table.load_data();
+          } catch (error) {
+            utils.process_error(error);
+            _this.$refs.delegacion_evento_table.selectedRowKeys = [];
+          }
         },
-        onCancel() {}
+        onCancel() {},
       });
     },
   },
@@ -150,4 +148,3 @@ export default {
 <style>
 @import "delegacion_evento_list.css";
 </style>
-

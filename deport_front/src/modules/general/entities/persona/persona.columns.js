@@ -32,6 +32,14 @@
       sorter: (a, b) =>  (a.genero > b.genero)-(a.genero < b.genero)
     },
     {
+      title: 'Facultad',
+      dataIndex: 'facultad',
+      align:'center',
+      key: 'facultad',
+
+      sorter: (a, b) =>  (a.facultad > b.facultad)-(a.facultad < b.facultad)
+    },
+    {
       title: 'Acciones',
       key: 'action_elements',
       fixed: 'right',

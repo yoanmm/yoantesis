@@ -1,46 +1,46 @@
 <template>
   <div>
     <div class="row row-breadcrumb">
-      <div class="col-md-6">
-        <h4>Listado de Evento_deportivo_regla</h4>
+      <a-breadcrumb>
+        <a-breadcrumb-item href="">
+          <a-icon type="home" />
+          <router-link :to="{ name: 'index' }">Inicio</router-link>
+        </a-breadcrumb-item>
+        <a-breadcrumb-item href="">
+          <span>General</span>
+        </a-breadcrumb-item>
+        <a-breadcrumb-item>
+          <span>Evento_deportivo_regla</span>
+        </a-breadcrumb-item>
+      </a-breadcrumb>
+      <div class="row col-md-6">
+        <h3>Listado de Evento_deportivo_regla</h3>
       </div>
-      <div class="col-md-5">
-        <a-breadcrumb>
-          <a-breadcrumb-item href="">
-            <a-icon type="home" />
-            <router-link :to="{name:'index'}">Inicio</router-link>
-          </a-breadcrumb-item>
-          <a-breadcrumb-item href="">
-            <span>General</span>
-          </a-breadcrumb-item>
-          <a-breadcrumb-item>
-           <span>Evento_deportivo_regla</span>
-          </a-breadcrumb-item>
-        </a-breadcrumb>
-       </div>
-      </div>
-    <div class="container">
-    <div>
-      <div class="row">
-        <div class="col-md-6">
-          <a-button-group style="margin-bottom: 10px">
-            <a-tooltip placement="topLeft" title="Añadir nuevo elemento">
-              <a-button icon="plus" type="primary" @click="show_form">Añadir</a-button>
-            </a-tooltip>
-            <a-tooltip placement="topLeft" title="Eliminar elementos seleccionados">
-              <a-button icon="delete" type="danger" @click="showDeleteConfirm">Eliminar</a-button>
-            </a-tooltip>
-          </a-button-group>
-        </div>
-        <div class="col-md-6" style="text-align: end;">
-        </div>
-      </div>
-     </div>
     </div>
-   <div>
+    <div class="container">
+      <div>
+        <div class="row">
+          <div class="col-md-6">
+            <a-button-group style="margin-bottom: 10px">
+              <a-tooltip placement="topLeft" title="Añadir nuevo elemento">
+                <a-button icon="plus" type="primary" @click="show_form">Añadir</a-button>
+              </a-tooltip>
+              <a-tooltip placement="topLeft" title="Eliminar elementos seleccionados">
+                <a-button icon="delete" type="danger" @click="showDeleteConfirm">Eliminar</a-button>
+              </a-tooltip>
+            </a-button-group>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div>
       <a-modal
         @cancel="onCloseModal"
-        :title="selected_evento_deportivo_regla.get_id()?'Actualizar evento_deportivo_regla':'Añadir evento_deportivo_regla'"
+        :title="
+          selected_evento_deportivo_regla.get_id()
+            ? 'Actualizar evento_deportivo_regla'
+            : 'Añadir evento_deportivo_regla'
+        "
         class="modal-form"
         width="55rem"
         :visible="show_modal_form"
@@ -50,16 +50,18 @@
         :footer="null"
         :maskClosable="false"
       >
-        <evento_deportivo_regla_form  :modal=true :model="selected_evento_deportivo_regla" />
+        <evento_deportivo_regla_form :modal="true" :model="selected_evento_deportivo_regla" />
       </a-modal>
-      <evento_deportivo_regla_table
-       :columns="columns"
-       table_name="Evento_deportivo_regla"
-       id_table="id_regla_evento"
-       ref="evento_deportivo_regla_table"
-       :params_search="params_search"
-       :paginate="paginate"
-      />
+      <div style="margin-left: 15px">
+        <evento_deportivo_regla_table
+          :columns="columns"
+          table_name="Evento_deportivo_regla"
+          id_table="id_regla_evento"
+          ref="evento_deportivo_regla_table"
+          :params_search="params_search"
+          :paginate="paginate"
+        />
+      </div>
     </div>
   </div>
 </template>
@@ -71,40 +73,40 @@ import evento_deportivo_regla_table from "./evento_deportivo_regla.table";
 
 export default {
   name: "evento_deportivo_regla_list",
-    provide: function(){
-      return{
-        close_modal: this.onCloseModal,
-        show_form: this.show_form,
-        load_data: () => {
-           this.$refs.evento_deportivo_regla_table.load_data()
-        },
-        setSelectedEvento_deportivo_regla: this.setSelectedEvento_deportivo_regla
-      }
-    },
+  provide: function() {
+    return {
+      close_modal: this.onCloseModal,
+      show_form: this.show_form,
+      load_data: () => {
+        this.$refs.evento_deportivo_regla_table.load_data();
+      },
+      setSelectedEvento_deportivo_regla: this.setSelectedEvento_deportivo_regla,
+    };
+  },
   data() {
     return {
       data: [],
       self: null,
-      columns: mb.statics('Evento_deportivo_regla').columns,
-      selected_evento_deportivo_regla: mb.instance( 'Evento_deportivo_regla'),
+      columns: mb.statics("Evento_deportivo_regla").columns,
+      selected_evento_deportivo_regla: mb.instance("Evento_deportivo_regla"),
       show_modal_form: false,
-      paginate:false,
-      params_search:{relations:[]},
-      mb
+      paginate: false,
+      params_search: { relations: [] },
+      mb,
     };
   },
   components: {
     evento_deportivo_regla_form,
-    evento_deportivo_regla_table
+    evento_deportivo_regla_table,
   },
   methods: {
     setSelectedEvento_deportivo_regla(model) {
-      this.selected_evento_deportivo_regla = model
+      this.selected_evento_deportivo_regla = model;
     },
-    onCloseModal(e,reload_data=false) {
-      this.selected_evento_deportivo_regla = mb.instance('Evento_deportivo_regla');
+    onCloseModal(e, reload_data = false) {
+      this.selected_evento_deportivo_regla = mb.instance("Evento_deportivo_regla");
       this.show_modal_form = false;
-      reload_data ? this.$refs.evento_deportivo_regla_table.load_data() : ''
+      reload_data ? this.$refs.evento_deportivo_regla_table.load_data() : "";
     },
     show_form() {
       this.show_modal_form = !this.show_modal_form;
@@ -129,18 +131,18 @@ export default {
         cancelText: "No",
         async onOk() {
           try {
-            const response = await mb.statics('Evento_deportivo_regla').delete_by_ids(
-                _this.$refs.evento_deportivo_regla_table.selectedRowKeys
-              );
-               utils.process_response(response, "deleted");
-              _this.$refs.evento_deportivo_regla_table.selectedRowKeys=[];
-              _this.$refs.evento_deportivo_regla_table.load_data();
-            } catch (error) {
-              utils.process_error(error);
-              _this.$refs.evento_deportivo_regla_table.selectedRowKeys=[];
-            }
+            const response = await mb
+              .statics("Evento_deportivo_regla")
+              .delete_by_ids(_this.$refs.evento_deportivo_regla_table.selectedRowKeys);
+            utils.process_response(response, "deleted");
+            _this.$refs.evento_deportivo_regla_table.selectedRowKeys = [];
+            _this.$refs.evento_deportivo_regla_table.load_data();
+          } catch (error) {
+            utils.process_error(error);
+            _this.$refs.evento_deportivo_regla_table.selectedRowKeys = [];
+          }
         },
-        onCancel() {}
+        onCancel() {},
       });
     },
   },
@@ -150,4 +152,3 @@ export default {
 <style>
 @import "evento_deportivo_regla_list.css";
 </style>
-
