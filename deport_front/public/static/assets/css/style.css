@@ -10360,7 +10360,7 @@ a.text-dark:hover {
   background: -webkit-linear-gradient(left, #8e54e9 0, #4776e6 100%) !important;
   background: -o-linear-gradient(left, #8e54e9 0, #4776e6 100%) !important;
   background: -ms-linear-gradient(left, #8e54e9 0, #4776e6 100%) !important;
-  background: linear-gradient(to right, #8e54e9 0, #4776e6 100%) !important;
+  background: linear-gradient(to bottom right, #c5dce6, #7cc3f0)   !important;
 }
 .bg-gradient-overlay:before {
   content: "";
@@ -13950,7 +13950,6 @@ ol.breadcrumb {
 }
 .top-bar .navbar .nav-right .nav-item .nav-link {
   padding: 1.4rem 0;
-  font-size: 17px;
 }
 .top-bar .navbar .nav-right .nav-item.dropdown .dropdown-toggle::after {
   margin: 0;
@@ -13959,16 +13958,16 @@ ol.breadcrumb {
   width: 50px;
 }
 .top-bar .navbar .nav-right .nav-item.user-profile .nav-link {
-  padding: 0.9em 0;
+  padding: 0.4em 0;
   position: relative;
 }
 .top-bar .navbar .nav-right .nav-item.user-profile a {
   padding: 0.6rem 1rem;
 }
 .top-bar .navbar .nav-right .nav-item.user-profile a img {
-  width: 36px;
-  height: 36px;
-  border-radius: 30px;
+  width: 43px;
+  height: 43px;
+  border-radius: 50px;
 }
 .top-bar .navbar .nav-right .nav-item.user-profile a .user-status {
   width: 8px;
@@ -13976,12 +13975,12 @@ ol.breadcrumb {
   border-radius: 50%;
   display: block;
   position: absolute;
-  right: 7px;
+  right: 3px;
   bottom: inherit;
   top: 14px;
 }
 .top-bar .navbar .nav-right .nav-item.user-profile .dropdown-menu {
-  width: 23rem;
+  width: 18rem;
 }
 @media screen and (min-width: 577px) and (max-width: 767px) {
   .top-bar .navbar .nav-right .nav-item.user-profile .dropdown-menu {
