@@ -11,7 +11,7 @@
         class="form-row"
       >
       <tc-form-item class="form-group mb-0 col-md-6 px-3">
-        <label>Nombre usuario</label>
+        <label>Nombre de usuario</label>
         <tc-input placeholder='Ingrese el valor' name='username' v-model="usuarios.username"></tc-input>
       </tc-form-item>
       <tc-form-item class="form-group mb-0 col-md-6 px-3">
@@ -41,10 +41,10 @@
           </div>
         </tc-form-item>
         <tc-form-item class="form-group mb-0 col-md-6 px-3">
-          <label>Persona</label>
+          <label>Usuario</label>
           <div class="d-flex flex-row">
             <tc-autocomplete
-              placeholder="Seleccione el Persona"
+              placeholder="Seleccione el usuario"
               name="id_persona"
               ref="select_persona"
               :successFeed="false"

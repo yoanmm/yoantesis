@@ -1,6 +1,6 @@
   export const columns = [
     {
-      title: 'Tipo_delegacion',
+      title: 'Tipos de delegación',
       dataIndex: 'tipo_delegacion',
       align:'center',
       key: 'tipo_delegacion',

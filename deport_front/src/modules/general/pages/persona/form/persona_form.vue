@@ -12,23 +12,23 @@
       >
       <tc-form-item class="form-group mb-0 col-md-6 px-3">
         <label>Nombre</label>
-        <tc-input placeholder='Ingrese el valor' name='nombre' v-model="persona.nombre"></tc-input>
+        <tc-input placeholder='Ingrese el dato' name='nombre' v-model="persona.nombre"></tc-input>
       </tc-form-item>
       <tc-form-item class="form-group mb-0 col-md-6 px-3">
-        <label>Apellido</label>
-        <tc-input placeholder='Ingrese el valor' name='apellido' v-model="persona.apellido"></tc-input>
+        <label>Apellidos</label>
+        <tc-input placeholder='Ingrese el dato' name='apellido' v-model="persona.apellido"></tc-input>
       </tc-form-item>
       <tc-form-item class="form-group mb-0 col-md-6 px-3">
         <label>Carnet</label>
-        <tc-input placeholder='Ingrese el valor' name='carnet' v-model="persona.carnet"></tc-input>
+        <tc-input placeholder='Ingrese el dato' name='carnet' v-model="persona.carnet"></tc-input>
       </tc-form-item>
       <tc-form-item class="form-group mb-0 col-md-6 px-3">
-        <label>Genero</label>
-        <tc-input placeholder='Ingrese el valor' name='genero' v-model="persona.genero"></tc-input>
+        <label>Género</label>
+        <tc-select placeholder='Ingrese el dato' name='genero' v-model="persona.genero"></tc-select>
       </tc-form-item>
       <tc-form-item class="form-group mb-0 col-md-6 px-3">
         <label>Facultad</label>
-        <tc-input placeholder='Ingrese el valor' name='facultad' v-model="persona.facultad"></tc-input>
+        <tc-select placeholder='Ingrese el valor' name='facultad' v-model="persona.facultad"></tc-select>
       </tc-form-item>
       </tc-form>
     </div>

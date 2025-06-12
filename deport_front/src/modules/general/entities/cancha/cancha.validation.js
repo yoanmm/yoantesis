@@ -4,21 +4,24 @@ import {
     between,
     maxLength,
     minLength,
-    decimal
+    decimal,
   } from 'vuelidate/lib/validators';
 import * as mb from "@/helpers/loaders/model.load"
+import { noSpecialChars } from '@/validators/customValidators';
 
     export const validations = {
       cancha: {
         nombre_cancha: {
+          required,
+          noSpecialChars
         },
       },
     }
     export const feedbacks = {
       cancha: {
-      id_cancha: {
-        isUnique: 'This id_cancha has been taken' 
-
-      },
+      nombre_cancha: {
+         required: 'Este campo es obligatorio',
+         noSpecialChars: 'Solo se permiten letras y espacios'
+         }
       },
     }

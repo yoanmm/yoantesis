@@ -8,7 +8,7 @@
       sorter: (a, b) =>  (a.nombre > b.nombre)-(a.nombre < b.nombre)
     },
     {
-      title: 'Apellido',
+      title: 'Apellidos',
       dataIndex: 'apellido',
       align:'center',
       key: 'apellido',
@@ -24,7 +24,7 @@
       sorter: (a, b) =>  (a.carnet > b.carnet)-(a.carnet < b.carnet)
     },
     {
-      title: 'Genero',
+      title: 'Género',
       dataIndex: 'genero',
       align:'center',
       key: 'genero',
@@ -46,13 +46,5 @@
       scopedSlots: {
         customRender: 'action'
       }
-    },
-    {
-      title: 'Facultad',
-      dataIndex: 'facultad',
-      align:'center',
-      key: 'facultad',
-
-      sorter: (a, b) =>  (a.facultad > b.facultad)-(a.facultad < b.facultad)
     }
   ];

@@ -25,7 +25,7 @@
               type="text"
               v-model.trim="user.username"
               name="username"
-              placeholder="Email"
+              placeholder="Correo"
               class="input-login w-full py-2"
             />
           </tc-form-item>
@@ -34,7 +34,7 @@
               type="password"
               v-model="user.password"
               name="password"
-              placeholder="Password"
+              placeholder="Contraseña"
               class="input-login w-full py-2"
             />
           </tc-form-item>
@@ -168,7 +168,7 @@ export default {
   max-width: 100%;
   background: #fff;
   border-radius: 12px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 10px 25px rgba(1, 7, 125, 0.74);
   overflow: hidden;
 }
 
@@ -191,7 +191,7 @@ export default {
 
 .form-subtitle {
   font-size: 1.3rem;
-  color: #888;
+  color: #00095D;
 }
 
 .login-error {

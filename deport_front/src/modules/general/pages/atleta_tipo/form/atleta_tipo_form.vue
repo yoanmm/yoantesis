@@ -11,8 +11,8 @@
         class="form-row"
       >
       <tc-form-item class="form-group mb-0 col-md-6 px-3">
-        <label>Tipo_atleta</label>
-        <tc-input placeholder='Ingrese el valor' name='tipo_atleta' v-model="atleta_tipo.tipo_atleta"></tc-input>
+        <label>Tipos de atleta</label>
+        <tc-input placeholder='Ingrese el dato' name='tipo_atleta' v-model="atleta_tipo.tipo_atleta"></tc-input>
       </tc-form-item>
       </tc-form>
     </div>

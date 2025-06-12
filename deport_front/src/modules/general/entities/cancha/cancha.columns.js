@@ -1,6 +1,6 @@
   export const columns = [
     {
-      title: 'Nombre_cancha',
+      title: 'Nombre',
       dataIndex: 'nombre_cancha',
       align:'center',
       key: 'nombre_cancha',

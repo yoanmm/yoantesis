@@ -7,18 +7,21 @@ import {
     decimal
   } from 'vuelidate/lib/validators';
 import * as mb from "@/helpers/loaders/model.load"
+import { alphaOnly } from '@/validators/customValidators';
 
     export const validations = {
       atleta_tipo: {
         tipo_atleta: {
+          required,
+          alphaOnly
         },
       },
     }
     export const feedbacks = {
       atleta_tipo: {
-      id_tipo: {
-        isUnique: 'This id_tipo has been taken' 
-
-      },
+      tipo_atleta: {
+        required: 'Este campo es obligatorio',
+        alphaOnly: 'Solo se permiten letras y espacios'
+        },
       },
     }

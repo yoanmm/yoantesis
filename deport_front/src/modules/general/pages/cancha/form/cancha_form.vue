@@ -11,8 +11,8 @@
         class="form-row"
       >
       <tc-form-item class="form-group mb-0 col-md-6 px-3">
-        <label>Nombre_cancha</label>
-        <tc-input placeholder='Ingrese el valor' name='nombre_cancha' v-model="cancha.nombre_cancha"></tc-input>
+        <label>Nombre</label>
+        <tc-input placeholder='Ingrese el dato' name='nombre_cancha' v-model="cancha.nombre_cancha"></tc-input>
       </tc-form-item>
       </tc-form>
     </div>

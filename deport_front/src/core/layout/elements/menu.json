@@ -19,13 +19,6 @@
         "path": "/general/competencia_list"
       },
       {
-        "name": "delegacion_list",
-        "module": "management",
-        "caption": "Delegaciones",
-        "icon": "",
-        "path": "/general/delegacion_list"
-      },
-      {
         "name": "equipo_list",
         "module": "management",
         "caption": "Equipos",
@@ -108,6 +101,13 @@
         "caption": "Canchas",
         "icon": "",
         "path": "/general/cancha_list"
+      },
+      {
+        "name": "delegacion_list",
+        "module": "management",
+        "caption": "Delegaciones",
+        "icon": "",
+        "path": "/general/delegacion_list"
       },
       {
         "name": "delegacion_tipo_list",

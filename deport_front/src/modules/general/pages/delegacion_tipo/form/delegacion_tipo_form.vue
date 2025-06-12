@@ -11,8 +11,8 @@
         class="form-row"
       >
       <tc-form-item class="form-group mb-0 col-md-6 px-3">
-        <label>Tipo_delegacion</label>
-        <tc-input placeholder='Ingrese el valor' name='tipo_delegacion' v-model="delegacion_tipo.tipo_delegacion"></tc-input>
+        <label>Tipos de delegacion</label>
+        <tc-input placeholder='Ingrese el dato' name='tipo_delegacion' v-model="delegacion_tipo.tipo_delegacion"></tc-input>
       </tc-form-item>
       </tc-form>
     </div>

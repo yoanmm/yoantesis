@@ -11,8 +11,8 @@
         class="form-row"
       >
       <tc-form-item class="form-group mb-0 col-md-6 px-3">
-        <label>Estado_atleta</label>
-        <tc-input placeholder='Ingrese el valor' name='estado_atleta' v-model="atleta_estado.estado_atleta"></tc-input>
+        <label>Estados del atleta</label>
+        <tc-input placeholder='Ingrese el dato' name='estado_atleta' v-model="atleta_estado.estado_atleta"></tc-input>
       </tc-form-item>
       </tc-form>
     </div>

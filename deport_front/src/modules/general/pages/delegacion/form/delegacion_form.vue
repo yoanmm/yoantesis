@@ -11,30 +11,30 @@
         class="form-row"
       >
       <tc-form-item class="form-group mb-0 col-md-6 px-3">
-        <label>Nombre_delegacion</label>
-        <tc-input placeholder='Ingrese el valor' name='nombre_delegacion' v-model="delegacion.nombre_delegacion"></tc-input>
+        <label>Nombre</label>
+        <tc-input placeholder='Ingrese el dato' name='nombre_delegacion' v-model="delegacion.nombre_delegacion"></tc-input>
       </tc-form-item>
       <tc-form-item class="form-group mb-0 col-md-6 px-3">
         <label>Abreviatura</label>
-        <tc-input placeholder='Ingrese el valor' name='abreviatura' v-model="delegacion.abreviatura"></tc-input>
+        <tc-input placeholder='Ingrese el dato' name='abreviatura' v-model="delegacion.abreviatura"></tc-input>
       </tc-form-item>
       <tc-form-item class="form-group mb-0 col-md-6 px-3">
         <label>Mascota</label>
-        <tc-input placeholder='Ingrese el valor' name='mascota' v-model="delegacion.mascota"></tc-input>
+        <tc-input placeholder='Ingrese el dato' name='mascota' v-model="delegacion.mascota"></tc-input>
       </tc-form-item>
       <tc-form-item class="form-group mb-0 col-md-6 px-3">
         <label>Color</label>
-        <tc-input placeholder='Ingrese el valor' name='color' v-model="delegacion.color"></tc-input>
+        <tc-input placeholder='Ingrese el dato' name='color' v-model="delegacion.color"></tc-input>
       </tc-form-item>
       <tc-form-item class="form-group mb-0 col-md-6 px-3">
         <label>Logo</label>
-        <tc-input placeholder='Ingrese el valor' name='logo' v-model="delegacion.logo"></tc-input>
+        <tc-input placeholder='Ingrese el dato' name='logo' v-model="delegacion.logo"></tc-input>
       </tc-form-item>
         <tc-form-item class="form-group mb-0 col-md-6 px-3">
-          <label>Delegacion_tipo</label>
+          <label>Tipo</label>
           <div class="d-flex flex-row">
             <tc-autocomplete
-              placeholder="Seleccione el Delegacion_tipo"
+              placeholder="Seleccione el tipo de delegación"
               name="id_tipo_delegacion"
               ref="select_tipo_delegacion"
               :successFeed="false"
@@ -56,7 +56,7 @@
           @cancel="showModalCreatetipo_delegacion = false"
           v-if="showModalCreatetipo_delegacion"
           class="modal-form"
-          :title="'Añadir Delegacion_tipo'"
+          :title="'Añadir tipo de delegación'"
           :visible="true"
           :header="null"
           :footer="null"
@@ -65,10 +65,10 @@
           <delegacion_tipo_form :model="null" :modal="true" @close_modal="tipo_delegacionAdded"/>
         </a-modal>
         <tc-form-item class="form-group mb-0 col-md-6 px-3">
-          <label>Delegacion_regla</label>
+          <label>Reglas</label>
           <div class="d-flex flex-row">
             <tc-autocomplete
-              placeholder="Seleccione el Delegacion_regla"
+              placeholder="Seleccione el documento "
               name="id_regla_delegacion"
               ref="select_regla_delegacion"
               :successFeed="false"
@@ -90,7 +90,7 @@
           @cancel="showModalCreateregla_delegacion = false"
           v-if="showModalCreateregla_delegacion"
           class="modal-form"
-          :title="'Añadir Delegacion_regla'"
+          :title="'Añadir Regla'"
           :visible="true"
           :header="null"
           :footer="null"
@@ -109,7 +109,7 @@
           <a-button v-if="!delegacion.get_id()" :disabled="loading"  type="primary" @click="save_model(true)">Añadir y nuevo</a-button>
         </a-tooltip>
         <a-tooltip placement="topLeft" title="Cancelar acción">
-          <a-button :disabled="loading"  type="danger" @click="cancel()">Cancel</a-button>
+          <a-button :disabled="loading"  type="danger" @click="cancel()">Cancelar</a-button>
         </a-tooltip>
       </a-button-group>
     </div>

@@ -1,6 +1,6 @@
   export const columns = [
     {
-      title: 'Nombre_delegacion',
+      title: 'Nombre',
       dataIndex: 'nombre_delegacion',
       align:'center',
       key: 'nombre_delegacion',
@@ -40,7 +40,7 @@
       sorter: (a, b) =>  (a.logo > b.logo)-(a.logo < b.logo)
     },
     {
-      title: 'Tipo_delegacion',
+      title: 'Tipo',
       dataIndex: 'tipo_delegacion.tipo_delegacion',
       align:'center',
       key: 'tipo_delegacion.tipo_delegacion',
@@ -48,7 +48,7 @@
       sorter: (a, b) =>  a.tipo_delegacion && b.tipo_delegacion?(a.tipo_delegacion.tipo_delegacion > b.tipo_delegacion.tipo_delegacion)-(a.tipo_delegacion.tipo_delegacion < b.tipo_delegacion.tipo_delegacion):0
     },
     {
-      title: 'Regla_delegacion',
+      title: 'Reglas',
       dataIndex: 'regla_delegacion.nombre_regla',
       align:'center',
       key: 'regla_delegacion.nombre_regla',

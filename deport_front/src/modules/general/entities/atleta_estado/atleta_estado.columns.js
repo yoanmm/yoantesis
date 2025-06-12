@@ -1,6 +1,6 @@
   export const columns = [
     {
-      title: 'Estado_atleta',
+      title: 'Estados',
       dataIndex: 'estado_atleta',
       align:'center',
       key: 'estado_atleta',
