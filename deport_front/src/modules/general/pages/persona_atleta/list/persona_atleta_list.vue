@@ -1,9 +1,6 @@
 <template>
   <div>
     <div class="row row-breadcrumb">
-      <div class=" row col-md-6">
-        <h3>Atletas</h3>
-      </div>
       <a-breadcrumb>
         <a-breadcrumb-item href="">
           <a-icon type="home" />
@@ -16,6 +13,9 @@
           <span>Atletas</span>
         </a-breadcrumb-item>
       </a-breadcrumb>
+    </div>
+    <div class=" row col-md-6">
+      <h3>Atletas</h3>
     </div>
     <div class="container">
       <div>
