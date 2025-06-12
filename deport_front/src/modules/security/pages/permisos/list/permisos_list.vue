@@ -1,46 +1,42 @@
 <template>
   <div>
     <div class="row row-breadcrumb">
-      <div class="col-md-6">
-        <h4>Listado de Permisos</h4>
-      </div>
-      <div class="col-md-5">
-        <a-breadcrumb>
-          <a-breadcrumb-item href="">
-            <a-icon type="home" />
-            <router-link :to="{name:'index'}">Inicio</router-link>
-          </a-breadcrumb-item>
-          <a-breadcrumb-item href="">
-            <span>Security</span>
-          </a-breadcrumb-item>
-          <a-breadcrumb-item>
-           <span>Permisos</span>
-          </a-breadcrumb-item>
-        </a-breadcrumb>
-       </div>
-      </div>
-    <div class="container">
-    <div>
-      <div class="row">
-        <div class="col-md-6">
-          <a-button-group style="margin-bottom: 10px">
-            <a-tooltip placement="topLeft" title="Añadir nuevo elemento">
-              <a-button icon="plus" type="primary" @click="show_form">Añadir</a-button>
-            </a-tooltip>
-            <a-tooltip placement="topLeft" title="Eliminar elementos seleccionados">
-              <a-button icon="delete" type="danger" @click="showDeleteConfirm">Eliminar</a-button>
-            </a-tooltip>
-          </a-button-group>
-        </div>
-        <div class="col-md-6" style="text-align: end;">
-        </div>
-      </div>
-     </div>
+      <a-breadcrumb>
+        <a-breadcrumb-item href="">
+          <a-icon type="home" />
+          <router-link :to="{ name: 'index' }">Inicio</router-link>
+        </a-breadcrumb-item>
+        <a-breadcrumb-item href="">
+          <span>Seguridad</span>
+        </a-breadcrumb-item>
+        <a-breadcrumb-item>
+          <span>Permisos</span>
+        </a-breadcrumb-item>
+      </a-breadcrumb>
     </div>
-   <div>
+    <div class="row col-md-6">
+      <h3>Permisos</h3>
+    </div>
+    <div class="container">
+      <div>
+        <div class="row">
+          <div class="col-md-6">
+            <a-button-group style="margin-bottom: 10px">
+              <a-tooltip placement="topLeft" title="Añadir nuevo elemento">
+                <a-button icon="plus" type="primary" @click="show_form">Añadir</a-button>
+              </a-tooltip>
+              <a-tooltip placement="topLeft" title="Eliminar elementos seleccionados">
+                <a-button icon="delete" type="danger" @click="showDeleteConfirm">Eliminar</a-button>
+              </a-tooltip>
+            </a-button-group>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div>
       <a-modal
         @cancel="onCloseModal"
-        :title="selected_permisos.get_id()?'Actualizar permisos':'Añadir permisos'"
+        :title="selected_permisos.get_id() ? 'Actualizar permisos' : 'Añadir permisos'"
         class="modal-form"
         width="55rem"
         :visible="show_modal_form"
@@ -50,16 +46,18 @@
         :footer="null"
         :maskClosable="false"
       >
-        <permisos_form  :modal=true :model="selected_permisos" />
+        <permisos_form :modal="true" :model="selected_permisos" />
       </a-modal>
-      <permisos_table
-       :columns="columns"
-       table_name="Permisos"
-       id_table="id_permiso"
-       ref="permisos_table"
-       :params_search="params_search"
-       :paginate="paginate"
-      />
+      <div style="margin-left: 15px">
+        <permisos_table
+          :columns="columns"
+          table_name="Permisos"
+          id_table="id_permiso"
+          ref="permisos_table"
+          :params_search="params_search"
+          :paginate="paginate"
+        />
+      </div>
     </div>
   </div>
 </template>
@@ -71,40 +69,40 @@ import permisos_table from "./permisos.table";
 
 export default {
   name: "permisos_list",
-    provide: function(){
-      return{
-        close_modal: this.onCloseModal,
-        show_form: this.show_form,
-        load_data: () => {
-           this.$refs.permisos_table.load_data()
-        },
-        setSelectedPermisos: this.setSelectedPermisos
-      }
-    },
+  provide: function() {
+    return {
+      close_modal: this.onCloseModal,
+      show_form: this.show_form,
+      load_data: () => {
+        this.$refs.permisos_table.load_data();
+      },
+      setSelectedPermisos: this.setSelectedPermisos,
+    };
+  },
   data() {
     return {
       data: [],
       self: null,
-      columns: mb.statics('Permisos').columns,
-      selected_permisos: mb.instance( 'Permisos'),
+      columns: mb.statics("Permisos").columns,
+      selected_permisos: mb.instance("Permisos"),
       show_modal_form: false,
-      paginate:false,
-      params_search:{relations:[]},
-      mb
+      paginate: false,
+      params_search: { relations: [] },
+      mb,
     };
   },
   components: {
     permisos_form,
-    permisos_table
+    permisos_table,
   },
   methods: {
     setSelectedPermisos(model) {
-      this.selected_permisos = model
+      this.selected_permisos = model;
     },
-    onCloseModal(e,reload_data=false) {
-      this.selected_permisos = mb.instance('Permisos');
+    onCloseModal(e, reload_data = false) {
+      this.selected_permisos = mb.instance("Permisos");
       this.show_modal_form = false;
-      reload_data ? this.$refs.permisos_table.load_data() : ''
+      reload_data ? this.$refs.permisos_table.load_data() : "";
     },
     show_form() {
       this.show_modal_form = !this.show_modal_form;
@@ -129,18 +127,16 @@ export default {
         cancelText: "No",
         async onOk() {
           try {
-            const response = await mb.statics('Permisos').delete_by_ids(
-                _this.$refs.permisos_table.selectedRowKeys
-              );
-               utils.process_response(response, "deleted");
-              _this.$refs.permisos_table.selectedRowKeys=[];
-              _this.$refs.permisos_table.load_data();
-            } catch (error) {
-              utils.process_error(error);
-              _this.$refs.permisos_table.selectedRowKeys=[];
-            }
+            const response = await mb.statics("Permisos").delete_by_ids(_this.$refs.permisos_table.selectedRowKeys);
+            utils.process_response(response, "deleted");
+            _this.$refs.permisos_table.selectedRowKeys = [];
+            _this.$refs.permisos_table.load_data();
+          } catch (error) {
+            utils.process_error(error);
+            _this.$refs.permisos_table.selectedRowKeys = [];
+          }
         },
-        onCancel() {}
+        onCancel() {},
       });
     },
   },
@@ -150,4 +146,3 @@ export default {
 <style>
 @import "permisos_list.css";
 </style>
-

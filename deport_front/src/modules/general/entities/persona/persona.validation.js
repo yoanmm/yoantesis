@@ -18,6 +18,8 @@ import * as mb from "@/helpers/loaders/model.load"
         },
         genero: {
         },
+        facultad: {
+        }
       },
     }
     export const feedbacks = {

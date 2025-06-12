@@ -1,4 +1,4 @@
-$primary: #2c2e3e;
+$primary: #00095D;
 $primary_hover: mix($primary, #eee0e0, 70%) !default;
 $white: #fafafa;
 $dark: #232324;
@@ -86,10 +86,6 @@ $dark-blue: rgb(36, 18, 106);
 
 .row-breadcrumb {
   padding: 0.7rem !important;
-  background-color: $white;
-  margin-bottom: 1rem !important;
-  border-radius: 10px !important;
-
 }
 
 .breadcrumb-list {
@@ -214,7 +210,6 @@ $dark-blue: rgb(36, 18, 106);
   align-items: center;
   margin: 10px 10px 0 10px;
   padding: 10px 0;
-  border-bottom: 1px solid rgb(32, 23, 66) !important;
 }
 
 .ls-toggle-btn {

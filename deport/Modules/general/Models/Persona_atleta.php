@@ -20,7 +20,7 @@ use App\Models\BaseModel;
  * @property string $foto
  * @property float $tamaño
  * @property float $peso
- * @property string $facultad
+
 
  * Los siguientes son las relaciones de este modelo :
 
@@ -97,8 +97,7 @@ class Persona_atleta extends BaseModel
       'id_tipo',
       'foto',
       'tamaño',
-      'peso',
-      'facultad'
+      'peso'
     ];
 
 	 /**
@@ -136,8 +135,7 @@ class Persona_atleta extends BaseModel
                 'id_tipo' =>'nullable|exists:'.$this->connection.'.atleta_tipo,id_tipo',
                 'foto' =>'nullable|max:255',
                 'tamaño' =>'nullable',
-                'peso' =>'nullable',
-                'facultad' =>'nullable|max:255'
+                'peso' =>'nullable'
             ],
             'update'=>[
                 'id_atleta' =>'required|unique:'.$this->connection.'.persona_atleta,id_atleta,'.$this->id_atleta.',id_atleta',
@@ -145,8 +143,7 @@ class Persona_atleta extends BaseModel
                 'id_tipo' =>'nullable|exists:'.$this->connection.'.atleta_tipo,id_tipo',
                 'foto' =>'nullable|max:255',
                 'tamaño' =>'nullable',
-                'peso' =>'nullable',
-                'facultad' =>'nullable|max:255'
+                'peso' =>'nullable'
             ]
         ];
         if(!isset($rules[$scenario]))

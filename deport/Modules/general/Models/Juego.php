@@ -22,12 +22,14 @@ use Illuminate\Support\Carbon;
  * @property integer $id_competencia
  * @property integer $id_fase
  * @property integer $id_cancha
-
+ * @property integer $id_supervisor
+ *
  * Los siguientes son las relaciones de este modelo :
 
  * @property Competencia $competencia
  * @property Juego_fase $fase
  * @property Cancha $cancha
+ * @property Persona_arbitro $supervisor
  * @property Juego_delegacion[] $array_juego_delegacion
  **/
 
@@ -72,7 +74,7 @@ class Juego extends BaseModel
      */
     protected $keyType = 'integer';
 
-    const RELATIONS = ['competencia','fase','cancha','array_juego_delegacion'];
+    const RELATIONS = ['competencia','fase','cancha','supervisor','array_juego_delegacion'];
 /**
      * The number of models to return for pagination.
      *
@@ -100,7 +102,8 @@ class Juego extends BaseModel
       'descripcion_juego',
       'id_competencia',
       'id_fase',
-      'id_cancha'
+      'id_cancha',
+      'id_supervisor'
     ];
 
 	 /**
@@ -127,9 +130,16 @@ class Juego extends BaseModel
 			return $this->belongsTo(Cancha::class,'id_cancha','id_cancha');
 		}
 
+     /**
+     * Get the Persona_arbitro
+     */
+      public function supervisor()
+        {
+            return $this->belongsTo(Persona_arbitro::class,'id_supervisor','id_supervisor');
+        }
 
 	 /**
-     * 
+     *
      * Get array_juego_delegacion
      */
 	  public function array_juego_delegacion()
@@ -147,6 +157,7 @@ class Juego extends BaseModel
                 'descripcion_juego' =>'nullable|max:255',
                 'id_competencia' =>'nullable|exists:'.$this->connection.'.competencia,id_competencia',
                 'id_fase' =>'nullable|exists:'.$this->connection.'.juego_fase,id_fase',
+                'id_supervisor' =>'nullable|exists:'.$this->connection.'.persona_arbitro,id_supervisor',
                 'id_cancha' =>'nullable|exists:'.$this->connection.'.cancha,id_cancha'
             ],
             'update'=>[
@@ -156,6 +167,7 @@ class Juego extends BaseModel
                 'descripcion_juego' =>'nullable|max:255',
                 'id_competencia' =>'nullable|exists:'.$this->connection.'.competencia,id_competencia',
                 'id_fase' =>'nullable|exists:'.$this->connection.'.juego_fase,id_fase',
+                'id_supervisor' =>'nullable|exists:'.$this->connection.'.persona_arbitro,id_supervisor',
                 'id_cancha' =>'nullable|exists:'.$this->connection.'.cancha,id_cancha'
             ]
         ];

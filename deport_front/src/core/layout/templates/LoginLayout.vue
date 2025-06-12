@@ -10,13 +10,14 @@
           </div>
         </div>
       </div>
-      <div class="app-contant">
+      <router-view/>
+      <!-- <div class="app-contant">
         <div style="background-color: #8e54e9;">
           <div class="container-fluid p-0">
             <div class="row no-gutters">
               <div class="col-sm-6 col-lg-5 col-xxl-3  align-self-center order-2 order-sm-1">
                 <div class="d-flex align-items-center h-100-vh">
-                  <router-view/>
+                  
                 </div>
               </div>
               <div class="col-sm-6 col-xxl-9 col-lg-7 bg-gradient o-hidden order-1 order-sm-2">
@@ -29,7 +30,7 @@
             </div>
           </div>
         </div>
-      </div>
+      </div> -->
     </div>
     <!-- end app-wrap -->
   </div>

@@ -2,19 +2,25 @@
   <header class="app-header top-bar">
     <!-- begin navbar -->
     <nav class="navbar navbar-expand-md">
-
       <!-- begin navbar-header -->
       <div class="navbar-header d-flex align-items-center">
         <a href="javascript:void(0)" class="mobile-toggle"><i class="ti ti-align-right"></i></a>
-        <router-link class="navbar-brand" :to="{name: 'index'}">
-          <img src="/static/assets/img/logo-icon.png" class="img-fluid" alt="logo" width="35px"
-               height="35px"/>
-          <span class="text-uppercase ml-2 mb-1" style="font-size: 24px">Deporte</span>
-          <img src="/static/assets/img/logo-icon.png" class="img-fluid logo-mobile" alt="logo"/>
+        <router-link class="navbar-brand" :to="{ name: 'index' }">
+          <img src="/static/assets/img/atlexus_icon.png" class="img-fluid" alt="logo" width="35px" height="35px" />
+          <span class="text-uppercase ml-2 mb-1" style="font-size: 24px; color: #2c2e3e;">Atlexus</span>
+
+          <img src="/static/assets/img/atlexus_icon.png" class="img-fluid logo-mobile" alt="logo" />
         </router-link>
       </div>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-              aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
         <i class="ti ti-align-left"></i>
       </button>
       <!-- end navbar-header -->
@@ -22,12 +28,12 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <div class="navigation d-flex">
           <ul class="navbar-nav nav-left">
-            <li class="nav-item">
+            <!-- <li class="nav-item">
               <a href="javascript:void(0)" class="nav-link sidebar-toggle">
                 <i class="ti ti-align-right"></i>
               </a>
-            </li>
-            <li class="nav-item dropdown" v-for="(item,index) in menu" :key="index">
+            </li> -->
+            <!-- <li class="nav-item dropdown" v-for="(item,index) in menu" :key="index">
               <a href="javascript:void(0)" class="nav-link " id="navbarDropdownseguridad" role="button"
                  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ item.caption }}
                 <i class="fa fa-angle-down"></i>
@@ -43,16 +49,16 @@
               <a href="javascript:void(0)" class="nav-link expand">
                 <i class="icon-size-fullscreen"></i>
               </a>
-            </li>
+            </li> -->
           </ul>
 
           <ul class="navbar-nav nav-right ml-auto">
-            <div class="mt-20">
+            <!-- <div class="mt-20">
               <span class="mr-2 mb-2 mr-sm-0 mb-sm-0 badge badge-pill badge-primary-inverse">Sistema actualizado {{
                   date
                 }}</span>
-            </div>
-            <li class="nav-item dropdown d-none">
+            </div> -->
+            <!-- <li class="nav-item dropdown d-none">
               <a class="nav-link dropdown-toggle" href="javascript:void(0)" id="navbarDropdown2"
                  role="button"
                  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -158,8 +164,8 @@
                   </li>
                 </ul>
               </div>
-            </li>
-            <li class="nav-item dropdown d-none">
+            </li> -->
+            <!-- <li class="nav-item dropdown d-none">
               <a class="nav-link dropdown-toggle" href="javascript:void(0)" id="navbarDropdown3"
                  role="button"
                  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -260,8 +266,8 @@
                   </li>
                 </ul>
               </div>
-            </li>
-            <li class="nav-item d-none">
+            </li> -->
+            <!-- <li class="nav-item d-none">
               <a class="nav-link search" href="javascript:void(0)">
                 <i class="ti ti-search"></i>
               </a>
@@ -280,12 +286,18 @@
                   </form>
                 </div>
               </div>
-            </li>
+            </li> -->
             <li class="nav-item dropdown user-profile">
-              <a href="javascript:void(0)" class="nav-link dropdown-toggle " id="navbarDropdown4"
-                 role="button"
-                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <a
+                href="javascript:void(0)"
+                class="nav-link dropdown-toggle"
+                id="navbarDropdown4"
+                role="button"
+                data-toggle="dropdown"
+              >
+                <!-- <i class="fa fa-user-circle-o pr-2 text-success" style="font-size: 35px;"></i> -->
                 <img src="/static/assets/img/avtar/user.png" alt="avtar-img">
+
                 <span class="bg-success user-status"></span>
               </a>
               <div class="dropdown-menu animated fadeIn" aria-labelledby="navbarDropdown">
@@ -295,16 +307,12 @@
                       <h4 class="text-white mb-0">{{ $store.site.user.name }}</h4>
                       <small class="text-white">{{ $store.site.user.email }}</small>
                     </div>
-                    <a href="javascript:void(0)" class="text-white font-20 tooltip-wrapper"
-                       data-toggle="tooltip"
-                       data-placement="top" title="" @click="logout()" data-original-title="Salir">
-                      <i
-                          class="zmdi zmdi-power"></i></a>
                   </div>
                 </div>
-                <div class="p-4" v-if="false">
+                <div class="p-4" v-if="true">
                   <a class="dropdown-item d-flex nav-link" href="javascript:void(0)">
-                    <i class="fa fa-user pr-2 text-success"></i> Profile</a>
+                    <i class="fa fa-user pr-2 text-success"></i> Profile</a
+                  >
                   <a class="dropdown-item d-flex nav-link" href="javascript:void(0)">
                     <i class="fa fa-envelope pr-2 text-primary"></i> Inbox
                     <span class="badge badge-primary ml-auto">6</span>
@@ -313,8 +321,17 @@
                     <i class=" ti ti-settings pr-2 text-info"></i> Settings
                   </a>
                   <a class="dropdown-item d-flex nav-link" href="javascript:void(0)">
-                    <i class="fa fa-compass pr-2 text-warning"></i> Need help?</a>
-                  <div class="row mt-2">
+                    <i class="fa fa-compass pr-2 text-warning"></i> Need help?</a
+                  >
+                  <a
+                    class="dropdown-item d-flex nav-link"
+                    href="javascript:void(0)"
+                    @click="logout()"
+                    data-original-title="Salir"
+                  >
+                    <i class="zmdi zmdi-power text-danger"></i>Logout</a
+                  >
+                  <!-- <div class="row mt-2">
                     <div class="col">
                       <a class="bg-light p-3 text-center d-block" href="#">
                         <i class="fe fe-mail font-20 text-primary"></i>
@@ -327,7 +344,7 @@
                         <span class="d-block font-13 mt-2">Compose new</span>
                       </a>
                     </div>
-                  </div>
+                  </div> -->
                 </div>
               </div>
             </li>
@@ -341,53 +358,51 @@
 </template>
 
 <script>
-import {DateTime} from "luxon";
-import menu from './menu.json'
+import { DateTime } from "luxon";
+import menu from "./menu.json";
 
 export default {
   name: "top_bar",
   inject: {
     logout: {
-      default: () => {
-      }
+      default: () => {},
     },
   },
   data() {
     return {
       date: null,
-      menu: menu
-    }
+      menu: menu,
+    };
   },
   mounted() {
     this.access_menu_load();
-    this.date = DateTime.fromISO(document.documentElement.dataset.buildTimestampUtc).setLocale('es').toLocaleString(DateTime.DATETIME_SHORT)
+    this.date = DateTime.fromISO(document.documentElement.dataset.buildTimestampUtc)
+      .setLocale("es")
+      .toLocaleString(DateTime.DATETIME_SHORT);
   },
   methods: {
     access_menu_load() {
-      if (!this.$store.site.user.roles.some(n => n === "ROLE_SUPER_ADMIN")) {
+      if (!this.$store.site.user.roles.some((n) => n === "ROLE_SUPER_ADMIN")) {
         const user_menu = this.$store.site.user.access_menu;
 
         this.menu.forEach((element, index) => {
-          if (user_menu.some((m => m.menu_module === element.caption))) {
+          if (user_menu.some((m) => m.menu_module === element.caption)) {
             let routes = element.routes;
             element.routes.forEach((route, index_r) => {
-              if (!user_menu.some((m => m.route === route.path))) {
+              if (!user_menu.some((m) => m.route === route.path)) {
                 delete routes[index_r];
               }
-            })
-            element.routes = routes.filter(n => n)
+            });
+            element.routes = routes.filter((n) => n);
           } else {
-            delete this.menu[index]
+            delete this.menu[index];
           }
-        })
-        this.menu = JSON.parse(JSON.stringify(this.menu.filter(n => n)))
+        });
+        this.menu = JSON.parse(JSON.stringify(this.menu.filter((n) => n)));
       }
-    }
+    },
   },
-
-}
+};
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>
