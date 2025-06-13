@@ -1,5 +1,5 @@
 <?php
-/**Generate by ASGENS
+/**
 *@author Yoan  
 *@date Sat May 10 00:07:04 GMT-04:00 2025  
 *@time Sat May 10 00:07:04 GMT-04:00 2025  

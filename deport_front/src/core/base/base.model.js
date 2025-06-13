@@ -2,8 +2,8 @@ import axios_instance from "@/config/axios/axios";
 import axios from "axios";
 import * as utils from "@/helpers/helpers/utils.js";
 
-/**Generate by ASGENS
- *@author Charlietyn
+/**
+ *@author Yoan
  *@date Wed Jun 15 16:10:18 GMT-04:00 2022
  *@time Wed Jun 15 16:10:18 GMT-04:00 2022
  */
