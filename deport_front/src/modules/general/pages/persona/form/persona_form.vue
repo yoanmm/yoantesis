@@ -24,12 +24,32 @@
       </tc-form-item>
       <tc-form-item class="form-group mb-0 col-md-6 px-3">
         <label>Género</label>
-        <tc-select placeholder='Ingrese el dato' name='genero' v-model="persona.genero"></tc-select>
+        <tc-autocomplete
+            placeholder="Seleccione el Género"
+            name="genero"
+            ref="genero"
+            :successFeed="false"
+            idKey="text"
+            textKey="text"
+            v-model="persona.genero"
+            :data="genero"
+        />
       </tc-form-item>
+
       <tc-form-item class="form-group mb-0 col-md-6 px-3">
         <label>Facultad</label>
-        <tc-select placeholder='Ingrese el valor' name='facultad' v-model="persona.facultad"></tc-select>
-      </tc-form-item>
+        <tc-autocomplete
+            placeholder="Seleccione el Delegacion"
+            name="id_delegacion"
+            ref="select_delegacion"
+            :successFeed="false"
+            idKey="id_delegacion"
+            textKey="nombre_delegacion"
+            :defaultValue="persona.facultad"
+            v-model="persona.facultad"
+            :url="mb.statics('Delegacion').select_2_url"
+        />
+        </tc-form-item>
       </tc-form>
     </div>
     <div class="card-footer p-0">
@@ -78,6 +98,18 @@ export default {
       loading: false,
       mb,      // This property is for load static or instance class
       persona: mb.instance( 'Persona'),
+      genero:[
+        {
+          text: 'Masculino'
+        },
+        {
+          text: 'Femenino'
+        },
+        {
+          text: 'Mixto'
+        }
+      ]
+
     };
   },
   computed: {
