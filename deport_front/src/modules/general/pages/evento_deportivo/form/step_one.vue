@@ -39,6 +39,7 @@
       <tc-input placeholder="Ej: 2020-2021" name="curso" v-model="evento_deportivo.curso"></tc-input>
     </tc-form-item>
 
+<!--
     <tc-form-item class="form-group mb-0 col-md-6 px-3">
       <label>Regla</label>
       <tc-autocomplete
@@ -46,13 +47,25 @@
         name="id_regla_evento"
         ref="select_regla_evento"
         idKey="id_regla_evento"
-        textKey="nombre_regla"
+        textKey="reglamento"
         :successFeed="false"
         :defaultValue="evento_deportivo.id_regla_evento"
         v-model="evento_deportivo.id_regla_evento"
         :url="mb.statics('Evento_deportivo_regla').select_2_url"
       />
     </tc-form-item>
+-->
+    <tc-form-item class="form-group mb-0 col-md-6 px-3">
+      <label>Reglamento</label>
+      <input
+        type="file"
+        name="reglamento"
+        accept=".pdf,.doc,.docx,.png,.jpg,.jpeg"
+        @change="evento_deportivo.reglamento = $event.target.files[0]"
+        class="form-control"
+      />
+    </tc-form-item>
+
   </tc-form>
 </template>
 

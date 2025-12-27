@@ -23,7 +23,7 @@
 <script>
 import StepOne from "./step_one.vue";
 import StepTwo from "./step_two.vue";
-import StepThree from "./step_three.vue";
+import StepThree from "./step_three.vue"; 
 
 export default {
   components: {
@@ -59,6 +59,43 @@ export default {
     prev() {
       if (this.current > 0) {
         this.current--;
+      }
+    },
+    async save_model() {
+      // Validar cada paso (suponiendo que cada Step expone un método validate y datos)
+      try {
+        this.loading = true;
+
+        const stepOneData = this.$refs.stepComponent.getData?.() || {};
+        const stepTwoData = this.$refs.stepComponent.getData?.() || {};
+        const stepThreeData = this.$refs.stepComponent.getData?.() || {};
+
+        // Combinar datos en el modelo evento
+        this.evento = mb.instance("Evento", {
+          ...stepOneData,
+          deportes: stepTwoData.deportes,
+          participantes: stepThreeData.participantes,
+        });
+
+        console.log("Datos del evento a enviar:", JSON.stringify(this.evento, null, 2));
+
+        const accion = this.evento.get_id() ? "actualizado" : "añadido";
+
+        const response = await this.evento.save();
+
+        console.log("Respuesta del servidor:", response);
+
+        if (utils.process_response(response, accion)) {
+          this.$message.success(`Evento ${accion} correctamente`);
+          // Resetear wizard
+          this.current = 0;
+          this.evento = mb.instance("Evento");
+        }
+
+      } catch (error) {
+        utils.process_error(error);
+      } finally {
+        this.loading = false;
       }
     },
   },

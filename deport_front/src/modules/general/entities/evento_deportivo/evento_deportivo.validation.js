@@ -35,6 +35,9 @@ import * as mb from "@/helpers/loaders/model.load"
         id_regla_evento: {
           integer,
         },
+        reglamento: {
+
+        },
       },
     }
     export const feedbacks = {
