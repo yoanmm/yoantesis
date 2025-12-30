@@ -38,8 +38,8 @@
         @cancel="onCloseModal"
         :title="
           selected_evento_deportivo_regla.get_id()
-            ? 'Actualizar evento_deportivo_regla'
-            : 'Añadir evento_deportivo_regla'
+            ? 'Actualizar Evento Deportivo_regla'
+            : 'Añadir Evento Deportivo_regla'
         "
         class="modal-form"
         width="55rem"

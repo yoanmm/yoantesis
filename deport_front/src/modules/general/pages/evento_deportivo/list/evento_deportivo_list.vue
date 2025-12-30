@@ -36,7 +36,7 @@
     <div>
       <a-modal
         @cancel="onCloseModal"
-        :title="selected_evento_deportivo.get_id() ? 'Actualizar evento_deportivo' : 'Añadir evento_deportivo'"
+        :title="selected_evento_deportivo.get_id() ? 'Actualizar Evento Deportivo' : 'Añadir Evento Deportivo'"
         class="modal-form"
         width="55rem"
         :visible="show_modal_form"

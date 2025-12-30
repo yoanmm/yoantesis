@@ -27,6 +27,7 @@
        resultado_edicion
        descripcion_delegaciones
        id_regla_evento
+       reglamento
 
     constructor(attributes = null) {
       super();
@@ -44,6 +45,7 @@
         this.resultado_edicion = attributes.resultado_edicion|| null
         this.descripcion_delegaciones = attributes.descripcion_delegaciones|| null
         this.id_regla_evento = attributes.id_regla_evento|| null
+        this.reglamento = attributes.reglamento|| null
       }
     }
 
@@ -62,6 +64,7 @@
         this.resultado_edicion = attributes.resultado_edicion
         this.descripcion_delegaciones = attributes.descripcion_delegaciones
         this.id_regla_evento = attributes.id_regla_evento
+        this.reglamento = attributes.reglamento
       }
     }
 
