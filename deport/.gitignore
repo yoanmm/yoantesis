@@ -16,7 +16,9 @@ yarn-error.log
 /.idea
 /storage/framework/cache/
 
+/storage/logs/*.log
+/storage/framework/sessions/*
+/storage/framework/views/*
 
 #/runtime
 /api/runtime
-

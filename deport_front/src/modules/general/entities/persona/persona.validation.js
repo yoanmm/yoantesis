@@ -16,7 +16,7 @@ export const validations = {
       required,
       alphaOnly
     },
-    apellidos: {
+    apellido: {
       required,
       alphaOnly
     },
@@ -39,7 +39,7 @@ export const feedbacks = {
       required: 'Este campo es obligatorio',
       alphaOnly: 'Solo se permiten letras y espacios'
     },
-    apellidos: {
+    apellido: {
       required: 'Este campo es obligatorio',
       alphaOnly: 'Solo se permiten letras y espacios'
     },
