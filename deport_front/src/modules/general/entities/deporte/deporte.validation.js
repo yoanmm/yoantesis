@@ -34,6 +34,10 @@ import * as mb from "@/helpers/loaders/model.load"
         id_deporte_padre: {
           integer,
         },
+        reglamento: {
+        },
+        activo: {
+        },
       },
     }
     export const feedbacks = {

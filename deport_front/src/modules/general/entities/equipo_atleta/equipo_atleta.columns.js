@@ -1,6 +1,6 @@
   export const columns = [
     {
-      title: 'Id_equipo_atleta',
+      title: 'Id Equipo Atleta',
       dataIndex: 'id_equipo_atleta',
       align:'center',
       key: 'id_equipo_atleta',
@@ -24,7 +24,7 @@
       sorter: (a, b) =>  a.atleta && b.atleta?(a.atleta.foto > b.atleta.foto)-(a.atleta.foto < b.atleta.foto):0
     },
     {
-      title: 'Estado_atleta',
+      title: 'Estado',
       dataIndex: 'estado_atleta.estado_atleta',
       align:'center',
       key: 'estado_atleta.estado_atleta',

@@ -109,7 +109,8 @@ class Evento_deportivo extends BaseModel
       'terminado',
       'resultado_edicion',
       'descripcion_delegaciones',
-      'id_regla_evento'
+      'id_regla_evento',
+      'reglamento'
     ];
 
 	 /**
@@ -154,7 +155,8 @@ class Evento_deportivo extends BaseModel
                 'terminado' =>'nullable|boolean',
                 'resultado_edicion' =>'nullable',
                 'descripcion_delegaciones' =>'nullable|max:255',
-                'id_regla_evento' =>'nullable|exists:'.$this->connection.'.evento_deportivo_regla,id_regla_evento'
+                'id_regla_evento' =>'nullable|exists:'.$this->connection.'.evento_deportivo_regla,id_regla_evento',
+                'reglamento' =>'nullable|max:255'
             ],
             'update'=>[
                 'id_evento' =>'required|unique:'.$this->connection.'.evento_deportivo,id_evento,'.$this->id_evento.',id_evento',
@@ -168,7 +170,8 @@ class Evento_deportivo extends BaseModel
                 'terminado' =>'nullable|boolean',
                 'resultado_edicion' =>'nullable',
                 'descripcion_delegaciones' =>'nullable|max:255',
-                'id_regla_evento' =>'nullable|exists:'.$this->connection.'.evento_deportivo_regla,id_regla_evento'
+                'id_regla_evento' =>'nullable|exists:'.$this->connection.'.evento_deportivo_regla,id_regla_evento',
+                'reglamento' =>'nullable|max:255'
             ]
         ];
         if(!isset($rules[$scenario]))

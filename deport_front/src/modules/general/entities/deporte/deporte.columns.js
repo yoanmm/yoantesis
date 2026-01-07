@@ -1,6 +1,6 @@
   export const columns = [
     {
-      title: 'Nombre_deporte',
+      title: 'Nombre',
       dataIndex: 'nombre_deporte',
       align:'center',
       key: 'nombre_deporte',
@@ -8,7 +8,7 @@
       sorter: (a, b) =>  (a.nombre_deporte > b.nombre_deporte)-(a.nombre_deporte < b.nombre_deporte)
     },
     {
-      title: 'Max_atleta',
+      title: 'Max de atletas',
       dataIndex: 'max_atleta',
       align:'center',
       key: 'max_atleta',
@@ -16,7 +16,7 @@
       sorter: (a, b) => a.max_atleta - b.max_atleta
     },
     {
-      title: 'Min_atleta',
+      title: 'Min de atletas',
       dataIndex: 'min_atleta',
       align:'center',
       key: 'min_atleta',
@@ -24,7 +24,7 @@
       sorter: (a, b) => a.min_atleta - b.min_atleta
     },
     {
-      title: 'Icono_deporte',
+      title: 'Icono',
       dataIndex: 'icono_deporte',
       align:'center',
       key: 'icono_deporte',
@@ -64,12 +64,20 @@
       sorter: (a, b) =>  a.regla && b.regla?(a.regla.nombre_regla > b.regla.nombre_regla)-(a.regla.nombre_regla < b.regla.nombre_regla):0
     },
     {
-      title: 'Deporte_padre',
+      title: 'Deporte Padre',
       dataIndex: 'deporte_padre.nombre_deporte',
       align:'center',
       key: 'deporte_padre.nombre_deporte',
 
-      sorter: (a, b) =>  a.deporte_padre && b.deporte_padre?(a.deporte_padre.nombre_deporte > b.deporte_padre.nombre_deporte)-(a.deporte_padre.nombre_deporte < b.deporte_padre.nombre_deporte):0
+      sorter: (a, b) =>  a.reglamento && b.reglamento?(a.reglamento > b.reglamento)-(a.reglamento < b.reglamento):0
+    },
+    {
+      title: 'Reglamento',
+      dataIndex: 'reglamento',
+      align:'center',
+      key: 'reglamento',
+
+      sorter: (a, b) =>  (a.deporte_padre.nombre_deporte > b.deporte_padre.nombre_deporte)-(a.deporte_padre.nombre_deporte < b.deporte_padre.nombre_deporte)
     },
     {
       title: 'Acciones',

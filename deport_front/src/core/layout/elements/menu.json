@@ -52,6 +52,13 @@
         "caption": "Congresillos",
         "icon": "",
         "path": "/general/congresillo_deporte_list"
+      },
+      {
+        "name": "compromiso_participacion_list",
+        "module": "management",
+        "caption": "Compromiso",
+        "icon": "",
+        "path": "/general/compromiso_participacion_list"
       }
     ]
   },

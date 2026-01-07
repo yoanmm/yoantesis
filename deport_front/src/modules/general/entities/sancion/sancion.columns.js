@@ -1,6 +1,6 @@
   export const columns = [
     {
-      title: 'Fecha_sancion',
+      title: 'Fecha',
       dataIndex: 'fecha_sancion',
       align:'center',
       key: 'fecha_sancion',
@@ -16,7 +16,7 @@
       sorter: (a, b) =>  (a.razon > b.razon)-(a.razon < b.razon)
     },
     {
-      title: 'Puntos_sancion',
+      title: 'Puntos de sancion',
       dataIndex: 'puntos_sancion',
       align:'center',
       key: 'puntos_sancion',
@@ -32,7 +32,7 @@
       sorter: (a, b) => a.suspendido - b.suspendido
     },
     {
-      title: 'Juegos_suspendidos',
+      title: 'Juegos suspendidos',
       dataIndex: 'juegos_suspendidos',
       align:'center',
       key: 'juegos_suspendidos',

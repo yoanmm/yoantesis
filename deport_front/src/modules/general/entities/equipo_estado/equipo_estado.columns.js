@@ -1,6 +1,6 @@
   export const columns = [
     {
-      title: 'Id_estado',
+      title: 'Id',
       dataIndex: 'id_estado',
       align:'center',
       key: 'id_estado',
@@ -8,7 +8,7 @@
       sorter: (a, b) => a.id_estado - b.id_estado
     },
     {
-      title: 'Estado_equipo',
+      title: 'Estado',
       dataIndex: 'estado_equipo',
       align:'center',
       key: 'estado_equipo',

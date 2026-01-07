@@ -23,6 +23,8 @@
        id_categoria
        id_regla
        id_deporte_padre
+       reglamento
+       activo
 
     constructor(attributes = null) {
       super();
@@ -38,6 +40,7 @@
         this.id_categoria = attributes.id_categoria|| null
         this.id_regla = attributes.id_regla|| null
         this.id_deporte_padre = attributes.id_deporte_padre|| null
+        this.reglamento = attributes.reglamento|| null
       }
     }
 
@@ -54,6 +57,7 @@
         this.id_categoria = attributes.id_categoria
         this.id_regla = attributes.id_regla
         this.id_deporte_padre = attributes.id_deporte_padre
+        this.reglamento = attributes.reglamento
       }
     }
 

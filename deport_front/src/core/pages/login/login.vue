@@ -148,6 +148,10 @@ export default {
         this.loading = false;
       }
     },
+    // Stub para evitar error si la función de captcha no está definida
+    async captcha_refresh() {
+      return Promise.resolve();
+    },
   },
 };
 </script>
