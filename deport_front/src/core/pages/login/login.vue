@@ -101,7 +101,7 @@ export default {
       forgotPasswordMode: false,
       error: false,
       loading: false,
-      message_error: "Error en usuario y contraseña",
+      message_error: "Error en usuario o contraseña",
     };
   },
   methods: {
@@ -127,7 +127,7 @@ export default {
           .catch((error) => {
             this.message_error =
               error.response?.status === 422
-                ? "Error en usuario y contraseña"
+                ? "Error en usuario o contraseña"
                 : "Error desconocido, contacte al administrador";
             this.error = true;
           });
