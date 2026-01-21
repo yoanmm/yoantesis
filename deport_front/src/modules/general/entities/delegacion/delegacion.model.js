@@ -21,6 +21,7 @@
        logo
        id_tipo_delegacion
        id_regla_delegacion
+       reglamento
 
     constructor(attributes = null) {
       super();
@@ -34,6 +35,7 @@
         this.logo = attributes.logo|| null
         this.id_tipo_delegacion = attributes.id_tipo_delegacion|| null
         this.id_regla_delegacion = attributes.id_regla_delegacion|| null
+        this.reglamento = attributes.reglamento|| null
       }
     }
 
@@ -48,6 +50,7 @@
         this.logo = attributes.logo
         this.id_tipo_delegacion = attributes.id_tipo_delegacion
         this.id_regla_delegacion = attributes.id_regla_delegacion
+        this.reglamento = attributes.reglamento
       }
     }
 

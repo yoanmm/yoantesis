@@ -24,7 +24,7 @@
       sorter: (a, b) => a.supervisor && b.supervisor?a.supervisor.id_supervisor - b.supervisor.id_supervisor:0
     },
     {
-      title: 'Resultado_competencia',
+      title: 'Resultado',
       dataIndex: 'resultado_competencia',
       align:'center',
       key: 'resultado_competencia',

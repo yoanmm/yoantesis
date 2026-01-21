@@ -1,6 +1,6 @@
   export const columns = [
     {
-      title: 'Id_regla_deporte',
+      title: 'Id',
       dataIndex: 'id_regla_deporte',
       align:'center',
       key: 'id_regla_deporte',
@@ -8,7 +8,7 @@
       sorter: (a, b) => a.id_regla_deporte - b.id_regla_deporte
     },
     {
-      title: 'Nombre_regla',
+      title: 'Nombre',
       dataIndex: 'nombre_regla',
       align:'center',
       key: 'nombre_regla',
@@ -24,7 +24,7 @@
       sorter: (a, b) =>  (a.campos > b.campos)-(a.campos < b.campos)
     },
     {
-      title: 'Cal_campos',
+      title: 'Cal campos',
       dataIndex: 'cal_campos',
       align:'center',
       key: 'cal_campos',

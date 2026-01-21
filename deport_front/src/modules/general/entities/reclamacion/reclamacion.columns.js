@@ -1,6 +1,6 @@
   export const columns = [
     {
-      title: 'Id_reclamacion',
+      title: 'Id',
       dataIndex: 'id_reclamacion',
       align:'center',
       key: 'id_reclamacion',
@@ -8,7 +8,7 @@
       sorter: (a, b) => a.id_reclamacion - b.id_reclamacion
     },
     {
-      title: 'Fecha_reclamacion',
+      title: 'Fecha',
       dataIndex: 'fecha_reclamacion',
       align:'center',
       key: 'fecha_reclamacion',
@@ -16,7 +16,7 @@
       sorter: (a, b) => a.fecha_reclamacion - b.fecha_reclamacion
     },
     {
-      title: 'Descripcion_reclamacion',
+      title: 'Descripcion',
       dataIndex: 'descripcion_reclamacion',
       align:'center',
       key: 'descripcion_reclamacion',

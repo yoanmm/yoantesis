@@ -105,7 +105,8 @@ class Delegacion extends BaseModel
       'color',
       'logo',
       'id_tipo_delegacion',
-      'id_regla_delegacion'
+      'id_regla_delegacion',
+      'reglamento'
     ];
 
 	 /**
@@ -190,7 +191,8 @@ class Delegacion extends BaseModel
                 'color' =>'nullable|max:255',
                 'logo' =>'nullable|max:255',
                 'id_tipo_delegacion' =>'nullable|exists:'.$this->connection.'.delegacion_tipo,id_tipo_delegacion',
-                'id_regla_delegacion' =>'nullable|exists:'.$this->connection.'.delegacion_regla,id_regla_delegacion'
+                'id_regla_delegacion' =>'nullable|exists:'.$this->connection.'.delegacion_regla,id_regla_delegacion',
+                'reglamento' =>'nullable|max:255'
             ],
             'update'=>[
                 'id_delegacion' =>'required|unique:'.$this->connection.'.delegacion,id_delegacion,'.$this->id_delegacion.',id_delegacion',
@@ -200,7 +202,8 @@ class Delegacion extends BaseModel
                 'color' =>'nullable|max:255',
                 'logo' =>'nullable|max:255',
                 'id_tipo_delegacion' =>'nullable|exists:'.$this->connection.'.delegacion_tipo,id_tipo_delegacion',
-                'id_regla_delegacion' =>'nullable|exists:'.$this->connection.'.delegacion_regla,id_regla_delegacion'
+                'id_regla_delegacion' =>'nullable|exists:'.$this->connection.'.delegacion_regla,id_regla_delegacion',
+                'reglamento' =>'nullable|max:255'
             ]
         ];
         if(!isset($rules[$scenario]))

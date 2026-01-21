@@ -107,7 +107,9 @@ class Deporte extends BaseModel
       'individual',
       'id_categoria',
       'id_regla',
-      'id_deporte_padre'
+      'id_deporte_padre',
+      'reglamento',
+      'activo'
     ];
 
 	 /**
@@ -175,7 +177,9 @@ class Deporte extends BaseModel
                 'individual' =>'nullable|boolean',
                 'id_categoria' =>'nullable|exists:'.$this->connection.'.deporte_categoria_puntuacion,id_categoria',
                 'id_regla' =>'nullable|exists:'.$this->connection.'.deporte_regla,id_regla_deporte',
-                'id_deporte_padre' =>'nullable|exists:'.$this->connection.'.deporte,id_deporte'
+                'id_deporte_padre' =>'nullable|exists:'.$this->connection.'.deporte,id_deporte',
+                'reglamento',
+                'activo'
             ],
             'update'=>[
                 'id_deporte' =>'required|unique:'.$this->connection.'.deporte,id_deporte,'.$this->id_deporte.',id_deporte',
@@ -187,7 +191,9 @@ class Deporte extends BaseModel
                 'individual' =>'nullable|boolean',
                 'id_categoria' =>'nullable|exists:'.$this->connection.'.deporte_categoria_puntuacion,id_categoria',
                 'id_regla' =>'nullable|exists:'.$this->connection.'.deporte_regla,id_regla_deporte',
-                'id_deporte_padre' =>'nullable|exists:'.$this->connection.'.deporte,id_deporte'
+                'id_deporte_padre' =>'nullable|exists:'.$this->connection.'.deporte,id_deporte',
+                'reglamento' =>'nullable|max:255',
+                'activo' =>'nullable|max:255',
             ]
         ];
         if(!isset($rules[$scenario]))

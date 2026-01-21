@@ -1,6 +1,6 @@
   export const columns = [
     {
-      title: 'Nombre_evento',
+      title: 'Nombre',
       dataIndex: 'nombre_evento',
       align:'center',
       key: 'nombre_evento',
@@ -8,7 +8,7 @@
       sorter: (a, b) =>  (a.nombre_evento > b.nombre_evento)-(a.nombre_evento < b.nombre_evento)
     },
     {
-      title: 'Descripcion_evento',
+      title: 'Descripcion',
       dataIndex: 'descripcion_evento',
       align:'center',
       key: 'descripcion_evento',
@@ -24,7 +24,7 @@
       sorter: (a, b) =>  (a.logo > b.logo)-(a.logo < b.logo)
     },
     {
-      title: 'Fecha_inicio',
+      title: 'Inicio',
       dataIndex: 'fecha_inicio',
       align:'center',
       key: 'fecha_inicio',
@@ -32,7 +32,7 @@
       sorter: (a, b) => a.fecha_inicio - b.fecha_inicio
     },
     {
-      title: 'Fecha_fin',
+      title: 'Fin',
       dataIndex: 'fecha_fin',
       align:'center',
       key: 'fecha_fin',
@@ -48,7 +48,7 @@
       sorter: (a, b) =>  (a.curso > b.curso)-(a.curso < b.curso)
     },
     {
-      title: 'Edicion_evento',
+      title: 'Edicion',
       dataIndex: 'edicion_evento',
       align:'center',
       key: 'edicion_evento',
@@ -64,7 +64,7 @@
       sorter: (a, b) => a.terminado - b.terminado
     },
     {
-      title: 'Resultado_edicion',
+      title: 'Resultado',
       dataIndex: 'resultado_edicion',
       align:'center',
       key: 'resultado_edicion',
@@ -72,7 +72,7 @@
       sorter: (a, b) =>  (a.resultado_edicion > b.resultado_edicion)-(a.resultado_edicion < b.resultado_edicion)
     },
     {
-      title: 'Descripcion_delegaciones',
+      title: 'Descripcion delegaciones',
       dataIndex: 'descripcion_delegaciones',
       align:'center',
       key: 'descripcion_delegaciones',
@@ -80,7 +80,7 @@
       sorter: (a, b) =>  (a.descripcion_delegaciones > b.descripcion_delegaciones)-(a.descripcion_delegaciones < b.descripcion_delegaciones)
     },
     {
-      title: 'Regla_evento',
+      title: 'Regla',
       dataIndex: 'regla_evento.nombre_regla',
       align:'center',
       key: 'regla_evento.nombre_regla',

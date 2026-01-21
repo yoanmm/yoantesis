@@ -208,5 +208,10 @@ foreach (['auth:api'] as $mid)
                Route::delete('sancion/delete_by_id', 'SancionController@deletebyid');
                Route::resource('sancion', 'SancionController');
 
+       /*Compromiso*/
+               Route::post('compromiso_participacion/validate', 'Compromiso_participacionController@validate_model');
+               Route::post('compromiso_participacion/update_multiple', 'Compromiso_participacionController@update_multiple');
+               Route::delete('compromiso_participacion/delete_by_id', 'Compromiso_participacionController@deletebyid');
+               Route::resource('compromiso_participacion', 'Compromiso_participacionController');
 
     });

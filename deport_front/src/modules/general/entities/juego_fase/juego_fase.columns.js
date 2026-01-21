@@ -1,6 +1,6 @@
   export const columns = [
     {
-      title: 'Nombre_fase',
+      title: 'Nombre',
       dataIndex: 'nombre_fase',
       align:'center',
       key: 'nombre_fase',
@@ -8,7 +8,7 @@
       sorter: (a, b) =>  (a.nombre_fase > b.nombre_fase)-(a.nombre_fase < b.nombre_fase)
     },
     {
-      title: 'Es_final',
+      title: 'Final',
       dataIndex: 'es_final',
       align:'center',
       key: 'es_final',

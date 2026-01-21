@@ -32,6 +32,8 @@ import { alphaOnly } from '@/validators/customValidators';
         id_regla_delegacion: {
           integer,
         },
+        reglamento: {
+        },
       },
     }
     export const feedbacks = {

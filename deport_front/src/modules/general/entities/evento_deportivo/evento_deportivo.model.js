@@ -28,6 +28,7 @@
        descripcion_delegaciones
        id_regla_evento
        reglamento
+       activo
 
     constructor(attributes = null) {
       super();
@@ -46,6 +47,7 @@
         this.descripcion_delegaciones = attributes.descripcion_delegaciones|| null
         this.id_regla_evento = attributes.id_regla_evento|| null
         this.reglamento = attributes.reglamento|| null
+        this.activo = attributes.activo|| null
       }
     }
 
@@ -65,6 +67,7 @@
         this.descripcion_delegaciones = attributes.descripcion_delegaciones
         this.id_regla_evento = attributes.id_regla_evento
         this.reglamento = attributes.reglamento
+        this.activo = attributes.activo
       }
     }
 

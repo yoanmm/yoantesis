@@ -1,6 +1,6 @@
   export const columns = [
     {
-      title: 'Fecha_inicio',
+      title: 'Inicio',
       dataIndex: 'fecha_inicio',
       align:'center',
       key: 'fecha_inicio',
@@ -8,7 +8,7 @@
       sorter: (a, b) => a.fecha_inicio - b.fecha_inicio
     },
     {
-      title: 'Fecha_fin',
+      title: 'Fin',
       dataIndex: 'fecha_fin',
       align:'center',
       key: 'fecha_fin',
@@ -16,7 +16,7 @@
       sorter: (a, b) => a.fecha_fin - b.fecha_fin
     },
     {
-      title: 'Descripcion_juego',
+      title: 'Descripcion',
       dataIndex: 'descripcion_juego',
       align:'center',
       key: 'descripcion_juego',

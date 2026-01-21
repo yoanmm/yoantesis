@@ -13,6 +13,7 @@ namespace App\Services;
 use App\Models\BaseModel;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Pagination\Paginator;
+use Carbon\Carbon;
 
 /**
  * @property Model $modelClass
@@ -260,6 +261,9 @@ class Services
         $validate_all = $this->validate_all($attributes, $this->modelClass->getScenario());
         if (!$validate_all['success'])
             return $validate_all;
+        // normalize incoming ISO8601 timestamps to MySQL DATETIME
+        $this->sanitizeDates($attributes);
+
         if (count($this->modelClass::PARENT) > 0) {
             $parent = $this->save_parents($this->modelClass, $attributes, $this->modelClass->getScenario());
         }
@@ -270,6 +274,24 @@ class Services
         $this->modelClass->save();
         $result = ["success" => true, "model" => $this->modelClass->getAttributes()];
         return $result;
+    }
+
+    private function sanitizeDates(array &$attributes)
+    {
+        foreach ($attributes as $key => $value) {
+            if (!is_string($value)) {
+                continue;
+            }
+            // quick check for ISO8601-like strings containing 'T' (e.g. 2025-05-10T04:17:25.604Z)
+            if (strpos($value, 'T') !== false) {
+                try {
+                    $dt = Carbon::parse($value);
+                    $attributes[$key] = $dt->toDateTimeString();
+                } catch (\Exception $e) {
+                    // if parsing fails, keep original value
+                }
+            }
+        }
     }
 
     public function create(array $params)

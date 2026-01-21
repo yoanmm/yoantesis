@@ -105,6 +105,16 @@
           <deporte_regla_form :model="null" :modal="true" @close_modal="reglaAdded"/>
         </a-modal>
         <tc-form-item class="form-group mb-0 col-md-6 px-3">
+            <label>Reglamento</label>
+            <input
+              type="file"
+              name="reglamento"
+              accept=".pdf,.doc,.docx,.png,.jpg,.jpeg"
+              @change="evento_deportivo.reglamento = $event.target.files[0]"
+              class="form-control"
+            />
+          </tc-form-item>
+        <tc-form-item class="form-group mb-0 col-md-6 px-3">
           <label>Deporte</label>
           <div class="d-flex flex-row">
             <tc-autocomplete

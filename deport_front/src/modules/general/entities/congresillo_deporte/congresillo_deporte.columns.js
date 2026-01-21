@@ -1,6 +1,6 @@
   export const columns = [
     {
-      title: 'Fecha_congresillo',
+      title: 'Fecha',
       dataIndex: 'fecha_congresillo',
       align:'center',
       key: 'fecha_congresillo',
