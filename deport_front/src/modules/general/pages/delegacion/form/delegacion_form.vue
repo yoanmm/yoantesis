@@ -20,15 +20,53 @@
       </tc-form-item>
       <tc-form-item class="form-group mb-0 col-md-6 px-3">
         <label>Mascota</label>
-        <tc-input placeholder='Ingrese el dato' name='mascota' v-model="delegacion.mascota"></tc-input>
+
+        <input
+          type="file"
+          name="mascota"
+          accept=".png,.jpg,.jpeg"
+          @change="onMascotaChange"
+          class="form-control"
+        />
+
+        <!-- PREVIEW -->
+        <img
+          v-if="previewMascota"
+          :src="previewMascota"
+          alt="Preview Mascota"
+          class="img-thumbnail mt-2"
+          style="max-height: 120px"
+        />
       </tc-form-item>
       <tc-form-item class="form-group mb-0 col-md-6 px-3">
-        <label>Color</label>
-        <tc-input placeholder='Ingrese el dato' name='color' v-model="delegacion.color"></tc-input>
-      </tc-form-item>
+  <label>Color</label>
+  <input
+    type="color"
+    name="color"
+    v-model="delegacion.color"
+    class="form-control"
+  />
+</tc-form-item>
+
       <tc-form-item class="form-group mb-0 col-md-6 px-3">
         <label>Logo</label>
-        <tc-input placeholder='Ingrese el dato' name='logo' v-model="delegacion.logo"></tc-input>
+
+        <input
+          type="file"
+          name="logo"
+          accept=".png,.jpg,.jpeg"
+          @change="onLogoChange"
+          class="form-control"
+        />
+
+        <!-- PREVIEW -->
+        <img
+          v-if="previewLogo"
+          :src="previewLogo"
+          alt="Preview Logo"
+          class="img-thumbnail mt-2"
+          style="max-height: 120px"
+        />
       </tc-form-item>
         <tc-form-item class="form-group mb-0 col-md-6 px-3">
           <label>Tipo</label>
@@ -129,8 +167,9 @@
 <script>
 import * as utils from "@/helpers/helpers/utils";
 import * as mb from "@/helpers/loaders/model.load"
-  import delegacion_tipo_form from '@/modules/general/pages/delegacion_tipo/form/delegacion_tipo_form';
-  import delegacion_regla_form from '@/modules/general/pages/delegacion_regla/form/delegacion_regla_form';
+import delegacion_tipo_form from '@/modules/general/pages/delegacion_tipo/form/delegacion_tipo_form';
+import delegacion_regla_form from '@/modules/general/pages/delegacion_regla/form/delegacion_regla_form';
+import { Chrome } from 'vue-color';
 
 export default {
   name: "delegacion_form",
@@ -162,6 +201,10 @@ export default {
       delegacion_tipo_list: [],
       showModalCreateregla_delegacion: false,
       delegacion_regla_list: [],
+
+      // 👇 NUEVO 
+      previewLogo: null, 
+      previewMascota: null,
     };
   },
   computed: {
@@ -177,6 +220,7 @@ export default {
     this.delegacion = mb.instance( 'Delegacion',this.model);
   },
   components: {
+    Chrome,
     delegacion_tipo_form,
     delegacion_regla_form,
   },
@@ -205,6 +249,23 @@ export default {
         await this.$refs.select_regla_delegacion.load();
         this.loading = false;
       },
+      onLogoChange(event) {
+        const file = event.target.files[0];
+        this.delegacion.logo = file;
+
+        if (file) {
+          this.previewLogo = URL.createObjectURL(file);
+        }
+      },
+
+      onMascotaChange(event) {
+        const file = event.target.files[0];
+        this.delegacion.mascota = file;
+
+        if (file) {
+          this.previewMascota = URL.createObjectURL(file);
+        }
+      },
       cancel(){
         if (!this.model) {
           this.$emit('close_modal',false)
@@ -220,6 +281,14 @@ export default {
           .save()
           .then((response) => {
             if(utils.process_response(response,accion)) {
+              // Actualizar las URLs de los archivos desde la respuesta del servidor
+              if (response.data && response.data.data) {
+                const data = response.data.data;
+                if (data.logo) this.delegacion.logo = data.logo;
+                if (data.mascota) this.delegacion.mascota = data.mascota;
+                if (data.reglamento) this.delegacion.reglamento = data.reglamento;
+              }
+              
               if (!this.model && !and_new && this.modal) {
 
                   this.$emit('close_modal',true)

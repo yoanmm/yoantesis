@@ -22,7 +22,11 @@ export default {
   },
   data() {
     return {
-      columns: mb.statics("Deporte").columns,
+      // Mostrar sólo Nombre, Genero e Individual en el wizard
+      columns: mb.statics("Deporte").columns.filter(c => {
+        const key = c.dataIndex || c.key || '';
+        return ['nombre_deporte', 'genero', 'individual'].includes(key);
+      }),
       params_search: { relations: ["categoria", "deporte_padre", "regla"] },
       paginate: false,
       mb,
@@ -31,6 +35,15 @@ export default {
   methods: {
     loadTableData() {
       this.$refs.deporte_table.load_data();
+    },
+    getData() {
+      return this.$refs.deporte_table ? this.$refs.deporte_table.selectedRowKeys : [];
+    },
+    resetTable() {
+      if (this.$refs.deporte_table) {
+        this.$refs.deporte_table.selectedRowKeys = [];
+        this.$refs.deporte_table.load_data();
+      }
     },
   },
   mounted() {

@@ -74,6 +74,16 @@ import * as mb from "@/helpers/loaders/model.load";
 
 export default {
   name: "StepOne",
+  props: {
+    model: {
+      type: Object,
+      default: () => ({})
+    },
+    modal: {
+      type: Boolean,
+      default: false
+    }
+  },
   validations: mb.statics("Evento_deportivo").validations,
   data() {
     return {
@@ -81,5 +91,66 @@ export default {
       evento_deportivo: mb.instance("Evento_deportivo"),
     };
   },
+  mounted() {
+    if (this.model && Object.keys(this.model).length) {
+      this.evento_deportivo = mb.instance("Evento_deportivo", this.model);
+    }
+  },
+  methods: {
+    getData() {
+      try {
+        const e = this.evento_deportivo || {};
+        return {
+          id_evento: e.id_evento || undefined,
+          nombre_evento: e.nombre_evento || null,
+          descripcion_evento: e.descripcion_evento || null,
+          logo: e.logo || null,
+          fecha_inicio: e.fecha_inicio && e.fecha_inicio.format ? e.fecha_inicio.format('YYYY-MM-DD') : e.fecha_inicio || null,
+          fecha_fin: e.fecha_fin && e.fecha_fin.format ? e.fecha_fin.format('YYYY-MM-DD') : e.fecha_fin || null,
+          curso: e.curso || null,
+          edicion_evento: e.edicion_evento || null,
+          terminado: e.terminado != null ? (e.terminado ? 1 : 0) : null,
+          resultado_edicion: e.resultado_edicion || null,
+          descripcion_delegaciones: e.descripcion_delegaciones || null,
+          id_regla_evento: e.id_regla_evento || null,
+          reglamento: e.reglamento || null,
+          activo: e.activo != null ? (e.activo ? 1 : 0) : null,
+        };
+      } catch (err) {
+        return this.evento_deportivo;
+      }
+    },
+    reset() {
+      this.evento_deportivo = mb.instance("Evento_deportivo");
+    }
+    ,
+    /**
+     * Devuelve un FormData si contiene archivos, o el objeto plano si no.
+     * Útil para que el componente padre lo envíe directamente al backend.
+     */
+    getFormData() {
+      const data = this.getData() || {};
+      const fd = new FormData();
+      let hasFile = false;
+      Object.keys(data).forEach((k) => {
+        const v = data[k];
+        if (v instanceof File) hasFile = true;
+      });
+
+      if (!hasFile) return data;
+
+      Object.keys(data).forEach((k) => {
+        const v = data[k];
+        if (v === null || v === undefined) {
+          fd.append(k, "");
+        } else if (v instanceof File) {
+          fd.append(k, v, v.name);
+        } else {
+          fd.append(k, v);
+        }
+      });
+      return fd;
+    }
+  }
 };
 </script>

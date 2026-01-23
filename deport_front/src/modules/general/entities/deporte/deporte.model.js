@@ -41,6 +41,10 @@
         this.id_regla = attributes.id_regla|| null
         this.id_deporte_padre = attributes.id_deporte_padre|| null
         this.reglamento = attributes.reglamento|| null
+        this.activo = attributes.activo != null ? (attributes.activo === '1' || attributes.activo === 1 || attributes.activo === true ? 1 : 0) : 0
+      }
+      else {
+        this.activo = 0
       }
     }
 
@@ -58,6 +62,7 @@
         this.id_regla = attributes.id_regla
         this.id_deporte_padre = attributes.id_deporte_padre
         this.reglamento = attributes.reglamento
+        this.activo = attributes.activo != null ? (attributes.activo === '1' || attributes.activo === 1 || attributes.activo === true ? 1 : 0) : 0
       }
     }
 

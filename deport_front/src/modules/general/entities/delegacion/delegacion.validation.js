@@ -5,10 +5,10 @@ import {
     maxLength,
     minLength,
     decimal,
-    alpha
+    alpha,
   } from 'vuelidate/lib/validators';
 import * as mb from "@/helpers/loaders/model.load"
-import { alphaOnly } from '@/validators/customValidators';
+import { alphaOnly, alphaMax5 } from '@/validators/customValidators';
 
     export const validations = {
       delegacion: {
@@ -17,13 +17,16 @@ import { alphaOnly } from '@/validators/customValidators';
           alphaOnly
         },
         abreviatura: {
-          alpha
+          alphaMax5
         },
         mascota: {
+          required,
         },
         color: {
+          required,
         },
         logo: {
+          required,
         },
         id_tipo_delegacion: {
           integer,

@@ -6,11 +6,14 @@ import {
     minLength,
     decimal
   } from 'vuelidate/lib/validators';
+  import { alphaOnly, alphaMax5 } from '@/validators/customValidators';
 import * as mb from "@/helpers/loaders/model.load"
 
     export const validations = {
       reclamacion_estado: {
         nombre_estado: {
+          required,
+          alphaOnly
         },
       },
     }

@@ -11,11 +11,11 @@
         class="form-row"
       >
       <tc-form-item class="form-group mb-0 col-md-6 px-3">
-        <label>Nombre_fase</label>
+        <label>Nombre fase</label>
         <tc-input placeholder='Ingrese el valor' name='nombre_fase' v-model="juego_fase.nombre_fase"></tc-input>
       </tc-form-item>
         <tc-form-item class="form-group mb-0 col-md-6 px-3">
-          <label>Es_final</label>
+          <label>Es final</label>
           <div>
             <a-switch  v-model="juego_fase.es_final"/>
           </div>
