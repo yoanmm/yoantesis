@@ -4,6 +4,13 @@ import { validateIdCard } from "@/helpers/helpers/utils";
 // Valida que el string contenga únicamente letras, permitiendo acentos, ñ y espacios.
 export const alphaOnly = helpers.regex('alphaOnly', /^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$/);
 
+// Valida que el string contenga únicamente un maximo de letras
+export const alphaMax5 = helpers.regex(
+  'alphaMax5',
+  /^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]{1,5}$/
+);
+
+
 // Valida que el string contenga únicamente dígitos.
 export const onlyNumbers = helpers.regex('onlyNumbers', /^[0-9]+$/);
 

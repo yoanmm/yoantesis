@@ -4,8 +4,9 @@ import {
     between,
     maxLength,
     minLength,
-    decimal
+    decimal,
   } from 'vuelidate/lib/validators';
+  import { alphaOnly, alphaMax5 } from '@/validators/customValidators';
 import * as mb from "@/helpers/loaders/model.load"
 
     export const validations = {
@@ -15,6 +16,8 @@ import * as mb from "@/helpers/loaders/model.load"
           integer,
         },
         estado_equipo: {
+          required,
+          alphaOnly
         },
       },
     }

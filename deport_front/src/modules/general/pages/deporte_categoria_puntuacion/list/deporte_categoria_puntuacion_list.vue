@@ -38,8 +38,8 @@
         @cancel="onCloseModal"
         :title="
           selected_deporte_categoria_puntuacion.get_id()
-            ? 'Actualizar deporte_categoria_puntuacion'
-            : 'Añadir deporte_categoria_puntuacion'
+            ? 'Actualizar Categoria deportiva y Puntuacion'
+            : 'Añadir Categoria deportiva y Puntuacion'
         "
         class="modal-form"
         width="55rem"

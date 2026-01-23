@@ -11,11 +11,11 @@
         class="form-row"
       >
       <tc-form-item class="form-group mb-0 col-md-6 px-3">
-        <label>Id_estado<span class='required_field'>*</span></label>
+        <label>Id estado<span class='required_field'>*</span></label>
         <tc-input placeholder='Ingrese el valor'   type_car='num'  name='id_estado' v-model="equipo_estado.id_estado"></tc-input>
       </tc-form-item>
       <tc-form-item class="form-group mb-0 col-md-6 px-3">
-        <label>Estado_equipo</label>
+        <label>Estado equipo</label>
         <tc-input placeholder='Ingrese el valor' name='estado_equipo' v-model="equipo_estado.estado_equipo"></tc-input>
       </tc-form-item>
       </tc-form>

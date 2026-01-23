@@ -11,8 +11,11 @@ import * as mb from "@/helpers/loaders/model.load"
     export const validations = {
       deporte_categoria_puntuacion: {
         nombre_categoria: {
+          required
         },
         puntos: {
+          required,
+          integer
         },
       },
     }

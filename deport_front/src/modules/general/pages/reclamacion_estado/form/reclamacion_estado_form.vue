@@ -11,7 +11,7 @@
         class="form-row"
       >
       <tc-form-item class="form-group mb-0 col-md-6 px-3">
-        <label>Nombre_estado</label>
+        <label>Nombre estado</label>
         <tc-input placeholder='Ingrese el valor' name='nombre_estado' v-model="reclamacion_estado.nombre_estado"></tc-input>
       </tc-form-item>
       </tc-form>

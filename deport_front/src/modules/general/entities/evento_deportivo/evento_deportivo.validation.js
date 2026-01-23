@@ -11,18 +11,23 @@ import * as mb from "@/helpers/loaders/model.load"
     export const validations = {
       evento_deportivo: {
         nombre_evento: {
+          required
         },
         descripcion_evento: {
         },
         logo: {
         },
         fecha_inicio: {
+          required
         },
         fecha_fin: {
+          required
         },
         curso: {
+          required
         },
         edicion_evento: {
+          required
         },
         terminado: {
           integer,

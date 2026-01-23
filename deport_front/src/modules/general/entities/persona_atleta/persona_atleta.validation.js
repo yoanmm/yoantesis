@@ -6,12 +6,14 @@ import {
     minLength,
     decimal
   } from 'vuelidate/lib/validators';
+  import { alphaOnly, alphaMax5 } from '@/validators/customValidators';
 import * as mb from "@/helpers/loaders/model.load"
 
     export const validations = {
       persona_atleta: {
         id_persona: {
           integer,
+          required
         },
         id_tipo: {
           integer,
@@ -25,6 +27,8 @@ import * as mb from "@/helpers/loaders/model.load"
           decimal,
         },
         facultad: {
+          required,
+          alphaOnly
         },
       },
     }

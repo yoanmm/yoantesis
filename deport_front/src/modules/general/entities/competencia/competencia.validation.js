@@ -15,9 +15,11 @@ import * as mb from "@/helpers/loaders/model.load"
         },
         id_deporte: {
           integer,
+          required
         },
         id_supervisor: {
           integer,
+          required
         },
         resultado_competencia: {
           maxLength: maxLength(65535),

@@ -11,16 +11,20 @@ import * as mb from "@/helpers/loaders/model.load"
     export const validations = {
       deporte: {
         nombre_deporte: {
+          required,
         },
         max_atleta: {
           integer,
+          required
         },
         min_atleta: {
           integer,
+          required
         },
         icono_deporte: {
         },
         genero: {
+          required
         },
         individual: {
           integer,

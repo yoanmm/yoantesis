@@ -11,24 +11,48 @@
         class="form-row"
       >
       <tc-form-item class="form-group mb-0 col-md-6 px-3">
-        <label>Nombre_deporte</label>
+        <label>Nombre deporte</label>
         <tc-input placeholder='Ingrese el valor' name='nombre_deporte' v-model="deporte.nombre_deporte"></tc-input>
       </tc-form-item>
       <tc-form-item class="form-group mb-0 col-md-6 px-3">
-        <label>Max_atleta</label>
+        <label>Max atleta</label>
         <tc-input placeholder='Ingrese el valor'   type_car='num'  name='max_atleta' v-model="deporte.max_atleta"></tc-input>
       </tc-form-item>
       <tc-form-item class="form-group mb-0 col-md-6 px-3">
-        <label>Min_atleta</label>
+        <label>Min atleta</label>
         <tc-input placeholder='Ingrese el valor'   type_car='num'  name='min_atleta' v-model="deporte.min_atleta"></tc-input>
       </tc-form-item>
       <tc-form-item class="form-group mb-0 col-md-6 px-3">
-        <label>Icono_deporte</label>
-        <tc-input placeholder='Ingrese el valor' name='icono_deporte' v-model="deporte.icono_deporte"></tc-input>
+        <label>Icono deporte</label>
+
+        <input
+          type="file"
+          name="icono_deporte"
+          accept=".png,.jpg,.jpeg"
+          @change="onIconoDeporteChange"
+          class="form-control"
+        />
+
+        <!-- PREVIEW -->
+        <img
+          v-if="previewIconoDeporte"
+          :src="previewIconoDeporte"
+          alt="Preview Icono Deporte"
+          class="img-thumbnail mt-2"
+          style="max-height: 120px"
+        />
       </tc-form-item>
       <tc-form-item class="form-group mb-0 col-md-6 px-3">
         <label>Genero</label>
-        <tc-input placeholder='Ingrese el valor' name='genero' v-model="deporte.genero"></tc-input>
+        <a-select
+          placeholder="Seleccione el género"
+          name="genero"
+          v-model="deporte.genero"
+        >
+          <a-select-option value="M">Masculino</a-select-option>
+          <a-select-option value="F">Femenino</a-select-option>
+          <a-select-option value="X">Mixto</a-select-option>
+        </a-select>
       </tc-form-item>
         <tc-form-item class="form-group mb-0 col-md-6 px-3">
           <label>Individual</label>
@@ -37,7 +61,7 @@
           </div>
         </tc-form-item>
         <tc-form-item class="form-group mb-0 col-md-6 px-3">
-          <label>Deporte_categoria_puntuacion</label>
+          <label>Deporte categoria puntuacion</label>
           <div class="d-flex flex-row">
             <tc-autocomplete
               placeholder="Seleccione el Deporte_categoria_puntuacion"
@@ -71,7 +95,7 @@
           <deporte_categoria_puntuacion_form :model="null" :modal="true" @close_modal="categoriaAdded"/>
         </a-modal>
         <tc-form-item class="form-group mb-0 col-md-6 px-3">
-          <label>Deporte_regla</label>
+          <label>Deporte regla</label>
           <div class="d-flex flex-row">
             <tc-autocomplete
               placeholder="Seleccione el Deporte_regla"
@@ -205,6 +229,7 @@ export default {
       deporte_list: [],
       showModalCreateregla: false,
       deporte_regla_list: [],
+      previewIconoDeporte: null,
     };
   },
   computed: {
@@ -225,6 +250,14 @@ export default {
     deporte_regla_form,
   },
   methods: {
+      onIconoDeporteChange(event) {
+        const file = event.target.files[0];
+        this.deporte.icono_deporte = file;
+
+        if (file) {
+          this.previewIconoDeporte = URL.createObjectURL(file);
+        }
+      },
       openModalCreatecategoria() {
         this.showModalCreatecategoria = true;
       },
@@ -272,10 +305,22 @@ export default {
       if (this.$refs.form.validate()) {
         this.loading = true;
         const accion=this.deporte.get_id() ? "actualizado" : "añadido";
+        // Asegurar que `activo` se envíe como 0/1
+        try {
+          this.deporte.activo = this.deporte.activo === true || this.deporte.activo === '1' || this.deporte.activo === 1 ? 1 : 0;
+        } catch (e) {}
+
         this.deporte
           .save()
           .then((response) => {
             if(utils.process_response(response,accion)) {
+              // Actualizar las URLs de los archivos desde la respuesta del servidor
+              if (response.data && response.data.data) {
+                const data = response.data.data;
+                if (data.icono_deporte) this.deporte.icono_deporte = data.icono_deporte;
+                if (data.reglamento) this.deporte.reglamento = data.reglamento;
+              }
+              
               if (!this.model && !and_new && this.modal) {
 
                   this.$emit('close_modal',true)

@@ -22,7 +22,11 @@ export default {
   },
   data() {
     return {
-      columns: mb.statics("Delegacion").columns,
+      // Mostrar sólo el nombre de la delegación en el wizard
+      columns: mb.statics("Delegacion").columns.filter(c => {
+        const key = c.dataIndex || c.key || '';
+        return key === 'nombre_delegacion';
+      }),
       params_search: { relations: ["tipo_delegacion", "regla_delegacion"] },
       paginate: false,
       mb,
@@ -31,6 +35,15 @@ export default {
   methods: {
     loadTableData() {
       this.$refs.delegacion_table.load_data();
+    },
+    getData() {
+      return this.$refs.delegacion_table ? this.$refs.delegacion_table.selectedRowKeys : [];
+    },
+    resetTable() {
+      if (this.$refs.delegacion_table) {
+        this.$refs.delegacion_table.selectedRowKeys = [];
+        this.$refs.delegacion_table.load_data();
+      }
     },
   },
   mounted() {

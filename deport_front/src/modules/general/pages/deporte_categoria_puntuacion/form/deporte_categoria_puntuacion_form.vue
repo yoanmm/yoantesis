@@ -11,7 +11,7 @@
         class="form-row"
       >
       <tc-form-item class="form-group mb-0 col-md-6 px-3">
-        <label>Nombre_categoria</label>
+        <label>Nombre categoria</label>
         <tc-input placeholder='Ingrese el valor' name='nombre_categoria' v-model="deporte_categoria_puntuacion.nombre_categoria"></tc-input>
       </tc-form-item>
       <tc-form-item class="form-group mb-0 col-md-6 px-3">
