@@ -11,7 +11,7 @@
  Target Server Version : 110302 (11.3.2-MariaDB)
  File Encoding         : 65001
 
- Date: 13/01/2026 22:07:55
+ Date: 23/01/2026 11:14:55
 */
 
 SET NAMES utf8mb4;
@@ -281,7 +281,7 @@ CREATE TABLE `deporte_categoria_puntuacion`  (
   `nombre_categoria` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `puntos` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id_categoria`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 8 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of deporte_categoria_puntuacion
@@ -400,7 +400,7 @@ CREATE TABLE `evento_deportivo`  (
 -- ----------------------------
 -- Records of evento_deportivo
 -- ----------------------------
-INSERT INTO `evento_deportivo` VALUES (1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL);
+INSERT INTO `evento_deportivo` VALUES (1, 'Trece de Marzo', NULL, NULL, '2026-03-03 19:59:22', '2026-03-30 19:59:38', '2020-2021', NULL, 0, NULL, NULL, NULL, NULL);
 INSERT INTO `evento_deportivo` VALUES (2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL);
 INSERT INTO `evento_deportivo` VALUES (3, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL);
 
@@ -476,7 +476,7 @@ CREATE TABLE `juego_fase`  (
   `nombre_fase` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `es_final` tinyint(4) NULL DEFAULT NULL,
   PRIMARY KEY (`id_fase`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 8 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of juego_fase
@@ -541,7 +541,7 @@ CREATE TABLE `persona`  (
   `genero` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `facultad` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id_persona`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 8 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 10 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of persona
@@ -553,6 +553,7 @@ INSERT INTO `persona` VALUES (4, 'Alberto', 'Ferrer', '00120609757', 'Masculino'
 INSERT INTO `persona` VALUES (5, 'Fer', 'Lopez', '97082354091', 'Femenino', 'Informática');
 INSERT INTO `persona` VALUES (6, 'Yurien', 'Rieumont', '78122480621', 'Femenino', 'Industrial');
 INSERT INTO `persona` VALUES (7, 'Yurima', 'Montero', '95042650412', 'Femenino', 'Eléctrica');
+INSERT INTO `persona` VALUES (9, 'Magela', 'Rodriguez', '12081214532', 'Femenino', 'Química');
 
 -- ----------------------------
 -- Table structure for persona_arbitro
@@ -647,12 +648,14 @@ CREATE TABLE `rol`  (
   `creado` timestamp NULL DEFAULT NULL,
   `actualizado` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id_rol`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of rol
 -- ----------------------------
 INSERT INTO `rol` VALUES (1, 'Vicedecano', 1, NULL, NULL);
+INSERT INTO `rol` VALUES (2, 'Administrador', 1, NULL, NULL);
+INSERT INTO `rol` VALUES (3, 'C_Organizadora', 1, NULL, NULL);
 
 -- ----------------------------
 -- Table structure for rol_permiso
@@ -711,11 +714,12 @@ CREATE TABLE `usuario_rol`  (
   INDEX `id_rol`(`id_rol`) USING BTREE,
   CONSTRAINT `usuario_rol_ibfk_1` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id_usuario`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `usuario_rol_ibfk_2` FOREIGN KEY (`id_rol`) REFERENCES `rol` (`id_rol`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of usuario_rol
 -- ----------------------------
+INSERT INTO `usuario_rol` VALUES (1, 1, 2);
 
 -- ----------------------------
 -- Table structure for usuarios
@@ -738,6 +742,6 @@ CREATE TABLE `usuarios`  (
 -- ----------------------------
 -- Records of usuarios
 -- ----------------------------
-INSERT INTO `usuarios` VALUES (1, 'admin', '$2y$10$qRYHnlNbi77YJyT7z3yjM.tsgeHfyRMjWUL.XS18q0M3gkA76AaSW', 'admin', '2025-05-05 00:00:00', '2025-05-05 00:00:00', NULL, 1);
+INSERT INTO `usuarios` VALUES (1, 'admin', '$2y$10$qRYHnlNbi77YJyT7z3yjM.tsgeHfyRMjWUL.XS18q0M3gkA76AaSW', 'admin', '2025-05-05 00:00:00', '2025-05-05 00:00:00', 1, 1);
 
 SET FOREIGN_KEY_CHECKS = 1;
