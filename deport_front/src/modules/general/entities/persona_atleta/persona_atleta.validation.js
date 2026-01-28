@@ -26,10 +26,7 @@ import * as mb from "@/helpers/loaders/model.load"
         peso: {
           decimal,
         },
-        facultad: {
-          required,
-          alphaOnly
-        },
+        
       },
     }
     export const feedbacks = {

@@ -19,7 +19,7 @@
        foto
        tamaño
        peso
-       facultad
+       
 
     constructor(attributes = null) {
       super();
@@ -31,7 +31,7 @@
         this.foto = attributes.foto|| null
         this.tamaño = attributes.tamaño|| null
         this.peso = attributes.peso|| null
-        this.facultad = attributes.facultad|| null
+        
       }
     }
 
@@ -44,7 +44,7 @@
         this.foto = attributes.foto
         this.tamaño = attributes.tamaño
         this.peso = attributes.peso
-        this.facultad = attributes.facultad
+        
       }
     }
 

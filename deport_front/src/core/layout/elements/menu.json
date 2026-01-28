@@ -1,5 +1,19 @@
 [
   {
+    "caption": "Calendario deportivo",
+    "modules": "['management']",
+    "icon": "zmdi zmdi-run",
+    "routes": [
+      {
+        "name": "calendario",
+        "module": "management",
+        "caption": "Calendario",
+        "icon": "",
+        "path": "/general/calendario"
+      }
+    ]
+  },
+  {
     "caption": "Gestión deportiva",
     "modules": "['management']",
     "icon": "zmdi zmdi-run",
@@ -24,6 +38,13 @@
         "caption": "Equipos",
         "icon": "",
         "path": "/general/equipo_list"
+      },
+      {
+        "name": "equipo_atleta_list",
+        "module": "management",
+        "caption": "Atletas por Equipo",
+        "icon": "",
+        "path": "/general/equipo_atleta_list"
       },
       {
         "name": "persona_atleta_list",
