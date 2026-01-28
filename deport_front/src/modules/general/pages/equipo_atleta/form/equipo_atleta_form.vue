@@ -10,12 +10,8 @@
         ref="form"
         class="form-row"
       >
-      <tc-form-item class="form-group mb-0 col-md-6 px-3">
-        <label>Id_equipo_atleta<span class='required_field'>*</span></label>
-        <tc-input placeholder='Ingrese el valor'   type_car='num'  name='id_equipo_atleta' v-model="equipo_atleta.id_equipo_atleta"></tc-input>
-      </tc-form-item>
         <tc-form-item class="form-group mb-0 col-md-6 px-3">
-          <label>Equipo</label>
+          <label>Equipo<span class='required_field'>*</span></label>
           <div class="d-flex flex-row">
             <tc-autocomplete
               placeholder="Seleccione el Equipo"
@@ -49,10 +45,10 @@
           <equipo_form :model="null" :modal="true" @close_modal="equipoAdded"/>
         </a-modal>
         <tc-form-item class="form-group mb-0 col-md-6 px-3">
-          <label>Persona_atleta</label>
+          <label>Atleta<span class='required_field'>*</span></label>
           <div class="d-flex flex-row">
             <tc-autocomplete
-              placeholder="Seleccione el Persona_atleta"
+              placeholder="Seleccione el Atleta"
               name="id_atleta"
               ref="select_atleta"
               :successFeed="false"
@@ -83,10 +79,10 @@
           <persona_atleta_form :model="null" :modal="true" @close_modal="atletaAdded"/>
         </a-modal>
         <tc-form-item class="form-group mb-0 col-md-6 px-3">
-          <label>Atleta_estado</label>
+          <label>Estado del Atleta<span class='required_field'>*</span></label>
           <div class="d-flex flex-row">
             <tc-autocomplete
-              placeholder="Seleccione el Atleta_estado"
+              placeholder="Seleccione el Estado"
               name="id_estado_atleta"
               ref="select_estado_atleta"
               :successFeed="false"
@@ -117,13 +113,13 @@
           <atleta_estado_form :model="null" :modal="true" @close_modal="estado_atletaAdded"/>
         </a-modal>
         <tc-form-item class="form-group mb-0 col-md-6 px-3">
-          <label>Capitan</label>
+          <label>¿Es Capitán?</label>
           <div>
             <a-switch  v-model="equipo_atleta.capitan"/>
           </div>
         </tc-form-item>
         <tc-form-item class="form-group mb-0 col-md-6 px-3">
-          <label>Subcapitan</label>
+          <label>¿Es Subcapitán?</label>
           <div>
             <a-switch  v-model="equipo_atleta.subcapitan"/>
           </div>
@@ -251,6 +247,10 @@ export default {
     save_model(and_new=false) {
       if (this.$refs.form.validate()) {
         this.loading = true;
+        // Convertir booleanos a 0/1 para tinyint
+        this.equipo_atleta.capitan = this.equipo_atleta.capitan ? 1 : 0;
+        this.equipo_atleta.subcapitan = this.equipo_atleta.subcapitan ? 1 : 0;
+        
         const accion=this.equipo_atleta.get_id() ? "actualizado" : "añadido";
         this.equipo_atleta
           .save()

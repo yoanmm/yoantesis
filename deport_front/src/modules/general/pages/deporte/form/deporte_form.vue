@@ -133,8 +133,8 @@
             <input
               type="file"
               name="reglamento"
-              accept=".pdf,.doc,.docx,.png,.jpg,.jpeg"
-              @change="evento_deportivo.reglamento = $event.target.files[0]"
+              accept=".pdf,.doc,.docx,.txt"
+              @change="onReglamentoChange"
               class="form-control"
             />
           </tc-form-item>
@@ -252,10 +252,25 @@ export default {
   methods: {
       onIconoDeporteChange(event) {
         const file = event.target.files[0];
-        this.deporte.icono_deporte = file;
-
         if (file) {
           this.previewIconoDeporte = URL.createObjectURL(file);
+          // Convertir a base64 para almacenamiento
+          const reader = new FileReader();
+          reader.onload = (e) => {
+            this.deporte.icono_deporte = e.target.result; // Almacenar como base64
+          };
+          reader.readAsDataURL(file);
+        }
+      },
+      onReglamentoChange(event) {
+        const file = event.target.files[0];
+        if (file) {
+          // Convertir a base64 para almacenamiento
+          const reader = new FileReader();
+          reader.onload = (e) => {
+            this.deporte.reglamento = e.target.result; // Almacenar como base64
+          };
+          reader.readAsDataURL(file);
         }
       },
       openModalCreatecategoria() {
@@ -304,6 +319,15 @@ export default {
     save_model(and_new=false) {
       if (this.$refs.form.validate()) {
         this.loading = true;
+        
+        // Limpiar campos vacíos o no válidos
+        if (!this.deporte.icono_deporte || typeof this.deporte.icono_deporte !== 'string') {
+          this.deporte.icono_deporte = null;
+        }
+        if (!this.deporte.reglamento || typeof this.deporte.reglamento !== 'string') {
+          this.deporte.reglamento = null;
+        }
+        
         const accion=this.deporte.get_id() ? "actualizado" : "añadido";
         // Asegurar que `activo` se envíe como 0/1
         try {

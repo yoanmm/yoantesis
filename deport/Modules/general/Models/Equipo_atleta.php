@@ -67,18 +67,12 @@ class Equipo_atleta extends BaseModel
      *
      * @var bool
      */
-    public $incrementing = false;
+    public $incrementing = true;
 
     /**
      * The "type" of the auto-incrementing ID.
      *
      * @var string
-     */
-    protected $keyType = 'integer';
-
-    const RELATIONS = ['equipo','atleta','estado_atleta'];
-/**
-     * The number of models to return for pagination.
      *
      * @var int
      */
@@ -136,18 +130,16 @@ class Equipo_atleta extends BaseModel
     {
           $rules=[
             'create'=>[
-                'id_equipo_atleta' =>'required|unique:'.$this->connection.'.equipo_atleta',
-                'id_equipo' =>'nullable|exists:'.$this->connection.'.equipo,id_equipo',
-                'id_atleta' =>'nullable|exists:'.$this->connection.'.persona_atleta,id_atleta',
-                'id_estado_atleta' =>'nullable|exists:'.$this->connection.'.atleta_estado,id_estado',
+                'id_equipo' =>'required|exists:'.$this->connection.'.equipo,id_equipo',
+                'id_atleta' =>'required|exists:'.$this->connection.'.persona_atleta,id_atleta',
+                'id_estado_atleta' =>'required|exists:'.$this->connection.'.atleta_estado,id_estado',
                 'capitan' =>'nullable|boolean',
                 'subcapitan' =>'nullable|boolean'
             ],
             'update'=>[
-                'id_equipo_atleta' =>'required|unique:'.$this->connection.'.equipo_atleta,id_equipo_atleta,'.$this->id_equipo_atleta.',id_equipo_atleta',
-                'id_equipo' =>'nullable|exists:'.$this->connection.'.equipo,id_equipo',
-                'id_atleta' =>'nullable|exists:'.$this->connection.'.persona_atleta,id_atleta',
-                'id_estado_atleta' =>'nullable|exists:'.$this->connection.'.atleta_estado,id_estado',
+                'id_equipo' =>'required|exists:'.$this->connection.'.equipo,id_equipo',
+                'id_atleta' =>'required|exists:'.$this->connection.'.persona_atleta,id_atleta',
+                'id_estado_atleta' =>'required|exists:'.$this->connection.'.atleta_estado,id_estado',
                 'capitan' =>'nullable|boolean',
                 'subcapitan' =>'nullable|boolean'
             ]

@@ -13,6 +13,5 @@ class DelegacionService extends Services
   {
       parent::__construct('Modules\general\Models\Delegacion');
    }
-
 }
 

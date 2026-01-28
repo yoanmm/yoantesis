@@ -24,6 +24,7 @@ module.exports = {
     lintOnSave:false,
     productionSourceMap: true,
     publicPath: '/',
+    transpileDependencies: ['vue-simple-calendar'],
     chainWebpack:(config)=>{
         config.resolve.alias
             .set('@',path.resolve(__dirname,'src/'))

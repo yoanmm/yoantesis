@@ -17,6 +17,7 @@
               placeholder="Seleccione el Persona"
               name="id_persona"
               ref="select_persona"
+              @change="personSelected"
               :successFeed="false"
               idKey="id_persona"
               textKey="nombre"
@@ -89,10 +90,6 @@
       <tc-form-item class="form-group mb-0 col-md-6 px-3">
         <label>Peso</label>
         <tc-input placeholder='Ingrese el valor'   type_car='dec'  name='peso' v-model="persona_atleta.peso"></tc-input>
-      </tc-form-item>
-      <tc-form-item class="form-group mb-0 col-md-6 px-3">
-        <label>Facultad</label>
-        <tc-input placeholder='Ingrese el valor' name='facultad' v-model="persona_atleta.facultad"></tc-input>
       </tc-form-item>
       </tc-form>
     </div>
@@ -201,6 +198,7 @@ export default {
     save_model(and_new=false) {
       if (this.$refs.form.validate()) {
         this.loading = true;
+
         const accion=this.persona_atleta.get_id() ? "actualizado" : "añadido";
         this.persona_atleta
           .save()

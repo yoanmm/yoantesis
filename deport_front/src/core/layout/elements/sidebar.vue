@@ -38,8 +38,9 @@ export default {
   },
   methods: {
     access_menu_load() {
-      if (!this.$store.site.user.roles.includes("ROLE_SUPER_ADMIN")) {
-        const user_menu = this.$store.site.user.access_menu;
+      if (!this.$store.site.user || !this.$store.site.user.roles || !this.$store.site.user.roles.includes("ROLE_SUPER_ADMIN")) {
+        const user_menu = this.$store.site.user?.access_menu;
+        if (!user_menu) return;
 
         this.menu.forEach((section, i) => {
           if (user_menu.some((m) => m.menu_module === section.caption)) {

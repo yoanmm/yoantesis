@@ -141,8 +141,8 @@
           <input
             type="file"
             name="reglamento"
-            accept=".pdf,.doc,.docx,.png,.jpg,.jpeg"
-            @change="evento_deportivo.reglamento = $event.target.files[0]"
+            accept=".pdf,.doc,.docx,.txt"
+            @change="onReglamentoChange"
             class="form-control"
           />
         </tc-form-item>
@@ -251,19 +251,39 @@ export default {
       },
       onLogoChange(event) {
         const file = event.target.files[0];
-        this.delegacion.logo = file;
-
         if (file) {
           this.previewLogo = URL.createObjectURL(file);
+          // Convertir a base64 para almacenamiento
+          const reader = new FileReader();
+          reader.onload = (e) => {
+            this.delegacion.logo = e.target.result; // Almacenar como base64
+          };
+          reader.readAsDataURL(file);
         }
       },
 
       onMascotaChange(event) {
         const file = event.target.files[0];
-        this.delegacion.mascota = file;
-
         if (file) {
           this.previewMascota = URL.createObjectURL(file);
+          // Convertir a base64 para almacenamiento
+          const reader = new FileReader();
+          reader.onload = (e) => {
+            this.delegacion.mascota = e.target.result; // Almacenar como base64
+          };
+          reader.readAsDataURL(file);
+        }
+      },
+
+      onReglamentoChange(event) {
+        const file = event.target.files[0];
+        if (file) {
+          // Convertir a base64 para almacenamiento
+          const reader = new FileReader();
+          reader.onload = (e) => {
+            this.delegacion.reglamento = e.target.result; // Almacenar como base64
+          };
+          reader.readAsDataURL(file);
         }
       },
       cancel(){
@@ -276,6 +296,18 @@ export default {
     save_model(and_new=false) {
       if (this.$refs.form.validate()) {
         this.loading = true;
+        
+        // Limpiar campos vacíos o no válidos
+        if (!this.delegacion.mascota || typeof this.delegacion.mascota !== 'string') {
+          this.delegacion.mascota = null;
+        }
+        if (!this.delegacion.logo || typeof this.delegacion.logo !== 'string') {
+          this.delegacion.logo = null;
+        }
+        if (!this.delegacion.reglamento || typeof this.delegacion.reglamento !== 'string') {
+          this.delegacion.reglamento = null;
+        }
+        
         const accion=this.delegacion.get_id() ? "actualizado" : "añadido";
         this.delegacion
           .save()
