@@ -31,6 +31,7 @@
           accept=".png,.jpg,.jpeg"
           @change="onIconoDeporteChange"
           class="form-control"
+          ref="icono_input"
         />
 
         <!-- PREVIEW -->
@@ -41,6 +42,9 @@
           class="img-thumbnail mt-2"
           style="max-height: 120px"
         />
+        <div v-if="previewIconoDeporte || deporte.icono_deporte" class="mt-2">
+          <a-button type="link" @click="removeIconoDeporte">Eliminar</a-button>
+        </div>
       </tc-form-item>
       <tc-form-item class="form-group mb-0 col-md-6 px-3">
         <label>Genero</label>
@@ -280,6 +284,10 @@ export default {
       onIconoDeporteChange(event) {
         const file = event.target.files[0];
         if (file) {
+          // Revoke previous blob preview if any
+          if (this.previewIconoDeporte && this.previewIconoDeporte.startsWith && this.previewIconoDeporte.startsWith('blob:')) {
+            URL.revokeObjectURL(this.previewIconoDeporte);
+          }
           this.previewIconoDeporte = URL.createObjectURL(file);
           // Convertir a base64 para almacenamiento
           const reader = new FileReader();
@@ -288,6 +296,15 @@ export default {
           };
           reader.readAsDataURL(file);
         }
+      },
+
+      removeIconoDeporte() {
+        if (this.previewIconoDeporte && this.previewIconoDeporte.startsWith && this.previewIconoDeporte.startsWith('blob:')) {
+          URL.revokeObjectURL(this.previewIconoDeporte);
+        }
+        this.deporte.icono_deporte = null;
+        this.previewIconoDeporte = null;
+        if (this.$refs.icono_input) this.$refs.icono_input.value = null;
       },
 
       resolveIconUrl(icon) {

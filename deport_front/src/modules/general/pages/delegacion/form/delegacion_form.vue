@@ -27,6 +27,7 @@
           accept=".png,.jpg,.jpeg"
           @change="onMascotaChange"
           class="form-control"
+          ref="mascota_input"
         />
 
         <!-- PREVIEW -->
@@ -37,6 +38,9 @@
           class="img-thumbnail mt-2"
           style="max-height: 120px"
         />
+        <div v-if="previewMascota || delegacion.mascota" class="mt-2">
+          <a-button type="link" @click="removeMascota">Eliminar</a-button>
+        </div>
       </tc-form-item>
       <tc-form-item class="form-group mb-0 col-md-6 px-3">
   <label>Color</label>
@@ -55,6 +59,7 @@
           accept=".png,.jpg,.jpeg"
           @change="onLogoChange"
           class="form-control"
+          ref="logo_input"
         />
 
         <!-- PREVIEW -->
@@ -65,6 +70,9 @@
           class="img-thumbnail mt-2"
           style="max-height: 120px"
         />
+        <div v-if="previewLogo || delegacion.logo" class="mt-2">
+          <a-button type="link" @click="removeLogo">Eliminar</a-button>
+        </div>
       </tc-form-item>
         <tc-form-item class="form-group mb-0 col-md-6 px-3">
           <label>Tipo</label>
@@ -361,6 +369,34 @@ export default {
           };
           reader.readAsDataURL(file);
         }
+      },
+
+      removeLogo() {
+        // Revoke any object URL
+        if (this.logoObjectUrl) {
+          URL.revokeObjectURL(this.logoObjectUrl);
+          this.logoObjectUrl = null;
+        }
+        if (this.previewLogo && this.previewLogo.startsWith && this.previewLogo.startsWith('blob:')) {
+          URL.revokeObjectURL(this.previewLogo);
+        }
+        this.delegacion.logo = null;
+        this.previewLogo = null;
+        if (this.$refs.logo_input) this.$refs.logo_input.value = null;
+      },
+
+      removeMascota() {
+        // Revoke any object URL
+        if (this.mascotaObjectUrl) {
+          URL.revokeObjectURL(this.mascotaObjectUrl);
+          this.mascotaObjectUrl = null;
+        }
+        if (this.previewMascota && this.previewMascota.startsWith && this.previewMascota.startsWith('blob:')) {
+          URL.revokeObjectURL(this.previewMascota);
+        }
+        this.delegacion.mascota = null;
+        this.previewMascota = null;
+        if (this.$refs.mascota_input) this.$refs.mascota_input.value = null;
       },
 
       resolveIconUrl(icon) {
