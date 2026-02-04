@@ -27,25 +27,27 @@
           accept=".png,.jpg,.jpeg"
           @change="onMascotaChange"
           class="form-control"
+          ref="mascota_input"
         />
 
         <!-- PREVIEW -->
         <img
-          v-if="previewMascota"
-          :src="previewMascota"
+          v-if="previewMascota || delegacion.mascota"
+          :src="previewMascota || resolveIconUrl(delegacion.mascota)"
           alt="Preview Mascota"
           class="img-thumbnail mt-2"
           style="max-height: 120px"
         />
+        <div v-if="previewMascota || delegacion.mascota" class="mt-2">
+          <a-button type="link" @click="removeMascota">Eliminar</a-button>
+        </div>
       </tc-form-item>
       <tc-form-item class="form-group mb-0 col-md-6 px-3">
   <label>Color</label>
-  <input
-    type="color"
-    name="color"
-    v-model="delegacion.color"
-    class="form-control"
-  />
+  <div class="d-flex align-items-center">
+    <Chrome :value="colorObject" @input="onColorPickerInput" />
+    <input type="text" class="form-control ml-2" :value="delegacion.color || ''" readonly style="max-width: 110px;" />
+  </div>
 </tc-form-item>
 
       <tc-form-item class="form-group mb-0 col-md-6 px-3">
@@ -57,16 +59,20 @@
           accept=".png,.jpg,.jpeg"
           @change="onLogoChange"
           class="form-control"
+          ref="logo_input"
         />
 
         <!-- PREVIEW -->
         <img
-          v-if="previewLogo"
-          :src="previewLogo"
+          v-if="previewLogo || delegacion.logo"
+          :src="previewLogo || resolveIconUrl(delegacion.logo)"
           alt="Preview Logo"
           class="img-thumbnail mt-2"
           style="max-height: 120px"
         />
+        <div v-if="previewLogo || delegacion.logo" class="mt-2">
+          <a-button type="link" @click="removeLogo">Eliminar</a-button>
+        </div>
       </tc-form-item>
         <tc-form-item class="form-group mb-0 col-md-6 px-3">
           <label>Tipo</label>
@@ -145,6 +151,10 @@
             @change="onReglamentoChange"
             class="form-control"
           />
+          <div v-if="previewReglamentoName" class="mt-2">
+            <a :href="previewReglamentoUrl" target="_blank" rel="noopener">{{ previewReglamentoName }}</a>
+            <a-button type="link" @click="removeReglamento">Eliminar</a-button>
+          </div>
         </tc-form-item>
       </tc-form>
     </div>
@@ -205,6 +215,13 @@ export default {
       // 👇 NUEVO 
       previewLogo: null, 
       previewMascota: null,
+      previewReglamentoName: null,
+      previewReglamentoUrl: null,
+      reglamentoObjectUrl: null,
+      logoObjectUrl: null,
+      mascotaObjectUrl: null,
+      // Color picker state
+      colorObject: { hex: '#000000' },
     };
   },
   computed: {
@@ -223,6 +240,49 @@ export default {
     Chrome,
     delegacion_tipo_form,
     delegacion_regla_form,
+  },
+
+  watch: {
+    'delegacion.logo': {
+      immediate: true,
+      handler(val) {
+        if (val && !this.previewLogo) {
+          this.previewLogo = this.resolveIconUrl(val);
+        }
+      }
+    },
+    'delegacion.mascota': {
+      immediate: true,
+      handler(val) {
+        if (val && !this.previewMascota) {
+          this.previewMascota = this.resolveIconUrl(val);
+        }
+      }
+    },
+    'delegacion.reglamento': {
+      immediate: true,
+      handler(val) {
+        if (val && !this.previewReglamentoName) {
+          this.previewReglamentoName = this.getFileName(val);
+          this.previewReglamentoUrl = this.resolveFileUrl(val);
+        }
+      }
+    },
+    'delegacion.color': {
+      immediate: true,
+      handler(val) {
+        // Ensure color is string and reflect it in the picker
+        const hex = val || '#000000';
+        if (!this.delegacion.color) this.delegacion.color = hex;
+        this.colorObject = { hex };
+      }
+    },
+    colorObject: {
+      deep: true,
+      handler(val) {
+        if (val && val.hex) this.delegacion.color = String(val.hex);
+      }
+    }
   },
   methods: {
       openModalCreatetipo_delegacion() {
@@ -252,7 +312,12 @@ export default {
       onLogoChange(event) {
         const file = event.target.files[0];
         if (file) {
-          this.previewLogo = URL.createObjectURL(file);
+          if (this.logoObjectUrl) {
+            URL.revokeObjectURL(this.logoObjectUrl);
+            this.logoObjectUrl = null;
+          }
+          this.logoObjectUrl = URL.createObjectURL(file);
+          this.previewLogo = this.logoObjectUrl;
           // Convertir a base64 para almacenamiento
           const reader = new FileReader();
           reader.onload = (e) => {
@@ -262,10 +327,22 @@ export default {
         }
       },
 
+      onColorPickerInput(color) {
+        // color comes as an object from chrome-picker, prefer hex
+        if (color && color.hex) {
+          this.colorObject = color;
+        }
+      },
+
       onMascotaChange(event) {
         const file = event.target.files[0];
         if (file) {
-          this.previewMascota = URL.createObjectURL(file);
+          if (this.mascotaObjectUrl) {
+            URL.revokeObjectURL(this.mascotaObjectUrl);
+            this.mascotaObjectUrl = null;
+          }
+          this.mascotaObjectUrl = URL.createObjectURL(file);
+          this.previewMascota = this.mascotaObjectUrl;
           // Convertir a base64 para almacenamiento
           const reader = new FileReader();
           reader.onload = (e) => {
@@ -278,6 +355,13 @@ export default {
       onReglamentoChange(event) {
         const file = event.target.files[0];
         if (file) {
+          if (this.reglamentoObjectUrl) {
+            URL.revokeObjectURL(this.reglamentoObjectUrl);
+            this.reglamentoObjectUrl = null;
+          }
+          this.reglamentoObjectUrl = URL.createObjectURL(file);
+          this.previewReglamentoName = file.name;
+          this.previewReglamentoUrl = this.reglamentoObjectUrl;
           // Convertir a base64 para almacenamiento
           const reader = new FileReader();
           reader.onload = (e) => {
@@ -286,6 +370,67 @@ export default {
           reader.readAsDataURL(file);
         }
       },
+
+      removeLogo() {
+        // Revoke any object URL
+        if (this.logoObjectUrl) {
+          URL.revokeObjectURL(this.logoObjectUrl);
+          this.logoObjectUrl = null;
+        }
+        if (this.previewLogo && this.previewLogo.startsWith && this.previewLogo.startsWith('blob:')) {
+          URL.revokeObjectURL(this.previewLogo);
+        }
+        this.delegacion.logo = null;
+        this.previewLogo = null;
+        if (this.$refs.logo_input) this.$refs.logo_input.value = null;
+      },
+
+      removeMascota() {
+        // Revoke any object URL
+        if (this.mascotaObjectUrl) {
+          URL.revokeObjectURL(this.mascotaObjectUrl);
+          this.mascotaObjectUrl = null;
+        }
+        if (this.previewMascota && this.previewMascota.startsWith && this.previewMascota.startsWith('blob:')) {
+          URL.revokeObjectURL(this.previewMascota);
+        }
+        this.delegacion.mascota = null;
+        this.previewMascota = null;
+        if (this.$refs.mascota_input) this.$refs.mascota_input.value = null;
+      },
+
+      resolveIconUrl(icon) {
+        if (!icon || typeof icon !== 'string') return null;
+        if (icon.startsWith('data:')) return icon; // already base64
+        if (icon.startsWith('http://') || icon.startsWith('https://')) return icon;
+        if (icon.startsWith('/')) return window.location.origin + icon;
+        if (process.env.VUE_APP_API_URL) return process.env.VUE_APP_API_URL.replace(/\/+$/,'') + '/uploads/' + icon;
+        return window.location.origin + '/uploads/' + icon;
+      },
+
+      resolveFileUrl(file) {
+        return this.resolveIconUrl(file);
+      },
+
+      getFileName(path) {
+        if (!path) return null;
+        if (path.startsWith('data:')) return 'Documento cargado';
+        try {
+          const name = path.split('/').pop().split('\\').pop();
+          return decodeURIComponent(name);
+        } catch (e) { return path; }
+      },
+
+      removeReglamento() {
+        this.delegacion.reglamento = null;
+        this.previewReglamentoName = null;
+        if (this.reglamentoObjectUrl) {
+          URL.revokeObjectURL(this.reglamentoObjectUrl);
+          this.reglamentoObjectUrl = null;
+        }
+        this.previewReglamentoUrl = null;
+      },
+
       cancel(){
         if (!this.model) {
           this.$emit('close_modal',false)
@@ -307,6 +452,10 @@ export default {
         if (!this.delegacion.reglamento || typeof this.delegacion.reglamento !== 'string') {
           this.delegacion.reglamento = null;
         }
+        // Asegurar que color se envíe como string (hex)
+        try {
+          this.delegacion.color = String(this.delegacion.color || this.colorObject.hex || '#000000');
+        } catch (e) {}
         
         const accion=this.delegacion.get_id() ? "actualizado" : "añadido";
         this.delegacion
@@ -316,9 +465,23 @@ export default {
               // Actualizar las URLs de los archivos desde la respuesta del servidor
               if (response.data && response.data.data) {
                 const data = response.data.data;
-                if (data.logo) this.delegacion.logo = data.logo;
-                if (data.mascota) this.delegacion.mascota = data.mascota;
-                if (data.reglamento) this.delegacion.reglamento = data.reglamento;
+                if (data.logo) {
+                  this.delegacion.logo = data.logo;
+                  this.previewLogo = this.resolveIconUrl(data.logo);
+                }
+                if (data.mascota) {
+                  this.delegacion.mascota = data.mascota;
+                  this.previewMascota = this.resolveIconUrl(data.mascota);
+                }
+                if (data.reglamento) {
+                  this.delegacion.reglamento = data.reglamento;
+                  this.previewReglamentoName = this.getFileName(data.reglamento);
+                  this.previewReglamentoUrl = this.resolveFileUrl(data.reglamento);
+                }
+                if (data.color) {
+                  this.delegacion.color = data.color;
+                  this.colorObject = { hex: data.color };
+                }
               }
               
               if (!this.model && !and_new && this.modal) {
@@ -340,6 +503,19 @@ export default {
             utils.process_error(error);
           });
       }
+    }
+  },
+
+  beforeDestroy() {
+    if (this.previewLogo && this.previewLogo.startsWith && this.previewLogo.startsWith('blob:')) {
+      URL.revokeObjectURL(this.previewLogo);
+    }
+    if (this.previewMascota && this.previewMascota.startsWith && this.previewMascota.startsWith('blob:')) {
+      URL.revokeObjectURL(this.previewMascota);
+    }
+    if (this.reglamentoObjectUrl) {
+      URL.revokeObjectURL(this.reglamentoObjectUrl);
+      this.reglamentoObjectUrl = null;
     }
   }
 };

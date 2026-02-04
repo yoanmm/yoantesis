@@ -253,7 +253,8 @@ class Deporte extends BaseModel
             file_put_contents($file_path, $file_content);
             
             // Retornar ruta relativa
-            return 'uploads/deporte/' . $field_name . '/' . $filename;
+            /*return 'uploads/deporte/' . $field_name . '/' . $filename;*/
+            return 'http://localhost/yoantesis/deport/public/uploads/deporte/' . $field_name . '/' . $filename;
         }
 
         return null;

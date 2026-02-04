@@ -72,10 +72,12 @@
       sorter: (a, b) =>  a.reglamento && b.reglamento?(a.reglamento > b.reglamento)-(a.reglamento < b.reglamento):0
     },
     {
+
       title: 'Reglamento',
       dataIndex: 'reglamento',
       align:'center',
       key: 'reglamento',
+      scopedSlots: { customRender: 'reglamento' },
 
       sorter: (a, b) =>  (a.deporte_padre.nombre_deporte > b.deporte_padre.nombre_deporte)-(a.deporte_padre.nombre_deporte < b.deporte_padre.nombre_deporte)
     },

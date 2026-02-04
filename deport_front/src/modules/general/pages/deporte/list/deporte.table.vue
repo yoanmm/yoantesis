@@ -85,6 +85,8 @@
     <slot :slot="'id_categoria'" slot-scope='record' name='id_categoria' :record='record'/>
     <slot :slot="'id_regla'" slot-scope='record' name='id_regla' :record='record'/>
     <slot :slot="'id_deporte_padre'" slot-scope='record' name='id_deporte_padre' :record='record'/>
+    <slot :slot="'reglamento'" slot-scope='record' name='reglamento' :record='record'/>
+
   </a-table>
 </template>
 
