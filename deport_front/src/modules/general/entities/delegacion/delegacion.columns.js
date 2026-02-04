@@ -28,7 +28,7 @@
       dataIndex: 'color',
       align:'center',
       key: 'color',
-
+      scopedSlots: { customRender: 'color' },
       sorter: (a, b) =>  (a.color > b.color)-(a.color < b.color)
     },
     {

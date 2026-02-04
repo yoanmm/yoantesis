@@ -35,8 +35,8 @@
 
         <!-- PREVIEW -->
         <img
-          v-if="previewIconoDeporte"
-          :src="previewIconoDeporte"
+          v-if="previewIconoDeporte || deporte.icono_deporte"
+          :src="previewIconoDeporte || resolveIconUrl(deporte.icono_deporte)"
           alt="Preview Icono Deporte"
           class="img-thumbnail mt-2"
           style="max-height: 120px"
@@ -137,6 +137,10 @@
               @change="onReglamentoChange"
               class="form-control"
             />
+            <div v-if="previewReglamentoName" class="mt-2">
+              <a :href="previewReglamentoUrl" target="_blank" rel="noopener">{{ previewReglamentoName }}</a>
+              <a-button type="link" @click="removeReglamento">Eliminar</a-button>
+            </div>
           </tc-form-item>
         <tc-form-item class="form-group mb-0 col-md-6 px-3">
           <label>Deporte</label>
@@ -230,6 +234,9 @@ export default {
       showModalCreateregla: false,
       deporte_regla_list: [],
       previewIconoDeporte: null,
+      previewReglamentoName: null,
+      previewReglamentoUrl: null,
+      reglamentoObjectUrl: null,
     };
   },
   computed: {
@@ -249,6 +256,26 @@ export default {
     deporte_form,
     deporte_regla_form,
   },
+
+  watch: {
+    'deporte.icono_deporte': {
+      immediate: true,
+      handler(val) {
+        if (val && !this.previewIconoDeporte) {
+          this.previewIconoDeporte = this.resolveIconUrl(val);
+        }
+      }
+    },
+    'deporte.reglamento': {
+      immediate: true,
+      handler(val) {
+        if (val && !this.previewReglamentoName) {
+          this.previewReglamentoName = this.getFileName(val);
+          this.previewReglamentoUrl = this.resolveFileUrl(val);
+        }
+      }
+    }
+  },
   methods: {
       onIconoDeporteChange(event) {
         const file = event.target.files[0];
@@ -262,9 +289,51 @@ export default {
           reader.readAsDataURL(file);
         }
       },
+
+      resolveIconUrl(icon) {
+        if (!icon || typeof icon !== 'string') return null;
+        if (icon.startsWith('data:')) return icon; // already base64
+        if (icon.startsWith('http://') || icon.startsWith('https://')) return icon;
+        if (icon.startsWith('/')) return window.location.origin + icon;
+        // Fallback: if backend returns only filename, try using env var or /uploads
+        if (process.env.VUE_APP_API_URL) return process.env.VUE_APP_API_URL.replace(/\/+$/,'') + '/uploads/' + icon;
+        return window.location.origin + '/uploads/' + icon;
+      },
+
+      resolveFileUrl(file) {
+        return this.resolveIconUrl(file);
+      },
+
+      getFileName(path) {
+        if (!path) return null;
+        if (path.startsWith('data:')) return 'Documento cargado';
+        try {
+          const name = path.split('/').pop().split('\\').pop();
+          return decodeURIComponent(name);
+        } catch (e) { return path; }
+      },
+
+      removeReglamento() {
+        this.deporte.reglamento = null;
+        this.previewReglamentoName = null;
+        if (this.reglamentoObjectUrl) {
+          URL.revokeObjectURL(this.reglamentoObjectUrl);
+          this.reglamentoObjectUrl = null;
+        }
+        this.previewReglamentoUrl = null;
+      },
+
       onReglamentoChange(event) {
         const file = event.target.files[0];
         if (file) {
+          // Mostrar nombre y vista previa usando object URL
+          if (this.reglamentoObjectUrl) {
+            URL.revokeObjectURL(this.reglamentoObjectUrl);
+            this.reglamentoObjectUrl = null;
+          }
+          this.reglamentoObjectUrl = URL.createObjectURL(file);
+          this.previewReglamentoName = file.name;
+          this.previewReglamentoUrl = this.reglamentoObjectUrl;
           // Convertir a base64 para almacenamiento
           const reader = new FileReader();
           reader.onload = (e) => {
@@ -341,8 +410,15 @@ export default {
               // Actualizar las URLs de los archivos desde la respuesta del servidor
               if (response.data && response.data.data) {
                 const data = response.data.data;
-                if (data.icono_deporte) this.deporte.icono_deporte = data.icono_deporte;
-                if (data.reglamento) this.deporte.reglamento = data.reglamento;
+              if (data.icono_deporte) {
+                this.deporte.icono_deporte = data.icono_deporte;
+                this.previewIconoDeporte = this.resolveIconUrl(data.icono_deporte);
+              }
+                if (data.reglamento) {
+                  this.deporte.reglamento = data.reglamento;
+                  this.previewReglamentoName = this.getFileName(data.reglamento);
+                  this.previewReglamentoUrl = this.resolveFileUrl(data.reglamento);
+                }
               }
               
               if (!this.model && !and_new && this.modal) {
@@ -364,6 +440,16 @@ export default {
             utils.process_error(error);
           });
       }
+    }
+  },
+
+  beforeDestroy() {
+    if (this.previewIconoDeporte && this.previewIconoDeporte.startsWith && this.previewIconoDeporte.startsWith('blob:')) {
+      URL.revokeObjectURL(this.previewIconoDeporte);
+    }
+    if (this.reglamentoObjectUrl) {
+      URL.revokeObjectURL(this.reglamentoObjectUrl);
+      this.reglamentoObjectUrl = null;
     }
   }
 };

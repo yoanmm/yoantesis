@@ -266,7 +266,7 @@ class Delegacion extends BaseModel
             file_put_contents($file_path, $file_content);
             
             // Retornar ruta relativa
-            return 'uploads/delegacion/' . $field_name . '/' . $filename;
+            return /*'uploads/delegacion/' . $field_name . '/' .*/ $filename;
         }
 
         return null;

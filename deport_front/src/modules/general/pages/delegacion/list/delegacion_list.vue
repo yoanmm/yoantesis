@@ -56,7 +56,11 @@
           ref="delegacion_table"
           :params_search="params_search"
           :paginate="paginate"
-        />
+        >
+          <template slot="color" slot-scope="{record}">
+            <div :title="record.color || ''" :style="{ width: '22px', height: '18px', borderRadius: '3px', margin: 'auto', border: '1px solid #ccc', backgroundColor: (record.color || '#ffffff') }"></div>
+          </template>
+        </delegacion_table>
       </div>
     </div>
   </div>
