@@ -78,12 +78,6 @@
         >
           <delegacion_form :model="null" :modal="true" @close_modal="delegacionAdded"/>
         </a-modal>
-        <tc-form-item class="form-group mb-0 col-md-6 px-3">
-          <label>Participa</label>
-          <div>
-            <a-switch  v-model="delegacion_evento.participa"/>
-          </div>
-        </tc-form-item>
       </tc-form>
     </div>
     <div class="card-footer p-0">

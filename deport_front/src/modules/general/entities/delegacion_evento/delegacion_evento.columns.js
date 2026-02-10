@@ -16,14 +16,6 @@
       sorter: (a, b) =>  a.delegacion && b.delegacion?(a.delegacion.nombre_delegacion > b.delegacion.nombre_delegacion)-(a.delegacion.nombre_delegacion < b.delegacion.nombre_delegacion):0
     },
     {
-      title: 'Participa',
-      dataIndex: 'participa',
-      align:'center',
-      key: 'participa',
-
-      sorter: (a, b) => a.participa - b.participa
-    },
-    {
       title: 'Acciones',
       key: 'action_elements',
       fixed: 'right',

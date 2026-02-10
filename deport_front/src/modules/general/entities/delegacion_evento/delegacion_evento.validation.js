@@ -16,9 +16,6 @@ import * as mb from "@/helpers/loaders/model.load"
         id_delegacion: {
           integer,
         },
-        participa: {
-          integer,
-        },
       },
     }
     export const feedbacks = {

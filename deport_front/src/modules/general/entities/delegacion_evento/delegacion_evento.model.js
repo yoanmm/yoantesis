@@ -16,8 +16,7 @@
        id_delegacion_evento
        id_evento
        id_delegacion
-       participa
-
+      
     constructor(attributes = null) {
       super();
       if (attributes != null) {
@@ -25,7 +24,6 @@
         this.id_delegacion_evento = attributes.id_delegacion_evento|| undefined
         this.id_evento = attributes.id_evento|| null
         this.id_delegacion = attributes.id_delegacion|| null
-        this.participa = attributes.participa=='1'?true:false
       }
     }
 
@@ -35,7 +33,6 @@
         this.id_delegacion_evento = attributes.id_delegacion_evento
         this.id_evento = attributes.id_evento
         this.id_delegacion = attributes.id_delegacion
-        this.participa = attributes.participa
       }
     }
 
