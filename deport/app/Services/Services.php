@@ -50,10 +50,28 @@ class Services
 
     private function relations($query, $params)
     {
-        if ($params == 'all' || array_search("all", $params) !== false)
-            $query = $query->with($this->modelClass::RELATIONS);
-        else
-            $query = $query->with($params);
+        if ($params == 'all' || (is_array($params) && array_search("all", $params) !== false)) {
+            $toLoad = $this->modelClass::RELATIONS;
+        } else {
+            if (is_string($params)) {
+                $decoded = json_decode($params, true);
+                $toLoad = $decoded === null ? [$params] : $decoded;
+            } else {
+                $toLoad = (array)$params;
+            }
+        }
+
+        $valid = [];
+        foreach ($toLoad as $r) {
+            if (!is_string($r)) continue;
+            if (method_exists($this->modelClass, $r) || in_array($r, $this->modelClass::RELATIONS)) {
+                $valid[] = $r;
+            }
+        }
+
+        if (count($valid) > 0) {
+            $query = $query->with($valid);
+        }
         return $query;
     }
 
