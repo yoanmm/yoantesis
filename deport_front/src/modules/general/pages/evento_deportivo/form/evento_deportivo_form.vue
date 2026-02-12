@@ -125,7 +125,7 @@ export default {
         if (!esEdicion) {
           const d = response.data; // El cuerpo de la respuesta { success: true, model: {...} }
 
-          console.log("Respuesta servidor:", d);
+          // console.log("Respuesta servidor:", d);
 
           // CASO 1: Tu estructura actual (dentro de 'model')
           if (d && d.model && d.model.id_evento) {
@@ -188,7 +188,7 @@ export default {
 
               let deporte = mb.instance("Deporte", deporteBD);
               deporte.activo = debeEstarActivo;
-              console.log(deporteBD);
+
               return deporte.save();
             }
 
