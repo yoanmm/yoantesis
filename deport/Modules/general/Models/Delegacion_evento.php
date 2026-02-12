@@ -1,5 +1,5 @@
 <?php
-/**Generate by ASGENS
+/**
 *@author Yoan  
 *@date Sat May 10 00:07:04 GMT-04:00 2025  
 *@time Sat May 10 00:07:04 GMT-04:00 2025  
@@ -17,7 +17,6 @@ use App\Models\BaseModel;
  * @property integer $id_delegacion_evento
  * @property integer $id_evento
  * @property integer $id_delegacion
- * @property boolean $participa
 
  * Los siguientes son las relaciones de este modelo :
 
@@ -90,8 +89,7 @@ class Delegacion_evento extends BaseModel
     protected $fillable = [
       'id_delegacion_evento',
       'id_evento',
-      'id_delegacion',
-      'participa'
+      'id_delegacion'
     ];
 
 	 /**
@@ -109,22 +107,19 @@ class Delegacion_evento extends BaseModel
 		{
 			return $this->belongsTo(Delegacion::class,'id_delegacion','id_delegacion');
 		}
-
-
-
+    
+  
     protected function rules($scenario='create')
     {
           $rules=[
             'create'=>[
                 'id_evento' =>'nullable|exists:'.$this->connection.'.evento_deportivo,id_evento',
-                'id_delegacion' =>'nullable|exists:'.$this->connection.'.delegacion,id_delegacion',
-                'participa' =>'nullable|boolean'
+                'id_delegacion' =>'nullable|exists:'.$this->connection.'.delegacion,id_delegacion'
             ],
             'update'=>[
                 'id_delegacion_evento' =>'required|unique:'.$this->connection.'.delegacion_evento,id_delegacion_evento,'.$this->id_delegacion_evento.',id_delegacion_evento',
                 'id_evento' =>'nullable|exists:'.$this->connection.'.evento_deportivo,id_evento',
-                'id_delegacion' =>'nullable|exists:'.$this->connection.'.delegacion,id_delegacion',
-                'participa' =>'nullable|boolean'
+                'id_delegacion' =>'nullable|exists:'.$this->connection.'.delegacion,id_delegacion'
             ]
         ];
         if(!isset($rules[$scenario]))

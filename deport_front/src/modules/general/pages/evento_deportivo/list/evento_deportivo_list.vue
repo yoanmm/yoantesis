@@ -35,32 +35,37 @@
     </div>
     <div>
       <a-modal
-        @cancel="onCloseModal"
-        :title="selected_evento_deportivo.get_id() ? 'Actualizar Evento Deportivo' : 'Añadir Evento Deportivo'"
-        class="modal-form"
-        width="55rem"
-        :visible="show_modal_form"
-        :destroyOnClose="true"
-        on-ok="handleOk"
-        :header="null"
-        :footer="null"
-        :maskClosable="false"
+          @cancel="onCloseModal"
+          :title="selected_evento_deportivo.get_id() ? 'Actualizar Evento Deportivo' : 'Añadir Evento Deportivo'"
+          class="modal-form"
+          width="55rem"
+          :visible="show_modal_form"
+          :destroyOnClose="true"
+          :header="null"
+          :footer="null"
+          :maskClosable="false"
       >
-        <evento_deportivo_form :modal="true" :model="selected_evento_deportivo" />
+        <evento_deportivo_form
+            :modal="true"
+            :model="selected_evento_deportivo"
+            @success="handleFormSuccess"
+            @close="onCloseModal"
+        />
       </a-modal>
       <div style="margin-left: 15px">
         <evento_deportivo_table
-          :columns="columns"
-          table_name="Evento_deportivo"
-          id_table="id_evento"
-          ref="evento_deportivo_table"
-          :params_search="params_search"
-          :paginate="paginate"
+            :columns="columns"
+            table_name="Evento_deportivo"
+            id_table="id_evento"
+            ref="evento_deportivo_table"
+            :params_search="params_search"
+            :paginate="paginate"
         />
       </div>
     </div>
   </div>
 </template>
+
 <script>
 import * as utils from "@/helpers/helpers/utils";
 import * as mb from "@/helpers/loaders/model.load";
@@ -99,9 +104,15 @@ export default {
     setSelectedEvento_deportivo(model) {
       this.selected_evento_deportivo = model;
     },
+    // Método para manejar el éxito del formulario
+    handleFormSuccess() {
+      // Llamamos a onCloseModal indicando reload_data = true
+      this.onCloseModal(null, true);
+    },
     onCloseModal(e, reload_data = false) {
       this.selected_evento_deportivo = mb.instance("Evento_deportivo");
       this.show_modal_form = false;
+      // Si reload_data es true, recargamos la tabla
       reload_data ? this.$refs.evento_deportivo_table.load_data() : "";
     },
     show_form() {
@@ -110,9 +121,9 @@ export default {
     showDeleteConfirm() {
       if (this.$refs.evento_deportivo_table.selectedRowKeys.length === 0) {
         utils.openNotificationWithIcon(
-          "error",
-          "Eliminar elementos seleccionados",
-          "Debe seleccionar al menos un elemento"
+            "error",
+            "Eliminar elementos seleccionados",
+            "Debe seleccionar al menos un elemento"
         );
         return;
       }
@@ -120,7 +131,6 @@ export default {
       this.$confirm({
         title: "Eliminar elementos seleccionados?",
         icon: "delete",
-        // icon:()=>{return ( <a-icon type="delete" style="color:red"/> )},
         okText: "Si",
         okType: "danger",
         class: "delete_confirm",
@@ -128,8 +138,8 @@ export default {
         async onOk() {
           try {
             const response = await mb
-              .statics("Evento_deportivo")
-              .delete_by_ids(_this.$refs.evento_deportivo_table.selectedRowKeys);
+                .statics("Evento_deportivo")
+                .delete_by_ids(_this.$refs.evento_deportivo_table.selectedRowKeys);
             utils.process_response(response, "deleted");
             _this.$refs.evento_deportivo_table.selectedRowKeys = [];
             _this.$refs.evento_deportivo_table.load_data();

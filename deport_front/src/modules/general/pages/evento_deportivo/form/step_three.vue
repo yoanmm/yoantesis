@@ -1,12 +1,13 @@
 <template>
   <div>
     <delegacion_table
-      :columns="columns"
-      table_name="Delegacion"
-      id_table="id_delegacion"
-      ref="delegacion_table"
-      :params_search="params_search"
-      :paginate="paginate"
+        :columns="columns"
+        table_name="Delegacion"
+        id_table="id_delegacion"
+        ref="delegacion_table"
+        :params_search="params_search"
+        :paginate="false"
+        :rowSelection="{ selectedRowKeys: selectedRowKeys, onChange: onSelectChange }"
     />
   </div>
 </template>
@@ -17,37 +18,66 @@ import delegacion_table from "@/modules/general/pages/delegacion/list/delegacion
 
 export default {
   name: "StepThree",
-  components: {
-    delegacion_table,
+  components: { delegacion_table },
+  props: {
+    model: { type: Object, default: () => ({}) }
   },
   data() {
     return {
-      // Mostrar sólo el nombre de la delegación en el wizard
-      columns: mb.statics("Delegacion").columns.filter(c => {
-        const key = c.dataIndex || c.key || '';
-        return key === 'nombre_delegacion';
-      }),
-      params_search: { relations: ["tipo_delegacion", "regla_delegacion"] },
-      paginate: false,
       mb,
+      columns: mb.statics("Delegacion").columns.filter(c =>
+          c.dataIndex === 'nombre_delegacion' || c.key === 'nombre_delegacion'
+      ),
+      params_search: { relations: ["tipo_delegacion", "regla_delegacion"] },
+      selectedRowKeys: [],
     };
   },
+  mounted() {
+    this.loadData();
+  },
   methods: {
-    loadTableData() {
-      this.$refs.delegacion_table.load_data();
+    loadData() {
+      if (this.$refs.delegacion_table) {
+        this.$refs.delegacion_table.load_data();
+      }
+      if (this.model && this.model.delegaciones) {
+        this.selectedRowKeys = this.model.delegaciones.map(d => d.id_delegacion || d);
+      }
     },
+
+    onSelectChange(selectedRowKeys) {
+      this.selectedRowKeys = selectedRowKeys;
+    },
+
     getData() {
-      return this.$refs.delegacion_table ? this.$refs.delegacion_table.selectedRowKeys : [];
+      // PLAN A
+      if (this.selectedRowKeys && this.selectedRowKeys.length > 0) {
+        return this.selectedRowKeys;
+      }
+      // PLAN B
+      if (this.$refs.delegacion_table && this.$refs.delegacion_table.selectedRowKeys) {
+        return this.$refs.delegacion_table.selectedRowKeys;
+      }
+      return [];
     },
+
     resetTable() {
+      this.selectedRowKeys = [];
       if (this.$refs.delegacion_table) {
         this.$refs.delegacion_table.selectedRowKeys = [];
         this.$refs.delegacion_table.load_data();
       }
-    },
+    }
   },
-  mounted() {
-    this.loadTableData();
-  },
+  watch: {
+    model: {
+      handler(val) {
+        if (val && val.delegaciones) {
+          this.selectedRowKeys = val.delegaciones.map(d => d.id_delegacion || d);
+        }
+      },
+      deep: true
+    }
+  }
 };
 </script>

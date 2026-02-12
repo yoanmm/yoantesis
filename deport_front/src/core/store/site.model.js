@@ -3,8 +3,8 @@ import * as utils from '@/helpers/helpers/utils.js'
 import SimpleCrypto from "simple-crypto-js"
 import * as mb from '@/helpers/loaders/model.load'
 
-/**Generate by ASGENS
- *@author Charlietyn
+/**
+ *@author Yoan
  *@date Thu Sep 12 00:09:29 GMT-04:00 2020
  *@time Thu Sep 12 00:09:29 GMT-04:00 2020
  */

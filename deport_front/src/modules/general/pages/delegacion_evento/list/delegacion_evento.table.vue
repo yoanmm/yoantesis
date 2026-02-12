@@ -78,7 +78,6 @@
     <slot :slot="'id_delegacion_evento'" slot-scope='record' name='id_delegacion_evento' :record='record'/>
     <slot :slot="'id_evento'" slot-scope='record' name='id_evento' :record='record'/>
     <slot :slot="'id_delegacion'" slot-scope='record' name='id_delegacion' :record='record'/>
-    <slot :slot="'participa'" slot-scope='record' name='participa' :record='record'/>
   </a-table>
 </template>
 

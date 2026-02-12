@@ -29,7 +29,7 @@
         },
         error: false,
         loading: false,
-        message_error: 'Error en usuario y contraseña'
+        message_error: 'Error en usuario o contraseña'
       }
     },
     methods: {
