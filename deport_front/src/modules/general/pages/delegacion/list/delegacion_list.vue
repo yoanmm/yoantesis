@@ -58,6 +58,19 @@
   :params_search="params_search"
   :paginate="paginate"
 >
+<!-- SLOT PARA LA COLUMNA REGLAMENTO -->
+<template #reglamento="{ record }">
+  <div style="text-align:center;">
+    <a
+      href="#"
+      @click.prevent="downloadReglamento(record)"
+      style="display:flex;flex-direction:column;align-items:center;justify-content:center;"
+    >
+      <a-icon type="download" style="font-size:22px;color:#1890ff;" />
+      <div style="font-size:11px;color:#666;">Descargar</div>
+    </a>
+  </div>
+</template>
  <!-- Color -->
 <template v-slot:color="{ record }">
   <div
@@ -129,6 +142,41 @@ export default {
       },
       setSelectedDelegacion: this.setSelectedDelegacion,
     };
+  },
+  async downloadReglamento(payload) {
+    try {
+      if (!payload) {
+        utils.openNotificationWithIcon('error','Reglamento','No hay reglamento disponible');
+        return;
+      }
+      let url = null;
+      if (typeof payload === 'string') url = payload;
+      else if (payload.reglamento) url = payload.reglamento;
+      else if (payload.record && payload.record.reglamento) url = payload.record.reglamento;
+      else if (payload.text) url = payload.text;
+
+      if (!url) {
+        utils.openNotificationWithIcon('error','Reglamento','No hay reglamento disponible');
+        return;
+      }
+
+      const response = await fetch(url);
+      if (!response.ok) throw new Error('Network response was not ok');
+      const blob = await response.blob();
+      let filename = 'reglamento';
+      if (response.headers && response.headers.get('Content-Disposition')) {
+        const match = response.headers.get('Content-Disposition').match(/filename="(.+)"/);
+        if (match) filename = match[1];
+      }
+      const link = document.createElement('a');
+      link.href = window.URL.createObjectURL(blob);
+      link.download = filename;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    } catch (e) {
+      utils.openNotificationWithIcon('error','Reglamento','No se pudo descargar el archivo');
+    }
   },
   data() {
     return {

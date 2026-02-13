@@ -82,7 +82,7 @@
     <slot :slot="'color'" slot-scope='record' name='color' :record='record'/>
     <slot :slot="'logo'" slot-scope='record' name='logo' :record='record'/>
     <slot :slot="'id_tipo_delegacion'" slot-scope='record' name='id_tipo_delegacion' :record='record'/>
-    <slot :slot="'id_regla_delegacion'" slot-scope='record' name='id_regla_delegacion' :record='record'/>
+    <slot :slot="'reglamento'" slot-scope='record' name='reglamento' :record='record'/>
   </a-table>
 </template>
 

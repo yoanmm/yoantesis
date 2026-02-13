@@ -80,6 +80,13 @@
         "caption": "Compromiso",
         "icon": "",
         "path": "/general/compromiso_participacion_list"
+      },
+      {
+        "name": "congresillo_asistencia_list",
+        "module": "management",
+        "caption": "Dashboard Asistencia",
+        "icon": "zmdi zmdi-assignment-check",
+        "path": "/general/congresillo_asistencia_list"
       }
     ]
   },

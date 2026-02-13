@@ -26,7 +26,7 @@
                 <a-button icon="plus" type="primary" @click="show_form">Añadir</a-button>
               </a-tooltip>
               <a-tooltip placement="topLeft" title="Eliminar elementos seleccionados">
-                <a-button icon="delete" type="danger" @click="showDeleteConfirm">Eliminar</a-button>
+                <!-- <a-button icon="delete" type="danger" @click="showDeleteConfirm">Eliminar</a-button> -->
               </a-tooltip>
             </a-button-group>
           </div>

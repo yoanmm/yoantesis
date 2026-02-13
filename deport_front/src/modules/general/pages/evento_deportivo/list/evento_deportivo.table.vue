@@ -69,7 +69,7 @@
        :object="record" 
        :visible_view="visible_view"
        :visible_edit="visible_edit"
-       :visible_delete="visible_delete"
+      :visible_delete="false"
        :v_instance="self"
        :class_name="selected_model.class_name()"
        />

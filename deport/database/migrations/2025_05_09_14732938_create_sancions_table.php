@@ -43,6 +43,7 @@ class CreateDelegacionTable extends Migration
                     'autoIncrement' => false,
                     'unsigned' => false,
                 ])->nullable();
+                $table->text('reglamento')->nullable(); // Se agrega columna reglamento tipo archivo/base64
             });
         }else{
             Schema::table("delegacion",function (Blueprint $table) {
@@ -117,6 +118,9 @@ class CreateDelegacionTable extends Migration
                     'autoIncrement' => false,
                     'unsigned' => false,
                 ])->nullable()->change();
+                   if (!Schema::hasColumn('delegacion', 'reglamento')) {
+                       $table->text('reglamento')->nullable();
+                   }
                 }
                else{
                    $table->addColumn('integer', 'id_regla_delegacion', [
@@ -125,6 +129,9 @@ class CreateDelegacionTable extends Migration
                     'autoIncrement' => false,
                     'unsigned' => false,
                 ])->nullable();
+                   if (!Schema::hasColumn('delegacion', 'reglamento')) {
+                       $table->text('reglamento')->nullable();
+                   }
                 }            
 			});
 

@@ -55,14 +55,7 @@
 
       sorter: (a, b) =>  a.categoria && b.categoria?(a.categoria.nombre_categoria > b.categoria.nombre_categoria)-(a.categoria.nombre_categoria < b.categoria.nombre_categoria):0
     },
-    {
-      title: 'Regla',
-      dataIndex: 'regla.nombre_regla',
-      align:'center',
-      key: 'regla.nombre_regla',
-
-      sorter: (a, b) =>  a.regla && b.regla?(a.regla.nombre_regla > b.regla.nombre_regla)-(a.regla.nombre_regla < b.regla.nombre_regla):0
-    },
+    // Columna 'Regla' ocultada
     {
       title: 'Deporte Padre',
       dataIndex: 'deporte_padre.nombre_deporte',

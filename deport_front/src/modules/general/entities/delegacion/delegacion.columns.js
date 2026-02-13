@@ -48,12 +48,12 @@
       sorter: (a, b) =>  a.tipo_delegacion && b.tipo_delegacion?(a.tipo_delegacion.tipo_delegacion > b.tipo_delegacion.tipo_delegacion)-(a.tipo_delegacion.tipo_delegacion < b.tipo_delegacion.tipo_delegacion):0
     },
     {
-      title: 'Reglas',
-      dataIndex: 'regla_delegacion.nombre_regla',
+      title: 'Reglamento',
+      dataIndex: 'reglamento',
       align:'center',
-      key: 'regla_delegacion.nombre_regla',
-
-      sorter: (a, b) =>  a.regla_delegacion && b.regla_delegacion?(a.regla_delegacion.nombre_regla > b.regla_delegacion.nombre_regla)-(a.regla_delegacion.nombre_regla < b.regla_delegacion.nombre_regla):0
+      key: 'reglamento',
+      scopedSlots: { customRender: 'reglamento' },
+      sorter: (a, b) =>  (a.reglamento > b.reglamento)-(a.reglamento < b.reglamento)
     },
     {
       title: 'Acciones',
