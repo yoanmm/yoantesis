@@ -28,7 +28,7 @@
       dataIndex: 'icono_deporte',
       align:'center',
       key: 'icono_deporte',
-
+      scopedSlots: { customRender: 'icono_deporte' },
       sorter: (a, b) =>  (a.icono_deporte > b.icono_deporte)-(a.icono_deporte < b.icono_deporte)
     },
     {
@@ -44,7 +44,7 @@
       dataIndex: 'individual',
       align:'center',
       key: 'individual',
-
+      scopedSlots: {customRender: 'individual'},
       sorter: (a, b) => a.individual - b.individual
     },
     {

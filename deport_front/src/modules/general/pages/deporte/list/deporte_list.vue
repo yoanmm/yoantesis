@@ -59,10 +59,48 @@
           :paginate="paginate"
         >
         <!-- SLOT PARA LA COLUMNA REGLAMENTO --> 
-         <template #reglamento="{ record }"> 
-          
-          <a href="#" @click.prevent="downloadReglamento(record)"> Descargar PDF </a> 
-        </template> 
+<template #reglamento="{ record }"> 
+  <div style="text-align:center;">
+    <a
+      href="#"
+      @click.prevent="downloadReglamento(record)"
+      style="display:flex;flex-direction:column;align-items:center;justify-content:center;"
+    >
+      <a-icon type="download" style="font-size:22px;color:#1890ff;" />
+      <div style="font-size:11px;color:#666;">Descargar</div>
+    </a>
+  </div>
+</template>
+
+<!-- Icono -->
+<template v-slot:icono_deporte="{ record }">
+  <div style="text-align:center;">
+    <template v-if="record">
+      <img
+        :src="record"
+        alt="Icono"
+        style="width:50px;height:50px;object-fit:cover;border-radius:4px;"
+      />
+    </template>
+    <template v-else>
+      <a-icon type="picture" style="font-size:20px;color:#1890ff;" />
+      <div style="font-size:10px;color:#666;">Sin imagen</div>
+    </template>
+  </div>
+</template>
+
+<!-- SLOT PARA LA COLUMNA INDIVIDUAL -->
+<template #individual="{ record }">
+  <div style="text-align:center;">
+    <template v-if="record === 1">
+      <a-icon type="check" style="font-size:15px;color:#52c41a;" />
+    </template>
+    <template v-else>
+      <a-icon type="close" style="font-size:15px;color:#ff4d4f;" />
+    </template>
+  </div>
+</template>
+
         </deporte_table>
       </div>
     </div>

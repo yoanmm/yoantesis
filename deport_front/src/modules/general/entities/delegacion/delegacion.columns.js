@@ -20,7 +20,7 @@
       dataIndex: 'mascota',
       align:'center',
       key: 'mascota',
-
+      scopedSlots: { customRender: 'mascota' },
       sorter: (a, b) =>  (a.mascota > b.mascota)-(a.mascota < b.mascota)
     },
     {
@@ -36,7 +36,7 @@
       dataIndex: 'logo',
       align:'center',
       key: 'logo',
-
+      scopedSlots: { customRender: 'logo' },
       sorter: (a, b) =>  (a.logo > b.logo)-(a.logo < b.logo)
     },
     {

@@ -49,18 +49,65 @@
         <delegacion_form :modal="true" :model="selected_delegacion" />
       </a-modal>
       <div style="margin-left: 15px">
+       
         <delegacion_table
-          :columns="columns"
-          table_name="Delegacion"
-          id_table="id_delegacion"
-          ref="delegacion_table"
-          :params_search="params_search"
-          :paginate="paginate"
-        >
-          <template slot="color" slot-scope="{record}">
-            <div :title="record.color || ''" :style="{ width: '22px', height: '18px', borderRadius: '3px', margin: 'auto', border: '1px solid #ccc', backgroundColor: (record.color || '#ffffff') }"></div>
-          </template>
-        </delegacion_table>
+  :columns="columns"
+  table_name="Delegacion"
+  id_table="id_delegacion"
+  ref="delegacion_table"
+  :params_search="params_search"
+  :paginate="paginate"
+>
+ <!-- Color -->
+<template v-slot:color="{ record }">
+  <div
+    :title="record"
+    :style="{
+      width: '22px',
+      height: '18px',
+      borderRadius: '3px',
+      margin: 'auto',
+      border: '1px solid #ccc',
+      backgroundColor: record
+    }"
+  ></div>
+</template>
+
+<!-- Mascota -->
+<template v-slot:mascota="{ record }">
+  <div style="text-align:center;">
+    <img
+      v-if="record"
+      :src="record"
+      alt="Mascota"
+      style="width:60px;height:60px;object-fit:cover;border-radius:4px;"
+    />
+    <div v-else>
+      <a-icon type="picture" style="font-size:20px;color:#1890ff;" />
+      <div style="font-size:10px;color:#666;">Sin imagen</div>
+    </div>
+  </div>
+</template>
+
+<!-- Logo -->
+<template v-slot:logo="{ record }">
+  <div style="text-align:center;">
+    <img
+      v-if="record"
+      :src="record"
+      alt="Logo"
+      style="width:60px;height:60px;object-fit:cover;border-radius:4px;"
+    />
+    <div v-else>
+      <a-icon type="picture" style="font-size:20px;color:#1890ff;" />
+      <div style="font-size:10px;color:#666;">Sin imagen</div>
+    </div>
+  </div>
+</template>
+
+</delegacion_table>
+
+
       </div>
     </div>
   </div>
