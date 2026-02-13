@@ -125,7 +125,7 @@ export default {
         if (!esEdicion) {
           const d = response.data; // El cuerpo de la respuesta { success: true, model: {...} }
 
-          console.log("Respuesta servidor:", d);
+          // console.log("Respuesta servidor:", d);
 
           // CASO 1: Tu estructura actual (dentro de 'model')
           if (d && d.model && d.model.id_evento) {
@@ -171,12 +171,30 @@ export default {
 
         // Deportes
         if (idsDeportes.length > 0) {
-          const promesasDeporte = idsDeportes.map(id_deporte => {
-            return mb.instance("Deporte", {
-              id_deporte: id_deporte,
-              activo: 1
-            }).save();
+          // 1. Cargar todos los deportes registrados en la BD
+          const respuestaDeportes = await mb.statics("Deporte").list();
+          const listaDeportesBD = respuestaDeportes.data || []; // Ajustar según la estructura de tu respuesta
+
+
+          // 2. Procesar la actualización masiva
+          const promesasDeporte = listaDeportesBD.map(deporteBD => {
+
+            // Verificamos si este deporte específico debe estar activo o no
+            const debeEstarActivo = idsDeportes.includes(deporteBD.id_deporte) ? 1 : 0;
+
+            // Solo disparamos el save si el estado actual en la BD es distinto al que queremos poner
+            // Esto evita peticiones innecesarias si el deporte ya estaba en 0 o ya estaba en 1
+            if (deporteBD.activo !== debeEstarActivo) {
+
+              let deporte = mb.instance("Deporte", deporteBD);
+              deporte.activo = debeEstarActivo;
+
+              return deporte.save();
+            }
+
+            return Promise.resolve(); // No hay cambios para este registro
           });
+
           await Promise.all(promesasDeporte);
         }
 
