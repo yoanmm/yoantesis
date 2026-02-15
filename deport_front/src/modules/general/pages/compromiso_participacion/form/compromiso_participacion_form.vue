@@ -51,7 +51,7 @@
           <label>Deporte</label>
           <div class="d-flex flex-row">
             <tc-autocomplete
-              placeholder="Seleccione el Deporte"
+              placeholder="Seleccione los Deportes"
               name="id_deporte"
               ref="select_deporte"
               :successFeed="false"
@@ -60,6 +60,7 @@
               :defaultValue="compromiso_participacion.id_deporte"
               v-model="compromiso_participacion.id_deporte"
               :url="mb.statics('Deporte').select_2_url"
+              multiple
             />
             <a-button type="dashed"
                       icon="plus"
@@ -189,27 +190,52 @@ export default {
     save_model(and_new=false) {
       if (this.$refs.form.validate()) {
         this.loading = true;
-        const accion=this.compromiso_participacion.get_id() ? "actualizado" : "añadido";
-        this.compromiso_participacion
-          .save()
-          .then((response) => {
-            if(utils.process_response(response,accion)) {
-              if (!this.model && !and_new && this.modal) {
-                  this.$emit('close_modal',true)
-                  return;
-               }
-                else {
-                   !and_new?this.modal?this.close_modal(null,true):this.$router.push({name: 'compromiso_participacion_list'}):this.compromiso_participacion=mb.instance('Compromiso_participacion');
-               }
-               this.load_data()
-               this.$refs.form.vobject.$reset()
-            }
-            this.loading = false;
-          })
-          .catch((error) => {
-            this.loading = false;
-            utils.process_error(error);
+        // Si es creación y hay varios deportes seleccionados
+        if (!this.compromiso_participacion.get_id() && Array.isArray(this.compromiso_participacion.id_deporte)) {
+          const promises = this.compromiso_participacion.id_deporte.map(id => {
+            let nuevo = mb.instance('Compromiso_participacion', {
+              ...this.compromiso_participacion,
+              id_deporte: id
+            });
+            return nuevo.save();
           });
+          Promise.all(promises)
+            .then(responses => {
+              responses.forEach(response => utils.process_response(response, 'añadido'));
+              this.load_data();
+              this.$refs.form.vobject.$reset();
+              this.compromiso_participacion = mb.instance('Compromiso_participacion');
+              this.loading = false;
+              if (this.modal) this.$emit('close_modal', true);
+              else this.$router.push({name: 'compromiso_participacion_list'});
+            })
+            .catch(error => {
+              this.loading = false;
+              utils.process_error(error);
+            });
+        } else {
+          const accion=this.compromiso_participacion.get_id() ? "actualizado" : "añadido";
+          this.compromiso_participacion
+            .save()
+            .then((response) => {
+              if(utils.process_response(response,accion)) {
+                if (!this.model && !and_new && this.modal) {
+                    this.$emit('close_modal',true)
+                    return;
+                 }
+                  else {
+                     !and_new?this.modal?this.close_modal(null,true):this.$router.push({name: 'compromiso_participacion_list'}):this.compromiso_participacion=mb.instance('Compromiso_participacion');
+                 }
+                 this.load_data()
+                 this.$refs.form.vobject.$reset()
+              }
+              this.loading = false;
+            })
+            .catch((error) => {
+              this.loading = false;
+              utils.process_error(error);
+            });
+        }
       }
     }
   }

@@ -20,7 +20,7 @@ export const validations = {
     },
     id_deporte: {
       required,
-      integer,
+      // integer, // Se comenta para permitir múltiples ids (array)
     },
   },
 };
