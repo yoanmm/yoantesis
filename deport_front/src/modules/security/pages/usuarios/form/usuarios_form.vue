@@ -25,13 +25,13 @@
         <tc-form-item class="form-group mb-0 col-md-6 px-3">
           <label>Creado</label>
           <div class="d-flex flex-row">
-            <tc-date-picker name="creado" v-model="usuarios.creado"></tc-date-picker>
+            <tc-date-picker name="creado" v-model="usuarios.creado" :readonly="true" :disabled="true"></tc-date-picker>
           </div>
         </tc-form-item>
         <tc-form-item class="form-group mb-0 col-md-6 px-3">
           <label>Actualizado</label>
           <div class="d-flex flex-row">
-            <tc-date-picker name="actualizado" v-model="usuarios.actualizado"></tc-date-picker>
+            <tc-date-picker name="actualizado" v-model="usuarios.actualizado" :readonly="true" :disabled="true"></tc-date-picker>
           </div>
         </tc-form-item>
         <tc-form-item class="form-group mb-0 col-md-6 px-3">
@@ -125,6 +125,7 @@ export default {
       usuarios: mb.instance( 'Usuarios'),
       showModalCreatepersona: false,
       persona_list: [],
+      today: new Date().toISOString().slice(0, 10),
     };
   },
   computed: {
@@ -138,6 +139,15 @@ export default {
 
   mounted: function() {
     this.usuarios = mb.instance( 'Usuarios',this.model);
+    // Si es creación, setear fechas actuales
+    if (!this.usuarios.get_id()) {
+      this.usuarios.creado = this.today;
+      this.usuarios.actualizado = this.today;
+    } else {
+      // Si es edición y no hay fecha, setear la actual
+      if (!this.usuarios.creado) this.usuarios.creado = this.today;
+      if (!this.usuarios.actualizado) this.usuarios.actualizado = this.today;
+    }
   },
   components: {
     persona_form,
