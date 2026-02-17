@@ -13,26 +13,25 @@
 
     export default class Usuario_rol extends BaseModel {
 
-       id_user_rol
-       id_usuario
-       id_rol
+      id_user_rol
+      id_usuario
+      id_roles = [] // array de roles
 
     constructor(attributes = null) {
       super();
       if (attributes != null) {
-
         this.id_user_rol = attributes.id_user_rol|| undefined
         this.id_usuario = attributes.id_usuario|| null
-        this.id_rol = attributes.id_rol|| null
+        // Soporta array de roles
+        this.id_roles = Array.isArray(attributes.id_roles) ? attributes.id_roles : (attributes.id_roles ? [attributes.id_roles] : []);
       }
     }
 
     set_attributes(attributes = null) {
       if (attributes != null) {
-
         this.id_user_rol = attributes.id_user_rol
         this.id_usuario = attributes.id_usuario
-        this.id_rol = attributes.id_rol
+        this.id_roles = Array.isArray(attributes.id_roles) ? attributes.id_roles : (attributes.id_roles ? [attributes.id_roles] : []);
       }
     }
 

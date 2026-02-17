@@ -112,20 +112,21 @@ class Usuario_rol extends BaseModel
 
     protected function rules($scenario='create')
     {
-          $rules=[
-            'create'=>[
-                'id_usuario' =>'nullable|exists:'.$this->connection.'.usuarios,id_usuario',
-                'id_rol' =>'nullable|exists:'.$this->connection.'.rol,id_rol'
-            ],
-            'update'=>[
-                'id_user_rol' =>'required|unique:'.$this->connection.'.usuario_rol,id_user_rol,'.$this->id_user_rol.',id_user_rol',
-                'id_usuario' =>'nullable|exists:'.$this->connection.'.usuarios,id_usuario',
-                'id_rol' =>'nullable|exists:'.$this->connection.'.rol,id_rol'
-            ]
-        ];
-        if(!isset($rules[$scenario]))
-            throw new \Exception('Scenario '.$scenario.' not exist');
-        return $rules[$scenario];
+      $uniqueCombo = 'unique:'.$this->connection.'.usuario_rol,id_rol,NULL,id_user_rol,id_usuario,' . $this->id_usuario;
+      $rules=[
+        'create'=>[
+          'id_usuario' =>'required|exists:'.$this->connection.'.usuarios,id_usuario',
+          'id_rol' =>'required|exists:'.$this->connection.'.rol,id_rol|' . $uniqueCombo
+        ],
+        'update'=>[
+          'id_user_rol' =>'required|unique:'.$this->connection.'.usuario_rol,id_user_rol,'.$this->id_user_rol.',id_user_rol',
+          'id_usuario' =>'required|exists:'.$this->connection.'.usuarios,id_usuario',
+          'id_rol' =>'required|exists:'.$this->connection.'.rol,id_rol|' . $uniqueCombo
+        ]
+      ];
+      if(!isset($rules[$scenario]))
+        throw new \Exception('Scenario '.$scenario.' not exist');
+      return $rules[$scenario];
     }
 
  protected static function boot()

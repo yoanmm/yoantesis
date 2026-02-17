@@ -228,6 +228,13 @@
         "caption": "Usuarios",
         "icon": "",
         "path": "/security/usuarios_list"
+      },
+      {
+        "name": "usuario_rol_list",
+        "module": "security",
+        "caption": "Asignación de roles a usuarios",
+        "icon": "",
+        "path": "/security/usuario_rol_list"
       }
     ]
   },
