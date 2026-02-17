@@ -25,14 +25,15 @@
       <tc-form-item class="form-group mb-0 col-md-6 px-3">
         <label>Icono deporte</label>
 
-        <input
-          type="file"
-          name="icono_deporte"
-          accept=".png,.jpg,.jpeg"
-          @change="onIconoDeporteChange"
-          class="form-control"
-          ref="icono_input"
-        />
+    <input
+      type="file"
+      name="icono_deporte"
+      accept=".png,.jpg,.jpeg"
+      @change="onIconoDeporteChange"
+      class="form-control"
+      ref="icono_input"
+    />
+    <small class="form-text text-muted">Solo se aceptan archivos .png, .jpg, .jpeg</small>
 
         <!-- PREVIEW -->
         <img

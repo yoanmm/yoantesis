@@ -21,14 +21,15 @@
       <tc-form-item class="form-group mb-0 col-md-6 px-3">
         <label>Mascota</label>
 
-        <input
-          type="file"
-          name="mascota"
-          accept=".png,.jpg,.jpeg"
-          @change="onMascotaChange"
-          class="form-control"
-          ref="mascota_input"
-        />
+    <input
+      type="file"
+      name="mascota"
+      accept=".png,.jpg,.jpeg"
+      @change="onMascotaChange"
+      class="form-control"
+      ref="mascota_input"
+    />
+    <small class="form-text text-muted">Solo se aceptan archivos .png, .jpg, .jpeg</small>
 
         <!-- PREVIEW -->
         <img

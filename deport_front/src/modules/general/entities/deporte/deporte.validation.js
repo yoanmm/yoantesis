@@ -46,9 +46,11 @@ import * as mb from "@/helpers/loaders/model.load"
     }
     export const feedbacks = {
       deporte: {
-      id_deporte: {
-        isUnique: 'This id_deporte has been taken' 
-
-      },
+        id_deporte: {
+          isUnique: 'This id_deporte has been taken' 
+        },
+        icono_deporte: {
+          acceptedExtensions: 'Solo se aceptan archivos .png, .jpg, .jpeg',
+        },
       },
     }

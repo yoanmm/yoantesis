@@ -41,9 +41,11 @@ import { alphaOnly, alphaMax5 } from '@/validators/customValidators';
     }
     export const feedbacks = {
       delegacion: {
-      id_delegacion: {
-        isUnique: 'This id_delegacion has been taken' 
-
-      },
+        id_delegacion: {
+          isUnique: 'This id_delegacion has been taken' 
+        },
+        mascota: {
+          acceptedExtensions: 'Solo se aceptan archivos .png, .jpg, .jpeg',
+        },
       },
     }
