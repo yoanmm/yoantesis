@@ -8,7 +8,7 @@
       sorter: (a, b) =>  (a.nombre_deporte > b.nombre_deporte)-(a.nombre_deporte < b.nombre_deporte)
     },
     {
-      title: 'Max de atletas',
+      title: 'Maximo de atletas',
       dataIndex: 'max_atleta',
       align:'center',
       key: 'max_atleta',
@@ -16,7 +16,7 @@
       sorter: (a, b) => a.max_atleta - b.max_atleta
     },
     {
-      title: 'Min de atletas',
+      title: 'Minimo de atletas',
       dataIndex: 'min_atleta',
       align:'center',
       key: 'min_atleta',
