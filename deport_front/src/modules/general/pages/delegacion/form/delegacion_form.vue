@@ -18,38 +18,43 @@
         <label>Abreviatura</label>
         <tc-input placeholder='Ingrese el dato' name='abreviatura' v-model="delegacion.abreviatura"></tc-input>
       </tc-form-item>
-      <tc-form-item class="form-group mb-0 col-md-6 px-3">
-        <label>Mascota</label>
 
-    <input
-      type="file"
-      name="mascota"
-      accept=".png,.jpg,.jpeg"
-      @change="onMascotaChange"
-      class="form-control"
-      ref="mascota_input"
-    />
-    <small class="form-text text-muted">Solo se aceptan archivos .png, .jpg, .jpeg</small>
+       <tc-form-item class="form-group mb-0 col-md-6 px-3">
+          <label>Tipo</label>
+          <div class="d-flex flex-row">
+            <tc-autocomplete
+              placeholder="Seleccione el tipo de delegación"
+              name="id_tipo_delegacion"
+              ref="select_tipo_delegacion"
+              :successFeed="false"
+              idKey="id_tipo_delegacion"
+              textKey="tipo_delegacion"
+              :defaultValue="delegacion.id_tipo_delegacion"
+              v-model="delegacion.id_tipo_delegacion"
+              :url="mb.statics('Delegacion_tipo').select_2_url"
+            />
+            <a-button type="dashed"
+                      icon="plus"
+                      class="dashed-primary rounded mt-1 ml-2"
+                      @click="openModalCreatetipo_delegacion">
+            </a-button>
+          </div>
+        </tc-form-item>
 
-        <!-- PREVIEW -->
-        <img
-          v-if="previewMascota || delegacion.mascota"
-          :src="previewMascota || resolveIconUrl(delegacion.mascota)"
-          alt="Preview Mascota"
-          class="img-thumbnail mt-2"
-          style="max-height: 120px"
-        />
-        <div v-if="previewMascota || delegacion.mascota" class="mt-2">
-          <a-button type="link" @click="removeMascota">Eliminar</a-button>
-        </div>
-      </tc-form-item>
-      <tc-form-item class="form-group mb-0 col-md-6 px-3">
-  <label>Color</label>
-  <div class="d-flex align-items-center">
-    <Chrome :value="colorObject" @input="onColorPickerInput" />
-    <input type="text" class="form-control ml-2" :value="delegacion.color || ''" readonly style="max-width: 110px;" />
-  </div>
-</tc-form-item>
+        <tc-form-item class="form-group mb-0 col-md-6 px-3">
+          <label>Reglamento</label>
+          <input
+            type="file"
+            name="reglamento"
+            accept=".pdf,.doc,.docx,.txt"
+            @change="onReglamentoChange"
+            class="form-control"
+          />
+          <div v-if="previewReglamentoName" class="mt-2">
+            <a :href="previewReglamentoUrl" target="_blank" rel="noopener">{{ previewReglamentoName }}</a>
+            <a-button type="link" @click="removeReglamento">Eliminar</a-button>
+          </div>
+        </tc-form-item>
 
       <tc-form-item class="form-group mb-0 col-md-6 px-3">
         <label>Logo</label>
@@ -75,27 +80,38 @@
           <a-button type="link" @click="removeLogo">Eliminar</a-button>
         </div>
       </tc-form-item>
-        <tc-form-item class="form-group mb-0 col-md-6 px-3">
-          <label>Tipo</label>
-          <div class="d-flex flex-row">
-            <tc-autocomplete
-              placeholder="Seleccione el tipo de delegación"
-              name="id_tipo_delegacion"
-              ref="select_tipo_delegacion"
-              :successFeed="false"
-              idKey="id_tipo_delegacion"
-              textKey="tipo_delegacion"
-              :defaultValue="delegacion.id_tipo_delegacion"
-              v-model="delegacion.id_tipo_delegacion"
-              :url="mb.statics('Delegacion_tipo').select_2_url"
-            />
-            <a-button type="dashed"
-                      icon="plus"
-                      class="dashed-primary rounded mt-1 ml-2"
-                      @click="openModalCreatetipo_delegacion">
-            </a-button>
+
+      <tc-form-item class="form-group mb-0 col-md-6 px-3">
+        <label>Mascota</label>
+
+        <input
+          type="file"
+          name="mascota"
+          accept=".png,.jpg,.jpeg,.svg"
+          @change="onMascotaChange"
+          class="form-control"
+          ref="mascota_input"
+        />
+
+        <!-- PREVIEW -->
+        <img
+          v-if="previewMascota || delegacion.mascota"
+          :src="previewMascota || resolveIconUrl(delegacion.mascota)"
+          alt="Preview Mascota"
+          class="img-thumbnail mt-2"
+          style="max-height: 120px"
+        />
+        <div v-if="previewMascota || delegacion.mascota" class="mt-2">
+          <a-button type="link" @click="removeMascota">Eliminar</a-button>
+        </div>
+      </tc-form-item>
+      <tc-form-item class="form-group mb-0 col-md-6 px-3">
+         <label>Color</label>
+          <div class="d-flex align-items-center">
+            <Chrome :value="colorObject" @input="onColorPickerInput" />
+            <input type="text" class="form-control ml-2" :value="delegacion.color || ''" readonly style="max-width: 110px;" />
           </div>
-        </tc-form-item>
+      </tc-form-item>
 
         <a-modal
           @cancel="showModalCreatetipo_delegacion = false"
@@ -109,7 +125,7 @@
         >
           <delegacion_tipo_form :model="null" :modal="true" @close_modal="tipo_delegacionAdded"/>
         </a-modal>
-        <tc-form-item class="form-group mb-0 col-md-6 px-3">
+      <!--  <tc-form-item class="form-group mb-0 col-md-6 px-3">
           <label>Reglas</label>
           <div class="d-flex flex-row">
             <tc-autocomplete
@@ -131,7 +147,7 @@
           </div>
         </tc-form-item>
 
-        <a-modal
+         <a-modal
           @cancel="showModalCreateregla_delegacion = false"
           v-if="showModalCreateregla_delegacion"
           class="modal-form"
@@ -142,21 +158,8 @@
           :maskClosable="false"
         >
           <delegacion_regla_form :model="null" :modal="true" @close_modal="regla_delegacionAdded"/>
-        </a-modal>
-        <tc-form-item class="form-group mb-0 col-md-6 px-3">
-          <label>Reglamento</label>
-          <input
-            type="file"
-            name="reglamento"
-            accept=".pdf,.doc,.docx,.txt"
-            @change="onReglamentoChange"
-            class="form-control"
-          />
-          <div v-if="previewReglamentoName" class="mt-2">
-            <a :href="previewReglamentoUrl" target="_blank" rel="noopener">{{ previewReglamentoName }}</a>
-            <a-button type="link" @click="removeReglamento">Eliminar</a-button>
-          </div>
-        </tc-form-item>
+        </a-modal> -->
+        
       </tc-form>
     </div>
     <div class="card-footer p-0">
@@ -213,7 +216,7 @@ export default {
       showModalCreateregla_delegacion: false,
       delegacion_regla_list: [],
 
-      // 👇 NUEVO 
+      //  NUEVO 
       previewLogo: null, 
       previewMascota: null,
       previewReglamentoName: null,

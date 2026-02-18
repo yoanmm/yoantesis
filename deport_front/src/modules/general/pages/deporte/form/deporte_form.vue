@@ -11,41 +11,22 @@
         class="form-row"
       >
       <tc-form-item class="form-group mb-0 col-md-6 px-3">
-        <label>Nombre deporte</label>
+        <label>Nombre</label>
         <tc-input placeholder='Ingrese el valor' name='nombre_deporte' v-model="deporte.nombre_deporte"></tc-input>
       </tc-form-item>
       <tc-form-item class="form-group mb-0 col-md-6 px-3">
-        <label>Max atleta</label>
+        <label>Individual o no</label>
+        <div>
+          <a-switch  v-model="deporte.individual"/>
+        </div>
+      </tc-form-item>
+      <tc-form-item class="form-group mb-0 col-md-6 px-3">
+        <label>Maximo de atletas</label>
         <tc-input placeholder='Ingrese el valor'   type_car='num'  name='max_atleta' v-model="deporte.max_atleta"></tc-input>
       </tc-form-item>
       <tc-form-item class="form-group mb-0 col-md-6 px-3">
-        <label>Min atleta</label>
+        <label>Minimo de atletas</label>
         <tc-input placeholder='Ingrese el valor'   type_car='num'  name='min_atleta' v-model="deporte.min_atleta"></tc-input>
-      </tc-form-item>
-      <tc-form-item class="form-group mb-0 col-md-6 px-3">
-        <label>Icono deporte</label>
-
-    <input
-      type="file"
-      name="icono_deporte"
-      accept=".png,.jpg,.jpeg"
-      @change="onIconoDeporteChange"
-      class="form-control"
-      ref="icono_input"
-    />
-    <small class="form-text text-muted">Solo se aceptan archivos .png, .jpg, .jpeg</small>
-
-        <!-- PREVIEW -->
-        <img
-          v-if="previewIconoDeporte || deporte.icono_deporte"
-          :src="previewIconoDeporte || resolveIconUrl(deporte.icono_deporte)"
-          alt="Preview Icono Deporte"
-          class="img-thumbnail mt-2"
-          style="max-height: 120px"
-        />
-        <div v-if="previewIconoDeporte || deporte.icono_deporte" class="mt-2">
-          <a-button type="link" @click="removeIconoDeporte">Eliminar</a-button>
-        </div>
       </tc-form-item>
       <tc-form-item class="form-group mb-0 col-md-6 px-3">
         <label>Genero</label>
@@ -60,13 +41,7 @@
         </a-select>
       </tc-form-item>
         <tc-form-item class="form-group mb-0 col-md-6 px-3">
-          <label>Individual</label>
-          <div>
-            <a-switch  v-model="deporte.individual"/>
-          </div>
-        </tc-form-item>
-        <tc-form-item class="form-group mb-0 col-md-6 px-3">
-          <label>Deporte categoria puntuacion</label>
+          <label>Categoria de puntuacion</label>
           <div class="d-flex flex-row">
             <tc-autocomplete
               placeholder="Seleccione el Deporte_categoria_puntuacion"
@@ -99,7 +74,66 @@
         >
           <deporte_categoria_puntuacion_form :model="null" :modal="true" @close_modal="categoriaAdded"/>
         </a-modal>
+      <tc-form-item class="form-group mb-0 col-md-6 px-3">
+        <label>Icono</label>
+
+        <input
+          type="file"
+          name="icono_deporte"
+          accept=".png,.jpg,.jpeg,.svg"
+          @change="onIconoDeporteChange"
+          class="form-control"
+          ref="icono_input"
+        />
+
+        <!-- PREVIEW -->
+        <img
+          v-if="previewIconoDeporte || deporte.icono_deporte"
+          :src="previewIconoDeporte || resolveIconUrl(deporte.icono_deporte)"
+          alt="Preview Icono Deporte"
+          class="img-thumbnail mt-2"
+          style="max-height: 120px"
+        />
+        <div v-if="previewIconoDeporte || deporte.icono_deporte" class="mt-2">
+          <a-button type="link" @click="removeIconoDeporte">Eliminar</a-button>
+        </div>
+      </tc-form-item>
         <tc-form-item class="form-group mb-0 col-md-6 px-3">
+            <label>Reglamento</label>
+            <input
+              type="file"
+              name="reglamento"
+              accept=".pdf,.doc,.docx,.txt"
+              @change="onReglamentoChange"
+              class="form-control"
+            />
+            <div v-if="previewReglamentoName" class="mt-2">
+              <a :href="previewReglamentoUrl" target="_blank" rel="noopener">{{ previewReglamentoName }}</a>
+              <a-button type="link" @click="removeReglamento">Eliminar</a-button>
+            </div>
+          </tc-form-item>
+        <tc-form-item class="form-group mb-0 col-md-6 px-3">
+          <label>Deporte Padre</label>
+          <div class="d-flex flex-row">
+            <tc-autocomplete
+              placeholder="Seleccione el Deporte"
+              name="id_deporte_padre"
+              ref="select_deporte_padre"
+              :successFeed="false"
+              idKey="id_deporte"
+              textKey="nombre_deporte"
+              :defaultValue="deporte.id_deporte_padre"
+              v-model="deporte.id_deporte_padre"
+              :url="mb.statics('Deporte').select_2_url"
+            />
+            <a-button type="dashed"
+                      icon="plus"
+                      class="dashed-primary rounded mt-1 ml-2"
+                      @click="openModalCreatedeporte_padre">
+            </a-button>
+          </div>
+        </tc-form-item>
+       <!-- <tc-form-item class="form-group mb-0 col-md-6 px-3">
           <label>Deporte regla</label>
           <div class="d-flex flex-row">
             <tc-autocomplete
@@ -132,42 +166,7 @@
           :maskClosable="false"
         >
           <deporte_regla_form :model="null" :modal="true" @close_modal="reglaAdded"/>
-        </a-modal>
-        <tc-form-item class="form-group mb-0 col-md-6 px-3">
-            <label>Reglamento</label>
-            <input
-              type="file"
-              name="reglamento"
-              accept=".pdf,.doc,.docx,.txt"
-              @change="onReglamentoChange"
-              class="form-control"
-            />
-            <div v-if="previewReglamentoName" class="mt-2">
-              <a :href="previewReglamentoUrl" target="_blank" rel="noopener">{{ previewReglamentoName }}</a>
-              <a-button type="link" @click="removeReglamento">Eliminar</a-button>
-            </div>
-          </tc-form-item>
-        <tc-form-item class="form-group mb-0 col-md-6 px-3">
-          <label>Deporte</label>
-          <div class="d-flex flex-row">
-            <tc-autocomplete
-              placeholder="Seleccione el Deporte"
-              name="id_deporte_padre"
-              ref="select_deporte_padre"
-              :successFeed="false"
-              idKey="id_deporte"
-              textKey="nombre_deporte"
-              :defaultValue="deporte.id_deporte_padre"
-              v-model="deporte.id_deporte_padre"
-              :url="mb.statics('Deporte').select_2_url"
-            />
-            <a-button type="dashed"
-                      icon="plus"
-                      class="dashed-primary rounded mt-1 ml-2"
-                      @click="openModalCreatedeporte_padre">
-            </a-button>
-          </div>
-        </tc-form-item>
+        </a-modal> -->
 
         <a-modal
           @cancel="showModalCreatedeporte_padre = false"
