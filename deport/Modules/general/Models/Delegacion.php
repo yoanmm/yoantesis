@@ -187,23 +187,23 @@ class Delegacion extends BaseModel
             'create'=>[
                 'nombre_delegacion' =>'nullable|max:255',
                 'abreviatura' =>'nullable|max:255',
-                'mascota' =>'nullable|mimes:jpeg,jpg,png,svg',
+                'mascota' =>'nullable',
                 'color' =>'nullable|max:255',
-                'logo' =>'nullable|mimes:jpeg,jpg,png,svg',
+                'logo' =>'nullable',
                 'id_tipo_delegacion' =>'nullable|exists:'.$this->connection.'.delegacion_tipo,id_tipo_delegacion',
                 'id_regla_delegacion' =>'nullable|exists:'.$this->connection.'.delegacion_regla,id_regla_delegacion',
-                'reglamento' =>'nullable|mimes:pdf,doc,docx,txt',
+                'reglamento' =>'nullable',
             ],
             'update'=>[
                 'id_delegacion' =>'required|unique:'.$this->connection.'.delegacion,id_delegacion,'.$this->id_delegacion.',id_delegacion',
                 'nombre_delegacion' =>'nullable|max:255',
                 'abreviatura' =>'nullable|max:255',
-                'mascota' =>'nullable|mimes:jpeg,jpg,png,svg',
+                'mascota' =>'nullable',
                 'color' =>'nullable|max:255',
-                'logo' =>'nullable|mimes:jpeg,jpg,png,svg',
+                'logo' =>'nullable',
                 'id_tipo_delegacion' =>'nullable|exists:'.$this->connection.'.delegacion_tipo,id_tipo_delegacion',
                 'id_regla_delegacion' =>'nullable|exists:'.$this->connection.'.delegacion_regla,id_regla_delegacion',
-                'reglamento' =>'nullable|mimes:pdf,doc,docx,txt',
+                'reglamento' =>'nullable',
             ]
         ];
         if(!isset($rules[$scenario]))
