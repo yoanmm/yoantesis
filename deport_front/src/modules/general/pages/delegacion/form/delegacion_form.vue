@@ -62,7 +62,7 @@
         <input
           type="file"
           name="logo"
-          accept=".png,.jpg,.jpeg"
+          accept=".png,.jpg,.jpeg,.svg"
           @change="onLogoChange"
           class="form-control"
           ref="logo_input"
