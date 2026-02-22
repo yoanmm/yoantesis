@@ -143,37 +143,37 @@ class Evento_deportivo extends BaseModel
 
     protected function rules($scenario='create')
     {
-          $rules=[
+            $rules=[
             'create'=>[
-                'nombre_evento' =>'nullable|max:255',
-                'descripcion_evento' =>'nullable|max:255',
-                'logo' =>'nullable|max:255',
-                'fecha_inicio' =>'nullable|date',
-                'fecha_fin' =>'nullable|date',
-                'curso' =>'nullable|max:255',
-                'edicion_evento' =>'nullable|max:255',
-                'terminado' =>'nullable|boolean',
-                'resultado_edicion' =>'nullable',
-                'descripcion_delegaciones' =>'nullable|max:255',
-                'id_regla_evento' =>'nullable|exists:'.$this->connection.'.evento_deportivo_regla,id_regla_evento',
-                'reglamento' =>'nullable|max:255'
+              'nombre_evento' =>'nullable|max:255',
+              'descripcion_evento' =>'nullable|max:255',
+              'logo' =>'nullable|max:255',
+              'fecha_inicio' =>'nullable|date',
+              'fecha_fin' =>'nullable|date|after_or_equal:fecha_inicio',
+              'curso' =>'nullable|max:255',
+              'edicion_evento' =>'nullable|max:255',
+              'terminado' =>'nullable|boolean',
+              'resultado_edicion' =>'nullable',
+              'descripcion_delegaciones' =>'nullable|max:255',
+              'id_regla_evento' =>'nullable|exists:'.$this->connection.'.evento_deportivo_regla,id_regla_evento',
+              'reglamento' =>'nullable|max:255'
             ],
             'update'=>[
-                'id_evento' =>'required|unique:'.$this->connection.'.evento_deportivo,id_evento,'.$this->id_evento.',id_evento',
-                'nombre_evento' =>'nullable|max:255',
-                'descripcion_evento' =>'nullable|max:255',
-                'logo' =>'nullable|max:255',
-                'fecha_inicio' =>'nullable|date',
-                'fecha_fin' =>'nullable|date',
-                'curso' =>'nullable|max:255',
-                'edicion_evento' =>'nullable|max:255',
-                'terminado' =>'nullable|boolean',
-                'resultado_edicion' =>'nullable',
-                'descripcion_delegaciones' =>'nullable|max:255',
-                'id_regla_evento' =>'nullable|exists:'.$this->connection.'.evento_deportivo_regla,id_regla_evento',
-                'reglamento' =>'nullable|max:255'
+              'id_evento' =>'required|unique:'.$this->connection.'.evento_deportivo,id_evento,'.$this->id_evento.',id_evento',
+              'nombre_evento' =>'nullable|max:255',
+              'descripcion_evento' =>'nullable|max:255',
+              'logo' =>'nullable|max:255',
+              'fecha_inicio' =>'nullable|date',
+              'fecha_fin' =>'nullable|date|after_or_equal:fecha_inicio',
+              'curso' =>'nullable|max:255',
+              'edicion_evento' =>'nullable|max:255',
+              'terminado' =>'nullable|boolean',
+              'resultado_edicion' =>'nullable',
+              'descripcion_delegaciones' =>'nullable|max:255',
+              'id_regla_evento' =>'nullable|exists:'.$this->connection.'.evento_deportivo_regla,id_regla_evento',
+              'reglamento' =>'nullable|max:255'
             ]
-        ];
+          ];
         if(!isset($rules[$scenario]))
             throw new \Exception('Scenario '.$scenario.' not exist');
         return $rules[$scenario];
