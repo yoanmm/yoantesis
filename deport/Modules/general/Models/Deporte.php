@@ -269,6 +269,8 @@ class Deporte extends BaseModel
             'image/jpeg' => 'jpg',
             'image/png' => 'png',
             'image/gif' => 'gif',
+            'image/svg+xml' => 'svg',
+            'image/svg' => 'svg',
             'application/pdf' => 'pdf',
             'application/msword' => 'doc',
             'application/vnd.openxmlformats-officedocument.wordprocessingml.document' => 'docx',

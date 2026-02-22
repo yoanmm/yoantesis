@@ -65,3 +65,45 @@ export const noSpecialChars = helpers.regex(
   'noSpecialChars',
   /^[A-Za-zÀ-ÖØ-öø-ÿ0-9\s]+$/
 );
+
+export function acceptedExtensions(value) {
+  if (!value) return true; // Permitir vacío si no es requerido
+  const allowed = ['.png', '.jpg', '.jpeg', '.svg'];
+  if (typeof value === 'string') {
+    // Si es base64, extraer extensión
+    if (value.startsWith('data:')) {
+      const mime = value.split(';')[0].replace('data:', '');
+      const ext = {
+        'image/png': '.png',
+        'image/jpeg': '.jpg',
+        'image/jpg': '.jpg',
+        'image/svg+xml': '.svg',
+      };
+      return allowed.includes(ext[mime] || '');
+    }
+    // Si es una url o nombre de archivo
+    return allowed.some(ext => value.toLowerCase().endsWith(ext));
+  }
+  return false;
+}
+
+export function acceptedReglamentoExtensions(value) {
+  if (!value) return true; // Permitir vacío si no es requerido
+  const allowed = ['.pdf', '.doc', '.docx', '.txt'];
+  if (typeof value === 'string') {
+    // Si es base64, extraer extensión
+    if (value.startsWith('data:')) {
+      const mime = value.split(';')[0].replace('data:', '');
+      const ext = {
+        'application/pdf': '.pdf',
+        'application/msword': '.doc',
+        'application/vnd.openxmlformats-officedocument.wordprocessingml.document': '.docx',
+        'text/plain': '.txt',
+      };
+      return allowed.includes(ext[mime] || '');
+    }
+    // Si es una url o nombre de archivo
+    return allowed.some(ext => value.toLowerCase().endsWith(ext));
+  }
+  return false;
+}

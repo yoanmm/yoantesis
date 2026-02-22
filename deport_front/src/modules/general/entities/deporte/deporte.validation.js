@@ -6,7 +6,8 @@ import {
     minLength,
     decimal
   } from 'vuelidate/lib/validators';
-import * as mb from "@/helpers/loaders/model.load"
+import * as mb from "@/helpers/loaders/model.load";
+import { acceptedExtensions, acceptedReglamentoExtensions } from '@/validators/customValidators';
 
     export const validations = {
       deporte: {
@@ -22,6 +23,7 @@ import * as mb from "@/helpers/loaders/model.load"
           required
         },
         icono_deporte: {
+          acceptedExtensions: 'Solo se aceptan archivos .png, .jpg, .jpeg, .svg'
         },
         genero: {
           required
@@ -39,16 +41,21 @@ import * as mb from "@/helpers/loaders/model.load"
           integer,
         },
         reglamento: {
+          acceptedReglamentoExtensions: 'Solo se aceptan archivos .pdf, .doc, .docx, .txt'
         },
-        activo: {
-        },
+        activo: {},
       },
     }
     export const feedbacks = {
       deporte: {
-      id_deporte: {
-        isUnique: 'This id_deporte has been taken' 
-
-      },
+        id_deporte: {
+          isUnique: 'This id_deporte has been taken' 
+        },
+        icono_deporte: {
+          acceptedExtensions: 'Solo se aceptan archivos .png, .jpg, .jpeg, .svg'
+        },
+        reglamento: {
+          acceptedReglamentoExtensions: 'Solo se aceptan archivos .pdf, .doc, .docx, .txt'
+        },
       },
     }

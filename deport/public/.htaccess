@@ -4,6 +4,11 @@
     </IfModule>
 
     RewriteEngine On
+    # Forzar MIME correcto para SVG
+<IfModule mod_mime.c>
+    AddType image/svg+xml .svg
+</IfModule>
+
 
     # Handle Authorization Header
     RewriteCond %{HTTP:Authorization} .

@@ -192,7 +192,7 @@ class Delegacion extends BaseModel
                 'logo' =>'nullable',
                 'id_tipo_delegacion' =>'nullable|exists:'.$this->connection.'.delegacion_tipo,id_tipo_delegacion',
                 'id_regla_delegacion' =>'nullable|exists:'.$this->connection.'.delegacion_regla,id_regla_delegacion',
-                'reglamento' =>'nullable'
+                'reglamento' =>'nullable',
             ],
             'update'=>[
                 'id_delegacion' =>'required|unique:'.$this->connection.'.delegacion,id_delegacion,'.$this->id_delegacion.',id_delegacion',
@@ -203,7 +203,7 @@ class Delegacion extends BaseModel
                 'logo' =>'nullable',
                 'id_tipo_delegacion' =>'nullable|exists:'.$this->connection.'.delegacion_tipo,id_tipo_delegacion',
                 'id_regla_delegacion' =>'nullable|exists:'.$this->connection.'.delegacion_regla,id_regla_delegacion',
-                'reglamento' =>'nullable'
+                'reglamento' =>'nullable',
             ]
         ];
         if(!isset($rules[$scenario]))
@@ -282,6 +282,8 @@ class Delegacion extends BaseModel
             'image/jpeg' => 'jpg',
             'image/png' => 'png',
             'image/gif' => 'gif',
+            'image/svg+xml' => 'svg',
+            'image/svg' => 'svg',
             'application/pdf' => 'pdf',
             'application/msword' => 'doc',
             'application/vnd.openxmlformats-officedocument.wordprocessingml.document' => 'docx',
