@@ -60,6 +60,19 @@ export default {
       this.evento = mb.instance("Evento_deportivo", this.model);
     }
   },
+    watch: {
+      model: {
+        handler(newVal) {
+          if (newVal && Object.keys(newVal).length) {
+            this.evento = mb.instance("Evento_deportivo", newVal);
+          } else {
+            this.evento = mb.instance("Evento_deportivo");
+          }
+        },
+        immediate: true,
+        deep: true
+      }
+    },
   methods: {
     getStepComponent(index) {
       const ref = this.$refs['step' + index];

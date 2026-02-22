@@ -143,41 +143,7 @@ export default {
       setSelectedDelegacion: this.setSelectedDelegacion,
     };
   },
-  async downloadReglamento(payload) {
-    try {
-      if (!payload) {
-        utils.openNotificationWithIcon('error','Reglamento','No hay reglamento disponible');
-        return;
-      }
-      let url = null;
-      if (typeof payload === 'string') url = payload;
-      else if (payload.reglamento) url = payload.reglamento;
-      else if (payload.record && payload.record.reglamento) url = payload.record.reglamento;
-      else if (payload.text) url = payload.text;
-
-      if (!url) {
-        utils.openNotificationWithIcon('error','Reglamento','No hay reglamento disponible');
-        return;
-      }
-
-      const response = await fetch(url);
-      if (!response.ok) throw new Error('Network response was not ok');
-      const blob = await response.blob();
-      let filename = 'reglamento';
-      if (response.headers && response.headers.get('Content-Disposition')) {
-        const match = response.headers.get('Content-Disposition').match(/filename="(.+)"/);
-        if (match) filename = match[1];
-      }
-      const link = document.createElement('a');
-      link.href = window.URL.createObjectURL(blob);
-      link.download = filename;
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-    } catch (e) {
-      utils.openNotificationWithIcon('error','Reglamento','No se pudo descargar el archivo');
-    }
-  },
+  
   data() {
     return {
       data: [],
@@ -205,6 +171,65 @@ export default {
     },
     show_form() {
       this.show_modal_form = !this.show_modal_form;
+    },
+    async downloadReglamento(payload) {
+      // payload can be: record object, { record }, a string url, or event
+      try {
+        if (!payload) {
+          utils.openNotificationWithIcon('error','Reglamento','No hay reglamento disponible');
+          return;
+        }
+        let url = null;
+        // string url
+        if (typeof payload === 'string') url = payload;
+        // direct record
+        else if (payload.reglamento) url = payload.reglamento;
+        // slot-prop object { record }
+        else if (payload.record && payload.record.reglamento) url = payload.record.reglamento;
+        // slot-prop with text
+        else if (payload.text) url = payload.text;
+
+        if (!url) {
+          utils.openNotificationWithIcon('error','Reglamento','No hay reglamento disponible');
+          return;
+        }
+
+        // try fetch and force download
+        const response = await fetch(url);
+        if (!response.ok) throw new Error('Network response was not ok');
+        const blob = await response.blob();
+        let filename = 'reglamento';
+        const disposition = response.headers.get('content-disposition');
+        if (disposition) {
+          const match = disposition.match(/filename[^;=\n]*=((['"]).*?\2|[^;\n]*)/);
+          if (match != null && match[1]) filename = match[1].replace(/['\"]/g, '');
+        } else {
+          const parts = url.split('/');
+          filename = parts[parts.length - 1] || filename;
+        }
+        const blobUrl = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = blobUrl;
+        a.download = filename;
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+        window.URL.revokeObjectURL(blobUrl);
+        utils.openNotificationWithIcon('success','Descarga','Descarga iniciada');
+      } catch (err) {
+        console.warn('Fetch failed or download error, opening direct URL as fallback', err);
+        try {
+          const tryUrl = (typeof payload === 'string') ? payload : (payload.reglamento || (payload.record && payload.record.reglamento) || payload.text);
+          if (tryUrl) {
+            window.open(tryUrl, '_blank');
+            utils.openNotificationWithIcon('info','Descarga','Abriendo archivo en nueva pestaña');
+            return;
+          }
+        } catch (err2) {
+          console.error('Fallback failed', err2);
+        }
+        utils.openNotificationWithIcon('error','Descarga','No se pudo descargar ni abrir el archivo');
+      }
     },
     showDeleteConfirm() {
       if (this.$refs.delegacion_table.selectedRowKeys.length === 0) {

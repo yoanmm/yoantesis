@@ -172,13 +172,13 @@ class Deporte extends BaseModel
                 'nombre_deporte' =>'nullable|max:255',
                 'max_atleta' =>'nullable',
                 'min_atleta' =>'nullable',
-                'icono_deporte' =>'nullable|mimes:jpeg,jpg,png,svg',
+                'icono_deporte' =>'nullable',
                 'genero' =>'nullable|max:255',
                 'individual' =>'nullable|boolean',
                 'id_categoria' =>'nullable|exists:'.$this->connection.'.deporte_categoria_puntuacion,id_categoria',
                 'id_regla' =>'nullable|exists:'.$this->connection.'.deporte_regla,id_regla_deporte',
                 'id_deporte_padre' =>'nullable|exists:'.$this->connection.'.deporte,id_deporte',
-                'reglamento' =>'nullable|mimes:pdf,doc,docx,txt',
+                'reglamento' =>'nullable',
                 'activo' =>'nullable'
             ],
             'update'=>[
@@ -186,13 +186,13 @@ class Deporte extends BaseModel
                 'nombre_deporte' =>'nullable|max:255',
                 'max_atleta' =>'nullable',
                 'min_atleta' =>'nullable',
-                'icono_deporte' =>'nullable|mimes:jpeg,jpg,png,svg',
+                'icono_deporte' =>'nullable',
                 'genero' =>'nullable|max:255',
                 'individual' =>'nullable|boolean',
                 'id_categoria' =>'nullable|exists:'.$this->connection.'.deporte_categoria_puntuacion,id_categoria',
                 'id_regla' =>'nullable|exists:'.$this->connection.'.deporte_regla,id_regla_deporte',
                 'id_deporte_padre' =>'nullable|exists:'.$this->connection.'.deporte,id_deporte',
-                'reglamento' =>'nullable|mimes:pdf,doc,docx,txt',
+                'reglamento' =>'nullable',
                 'activo' =>'nullable'
             ]
         ];
