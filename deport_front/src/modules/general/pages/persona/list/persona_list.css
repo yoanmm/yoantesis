@@ -29,4 +29,20 @@
 .modal-form .ant-modal-body {
   padding-top: .5rem !important;
 }
+/* Estilo para el botón Cargar Personal */
+.cargar {
+  background-color: #52c41a;   /* verde éxito */
+  border-color: #52c41a;
+  color: #fff;
+}
 
+.cargar:hover {
+  background-color: #73d13d;   /* tono más claro al pasar el mouse */
+  border-color: #73d13d;
+  color: #fff;
+}
+
+.cargar:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(82, 196, 26, 0.3);
+}

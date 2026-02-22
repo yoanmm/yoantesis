@@ -2,7 +2,7 @@
   {
     "caption": "Calendario deportivo",
     "modules": "['management']",
-    "icon": "zmdi zmdi-run",
+    "icon": "zmdi zmdi-calendar-note",
     "routes": [
       {
         "name": "calendario",
