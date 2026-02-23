@@ -23,7 +23,11 @@
 
     <tc-form-item class="form-group mb-0 col-md-6 px-3">
       <label>Fecha fin</label>
-      <tc-date-picker name="fecha_fin" v-model="evento_deportivo.fecha_fin" />
+      <tc-date-picker
+        name="fecha_fin"
+        v-model="evento_deportivo.fecha_fin"
+        :disabled-date="disabledEndDate"
+      />
     </tc-form-item>
 
     <tc-form-item class="form-group mb-0 col-md-6 px-3">
@@ -82,6 +86,12 @@ export default {
     }
   },
   methods: {
+    // Deshabilita fechas de fin menores que la de inicio
+    disabledEndDate(date) {
+      if (!this.evento_deportivo.fecha_inicio) return false;
+      const inicio = moment(this.evento_deportivo.fecha_inicio).startOf('day');
+      return moment(date).isBefore(inicio, 'day');
+    },
     handleFileUpload(event) {
       if (event.target.files && event.target.files[0]) {
         this.evento_deportivo.reglamento = event.target.files[0];

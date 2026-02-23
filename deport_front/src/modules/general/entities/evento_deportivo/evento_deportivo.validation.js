@@ -6,7 +6,16 @@ import {
     minLength,
     decimal
   } from 'vuelidate/lib/validators';
+import moment from 'moment';
 import * as mb from "@/helpers/loaders/model.load"
+
+    // Validador personalizado para comparar fechas
+    const fechaFinNoMenorQueInicio = (value, vm) => {
+      if (!value || !vm.fecha_inicio) return true;
+      const inicio = moment(vm.fecha_inicio);
+      const fin = moment(value);
+      return fin.isSameOrAfter(inicio, 'day');
+    };
 
     export const validations = {
       evento_deportivo: {
@@ -21,7 +30,8 @@ import * as mb from "@/helpers/loaders/model.load"
           required
         },
         fecha_fin: {
-          required
+          required,
+          fechaFinNoMenorQueInicio
         },
         curso: {
           required
@@ -41,15 +51,16 @@ import * as mb from "@/helpers/loaders/model.load"
           integer,
         },
         reglamento: {
-
         },
       },
     }
     export const feedbacks = {
       evento_deportivo: {
-      id_evento: {
-        isUnique: 'This id_evento has been taken' 
-
-      },
+        id_evento: {
+          isUnique: 'This id_evento has been taken'
+        },
+        fecha_fin: {
+          fechaFinNoMenorQueInicio: 'La fecha de fin no puede ser menor que la fecha de inicio.'
+        }
       },
     }
