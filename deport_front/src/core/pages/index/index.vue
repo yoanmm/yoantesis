@@ -12,9 +12,6 @@
             </div>
             <div class="ml-3">
               <h4 class="mb-0">Nombre y Apellidos: {{ $store.site.user.name }}</h4>
-              <p class="float-right">
-                <span class="badge badge-warning-inverse px-2 py-1 mt-1">Entidad: {{ $store.site.user.touroperador.company_name.toUpperCase() }}</span>
-              </p>
             </div>
           </div>
           <div>
