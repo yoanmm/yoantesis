@@ -20,14 +20,14 @@
           <a-switch  v-model="deporte.individual"/>
         </div>
       </tc-form-item>
-      <tc-form-item class="form-group mb-0 col-md-6 px-3">
-        <label>Maximo de atletas</label>
-        <tc-input placeholder='Ingrese el valor'   type_car='num'  name='max_atleta' v-model="deporte.max_atleta"></tc-input>
-      </tc-form-item>
-      <tc-form-item class="form-group mb-0 col-md-6 px-3">
-        <label>Minimo de atletas</label>
-        <tc-input placeholder='Ingrese el valor'   type_car='num'  name='min_atleta' v-model="deporte.min_atleta"></tc-input>
-      </tc-form-item>
+        <tc-form-item class="form-group mb-0 col-md-6 px-3">
+          <label>Minimo de atletas</label>
+          <tc-input placeholder='Ingrese el valor'   type_car='num'  name='min_atleta' v-model="deporte.min_atleta"></tc-input>
+        </tc-form-item>
+        <tc-form-item class="form-group mb-0 col-md-6 px-3">
+          <label>Máximo de atletas</label>
+          <tc-input placeholder='Ingrese el valor'   type_car='num'  name='max_atleta' v-model="deporte.max_atleta"></tc-input>
+        </tc-form-item>
       <tc-form-item class="form-group mb-0 col-md-6 px-3">
         <label>Genero</label>
         <a-select
