@@ -3,6 +3,7 @@
 		<h1>Calendario de Eventos</h1>
 		<vue-cal
 			default-view="month"
+			locale='es'
 			:disable-views="[]"
 			:selected-date="selectedDate"
 			:events="events"
@@ -21,6 +22,7 @@
 <script>
 	import VueCal from "vue-cal"
 	import 'vue-cal/dist/vuecal.css'
+	import 'vue-cal/dist/i18n/es.js'
 	import * as mb from "@/helpers/loaders/model.load"
 
 	export default {
