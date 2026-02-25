@@ -3,7 +3,7 @@
     <div class="col-md-3">
 
     </div>
-    <div class=" col-xxl-6 col-xl-6 col-sm-6">
+    <!-- <div class=" col-xxl-6 col-xl-6 col-sm-6">
       <div class="card card-statistics contact-contant">
         <div class="card-body py-4">
           <div class="d-flex align-items-center">
@@ -52,7 +52,7 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
   </div>
 </template>
 
