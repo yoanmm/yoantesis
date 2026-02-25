@@ -41,7 +41,7 @@
           </div>
         </tc-form-item>
         <tc-form-item class="form-group mb-0 col-md-6 px-3">
-          <label>Usuario</label>
+          <label>Persona</label>
           <div class="d-flex flex-row">
             <tc-autocomplete
               placeholder="Seleccione el usuario"

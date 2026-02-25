@@ -15,7 +15,7 @@
       </a-breadcrumb>
     </div>
     <div class="row col-md-6">
-      <h3>Listado de Usuario_rol</h3>
+      <h3>Listado de Usuario Rol</h3>
     </div>
     <div class="container">
       <div>

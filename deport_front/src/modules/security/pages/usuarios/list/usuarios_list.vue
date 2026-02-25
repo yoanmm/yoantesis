@@ -83,7 +83,14 @@ export default {
     return {
       data: [],
       self: null,
-      columns: mb.statics("Usuarios").columns,
+      columns: mb.statics("Usuarios").show_columns([
+        "username",
+        "correo",
+        "creado",
+        "actualizado",
+        "persona.nombre",
+        "action_elements",
+      ]),
       selected_usuarios: mb.instance("Usuarios"),
       show_modal_form: false,
       paginate: false,
