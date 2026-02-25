@@ -14,7 +14,7 @@
         </a-breadcrumb-item>
       </a-breadcrumb>
     </div>
-    <div class="rwo col-md-6">
+    <div class="row col-md-6">
       <h3>Personas</h3>
     </div>
     <div class="container">
@@ -25,8 +25,9 @@
               <a-tooltip placement="topLeft" title="Añadir nuevo elemento">
                 <a-button icon="plus" type="primary" @click="show_form">Añadir</a-button>
               </a-tooltip>
-              <a-tooltip placement="topLeft" title="Cargar listado de personal desde servidor">
-                <a-button icon="solution"class="cargar"@click="startImportFromServer">Cargar Personal</a-button>
+              <a-tooltip placement="topLeft" title="Actualizar personal">
+                <a-button icon="upload" type="dashed" @click="triggerFileInput">Cargar personal</a-button>
+                <input ref="fileInput" type="file" accept="application/json" style="display:none" @change="handleFileChange" />
               </a-tooltip>
               <a-tooltip placement="topLeft" title="Eliminar elementos seleccionados">
                 <a-button icon="delete" type="danger" @click="showDeleteConfirm">Eliminar</a-button>
@@ -65,6 +66,7 @@
   </div>
 </template>
 <script>
+import Persona from '@/modules/general/entities/persona/persona.model';
 import * as utils from "@/helpers/helpers/utils";
 import * as mb from "@/helpers/loaders/model.load";
 import persona_form from "../form/persona_form";
@@ -76,9 +78,9 @@ export default {
     return {
       close_modal: this.onCloseModal,
       show_form: this.show_form,
-      load_data: () => {
-        this.$refs.persona_table.load_data();
-      },
+       load_data: () => {
+         this.$refs.persona_table.load_data();
+       },
       setSelectedPersona: this.setSelectedPersona,
     };
   },
@@ -99,6 +101,36 @@ export default {
     persona_table,
   },
   methods: {
+              triggerFileInput() {
+                this.$refs.fileInput.click();
+              },
+              async handleFileChange(event) {
+                const file = event.target.files[0];
+                if (!file) return;
+                try {
+                  const text = await file.text();
+                  const personas = JSON.parse(text);
+                  if (!Array.isArray(personas)) throw new Error('El archivo no contiene un array');
+                  let exitos = 0, fallos = 0;
+                  for (const p of personas) {
+                    try {
+                      const persona = new Persona(p);
+                      await persona.save();
+                      exitos++;
+                    } catch (e) {
+                      fallos++;
+                    }
+                  }
+                  utils.openNotificationWithIcon(
+                    fallos === 0 ? 'success' : 'warning',
+                    'Importación finalizada',
+                    'Éxitos: ${exitos}, Fallos: ${fallos}'
+                  );
+                  this.$refs.persona_table.load_data();
+                } catch (error) {
+                  utils.openNotificationWithIcon('error', 'Error al importar', error.message);
+                }
+              },
     setSelectedPersona(model) {
       this.selected_persona = model;
     },
