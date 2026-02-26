@@ -37,7 +37,7 @@
     <div>
       <a-modal
         @cancel="onCloseModal"
-        :title="selected_delegacion_tipo.get_id() ? 'Actualizar delegacion_tipo' : 'Añadir delegacion_tipo'"
+        :title="selected_delegacion_tipo.get_id() ? 'Actualizar tipo de delegacion' : 'Añadir tipo de delegacion'"
         class="modal-form"
         width="55rem"
         :visible="show_modal_form"

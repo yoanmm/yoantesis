@@ -36,7 +36,7 @@
     <div>
       <a-modal
         @cancel="onCloseModal"
-        :title="selected_reclamacion_estado.get_id() ? 'Actualizar reclamacion_estado' : 'Añadir reclamacion_estado'"
+        :title="selected_reclamacion_estado.get_id() ? 'Actualizar estado' : 'Añadir estado'"
         class="modal-form"
         width="55rem"
         :visible="show_modal_form"

@@ -59,18 +59,16 @@
           :paginate="paginate"
         >
         <!-- SLOT PARA LA COLUMNA REGLAMENTO --> 
-<template #reglamento="{ record }"> 
-  <div style="text-align:center;">
-    <a
-      href="#"
-      @click.prevent="downloadReglamento(record)"
-      style="display:flex;flex-direction:column;align-items:center;justify-content:center;"
-    >
-      <a-icon type="download" style="font-size:22px;color:#1890ff;" />
-      <div style="font-size:11px;color:#666;">Descargar</div>
-    </a>
-  </div>
-</template>
+        <template #reglamento="{ record }"> 
+          <div style="text-align:center;">
+            <a href="#"@click.prevent="downloadReglamento(record)"
+               style="display:flex;flex-direction:column;align-items:center;justify-content:center;"
+            >
+            <a-icon type="download" style="font-size:22px;color:#1890ff;" />
+            <div style="font-size:11px;color:#666;">Descargar</div>
+            </a>
+          </div>
+        </template>
 
 <!-- Icono -->
 <template v-slot:icono_deporte="{ record }">

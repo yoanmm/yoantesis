@@ -21,7 +21,7 @@
       super();
       if (attributes != null) {
 
-        this.id_delegacion_evento = attributes.id_delegacion_evento|| undefined
+        this.id_delegacion_evento = attributes.id_delegacion_evento || undefined
         this.id_evento = attributes.id_evento|| null
         this.id_delegacion = attributes.id_delegacion|| null
       }

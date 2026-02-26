@@ -7,15 +7,15 @@
           <router-link :to="{ name: 'index' }">Inicio</router-link>
         </a-breadcrumb-item>
         <a-breadcrumb-item href="">
-          <span>Security</span>
+          <span>Seguridad</span>
         </a-breadcrumb-item>
         <a-breadcrumb-item>
-          <span>Usuario_rol</span>
+          <span>Rol de usuario</span>
         </a-breadcrumb-item>
       </a-breadcrumb>
     </div>
     <div class="row col-md-6">
-      <h3>Listado de Usuario Rol</h3>
+      <h3>Roles de usuarios</h3>
     </div>
     <div class="container">
       <div>
@@ -37,7 +37,7 @@
     <div>
       <a-modal
         @cancel="onCloseModal"
-        :title="selected_usuario_rol.get_id() ? 'Actualizar usuario_rol' : 'Añadir usuario_rol'"
+        :title="selected_usuario_rol.get_id() ? 'Actualizar Rol' : 'Añadir Rol'"
         class="modal-form"
         width="55rem"
         :visible="show_modal_form"

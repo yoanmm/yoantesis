@@ -169,6 +169,7 @@ foreach (['auth:api'] as $mid)
 
         /*Persona*/
                Route::post('persona/validate', 'PersonaController@validate_model');
+               Route::post('persona/import_from_file', 'PersonaController@importFromFile');
                Route::post('persona/update_multiple', 'PersonaController@update_multiple');
                Route::delete('persona/delete_by_id', 'PersonaController@deletebyid');
                Route::resource('persona', 'PersonaController');

@@ -55,6 +55,13 @@
         "path": "/general/persona_arbitro_list"
       },
       {
+        "name": "equipo_list",
+        "module": "management",
+        "caption": "Equipos",
+        "icon": "",
+        "path": "/general/equipo_list"
+      },
+      {
         "name": "juego_list",
         "module": "management",
         "caption": "Juegos",
@@ -137,13 +144,6 @@
         "caption": "Categoría de puntuación del deporte",
         "icon": "",
         "path": "/general/deporte_categoria_puntuacion_list"
-      },
-      {
-        "name": "equipo_list",
-        "module": "management",
-        "caption": "Equipos",
-        "icon": "",
-        "path": "/general/equipo_list"
       },
       {
         "name": "equipo_estado_list",

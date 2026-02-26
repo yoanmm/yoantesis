@@ -75,7 +75,7 @@
     <slot :slot="'creado'" slot-scope="record" name="creado" :record="record" />
     <slot :slot="'actualizado'" slot-scope="record" name="actualizado" :record="record" />
     <slot :slot="'activo'" slot-scope="record" name="activo" :record="record" />
-    <slot :slot="'id_persona'" slot-scope="record" name="id_persona" :record="record" />
+    <slot :slot="'id_persona'" slot-scope="record" name="nombre" :record="record" />
   </a-table>
 </template>
 
