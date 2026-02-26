@@ -10,12 +10,12 @@
           <span>General</span>
         </a-breadcrumb-item>
         <a-breadcrumb-item>
-          <span>Compromiso_participacion</span>
+          <span>Compromiso de participacion</span>
         </a-breadcrumb-item>
       </a-breadcrumb>
     </div>
     <div class="row col-md-6">
-      <h3>Listado de Compromiso_participacion</h3>
+      <h3>Compromiso de participacion</h3>
     </div>
     <div class="container">
       <div>
@@ -26,7 +26,7 @@
                 <a-button icon="plus" type="primary" @click="show_form">Añadir</a-button>
               </a-tooltip>
               <a-tooltip placement="topLeft" title="Eliminar elementos seleccionados">
-                <!-- <a-button icon="delete" type="danger" @click="showDeleteConfirm">Eliminar</a-button> -->
+                <a-button icon="delete" type="danger" @click="showDeleteConfirm">Eliminar</a-button>
               </a-tooltip>
             </a-button-group>
           </div>
@@ -38,8 +38,8 @@
         @cancel="onCloseModal"
         :title="
           selected_compromiso_participacion.get_id()
-            ? 'Actualizar compromiso_participacion'
-            : 'Añadir compromiso_participacion'
+            ? 'Actualizar compromiso de participacion'
+            : 'Añadir compromiso de participacion'
         "
         class="modal-form"
         width="55rem"

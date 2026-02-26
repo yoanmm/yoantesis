@@ -20,16 +20,16 @@
               ref="select_delegacion_evento"
               :successFeed="false"
               idKey="id_delegacion_evento"
-              textKey="nombre_delegacion_evento"
+              textKey="id_delegacion"
               :defaultValue="compromiso_participacion.id_delegacion_evento"
               v-model="compromiso_participacion.id_delegacion_evento"
               :url="mb.statics('Delegacion_evento').select_2_url"
             />
-            <a-button type="dashed"
+            <!--<a-button type="dashed"
                       icon="plus"
                       class="dashed-primary rounded mt-1 ml-2"
                       @click="openModalCreatedelegacion_evento">
-            </a-button>
+            </a-button>-->
           </div>
         </tc-form-item>
 
@@ -62,11 +62,11 @@
               :url="mb.statics('Deporte').select_2_url"
               multiple
             />
-            <a-button type="dashed"
+            <!--<a-button type="dashed"
                       icon="plus"
                       class="dashed-primary rounded mt-1 ml-2"
                       @click="openModalCreatedeporte">
-            </a-button>
+            </a-button>-->
           </div>
         </tc-form-item>
 

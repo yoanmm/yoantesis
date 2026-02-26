@@ -37,10 +37,7 @@
       <a-modal
         @cancel="onCloseModal"
         :title="
-          selected_deporte_categoria_puntuacion.get_id()
-            ? 'Actualizar Categoria deportiva y Puntuacion'
-            : 'Añadir Categoria deportiva y Puntuacion'
-        "
+          selected_deporte_categoria_puntuacion.get_id() ? 'Actualizar Categoria de puntuación': 'Añadir Categoria de puntuación'"
         class="modal-form"
         width="55rem"
         :visible="show_modal_form"

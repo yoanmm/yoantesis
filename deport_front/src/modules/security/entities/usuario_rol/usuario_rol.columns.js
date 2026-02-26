@@ -1,6 +1,6 @@
   export const columns = [
     {
-      title: 'Usuario',
+      title: 'Usuarios',
       dataIndex: 'usuario.username',
       align:'center',
       key: 'usuario.username',
@@ -8,7 +8,7 @@
       sorter: (a, b) =>  a.usuario && b.usuario?(a.usuario.username > b.usuario.username)-(a.usuario.username < b.usuario.username):0
     },
     {
-      title: 'Rol',
+      title: 'Roles',
       dataIndex: 'rol.nombre_rol',
       align:'center',
       key: 'rol.nombre_rol',

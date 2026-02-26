@@ -14,7 +14,7 @@
           <label>Usuarios</label>
           <div class="d-flex flex-row">
             <tc-autocomplete
-              placeholder="Seleccione el Usuarios"
+              placeholder="Seleccione el Usuario"
               name="id_usuario"
               ref="select_usuario"
               :successFeed="false"
@@ -24,11 +24,11 @@
               v-model="usuario_rol.id_usuario"
               :url="mb.statics('Usuarios').select_2_url"
             />
-            <a-button type="dashed"
+           <!-- <a-button type="dashed"
                       icon="plus"
                       class="dashed-primary rounded mt-1 ml-2"
                       @click="openModalCreateusuario">
-            </a-button>
+            </a-button>-->
           </div>
         </tc-form-item>
 
@@ -45,7 +45,7 @@
           <usuarios_form :model="null" :modal="true" @close_modal="usuarioAdded"/>
         </a-modal>
         <tc-form-item class="form-group mb-0 col-md-6 px-3">
-          <label>Rol</label>
+          <label>Roles</label>
           <div class="d-flex flex-row">
             <tc-autocomplete
               placeholder="Seleccione el Rol"
@@ -58,11 +58,11 @@
               v-model="usuario_rol.id_rol"
               :url="mb.statics('Rol').select_2_url"
             />
-            <a-button type="dashed"
+            <!--<a-button type="dashed"
                       icon="plus"
                       class="dashed-primary rounded mt-1 ml-2"
                       @click="openModalCreaterol">
-            </a-button>
+            </a-button>-->
           </div>
         </tc-form-item>
 

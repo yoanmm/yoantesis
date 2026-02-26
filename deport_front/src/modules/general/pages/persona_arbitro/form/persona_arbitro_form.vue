@@ -19,7 +19,7 @@
               ref="select_persona"
               :successFeed="false"
               idKey="id_persona"
-              textKey="nombre"
+              textKey="nombre_completo"
               :defaultValue="persona_arbitro.id_persona"
               v-model="persona_arbitro.id_persona"
               :url="mb.statics('Persona').select_2_url"

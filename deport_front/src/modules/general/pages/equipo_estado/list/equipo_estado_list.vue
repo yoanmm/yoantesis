@@ -36,7 +36,7 @@
     <div>
       <a-modal
         @cancel="onCloseModal"
-        :title="selected_equipo_estado.get_id() ? 'Actualizar equipo_estado' : 'Añadir equipo_estado'"
+        :title="selected_equipo_estado.get_id() ? 'Actualizar estado' : 'Añadir estado'"
         class="modal-form"
         width="55rem"
         :visible="show_modal_form"

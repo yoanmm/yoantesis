@@ -12,7 +12,7 @@
       dataIndex: 'es_final',
       align:'center',
       key: 'es_final',
-
+      scopedSlots: { customRender: 'es_final' },
       sorter: (a, b) => a.es_final - b.es_final
     },
     {
@@ -20,7 +20,7 @@
       key: 'action_elements',
       fixed: 'right',
       scopedSlots: {
-        customRender: 'action'
+      customRender: 'action'
       }
     }
   ];
