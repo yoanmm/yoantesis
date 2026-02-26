@@ -241,6 +241,7 @@ class Usuarios extends BaseModel implements
         return [
             'username' => $this->username, //
             'correo'   => $this->correo,   // Usamos 'correo' que es el campo en tu tabla
+            'facultad' => $this->persona->facultad,
             'roles'    => $this->getRoles(),
         ];
     }
