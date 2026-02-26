@@ -85,27 +85,6 @@
     ]
   },
   {
-    "caption": "Comisión disciplinaria",
-    "modules": "['dicipline']",
-    "icon": "zmdi zmdi-library",
-    "routes": [
-      {
-        "name": "sancion_list",
-        "module": "dicipline",
-        "caption": "Sanciones",
-        "icon": "",
-        "path": "/general/sancion_list"
-      },
-      {
-        "name": "reclamacion_list",
-        "module": "general",
-        "caption": "Reclamaciones",
-        "icon": "",
-        "path": "/general/reclamacion_list"
-      }
-    ]
-  },
-  {
     "caption": "Configuración",
     "modules": "['config']",
     "icon": "zmdi zmdi-settings",
@@ -207,20 +186,6 @@
         "caption": "Trazas",
         "icon": "",
         "path": "/security/log_list"
-      },
-      {
-        "name": "permisos_list",
-        "module": "security",
-        "caption": "Permisos",
-        "icon": "",
-        "path": "/security/permisos_list"
-      },
-      {
-        "name": "rol_list",
-        "module": "security",
-        "caption": "Roles",
-        "icon": "",
-        "path": "/security/rol_list"
       },
       {
         "name": "usuarios_list",
