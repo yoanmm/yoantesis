@@ -152,6 +152,14 @@ class Usuarios extends BaseModel implements
 			return $this->hasMany(Usuario_rol::class,'id_usuario','id_usuario');
 		}
 
+//    public function hasPermission($controller, $action) {
+//        // Buscamos si alguno de los roles del usuario tiene el permiso
+//        return $this->array_usuario_rol()->whereHas('permisos', function($query) use ($controller, $action) {
+//            $query->where('controller', $controller)
+//                ->where('accion', $action)
+//                ->where('habilitado', 1);
+//        })->exists();
+//    }
 
     protected function rules($scenario='create')
     {
@@ -208,11 +216,28 @@ class Usuarios extends BaseModel implements
     }
 
     /**
+     * Obtiene los nombres de los roles asociados al usuario.
+     */
+    public function getRoles()
+    {
+        // Cargamos la relación 'rol' dentro de 'array_usuario_rol'
+        // y extraemos solo el nombre.
+        return $this->array_usuario_rol->map(function ($item) {
+            // Asumiendo que el modelo Usuario_rol tiene una relación 'rol'
+            // y esta tiene un atributo 'nombre' o 'name'
+            return $item->rol ? $item->rol->nombre_rol : null;
+        })->filter()->values()->toArray();
+    }
+    /**
      * @inheritDoc
      */
     public function getJWTCustomClaims()
     {
-        return ['username'=>$this->username];
+        return [
+            'username' => $this->username, //
+            'correo'   => $this->correo,   // Usamos 'correo' que es el campo en tu tabla
+            'roles'    => $this->getRoles(),
+        ];
     }
 }
 
