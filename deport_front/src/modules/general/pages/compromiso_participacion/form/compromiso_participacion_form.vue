@@ -20,7 +20,7 @@
               ref="select_delegacion_evento"
               :successFeed="false"
               idKey="id_delegacion_evento"
-              textKey="id_delegacion"
+              textKey="nombre"
               :defaultValue="compromiso_participacion.id_delegacion_evento"
               v-model="compromiso_participacion.id_delegacion_evento"
               :url="mb.statics('Delegacion_evento').select_2_url"
