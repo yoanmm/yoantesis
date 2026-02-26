@@ -1,9 +1,9 @@
 export const columns = [
     {
         title: 'Participantes',
-        dataIndex: 'delegacion_evento.nombre_delegacion_evento',
+        dataIndex: 'delegacion_evento.nombre',
         align:'center',
-        key: 'delegacion_evento.nombre_delegacion_evento',
+        key: 'delegacion_evento.nombre',
         sorter: (a, b) => a.delegacion_evento && b.delegacion_evento ? 
             (a.delegacion_evento.nombre_delegacion_evento > b.delegacion_evento.nombre_delegacion_evento) - 
             (a.delegacion_evento.nombre_delegacion_evento < b.delegacion_evento.nombre_delegacion_evento) : 0
