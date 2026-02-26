@@ -10,12 +10,12 @@
           <span>General</span>
         </a-breadcrumb-item>
         <a-breadcrumb-item>
-          <span>Compromiso de participacion</span>
+          <span>Compromiso de participación</span>
         </a-breadcrumb-item>
       </a-breadcrumb>
     </div>
     <div class="row col-md-6">
-      <h3>Compromiso de participacion</h3>
+      <h3>Compromiso de participación</h3>
     </div>
     <div class="container">
       <div>
