@@ -20,42 +20,32 @@
     <div class="container">
       <div>
         <div class="row">
-          <div class="col-md-6">
-            <a-button-group style="margin-bottom: 10px">
-              <a-tooltip placement="topLeft" title="Añadir nuevo elemento">
-                <a-button icon="plus" type="primary" @click="show_form">Añadir</a-button>
-              </a-tooltip>
-              <a-tooltip placement="topLeft" title="Eliminar elementos seleccionados">
-                <a-button icon="delete" type="danger" @click="showDeleteConfirm">Eliminar</a-button>
-              </a-tooltip>
-            </a-button-group>
-          </div>
         </div>
       </div>
     </div>
     <div>
       <a-modal
-        @cancel="onCloseModal"
-        :title="selected_log.get_id() ? 'Actualizar log' : 'Añadir log'"
-        class="modal-form"
-        width="55rem"
-        :visible="show_modal_form"
-        :destroyOnClose="true"
-        on-ok="handleOk"
-        :header="null"
-        :footer="null"
-        :maskClosable="false"
+          @cancel="onCloseModal"
+          :title="selected_log.get_id() ? 'Actualizar log' : 'Añadir log'"
+          class="modal-form"
+          width="55rem"
+          :visible="show_modal_form"
+          :destroyOnClose="true"
+          on-ok="handleOk"
+          :header="null"
+          :footer="null"
+          :maskClosable="false"
       >
         <log_form :modal="true" :model="selected_log" />
       </a-modal>
       <div style="margin-left: 15px">
         <log_table
-          :columns="columns"
-          table_name="Log"
-          id_table="id"
-          ref="log_table"
-          :params_search="params_search"
-          :paginate="paginate"
+            :columns="columns"
+            table_name="Log"
+            id_table="id"
+            ref="log_table"
+            :params_search="params_search"
+            :paginate="paginate"
         />
       </div>
     </div>
@@ -83,7 +73,18 @@ export default {
     return {
       data: [],
       self: null,
-      columns: mb.statics("Log").columns,
+      columns: mb.statics("Log").show_columns(
+          [
+            'nombre_accion',
+            'tabla',
+            'record',
+            'ip',
+            'creado',
+            'actualizado',
+            'usuario.username'
+          ],
+          true
+      ),
       selected_log: mb.instance("Log"),
       show_modal_form: false,
       paginate: false,
