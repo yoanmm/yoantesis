@@ -88,7 +88,7 @@ export default {
         "correo",
         "creado",
         "actualizado",
-        "persona.nombre",
+        "persona.nombre_completo",
         "action_elements",
       ]),
       selected_usuarios: mb.instance("Usuarios"),

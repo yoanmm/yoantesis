@@ -70,11 +70,9 @@
 
     <slot :slot="'id_usuario'" slot-scope="record" name="id_usuario" :record="record" />
     <slot :slot="'username'" slot-scope="record" name="username" :record="record" />
-    <slot :slot="'password'" slot-scope="record" name="password" :record="record" />
     <slot :slot="'correo'" slot-scope="record" name="correo" :record="record" />
     <slot :slot="'creado'" slot-scope="record" name="creado" :record="record" />
     <slot :slot="'actualizado'" slot-scope="record" name="actualizado" :record="record" />
-    <slot :slot="'activo'" slot-scope="record" name="activo" :record="record" />
     <slot :slot="'id_persona'" slot-scope="record" name="nombre" :record="record" />
   </a-table>
 </template>
