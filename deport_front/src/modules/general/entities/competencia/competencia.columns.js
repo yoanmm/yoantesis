@@ -15,30 +15,14 @@
 
       sorter: (a, b) =>  a.deporte && b.deporte?(a.deporte.nombre_deporte > b.deporte.nombre_deporte)-(a.deporte.nombre_deporte < b.deporte.nombre_deporte):0
     },
-    {
-      title: 'Supervisor',
-      dataIndex: 'supervisor.id_supervisor',
-      align:'center',
-      key: 'supervisor.id_supervisor',
-
-      sorter: (a, b) => a.supervisor && b.supervisor?a.supervisor.id_supervisor - b.supervisor.id_supervisor:0
-    },
-    {
+    /*{
       title: 'Resultado',
       dataIndex: 'resultado_competencia',
       align:'center',
       key: 'resultado_competencia',
 
       sorter: (a, b) =>  (a.resultado_competencia > b.resultado_competencia)-(a.resultado_competencia < b.resultado_competencia)
-    },
-    {
-      title: 'Terminado',
-      dataIndex: 'terminado',
-      align:'center',
-      key: 'terminado',
-
-      sorter: (a, b) => a.terminado - b.terminado
-    },
+    },*/
     {
       title: 'Fin_inscripcion',
       dataIndex: 'fin_inscripcion',
@@ -46,6 +30,15 @@
       key: 'fin_inscripcion',
 
       sorter: (a, b) => a.fin_inscripcion - b.fin_inscripcion
+    },
+    {
+      title: 'Terminado',
+      dataIndex: 'terminado',
+      align:'center',
+      key: 'terminado',
+      scopedSlots: {customRender: 'terminado'},
+
+      sorter: (a, b) => a.terminado - b.terminado
     },
     {
       title: 'Acciones',

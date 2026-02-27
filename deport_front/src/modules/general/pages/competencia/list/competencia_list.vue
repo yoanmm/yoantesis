@@ -49,14 +49,27 @@
         <competencia_form :modal="true" :model="selected_competencia" />
       </a-modal>
       <div style="margin-left: 15px">
-        <competencia_table
-          :columns="columns"
-          table_name="Competencia"
-          id_table="id_competencia"
-          ref="competencia_table"
-          :params_search="params_search"
-          :paginate="paginate"
-        />
+        <!-- Asegúrate de tener la columna con scopedSlots: { customRender: 'terminado' } en columns -->
+<competencia_table
+  :columns="columns"
+  table_name="Competencia"
+  id_table="id_competencia"
+  ref="competencia_table"
+  :params_search="params_search"
+  :paginate="paginate"
+>
+  <template #terminado="{ record }">
+    <div style="text-align:center;">
+      <template v-if="record === 1">
+        <a-icon type="check" style="font-size:15px;color:#52c41a;" />
+      </template>
+      <template v-else>
+        <a-icon type="close" style="font-size:15px;color:#ff4d4f;" />
+      </template>
+    </div>
+  </template>
+</competencia_table>
+
       </div>
     </div>
   </div>

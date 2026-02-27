@@ -54,13 +54,25 @@
       </a-modal>
       <div style="margin-left: 15px">
         <evento_deportivo_table
-            :columns="columns"
-            table_name="Evento_deportivo"
-            id_table="id_evento"
-            ref="evento_deportivo_table"
-            :params_search="params_search"
-            :paginate="paginate"
-        />
+  :columns="columns"
+  table_name="Evento_deportivo"
+  id_table="id_evento"
+  ref="evento_deportivo_table"
+  :params_search="params_search"
+  :paginate="paginate"
+>
+  <template #terminado="{ record }">
+    <div style="text-align:center;">
+      <template v-if="record.terminado == 1 || record.terminado === true">
+        <a-icon type="check" style="font-size:15px;color:#52c41a;" />
+      </template>
+      <template v-else>
+        <a-icon type="close" style="font-size:15px;color:#ff4d4f;" />
+      </template>
+    </div>
+  </template>
+</evento_deportivo_table>
+
       </div>
     </div>
   </div>
