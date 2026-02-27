@@ -72,7 +72,8 @@ foreach (['auth:api'] as $mid)
         /*Delegacion_evento*/
                Route::post('delegacion_evento/validate', 'Delegacion_eventoController@validate_model');
                Route::post('delegacion_evento/update_multiple', 'Delegacion_eventoController@update_multiple');
-               Route::delete('delegacion_evento/delete_by_id', 'Delegacion_eventoController@deletebyid');
+           Route::post('delegacion_evento/delete_evento_delgacion', 'Delegacion_eventoController@delete_evento_delgacion');
+           Route::delete('delegacion_evento/delete_by_id', 'Delegacion_eventoController@deletebyid');
                Route::resource('delegacion_evento', 'Delegacion_eventoController');
 
 

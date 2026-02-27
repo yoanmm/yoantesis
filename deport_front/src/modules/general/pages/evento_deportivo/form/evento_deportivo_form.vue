@@ -36,6 +36,7 @@ import StepThree from "./step_three.vue";
 import * as mb from "@/helpers/loaders/model.load";
 import * as utils from "@/helpers/helpers/utils";
 import axios_instance from "@/config/axios/axios";
+import axios_api from "@/config/axios/axios";
 
 export default {
   components: { StepOne, StepTwo, StepThree },
@@ -178,6 +179,19 @@ export default {
         // --- GUARDAR RELACIONES ---
         // =================================================================
 
+        // 1. Delegaciones: Limpiar
+        if (esEdicion) {
+          const response = await axios_api({
+            url: "general/delegacion_evento/delete_evento_delgacion",
+            method: "post",
+            data: {
+              id: id_evento
+            },
+            responseType: 'json',
+          }).then((response) => {
+
+          });
+        }
         // Delegaciones
         if (idsDelegaciones.length > 0) {
           const promesasDelegacion = idsDelegaciones.map((id_delegacion) => {
