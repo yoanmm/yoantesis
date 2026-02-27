@@ -38,25 +38,58 @@ export default {
   },
   methods: {
     access_menu_load() {
-      if (!this.$store.site.user || !this.$store.site.user.roles || !this.$store.site.user.roles.includes("ROLE_SUPER_ADMIN")) {
-        const user_menu = this.$store.site.user?.access_menu;
-        if (!user_menu) return;
+      const user = this.$store.site.user;
+      if (!user || !user.roles) return;
 
-        this.menu.forEach((section, i) => {
-          if (user_menu.some((m) => m.menu_module === section.caption)) {
-            let filteredRoutes = section.routes.filter((route) =>
-              user_menu.some((m) => m.route === route.path)
-            );
-            section.routes = filteredRoutes;
-          } else {
-            delete this.menu[i];
-          }
-        });
-
-        this.menu = this.menu.filter(Boolean);
+      // 1. Si es SUPER_ADMIN, no filtramos nada (ve todo el json)
+      if (user.roles.includes("Administrador")) {
+        return;
       }
-    },
-  },
+
+      // 2. Definimos qué rutas puede ver cada rol específico
+      const rolePermissions = {
+        "C_Organizadora": [
+          "/general/evento_deportivo_list",
+          "/general/competencia_list",
+          "/general/persona_arbitro_list",
+          "/general/juego_list",
+          "/general/congresillo_deporte_list",
+          "/general/compromiso_participacion_list",
+          "/general/deporte_categoria_puntuacion_list",
+          "/general/congresillo_asistencia_list"
+        ],
+        "Jefe de Deporte": [
+          "/general/equipo_atleta_list",
+          "/general/persona_atleta_list"
+        ]
+      };
+
+      // 3. Obtenemos la lista consolidada de rutas permitidas para el usuario actual
+      // (en caso de que un usuario tenga múltiples roles)
+      let allowedPaths = [];
+      user.roles.forEach(role => {
+        if (rolePermissions[role]) {
+          allowedPaths = [...allowedPaths, ...rolePermissions[role]];
+        }
+      });
+
+      // 4. Filtramos el menú
+      this.menu = this.menu
+          .map(section => {
+            // Clonamos la sección para no modificar el objeto original por referencia
+            const newSection = { ...section };
+
+            // Filtramos las rutas de esta sección que están en la lista permitida
+            newSection.routes = section.routes.filter(route =>
+                allowedPaths.includes(route.path)
+            );
+
+            // Solo devolvemos la sección si tiene al menos una ruta permitida
+            return newSection.routes.length > 0 ? newSection : null;
+          })
+          .filter(Boolean); // Eliminamos los nulos (secciones que quedaron vacías)
+    }
+  }
 };
 </script>
 
