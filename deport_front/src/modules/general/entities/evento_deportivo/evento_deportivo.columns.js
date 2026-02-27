@@ -81,6 +81,16 @@
       sorter: (a, b) =>  (a.descripcion_delegaciones > b.descripcion_delegaciones)-(a.descripcion_delegaciones < b.descripcion_delegaciones)
     },
     {
+
+      title: 'Reglamento',
+      dataIndex: 'reglamento',
+      align:'center',
+      key: 'reglamento',
+      scopedSlots: { customRender: 'reglamento' },
+
+      sorter: (a, b) =>  (a.deporte_padre.nombre_deporte > b.deporte_padre.nombre_deporte)-(a.deporte_padre.nombre_deporte < b.deporte_padre.nombre_deporte)
+    },
+    {
       title: 'Regla',
       dataIndex: 'regla_evento.nombre_regla',
       align:'center',

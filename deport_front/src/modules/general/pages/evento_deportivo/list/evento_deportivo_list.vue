@@ -107,6 +107,7 @@ export default {
             "fecha_fin",
             "curso",
             "terminado",
+            "reglamento",
             "action_elements" ,
           ],
           true
