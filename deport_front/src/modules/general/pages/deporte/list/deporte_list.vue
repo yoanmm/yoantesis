@@ -58,47 +58,44 @@
           :params_search="params_search"
           :paginate="paginate"
         >
-        <!-- SLOT PARA LA COLUMNA REGLAMENTO --> 
-        <template #reglamento="{ record }"> 
-          <div style="text-align:center;">
-            <a href="#"@click.prevent="downloadReglamento(record)"
-               style="display:flex;flex-direction:column;align-items:center;justify-content:center;"
-            >
-            <a-icon type="download" style="font-size:22px;color:#1890ff;" />
-            <div style="font-size:11px;color:#666;">Descargar</div>
-            </a>
-          </div>
-        </template>
+          <!-- SLOT PARA LA COLUMNA REGLAMENTO -->
+          <template #reglamento="{ record }">
+            <div style="text-align:center;">
+              <a
+                href="#"
+                @click.prevent="downloadReglamento(record)"
+                style="display:flex;flex-direction:column;align-items:center;justify-content:center;"
+              >
+                <a-icon type="download" style="font-size:22px;color:#1890ff;" />
+                <div style="font-size:11px;color:#666;">Descargar</div>
+              </a>
+            </div>
+          </template>
 
-<!-- Icono -->
-<template v-slot:icono_deporte="{ record }">
-  <div style="text-align:center;">
-    <template v-if="record">
-      <img
-        :src="record"
-        alt="Icono"
-        style="width:50px;height:50px;object-fit:cover;border-radius:4px;"
-      />
-    </template>
-    <template v-else>
-      <a-icon type="picture" style="font-size:20px;color:#1890ff;" />
-      <div style="font-size:10px;color:#666;">Sin imagen</div>
-    </template>
-  </div>
-</template>
+          <!-- Icono -->
+          <template v-slot:icono_deporte="{ record }">
+            <div style="text-align:center;">
+              <template v-if="record">
+                <img :src="record" alt="Icono" style="width:50px;height:50px;object-fit:cover;border-radius:4px;" />
+              </template>
+              <template v-else>
+                <a-icon type="picture" style="font-size:20px;color:#1890ff;" />
+                <div style="font-size:10px;color:#666;">Sin imagen</div>
+              </template>
+            </div>
+          </template>
 
-<!-- SLOT PARA LA COLUMNA INDIVIDUAL -->
-<template #individual="{ record }">
-  <div style="text-align:center;">
-    <template v-if="record === 1">
-      <a-icon type="check" style="font-size:15px;color:#52c41a;" />
-    </template>
-    <template v-else>
-      <a-icon type="close" style="font-size:15px;color:#ff4d4f;" />
-    </template>
-  </div>
-</template>
-
+          <!-- SLOT PARA LA COLUMNA INDIVIDUAL -->
+          <template #individual="{ record }">
+            <div style="text-align:center;">
+              <template v-if="record === 1">
+                <a-icon type="check" style="font-size:15px;color:#52c41a;" />
+              </template>
+              <template v-else>
+                <a-icon type="close" style="font-size:15px;color:#ff4d4f;" />
+              </template>
+            </div>
+          </template>
         </deporte_table>
       </div>
     </div>
@@ -154,12 +151,12 @@ export default {
       // payload can be: record object, { record }, a string url, or event
       try {
         if (!payload) {
-          utils.openNotificationWithIcon('error','Reglamento','No hay reglamento disponible');
+          utils.openNotificationWithIcon("error", "Reglamento", "No hay reglamento disponible");
           return;
         }
         let url = null;
         // string url
-        if (typeof payload === 'string') url = payload;
+        if (typeof payload === "string") url = payload;
         // direct record
         else if (payload.reglamento) url = payload.reglamento;
         // slot-prop object { record }
@@ -168,45 +165,48 @@ export default {
         else if (payload.text) url = payload.text;
 
         if (!url) {
-          utils.openNotificationWithIcon('error','Reglamento','No hay reglamento disponible');
+          utils.openNotificationWithIcon("error", "Reglamento", "No hay reglamento disponible");
           return;
         }
 
         // try fetch and force download
         const response = await fetch(url);
-        if (!response.ok) throw new Error('Network response was not ok');
+        if (!response.ok) throw new Error("Network response was not ok");
         const blob = await response.blob();
-        let filename = 'reglamento';
-        const disposition = response.headers.get('content-disposition');
+        let filename = "reglamento";
+        const disposition = response.headers.get("content-disposition");
         if (disposition) {
           const match = disposition.match(/filename[^;=\n]*=((['"]).*?\2|[^;\n]*)/);
-          if (match != null && match[1]) filename = match[1].replace(/['\"]/g, '');
+          if (match != null && match[1]) filename = match[1].replace(/['\"]/g, "");
         } else {
-          const parts = url.split('/');
+          const parts = url.split("/");
           filename = parts[parts.length - 1] || filename;
         }
         const blobUrl = window.URL.createObjectURL(blob);
-        const a = document.createElement('a');
+        const a = document.createElement("a");
         a.href = blobUrl;
         a.download = filename;
         document.body.appendChild(a);
         a.click();
         a.remove();
         window.URL.revokeObjectURL(blobUrl);
-        utils.openNotificationWithIcon('success','Descarga','Descarga iniciada');
+        utils.openNotificationWithIcon("success", "Descarga", "Descarga iniciada");
       } catch (err) {
-        console.warn('Fetch failed or download error, opening direct URL as fallback', err);
+        console.warn("Fetch failed or download error, opening direct URL as fallback", err);
         try {
-          const tryUrl = (typeof payload === 'string') ? payload : (payload.reglamento || (payload.record && payload.record.reglamento) || payload.text);
+          const tryUrl =
+            typeof payload === "string"
+              ? payload
+              : payload.reglamento || (payload.record && payload.record.reglamento) || payload.text;
           if (tryUrl) {
-            window.open(tryUrl, '_blank');
-            utils.openNotificationWithIcon('info','Descarga','Abriendo archivo en nueva pestaña');
+            window.open(tryUrl, "_blank");
+            utils.openNotificationWithIcon("info", "Descarga", "Abriendo archivo en nueva pestaña");
             return;
           }
         } catch (err2) {
-          console.error('Fallback failed', err2);
+          console.error("Fallback failed", err2);
         }
-        utils.openNotificationWithIcon('error','Descarga','No se pudo descargar ni abrir el archivo');
+        utils.openNotificationWithIcon("error", "Descarga", "No se pudo descargar ni abrir el archivo");
       }
     },
 
@@ -215,7 +215,7 @@ export default {
         utils.openNotificationWithIcon(
           "error",
           "Eliminar elementos seleccionados",
-          "Debe seleccionar al menos un elemento"
+          "Debe seleccionar al menos un elemento",
         );
         return;
       }

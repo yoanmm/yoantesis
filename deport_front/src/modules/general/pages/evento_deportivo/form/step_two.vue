@@ -9,7 +9,19 @@
       :paginate="false"
       :rowSelection="{ selectedRowKeys: selectedRowKeys, onChange: onSelectChange }"
       :show_export="false"
-    />
+      
+      ><!-- SLOT PARA LA COLUMNA INDIVIDUAL -->
+      <template #individual="{ record }">
+        <div style="text-align:center;">
+          <template v-if="record === 1">
+            <a-icon type="check" style="font-size:15px;color:#52c41a;" />
+          </template>
+          <template v-else>
+            <a-icon type="close" style="font-size:15px;color:#ff4d4f;" />
+          </template>
+        </div>
+      </template>
+    </deporte_table>
   </div>
 </template>
 
