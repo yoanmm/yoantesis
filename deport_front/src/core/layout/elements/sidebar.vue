@@ -49,6 +49,7 @@ export default {
       // 2. Definimos qué rutas puede ver cada rol específico
       const rolePermissions = {
         "C_Organizadora": [
+          "/general/calendario",
           "/general/evento_deportivo_list",
           "/general/competencia_list",
           "/general/persona_arbitro_list",
@@ -59,6 +60,7 @@ export default {
           "/general/congresillo_asistencia_list"
         ],
         "Jefe de Deporte": [
+          "/general/calendario",
           "/general/equipo_atleta_list",
           "/general/persona_atleta_list"
         ]
