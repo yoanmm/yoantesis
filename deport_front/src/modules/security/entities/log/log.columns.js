@@ -8,7 +8,7 @@
       sorter: (a, b) => a.id - b.id
     },
     {
-      title: 'Nombre_accion',
+      title: 'Accion',
       dataIndex: 'nombre_accion',
       align:'center',
       key: 'nombre_accion',

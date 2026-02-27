@@ -42,7 +42,7 @@
       {
         "name": "congresillo_asistencia_list",
         "module": "management",
-        "caption": "Asistencia",
+        "caption": "Asistencia al Congresillo",
         "icon": "zmdi zmdi-assignment-check",
         "path": "/general/congresillo_asistencia_list"
       },

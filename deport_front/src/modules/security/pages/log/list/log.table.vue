@@ -50,14 +50,6 @@
                         <a-icon type="file-excel" theme="twoTone" twoToneColor="#52c41a"/>
                      EXCEL
                    </a-menu-item>
-   <a-menu-item key="2">
-                     <a-icon type="file-pdf" theme="twoTone" twoToneColor="#c41c33"/>
-                     PDF
-                   </a-menu-item>
-                   <a-menu-item key="3" @click="exportToCSV">
-                     <a-icon type="file-text" theme="twoTone" twoToneColor="#2771c4"/>
-                     CSV
-                   </a-menu-item>
                     </a-menu>
                </a-dropdown-button>
            </a-tooltip>
