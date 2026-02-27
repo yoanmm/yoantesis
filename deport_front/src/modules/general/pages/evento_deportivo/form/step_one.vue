@@ -1,10 +1,10 @@
 <template>
   <tc-form
-      :feedbacks="mb.statics('Evento_deportivo').feedbacks"
-      :vobject="$v"
-      nested="evento_deportivo"
-      ref="form"
-      class="form-row"
+    :feedbacks="mb.statics('Evento_deportivo').feedbacks"
+    :vobject="$v"
+    nested="evento_deportivo"
+    ref="form"
+    class="form-row"
   >
     <tc-form-item class="form-group mb-0 col-md-6 px-3">
       <label>Nombre del evento</label>
@@ -18,12 +18,12 @@
 
     <tc-form-item class="form-group mb-0 col-md-6 px-3">
       <label>Fecha inicio</label>
-      <tc-date-picker name="fecha_inicio" v-model="evento_deportivo.fecha_inicio" />
+      <tc-date-picker name="fecha_inicio" v-model="evento_deportivo.fecha_inicio" :disabled-date="disabledStartDate" />
     </tc-form-item>
 
     <tc-form-item class="form-group mb-0 col-md-6 px-3">
       <label>Fecha fin</label>
-      <tc-date-picker name="fecha_fin" v-model="evento_deportivo.fecha_fin" />
+      <tc-date-picker name="fecha_fin" v-model="evento_deportivo.fecha_fin" :disabled-date="disabledEndDate" />
     </tc-form-item>
 
     <tc-form-item class="form-group mb-0 col-md-6 px-3">
@@ -31,28 +31,23 @@
       <tc-input placeholder="2020-2021" name="curso" v-model="evento_deportivo.curso" />
     </tc-form-item>
 
-<!--    <tc-form-item class="form-group mb-0 col-md-6 px-3">-->
-<!--      <label>Terminado</label>-->
-<!--      <div style="margin-top: 5px;">-->
-<!--        <a-switch v-model="evento_deportivo.terminado" checked-children="Sí" un-checked-children="No" />-->
-<!--      </div>-->
-<!--    </tc-form-item>-->
+    <!--    <tc-form-item class="form-group mb-0 col-md-6 px-3">-->
+    <!--      <label>Terminado</label>-->
+    <!--      <div style="margin-top: 5px;">-->
+    <!--        <a-switch v-model="evento_deportivo.terminado" checked-children="Sí" un-checked-children="No" />-->
+    <!--      </div>-->
+    <!--    </tc-form-item>-->
 
-<!--    <tc-form-item class="form-group mb-0 col-md-6 px-3">-->
-<!--      <label>Activo</label>-->
-<!--      <div style="margin-top: 5px;">-->
-<!--        <a-switch v-model="evento_deportivo.activo" checked-children="Sí" un-checked-children="No" />-->
-<!--      </div>-->
-<!--    </tc-form-item>-->
+    <!--    <tc-form-item class="form-group mb-0 col-md-6 px-3">-->
+    <!--      <label>Activo</label>-->
+    <!--      <div style="margin-top: 5px;">-->
+    <!--        <a-switch v-model="evento_deportivo.activo" checked-children="Sí" un-checked-children="No" />-->
+    <!--      </div>-->
+    <!--    </tc-form-item>-->
 
     <tc-form-item class="form-group mb-0 col-md-12 px-3">
       <label>Reglamento (Archivo)</label>
-      <input
-          type="file"
-          accept=".pdf,.doc,.docx,.png,.jpg"
-          @change="handleFileUpload"
-          class="form-control"
-      />
+      <input type="file" accept=".pdf,.doc,.docx,.png,.jpg" @change="handleFileUpload" class="form-control" />
     </tc-form-item>
   </tc-form>
 </template>
@@ -94,7 +89,7 @@ export default {
 
       const formatDate = (date) => {
         if (!date) return null;
-        if (moment.isMoment(date)) return date.format('YYYY-MM-DD');
+        if (moment.isMoment(date)) return date.format("YYYY-MM-DD");
         return date;
       };
 
@@ -106,7 +101,7 @@ export default {
         // Conversión estricta a entero para la BD
         terminado: e.terminado ? 1 : 0,
         activo: e.activo ? 1 : 0,
-        id_evento: e.id_evento || undefined
+        id_evento: e.id_evento || undefined,
       };
     },
 
@@ -141,7 +136,27 @@ export default {
 
     reset() {
       this.evento_deportivo = mb.instance("Evento_deportivo");
-    }
-  }
+    },
+
+    disabledStartDate(current) {
+      // No permitir fechas anteriores a hoy
+      return current && current < moment().startOf("day");
+    },
+
+    disabledEndDate(current) {
+      if (!current) return false;
+
+      const today = moment().startOf("day");
+
+      // Si no hay fecha inicio → mínimo hoy
+      if (!this.evento_deportivo.fecha_inicio) {
+        return current < today;
+      }
+
+      // No permitir que fecha fin sea menor que fecha inicio
+      const start = moment(this.evento_deportivo.fecha_inicio).startOf("day");
+      return current < start;
+    },
+  },
 };
 </script>
