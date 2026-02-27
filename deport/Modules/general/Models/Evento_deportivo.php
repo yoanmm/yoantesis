@@ -86,6 +86,11 @@ class Evento_deportivo extends BaseModel
 
     protected $appends = [];
 
+    protected $casts = [
+        'fecha_inicio' => 'date:Y-m-d',
+        'fecha_fin' => 'date:Y-m-d',
+    ];
+
     /**
      * Model Class Name
      *

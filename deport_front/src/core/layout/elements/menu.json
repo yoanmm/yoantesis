@@ -33,6 +33,13 @@
         "path": "/general/compromiso_participacion_list"
       },
       {
+        "name": "competencia_list",
+        "module": "management",
+        "caption": "Competencias",
+        "icon": "",
+        "path": "/general/competencia_list"
+      },
+      {
         "name": "congresillo_deporte_list",
         "module": "management",
         "caption": "Congresillos",
@@ -45,13 +52,6 @@
         "caption": "Asistencia al Congresillo",
         "icon": "zmdi zmdi-assignment-check",
         "path": "/general/congresillo_asistencia_list"
-      },
-      {
-        "name": "competencia_list",
-        "module": "management",
-        "caption": "Competencias",
-        "icon": "",
-        "path": "/general/competencia_list"
       },
       {
         "name": "equipo_list",

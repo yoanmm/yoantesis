@@ -11,10 +11,10 @@
         class="form-row"
       >
         <tc-form-item class="form-group mb-0 col-md-6 px-3">
-          <label>Evento_deportivo</label>
+          <label>Evento deportivo</label>
           <div class="d-flex flex-row">
             <tc-autocomplete
-              placeholder="Seleccione el Evento_deportivo"
+              placeholder="Seleccione el Evento deportivo"
               name="id_evento"
               ref="select_evento"
               :successFeed="false"
@@ -32,7 +32,7 @@
           </div>
         </tc-form-item>
 
-        <a-modal
+        <!--<a-modal
           @cancel="showModalCreateevento = false"
           v-if="showModalCreateevento"
           class="modal-form"
@@ -43,7 +43,8 @@
           :maskClosable="false"
         >
           <evento_deportivo_form :model="null" :modal="true" @close_modal="eventoAdded"/>
-        </a-modal>
+        </a-modal>-->
+
         <tc-form-item class="form-group mb-0 col-md-6 px-3">
           <label>Deporte</label>
           <div class="d-flex flex-row">
@@ -58,15 +59,16 @@
               v-model="competencia.id_deporte"
               :url="mb.statics('Deporte').select_2_url"
             />
-            <a-button type="dashed"
+            <!--<a-button type="dashed"
                       icon="plus"
                       class="dashed-primary rounded mt-1 ml-2"
                       @click="openModalCreatedeporte">
-            </a-button>
+            </a-button>-->
+            
           </div>
         </tc-form-item>
 
-        <a-modal
+        <!--<a-modal
           @cancel="showModalCreatedeporte = false"
           v-if="showModalCreatedeporte"
           class="modal-form"
@@ -77,57 +79,25 @@
           :maskClosable="false"
         >
           <deporte_form :model="null" :modal="true" @close_modal="deporteAdded"/>
-        </a-modal>
-        <tc-form-item class="form-group mb-0 col-md-6 px-3">
-          <label>Persona_arbitro</label>
-          <div class="d-flex flex-row">
-            <tc-autocomplete
-              placeholder="Seleccione el Persona_arbitro"
-              name="id_supervisor"
-              ref="select_supervisor"
-              :successFeed="false"
-              idKey="id_supervisor"
-              textKey="id_persona"
-              :defaultValue="competencia.id_supervisor"
-              v-model="competencia.id_supervisor"
-              :url="mb.statics('Persona_arbitro').select_2_url"
-            />
-            <a-button type="dashed"
-                      icon="plus"
-                      class="dashed-primary rounded mt-1 ml-2"
-                      @click="openModalCreatesupervisor">
-            </a-button>
-          </div>
-        </tc-form-item>
+        </a-modal>-->
 
-        <a-modal
-          @cancel="showModalCreatesupervisor = false"
-          v-if="showModalCreatesupervisor"
-          class="modal-form"
-          :title="'Añadir Persona_arbitro'"
-          :visible="true"
-          :header="null"
-          :footer="null"
-          :maskClosable="false"
-        >
-          <persona_arbitro_form :model="null" :modal="true" @close_modal="supervisorAdded"/>
-        </a-modal>
-      <tc-form-item class="form-group px-3 col-12">
-        <label>Resultado_competencia</label>
-        <tc-input :text_area="true" size="large" name="resultado_competencia" v-model="competencia.resultado_competencia"/>
-      </tc-form-item>
-        <tc-form-item class="form-group mb-0 col-md-6 px-3">
+          <tc-form-item class="form-group mb-0 col-md-6 px-3">
           <label>Terminado</label>
           <div>
             <a-switch  v-model="competencia.terminado"/>
           </div>
         </tc-form-item>
         <tc-form-item class="form-group mb-0 col-md-6 px-3">
-          <label>Fin_inscripcion</label>
+          <label>Fin de inscripcion</label>
           <div class="d-flex flex-row">
             <tc-date-picker name="fin_inscripcion" v-model="competencia.fin_inscripcion"></tc-date-picker>
           </div>
         </tc-form-item>
+
+      <tc-form-item class="form-group px-3 col-12">
+        <label>Resultado competencia</label>
+        <tc-input :text_area="true" size="medium" name="resultado_competencia" v-model="competencia.resultado_competencia"/>
+      </tc-form-item>
       </tc-form>
     </div>
     <div class="card-footer p-0">

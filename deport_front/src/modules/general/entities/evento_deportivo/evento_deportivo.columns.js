@@ -60,6 +60,7 @@
       dataIndex: 'terminado',
       align:'center',
       key: 'terminado',
+      scopedSlots: {customRender: 'terminado'},
 
       sorter: (a, b) => a.terminado - b.terminado
     },
@@ -91,8 +92,6 @@
       title: 'Acciones',
       key: 'action_elements',
       fixed: 'right',
-      scopedSlots: {
-        customRender: 'action'
-      }
+      scopedSlots: {customRender: 'action'}
     }
   ];
