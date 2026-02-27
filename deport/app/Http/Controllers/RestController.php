@@ -1,10 +1,10 @@
 <?php
 
 /**
-*@author Yoan  
-*@date Fri May 09 13:47:31 GMT-04:00 2025  
-*@time Fri May 09 13:47:31 GMT-04:00 2025  
-*/
+ *@author Yoan  
+ *@date Fri May 09 13:47:31 GMT-04:00 2025  
+ *@time Fri May 09 13:47:31 GMT-04:00 2025  
+ */
 
 
 
@@ -78,13 +78,25 @@ class RestController extends BaseController
         try {
             $params = $request->all();
             $result = $this->service->create($params);
-            if ($result['success'])
+
+            // Si el service no devolvió el wrapper {success: ...}, asumimos que fue OK
+            if (!is_array($result) || !array_key_exists('success', $result)) {
                 DB::commit();
+                return $result;
+            }
+
+            // Si sí devolvió wrapper, respetamos success
+            if ($result['success']) {
+                DB::commit();
+            } else {
+                DB::rollBack();
+            }
+
+            return $result;
         } catch (\Throwable $e) {
             DB::rollBack();
             throw $e;
         }
-        return $result;
     }
 
     public function update(Request $request, $id)
@@ -149,5 +161,3 @@ class RestController extends BaseController
         return $result;
     }
 }
-
-
