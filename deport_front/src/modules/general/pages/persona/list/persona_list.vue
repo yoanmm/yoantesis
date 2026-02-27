@@ -71,6 +71,7 @@ import * as utils from "@/helpers/helpers/utils";
 import * as mb from "@/helpers/loaders/model.load";
 import persona_form from "../form/persona_form";
 import persona_table from "./persona.table";
+import axios_api from "@/config/axios/axios"; // Asegúrate de que la ruta sea correcta
 
 export default {
   name: "persona_list",
@@ -104,29 +105,54 @@ export default {
       triggerFileInput() {
         this.$refs.fileInput.click();
       },
-        async handleFileChange(event) {
-        const file = event.target.files[0];
-          if (!file) return;
-            try {
-              const text = await file.text();
-              const personas = JSON.parse(text);
-                if (!Array.isArray(personas)) throw new Error('El archivo no contiene un array');
-                  let exitos = 0, fallos = 0;
-                  for (const p of personas) {
-                    try {
-                      const persona = new Persona(p);
-                      await persona.save();
-                      exitos++;
-                    } catch (e) {
-                      fallos++;
-                    }
-                  }
-              utils.openNotificationWithIcon(fallos === 0 ? 'success' : 'warning','Importación finalizada','Éxitos: ${exitos}, Fallos: ${fallos}');
-                this.$refs.persona_table.load_data();
-            } 
-              catch (error) {
-                utils.openNotificationWithIcon('error', 'Error al importar', error.message);
-              }
+    async handleFileChange(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+
+      try {
+        // 1. Leemos el contenido del archivo como texto
+        const text = await file.text();
+
+        // 2. Lo convertimos a objeto JS para validar que sea un JSON correcto
+        const jsonData = JSON.parse(text);
+
+        // 3. Realizamos la petición POST estándar (application/json)
+        const response = await axios_api({
+          url: "general/persona/loadjsonfile",
+          method: "post",
+          // Enviamos el JSON directamente en el body
+          data: {
+            personas: jsonData
+          },
+          responseType: 'json',
+        }).then((response) => {
+
+          const { exitos, fallos } = response.data;
+
+          utils.openNotificationWithIcon(
+              fallos === 0 ? 'success' : 'warning',
+              'Importación finalizada',
+              `Éxitos: ${exitos}, Fallos: ${fallos}`
+          );
+        });
+
+
+        this.$refs.persona_table.load_data();
+
+      } catch (error) {
+        console.error("Error en la carga:", error);
+        let errorMsg = "Error al procesar el archivo";
+
+        if (error instanceof SyntaxError) {
+          errorMsg = "El archivo no tiene un formato JSON válido";
+        } else {
+          errorMsg = error.response?.data?.message || error.message;
+        }
+
+        utils.openNotificationWithIcon('error', 'Error al importar', errorMsg);
+      } finally {
+        event.target.value = '';
+      }
     },
     setSelectedPersona(model) {
       this.selected_persona = model;

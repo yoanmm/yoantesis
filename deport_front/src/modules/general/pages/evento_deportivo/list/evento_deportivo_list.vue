@@ -35,44 +35,43 @@
     </div>
     <div>
       <a-modal
-          @cancel="onCloseModal"
-          :title="selected_evento_deportivo.get_id() ? 'Actualizar Evento Deportivo' : 'Añadir Evento Deportivo'"
-          class="modal-form"
-          width="55rem"
-          :visible="show_modal_form"
-          :destroyOnClose="true"
-          :header="null"
-          :footer="null"
-          :maskClosable="false"
+        @cancel="onCloseModal"
+        :title="selected_evento_deportivo.get_id() ? 'Actualizar Evento Deportivo' : 'Añadir Evento Deportivo'"
+        class="modal-form"
+        width="55rem"
+        :visible="show_modal_form"
+        :destroyOnClose="true"
+        :header="null"
+        :footer="null"
+        :maskClosable="false"
       >
         <evento_deportivo_form
-            :modal="true"
-            :model="selected_evento_deportivo"
-            @success="handleFormSuccess"
-            @close="onCloseModal"
+          :modal="true"
+          :model="selected_evento_deportivo"
+          @success="handleFormSuccess"
+          @close="onCloseModal"
         />
       </a-modal>
       <div style="margin-left: 15px">
         <evento_deportivo_table
-  :columns="columns"
-  table_name="Evento_deportivo"
-  id_table="id_evento"
-  ref="evento_deportivo_table"
-  :params_search="params_search"
-  :paginate="paginate"
->
-  <template #terminado="{ record }">
-    <div style="text-align:center;">
-      <template v-if="record.terminado == 1 || record.terminado === true">
-        <a-icon type="check" style="font-size:15px;color:#52c41a;" />
-      </template>
-      <template v-else>
-        <a-icon type="close" style="font-size:15px;color:#ff4d4f;" />
-      </template>
-    </div>
-  </template>
-</evento_deportivo_table>
-
+          :columns="columns"
+          table_name="Evento_deportivo"
+          id_table="id_evento"
+          ref="evento_deportivo_table"
+          :params_search="params_search"
+          :paginate="paginate"
+        >
+          <template #terminado="{ record }">
+            <div style="text-align:center;">
+              <template v-if="record.terminado == 1 || record.terminado === true">
+                <a-icon type="check" style="font-size:15px;color:#52c41a;" />
+              </template>
+              <template v-else>
+                <a-icon type="close" style="font-size:15px;color:#ff4d4f;" />
+              </template>
+            </div>
+          </template>
+        </evento_deportivo_table>
       </div>
     </div>
   </div>
@@ -100,18 +99,9 @@ export default {
     return {
       data: [],
       self: null,
-      columns: mb.statics("Evento_deportivo").show_columns(
-          [
-            "nombre_evento",
-            "fecha_inicio",
-            "fecha_fin",
-            "curso",
-            "terminado",
-            "reglamento",
-            "action_elements" ,
-          ],
-          true
-      ),
+      columns: mb
+        .statics("Evento_deportivo")
+        .show_columns(["nombre_evento", "fecha_inicio", "fecha_fin", "curso", "terminado", "action_elements"], true),
       selected_evento_deportivo: mb.instance("Evento_deportivo"),
       show_modal_form: false,
       paginate: false,
@@ -138,15 +128,35 @@ export default {
       // Si reload_data es true, recargamos la tabla
       reload_data ? this.$refs.evento_deportivo_table.load_data() : "";
     },
-    show_form() {
+    async show_form() {
+      // Si la tabla todavía no tiene data, intenta cargarla
+      if (
+        this.$refs.evento_deportivo_table &&
+        (!this.$refs.evento_deportivo_table.data || this.$refs.evento_deportivo_table.data.length === 0)
+      ) {
+        await this.$refs.evento_deportivo_table.load_data();
+      }
+
+      //  Si NO estoy editando (creación) y existe un evento no terminado, bloqueo
+      const isCreating = !this.selected_evento_deportivo.get_id();
+
+      if (isCreating && this.hasActiveEvento()) {
+        utils.openNotificationWithIcon(
+          "error",
+          "No se puede crear el evento",
+          "Ya existe un evento deportivo activo. Finalízalo antes de crear uno nuevo.",
+        );
+        return;
+      }
+
       this.show_modal_form = !this.show_modal_form;
     },
     showDeleteConfirm() {
       if (this.$refs.evento_deportivo_table.selectedRowKeys.length === 0) {
         utils.openNotificationWithIcon(
-            "error",
-            "Eliminar elementos seleccionados",
-            "Debe seleccionar al menos un elemento"
+          "error",
+          "Eliminar elementos seleccionados",
+          "Debe seleccionar al menos un elemento",
         );
         return;
       }
@@ -161,8 +171,8 @@ export default {
         async onOk() {
           try {
             const response = await mb
-                .statics("Evento_deportivo")
-                .delete_by_ids(_this.$refs.evento_deportivo_table.selectedRowKeys);
+              .statics("Evento_deportivo")
+              .delete_by_ids(_this.$refs.evento_deportivo_table.selectedRowKeys);
             utils.process_response(response, "deleted");
             _this.$refs.evento_deportivo_table.selectedRowKeys = [];
             _this.$refs.evento_deportivo_table.load_data();
@@ -173,6 +183,12 @@ export default {
         },
         onCancel() {},
       });
+    },
+    hasActiveEvento() {
+      const table = this.$refs.evento_deportivo_table;
+      if (!table || !table.data) return false;
+
+      return table.data.some((e) => Number(e.terminado) === 0 || e.terminado === false);
     },
   },
 };
