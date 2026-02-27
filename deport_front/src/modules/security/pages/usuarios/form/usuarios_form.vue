@@ -22,7 +22,7 @@
         <label>Correo</label>
         <tc-input placeholder='Ingrese el valor' name='correo' v-model="usuarios.correo"></tc-input>
       </tc-form-item>
-        <tc-form-item class="form-group mb-0 col-md-6 px-3">
+        <!-- <tc-form-item class="form-group mb-0 col-md-6 px-3">
           <label>Creado</label>
           <div class="d-flex flex-row">
             <tc-date-picker name="creado" v-model="usuarios.creado" :readonly="true" :disabled="true"></tc-date-picker>
@@ -33,7 +33,7 @@
           <div class="d-flex flex-row">
             <tc-date-picker name="actualizado" v-model="usuarios.actualizado" :readonly="true" :disabled="true"></tc-date-picker>
           </div>
-        </tc-form-item>
+        </tc-form-item> -->
         <tc-form-item class="form-group mb-0 col-md-6 px-3">
           <label>Activo</label>
           <div>
@@ -41,7 +41,7 @@
           </div>
         </tc-form-item>
         <tc-form-item class="form-group mb-0 col-md-6 px-3">
-          <label>Usuario</label>
+          <label>Persona</label>
           <div class="d-flex flex-row">
             <tc-autocomplete
               placeholder="Seleccione el usuario"
@@ -49,7 +49,7 @@
               ref="select_persona"
               :successFeed="false"
               idKey="id_persona"
-              textKey="nombre"
+              textKey="nombre_completo"
               :defaultValue="usuarios.id_persona"
               v-model="usuarios.id_persona"
               :url="mb.statics('Persona').select_2_url"

@@ -33,11 +33,9 @@ export const feedbacks = {
     },
     id_delegacion_evento: {
       required: "La delegación evento es requerida",
-      integer: "La delegación evento debe ser un número entero",
     },
     id_deporte: {
       required: "El deporte es requerido",
-      integer: "El deporte debe ser un número entero",
     },
   },
 };

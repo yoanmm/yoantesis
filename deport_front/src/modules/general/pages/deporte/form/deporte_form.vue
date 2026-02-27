@@ -20,14 +20,14 @@
           <a-switch  v-model="deporte.individual"/>
         </div>
       </tc-form-item>
-      <tc-form-item class="form-group mb-0 col-md-6 px-3">
-        <label>Maximo de atletas</label>
-        <tc-input placeholder='Ingrese el valor'   type_car='num'  name='max_atleta' v-model="deporte.max_atleta"></tc-input>
-      </tc-form-item>
-      <tc-form-item class="form-group mb-0 col-md-6 px-3">
-        <label>Minimo de atletas</label>
-        <tc-input placeholder='Ingrese el valor'   type_car='num'  name='min_atleta' v-model="deporte.min_atleta"></tc-input>
-      </tc-form-item>
+        <tc-form-item class="form-group mb-0 col-md-6 px-3">
+          <label>Minimo de atletas</label>
+          <tc-input placeholder='Ingrese el valor'   type_car='num'  name='min_atleta' v-model="deporte.min_atleta"></tc-input>
+        </tc-form-item>
+        <tc-form-item class="form-group mb-0 col-md-6 px-3">
+          <label>Máximo de atletas</label>
+          <tc-input placeholder='Ingrese el valor'   type_car='num'  name='max_atleta' v-model="deporte.max_atleta"></tc-input>
+        </tc-form-item>
       <tc-form-item class="form-group mb-0 col-md-6 px-3">
         <label>Genero</label>
         <a-select
@@ -402,60 +402,77 @@ export default {
         this.modal?this.close_modal(null,false):this.$router.push({name: 'deporte_list'})
        }
       },
-    save_model(and_new=false) {
+    save_model(and_new = false) {
       if (this.$refs.form.validate()) {
         this.loading = true;
-        
-        // Limpiar campos vacíos o no válidos
+
+        // 1. Limpieza de campos de archivos
         if (!this.deporte.icono_deporte || typeof this.deporte.icono_deporte !== 'string') {
           this.deporte.icono_deporte = null;
         }
         if (!this.deporte.reglamento || typeof this.deporte.reglamento !== 'string') {
           this.deporte.reglamento = null;
         }
-        
-        const accion=this.deporte.get_id() ? "actualizado" : "añadido";
-        // Asegurar que `activo` se envíe como 0/1
+
+        // 2. Asegurar que `activo` se envíe como 0/1 (Si aplica)
         try {
-          this.deporte.activo = this.deporte.activo === true || this.deporte.activo === '1' || this.deporte.activo === 1 ? 1 : 0;
+          this.deporte.activo = (this.deporte.activo === true || this.deporte.activo === '1' || this.deporte.activo === 1) ? 1 : 0;
         } catch (e) {}
 
-        this.deporte
-          .save()
-          .then((response) => {
-            if(utils.process_response(response,accion)) {
-              // Actualizar las URLs de los archivos desde la respuesta del servidor
-              if (response.data && response.data.data) {
-                const data = response.data.data;
-              if (data.icono_deporte) {
-                this.deporte.icono_deporte = data.icono_deporte;
-                this.previewIconoDeporte = this.resolveIconUrl(data.icono_deporte);
-              }
-                if (data.reglamento) {
-                  this.deporte.reglamento = data.reglamento;
-                  this.previewReglamentoName = this.getFileName(data.reglamento);
-                  this.previewReglamentoUrl = this.resolveFileUrl(data.reglamento);
+        const accion = this.deporte.get_id() ? "actualizado" : "añadido";
+
+        this.deporte.save()
+            .then((response) => {
+              if (utils.process_response(response, accion)) {
+
+                // 3. Sincronizar datos recibidos del servidor
+                if (response.data && response.data.data) {
+                  const data = response.data.data;
+                  if (data.icono_deporte) {
+                    this.deporte.icono_deporte = data.icono_deporte;
+                    this.previewIconoDeporte = this.resolveIconUrl(data.icono_deporte);
+                  }
+                  if (data.reglamento) {
+                    this.deporte.reglamento = data.reglamento;
+                    this.previewReglamentoName = this.getFileName(data.reglamento);
+                    this.previewReglamentoUrl = this.resolveFileUrl(data.reglamento);
+                  }
+                }
+
+                // 4. Lógica de Navegación y Control de Reset
+                if (and_new) {
+                  // CASO: Añadir y continuar insertando
+                  this.deporte = mb.instance('Deporte');
+                  this.load_data();
+
+                  // Usamos nextTick para esperar que Vue procese la nueva instancia de 'deporte'
+                  // antes de intentar resetear las validaciones del formulario.
+                  this.$nextTick(() => {
+                    if (this.$refs.form && this.$refs.form.vobject) {
+                      this.$refs.form.vobject.$reset();
+                    }
+                  });
+                } else {
+                  // CASO: Guardar y Salir
+                  // IMPORTANTE: NO llamar a $reset() aquí.
+                  // La navegación o el cierre destruyen el componente, limpiando Vuelidate automáticamente.
+                  if (!this.model && this.modal) {
+                    this.$emit('close_modal', true);
+                  } else {
+                    if (this.modal) {
+                      this.close_modal(null, true);
+                    } else {
+                      this.$router.push({ name: 'deporte_list' });
+                    }
+                  }
                 }
               }
-              
-              if (!this.model && !and_new && this.modal) {
-
-                  this.$emit('close_modal',true)
-                  return;
-               }
-                else {
-                   !and_new?this.modal?this.close_modal(null,true):this.$router.push({name: 'deporte_list'}):this.deporte=mb.instance('Deporte');
-               }
-               this.load_data()
-               this.$refs.form.vobject.$reset()
-
-            }
-            this.loading = false;
-          })
-          .catch((error) => {
-            this.loading = false;
-            utils.process_error(error);
-          });
+              this.loading = false;
+            })
+            .catch((error) => {
+              this.loading = false;
+              utils.process_error(error);
+            });
       }
     }
   },

@@ -36,7 +36,7 @@
     <div>
       <a-modal
         @cancel="onCloseModal"
-        :title="selected_atleta_tipo.get_id() ? 'Actualizar atleta_tipo' : 'Añadir atleta_tipo'"
+        :title="selected_atleta_tipo.get_id() ? 'Actualizar tipo de atleta' : 'Añadir tipo de atleta'"
         class="modal-form"
         width="55rem"
         :visible="show_modal_form"

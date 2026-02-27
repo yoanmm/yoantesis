@@ -50,15 +50,7 @@
                         <a-icon type="file-excel" theme="twoTone" twoToneColor="#52c41a"/>
                      EXCEL
                    </a-menu-item>
-   <a-menu-item key="2">
-                     <a-icon type="file-pdf" theme="twoTone" twoToneColor="#c41c33"/>
-                     PDF
-                   </a-menu-item>
-                   <a-menu-item key="3" @click="exportToCSV">
-                     <a-icon type="file-text" theme="twoTone" twoToneColor="#2771c4"/>
-                     CSV
-                   </a-menu-item>
-                    </a-menu>
+                  </a-menu>
                </a-dropdown-button>
            </a-tooltip>
         </div>
@@ -75,19 +67,13 @@
        />
     </a>
 
-    <slot :slot="'id_evento'" slot-scope='record' name='id_evento' :record='record'/>
     <slot :slot="'nombre_evento'" slot-scope='record' name='nombre_evento' :record='record'/>
-    <slot :slot="'descripcion_evento'" slot-scope='record' name='descripcion_evento' :record='record'/>
-    <slot :slot="'logo'" slot-scope='record' name='logo' :record='record'/>
     <slot :slot="'fecha_inicio'" slot-scope='record' name='fecha_inicio' :record='record'/>
     <slot :slot="'fecha_fin'" slot-scope='record' name='fecha_fin' :record='record'/>
     <slot :slot="'curso'" slot-scope='record' name='curso' :record='record'/>
-    <slot :slot="'edicion_evento'" slot-scope='record' name='edicion_evento' :record='record'/>
     <slot :slot="'terminado'" slot-scope='record' name='terminado' :record='record'/>
-    <slot :slot="'resultado_edicion'" slot-scope='record' name='resultado_edicion' :record='record'/>
-    <slot :slot="'descripcion_delegaciones'" slot-scope='record' name='descripcion_delegaciones' :record='record'/>
-    <slot :slot="'id_regla_evento'" slot-scope='record' name='id_regla_evento' :record='record'/>
-  </a-table>
+    <slot :slot="'reglamento'" slot-scope='record' name='reglamento' :record='record'/>
+    </a-table>
 </template>
 
 <script>

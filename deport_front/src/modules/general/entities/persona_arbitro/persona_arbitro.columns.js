@@ -1,7 +1,7 @@
   export const columns = [
     {
       title: 'Persona',
-      dataIndex: 'persona.nombre',
+      dataIndex: 'persona.nombre_completo',
       align:'center',
       key: 'persona.nombre',
 

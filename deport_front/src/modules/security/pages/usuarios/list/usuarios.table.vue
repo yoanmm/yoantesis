@@ -43,14 +43,6 @@
                   <a-icon type="file-excel" theme="twoTone" twoToneColor="#52c41a" />
                   EXCEL
                 </a-menu-item>
-                <a-menu-item key="2">
-                  <a-icon type="file-pdf" theme="twoTone" twoToneColor="#c41c33" />
-                  PDF
-                </a-menu-item>
-                <a-menu-item key="3" @click="exportToCSV">
-                  <a-icon type="file-text" theme="twoTone" twoToneColor="#2771c4" />
-                  CSV
-                </a-menu-item>
               </a-menu>
             </a-dropdown-button>
           </a-tooltip>
@@ -70,12 +62,10 @@
 
     <slot :slot="'id_usuario'" slot-scope="record" name="id_usuario" :record="record" />
     <slot :slot="'username'" slot-scope="record" name="username" :record="record" />
-    <slot :slot="'password'" slot-scope="record" name="password" :record="record" />
     <slot :slot="'correo'" slot-scope="record" name="correo" :record="record" />
     <slot :slot="'creado'" slot-scope="record" name="creado" :record="record" />
     <slot :slot="'actualizado'" slot-scope="record" name="actualizado" :record="record" />
-    <slot :slot="'activo'" slot-scope="record" name="activo" :record="record" />
-    <slot :slot="'id_persona'" slot-scope="record" name="id_persona" :record="record" />
+    <slot :slot="'id_persona'" slot-scope="record" name="nombre" :record="record" />
   </a-table>
 </template>
 

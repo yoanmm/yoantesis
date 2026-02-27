@@ -62,7 +62,7 @@
         <input
           type="file"
           name="logo"
-          accept=".png,.jpg,.jpeg"
+          accept=".png,.jpg,.jpeg,.svg"
           @change="onLogoChange"
           class="form-control"
           ref="logo_input"
@@ -442,70 +442,68 @@ export default {
         this.modal?this.close_modal(null,false):this.$router.push({name: 'delegacion_list'})
        }
       },
-    save_model(and_new=false) {
+    save_model(and_new = false) {
       if (this.$refs.form.validate()) {
         this.loading = true;
-        
+
         // Limpiar campos vacíos o no válidos
-        if (!this.delegacion.mascota || typeof this.delegacion.mascota !== 'string') {
-          this.delegacion.mascota = null;
-        }
-        if (!this.delegacion.logo || typeof this.delegacion.logo !== 'string') {
-          this.delegacion.logo = null;
-        }
-        if (!this.delegacion.reglamento || typeof this.delegacion.reglamento !== 'string') {
-          this.delegacion.reglamento = null;
-        }
-        // Asegurar que color se envíe como string (hex)
+        this.delegacion.mascota = (typeof this.delegacion.mascota === 'string') ? this.delegacion.mascota : null;
+        this.delegacion.logo = (typeof this.delegacion.logo === 'string') ? this.delegacion.logo : null;
+        this.delegacion.reglamento = (typeof this.delegacion.reglamento === 'string') ? this.delegacion.reglamento : null;
+
         try {
           this.delegacion.color = String(this.delegacion.color || this.colorObject.hex || '#000000');
-        } catch (e) {}
-        
-        const accion=this.delegacion.get_id() ? "actualizado" : "añadido";
-        this.delegacion
-          .save()
-          .then((response) => {
-            if(utils.process_response(response,accion)) {
-              // Actualizar las URLs de los archivos desde la respuesta del servidor
-              if (response.data && response.data.data) {
-                const data = response.data.data;
-                if (data.logo) {
-                  this.delegacion.logo = data.logo;
-                  this.previewLogo = this.resolveIconUrl(data.logo);
+        } catch (e) {
+          this.delegacion.color = '#000000';
+        }
+
+        const accion = this.delegacion.get_id() ? "actualizado" : "añadido";
+
+        this.delegacion.save()
+            .then((response) => {
+              if (utils.process_response(response, accion)) {
+                // 1. Sincronizar datos de respuesta (opcional si vas a cerrar, pero útil si hay errores)
+                if (response.data && response.data.data) {
+                  const data = response.data.data;
+                  if (data.logo) { this.delegacion.logo = data.logo; this.previewLogo = this.resolveIconUrl(data.logo); }
+                  if (data.mascota) { this.delegacion.mascota = data.mascota; this.previewMascota = this.resolveIconUrl(data.mascota); }
+                  if (data.reglamento) {
+                    this.delegacion.reglamento = data.reglamento;
+                    this.previewReglamentoName = this.getFileName(data.reglamento);
+                    this.previewReglamentoUrl = this.resolveFileUrl(data.reglamento);
+                  }
+                  if (data.color) { this.delegacion.color = data.color; this.colorObject = { hex: data.color }; }
                 }
-                if (data.mascota) {
-                  this.delegacion.mascota = data.mascota;
-                  this.previewMascota = this.resolveIconUrl(data.mascota);
-                }
-                if (data.reglamento) {
-                  this.delegacion.reglamento = data.reglamento;
-                  this.previewReglamentoName = this.getFileName(data.reglamento);
-                  this.previewReglamentoUrl = this.resolveFileUrl(data.reglamento);
-                }
-                if (data.color) {
-                  this.delegacion.color = data.color;
-                  this.colorObject = { hex: data.color };
+
+                // 2. Lógica de Navegación vs Reset
+                if (and_new) {
+                  // Caso "Añadir y Nuevo": Reseteamos la instancia y la validación
+                  this.delegacion = mb.instance('Delegacion');
+                  this.load_data();
+
+                  // Usamos nextTick para que Vuelidate procese el cambio de instancia antes del reset
+                  this.$nextTick(() => {
+                    if (this.$refs.form && this.$refs.form.vobject) {
+                      this.$refs.form.vobject.$reset();
+                    }
+                  });
+                } else {
+                  // Caso "Guardar y Salir": NO llamar a $reset() aquí.
+                  // Al navegar o cerrar el modal, el componente se destruye y Vuelidate se limpia solo.
+                  if (this.modal) {
+                    this.$emit('close_modal', true);
+                    if (this.close_modal) this.close_modal(null, true);
+                  } else {
+                    this.$router.push({ name: 'delegacion_list' });
+                  }
                 }
               }
-              
-              if (!this.model && !and_new && this.modal) {
-
-                  this.$emit('close_modal',true)
-                  return;
-               }
-                else {
-                   !and_new?this.modal?this.close_modal(null,true):this.$router.push({name: 'delegacion_list'}):this.delegacion=mb.instance('Delegacion');
-               }
-               this.load_data()
-               this.$refs.form.vobject.$reset()
-
-            }
-            this.loading = false;
-          })
-          .catch((error) => {
-            this.loading = false;
-            utils.process_error(error);
-          });
+              this.loading = false;
+            })
+            .catch((error) => {
+              this.loading = false;
+              utils.process_error(error);
+            });
       }
     }
   },

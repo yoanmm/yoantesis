@@ -88,7 +88,17 @@ export default {
     return {
       data: [],
       self: null,
-      columns: mb.statics("Evento_deportivo").columns,
+      columns: mb.statics("Evento_deportivo").show_columns(
+          [
+            "nombre_evento",
+            "fecha_inicio",
+            "fecha_fin",
+            "curso",
+            "terminado",
+            "action_elements" ,
+          ],
+          true
+      ),
       selected_evento_deportivo: mb.instance("Evento_deportivo"),
       show_modal_form: false,
       paginate: false,

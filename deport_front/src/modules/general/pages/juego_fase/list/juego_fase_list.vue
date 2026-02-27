@@ -14,29 +14,30 @@
         </a-breadcrumb-item>
       </a-breadcrumb>
     </div>
+
     <div class="row col-md-6">
       <h3>Fase del juego</h3>
     </div>
+
     <div class="container">
-      <div>
-        <div class="row">
-          <div class="col-md-6">
-            <a-button-group style="margin-bottom: 10px">
-              <a-tooltip placement="topLeft" title="Añadir nuevo elemento">
-                <a-button icon="plus" type="primary" @click="show_form">Añadir</a-button>
-              </a-tooltip>
-              <a-tooltip placement="topLeft" title="Eliminar elementos seleccionados">
-                <a-button icon="delete" type="danger" @click="showDeleteConfirm">Eliminar</a-button>
-              </a-tooltip>
-            </a-button-group>
-          </div>
+      <div class="row">
+        <div class="col-md-6">
+          <a-button-group style="margin-bottom: 10px">
+            <a-tooltip placement="topLeft" title="Añadir nuevo elemento">
+              <a-button icon="plus" type="primary" @click="show_form">Añadir</a-button>
+            </a-tooltip>
+            <a-tooltip placement="topLeft" title="Eliminar elementos seleccionados">
+              <a-button icon="delete" type="danger" @click="showDeleteConfirm">Eliminar</a-button>
+            </a-tooltip>
+          </a-button-group>
         </div>
       </div>
     </div>
+
     <div>
       <a-modal
         @cancel="onCloseModal"
-        :title="selected_juego_fase.get_id() ? 'Actualizar juego_fase' : 'Añadir juego_fase'"
+        :title="selected_juego_fase.get_id() ? 'Actualizar fase' : 'Añadir fase'"
         class="modal-form"
         width="55rem"
         :visible="show_modal_form"
@@ -48,6 +49,7 @@
       >
         <juego_fase_form :modal="true" :model="selected_juego_fase" />
       </a-modal>
+
       <div style="margin-left: 15px">
         <juego_fase_table
           :columns="columns"
@@ -56,11 +58,24 @@
           ref="juego_fase_table"
           :params_search="params_search"
           :paginate="paginate"
-        />
+        >
+          <!-- SLOT PARA LA COLUMNA FINAL -->
+         <template #es_final="{ record }">
+            <div style="text-align:center;">
+              <template v-if="record === 1">
+                <a-icon type="check" style="font-size:15px;color:#52c41a;" />
+              </template>
+              <template v-else>
+                <a-icon type="close" style="font-size:15px;color:#ff4d4f;" />
+              </template>
+            </div>
+          </template>
+        </juego_fase_table>
       </div>
     </div>
   </div>
 </template>
+
 <script>
 import * as utils from "@/helpers/helpers/utils";
 import * as mb from "@/helpers/loaders/model.load";

@@ -3,7 +3,7 @@
     <div class="col-md-3">
 
     </div>
-    <div class=" col-xxl-6 col-xl-6 col-sm-6">
+    <!-- <div class=" col-xxl-6 col-xl-6 col-sm-6">
       <div class="card card-statistics contact-contant">
         <div class="card-body py-4">
           <div class="d-flex align-items-center">
@@ -12,9 +12,6 @@
             </div>
             <div class="ml-3">
               <h4 class="mb-0">Nombre y Apellidos: {{ $store.site.user.name }}</h4>
-              <p class="float-right">
-                <span class="badge badge-warning-inverse px-2 py-1 mt-1">Entidad: {{ $store.site.user.touroperador.company_name.toUpperCase() }}</span>
-              </p>
             </div>
           </div>
           <div>
@@ -55,7 +52,7 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
   </div>
 </template>
 

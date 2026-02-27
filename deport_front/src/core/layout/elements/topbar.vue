@@ -311,7 +311,7 @@
                   </div>
                 </div>
                 <div class="p-4" v-if="true">
-                  <a class="dropdown-item d-flex nav-link" href="javascript:void(0)">
+              <!--<a class="dropdown-item d-flex nav-link" href="javascript:void(0)">
                     <i class="fa fa-user pr-2 text-success"></i> Profile</a
                   >
                   <a class="dropdown-item d-flex nav-link" href="javascript:void(0)">
@@ -323,7 +323,7 @@
                   </a>
                   <a class="dropdown-item d-flex nav-link" href="javascript:void(0)">
                     <i class="fa fa-compass pr-2 text-warning"></i> Need help?</a
-                  >
+                  >-->
                   <a
                     class="dropdown-item d-flex nav-link"
                     href="javascript:void(0)"

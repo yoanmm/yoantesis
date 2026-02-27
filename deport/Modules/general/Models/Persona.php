@@ -78,7 +78,7 @@ class Persona extends BaseModel
      */
     protected $perPage = 15;
 
-    protected $appends = [];
+    protected $appends = ['nombre_completo'];
 
     /**
      * Model Class Name
@@ -100,6 +100,10 @@ class Persona extends BaseModel
       'facultad'
     ];
 
+    public function getNombreCompletoAttribute()
+    {
+        return trim($this->nombre . ' ' . $this->apellido);
+    }
 
 	 /**
      * 

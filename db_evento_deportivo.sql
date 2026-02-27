@@ -11,7 +11,7 @@
  Target Server Version : 110302 (11.3.2-MariaDB)
  File Encoding         : 65001
 
- Date: 23/01/2026 11:14:55
+ Date: 24/02/2026 13:11:07
 */
 
 SET NAMES utf8mb4;
@@ -90,11 +90,12 @@ CREATE TABLE `competencia`  (
   INDEX `id_evento`(`id_evento`) USING BTREE,
   CONSTRAINT `competencia_ibfk_1` FOREIGN KEY (`id_deporte`) REFERENCES `deporte` (`id_deporte`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `competencia_ibfk_3` FOREIGN KEY (`id_evento`) REFERENCES `evento_deportivo` (`id_evento`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of competencia
 -- ----------------------------
+INSERT INTO `competencia` VALUES (1, 1, 26, NULL, 0, '2026-02-08 23:09:46');
 
 -- ----------------------------
 -- Table structure for compromiso_participacion
@@ -171,16 +172,20 @@ CREATE TABLE `delegacion`  (
   INDEX `id_regla_delegacion`(`id_regla_delegacion`) USING BTREE,
   CONSTRAINT `delegacion_ibfk_1` FOREIGN KEY (`id_tipo_delegacion`) REFERENCES `delegacion_tipo` (`id_tipo_delegacion`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `delegacion_ibfk_2` FOREIGN KEY (`id_regla_delegacion`) REFERENCES `delegacion_regla` (`id_regla_delegacion`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 14 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of delegacion
 -- ----------------------------
-INSERT INTO `delegacion` VALUES (1, 'Informática', NULL, NULL, NULL, NULL, 2, NULL, NULL);
-INSERT INTO `delegacion` VALUES (2, 'Civil', NULL, NULL, NULL, NULL, 2, NULL, NULL);
-INSERT INTO `delegacion` VALUES (3, 'Industrial', NULL, NULL, NULL, NULL, 2, NULL, NULL);
-INSERT INTO `delegacion` VALUES (4, 'Química', NULL, NULL, NULL, NULL, 2, NULL, NULL);
-INSERT INTO `delegacion` VALUES (6, 'Eléctrica', NULL, NULL, NULL, NULL, 2, NULL, NULL);
+INSERT INTO `delegacion` VALUES (1, 'Informática', 'I', 'http://localhost/yoantesis/deport/public/uploads/delegacion/mascota/1770969080_698ed7f8992a9.png', '#FFFB00', 'http://localhost/yoantesis/deport/public/uploads/delegacion/logo/1770969091_698ed80397729.png', 2, NULL, NULL);
+INSERT INTO `delegacion` VALUES (2, 'Civil', 'C', 'http://localhost/yoantesis/deport/public/uploads/delegacion/mascota/1770969127_698ed82774da0.png', '#AFB4C0', NULL, 2, NULL, NULL);
+INSERT INTO `delegacion` VALUES (3, 'Industrial', 'Ind', 'http://localhost/yoantesis/deport/public/uploads/delegacion/mascota/1770969118_698ed81e09ee1.png', '#FFFFFF', NULL, 2, NULL, NULL);
+INSERT INTO `delegacion` VALUES (4, 'Química', 'Q', 'http://localhost/yoantesis/deport/public/uploads/delegacion/mascota/1770969136_698ed83025d60.png', '#000000', NULL, 2, NULL, NULL);
+INSERT INTO `delegacion` VALUES (6, 'Eléctrica', 'E', 'http://localhost/yoantesis/deport/public/uploads/delegacion/mascota/1770969050_698ed7da713a5.png', '#1C1FA4', 'http://localhost/yoantesis/deport/public/uploads/delegacion/logo/1770969063_698ed7e7ed960.png', 2, NULL, NULL);
+INSERT INTO `delegacion` VALUES (10, 'Arbitros', NULL, NULL, '#958C8C', NULL, 234, NULL, NULL);
+INSERT INTO `delegacion` VALUES (11, 'Automatica y Biomedica', 'AB', 'http://localhost/yoantesis/deport/public/uploads/delegacion/mascota/1771284230_6993a7066d1a8.png', '#FE802B', 'http://localhost/yoantesis/deport/public/uploads/delegacion/logo/1771284230_6993a7066d6d9.png', 2, NULL, NULL);
+INSERT INTO `delegacion` VALUES (12, 'Mecanica', 'M', 'http://localhost/yoantesis/deport/public/uploads/delegacion/mascota/1771738069_699a93d5471ff.png', '#EF0606', 'http://localhost/yoantesis/deport/public/uploads/delegacion/logo/1771738069_699a93d547796.png', 2, NULL, NULL);
+INSERT INTO `delegacion` VALUES (13, 'Telecomunicacionesz', 'Tel', NULL, '#990BD8', NULL, 2, NULL, 'http://localhost/yoantesis/deport/public/uploads/delegacion/reglamento/1771891676_699cebdcc677b.docx');
 
 -- ----------------------------
 -- Table structure for delegacion_evento
@@ -195,11 +200,23 @@ CREATE TABLE `delegacion_evento`  (
   INDEX `id_delegacion`(`id_delegacion`) USING BTREE,
   CONSTRAINT `delegacion_evento_ibfk_1` FOREIGN KEY (`id_evento`) REFERENCES `evento_deportivo` (`id_evento`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `delegacion_evento_ibfk_2` FOREIGN KEY (`id_delegacion`) REFERENCES `delegacion` (`id_delegacion`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 16 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of delegacion_evento
 -- ----------------------------
+INSERT INTO `delegacion_evento` VALUES (4, 10, 1);
+INSERT INTO `delegacion_evento` VALUES (5, 10, 2);
+INSERT INTO `delegacion_evento` VALUES (6, 10, 6);
+INSERT INTO `delegacion_evento` VALUES (7, 10, 3);
+INSERT INTO `delegacion_evento` VALUES (8, 10, 4);
+INSERT INTO `delegacion_evento` VALUES (9, 11, 3);
+INSERT INTO `delegacion_evento` VALUES (10, 11, 1);
+INSERT INTO `delegacion_evento` VALUES (11, 11, 2);
+INSERT INTO `delegacion_evento` VALUES (12, 11, 10);
+INSERT INTO `delegacion_evento` VALUES (13, 11, 11);
+INSERT INTO `delegacion_evento` VALUES (14, 11, 4);
+INSERT INTO `delegacion_evento` VALUES (15, 11, 6);
 
 -- ----------------------------
 -- Table structure for delegacion_regla
@@ -224,13 +241,14 @@ CREATE TABLE `delegacion_tipo`  (
   `id_tipo_delegacion` int(11) NOT NULL AUTO_INCREMENT,
   `tipo_delegacion` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id_tipo_delegacion`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 233 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 235 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of delegacion_tipo
 -- ----------------------------
 INSERT INTO `delegacion_tipo` VALUES (2, 'Facultad');
 INSERT INTO `delegacion_tipo` VALUES (32, 'Universidad');
+INSERT INTO `delegacion_tipo` VALUES (234, 'Invitados');
 
 -- ----------------------------
 -- Table structure for deporte
@@ -261,16 +279,14 @@ CREATE TABLE `deporte`  (
 -- ----------------------------
 -- Records of deporte
 -- ----------------------------
-INSERT INTO `deporte` VALUES (25, 'Lucha Libre', 8, 1, 'judo-lucha.svg', 'M', 1, 4, NULL, NULL, NULL, NULL);
-INSERT INTO `deporte` VALUES (26, 'Natación', 15, 1, 'natacion.svg', 'F', 0, 3, NULL, NULL, NULL, NULL);
-INSERT INTO `deporte` VALUES (27, 'Natación', 15, 1, 'natacion.svg', 'M', 0, 3, NULL, NULL, NULL, NULL);
-INSERT INTO `deporte` VALUES (31, 'Taekwondo', 8, 1, 'karate-taekwondo.svg', 'M', 1, 2, NULL, NULL, NULL, NULL);
-INSERT INTO `deporte` VALUES (32, 'Teakwondo', 8, 1, 'karate-taekwondo.svg', 'F', 1, 2, NULL, NULL, NULL, NULL);
-INSERT INTO `deporte` VALUES (33, 'Tenis de Campo', 3, 2, 'tenis.svg', 'M', 0, 4, NULL, NULL, NULL, NULL);
-INSERT INTO `deporte` VALUES (37, 'Tiro Deportivo', 3, 2, 'tiro.svg', 'F', 0, 4, NULL, NULL, NULL, NULL);
-INSERT INTO `deporte` VALUES (40, 'Voleibol', 15, 8, 'voley.svg', 'M', 0, 2, NULL, NULL, NULL, NULL);
-INSERT INTO `deporte` VALUES (76, 'Atletismo', 15, 1, 'atletismo.svg', 'X', 0, 2, NULL, NULL, NULL, NULL);
-INSERT INTO `deporte` VALUES (77, 'Carera de 100m', 4, 2, NULL, 'M', 1, 5, NULL, 76, NULL, NULL);
+INSERT INTO `deporte` VALUES (25, 'Lucha Libre', 8, 1, 'http://localhost/yoantesis/deport/public/uploads/deporte/icono/1771292266_6993c66a3796f.svg', 'M', 1, 4, NULL, NULL, NULL, 0);
+INSERT INTO `deporte` VALUES (26, 'Natación', 15, 1, 'http://localhost/yoantesis/deport/public/uploads/deporte/icono/1771292278_6993c676500e7.svg', 'X', 0, 3, NULL, NULL, NULL, 0);
+INSERT INTO `deporte` VALUES (31, 'Taekwondo', 8, 1, 'http://localhost/yoantesis/deport/public/uploads/deporte/icono/1771292350_6993c6be8ae5e.svg', 'X', 1, 2, NULL, NULL, NULL, 0);
+INSERT INTO `deporte` VALUES (33, 'Tenis de Campo', 3, 2, 'http://localhost/yoantesis/deport/public/uploads/deporte/icono/1771292383_6993c6df59542.svg', 'M', 0, 4, NULL, NULL, NULL, 0);
+INSERT INTO `deporte` VALUES (37, 'Tiro Deportivo', 3, 2, 'http://localhost/yoantesis/deport/public/uploads/deporte/icono/1771292394_6993c6eae2990.svg', 'F', 0, 4, NULL, NULL, NULL, 0);
+INSERT INTO `deporte` VALUES (40, 'Voleibol', 15, 8, 'http://localhost/yoantesis/deport/public/uploads/deporte/icono/1771292596_6993c7b42ce85.svg', 'M', 0, 2, NULL, NULL, NULL, 0);
+INSERT INTO `deporte` VALUES (76, 'Atletismo', 15, 1, 'http://localhost/yoantesis/deport/public/uploads/deporte/icono/1771292607_6993c7bf669e6.svg', 'X', 0, 2, NULL, NULL, NULL, 0);
+INSERT INTO `deporte` VALUES (77, 'Carera de 100m', 4, 2, NULL, 'M', 1, 5, NULL, 76, NULL, 1);
 
 -- ----------------------------
 -- Table structure for deporte_categoria_puntuacion
@@ -361,10 +377,10 @@ CREATE TABLE `equipo_atleta`  (
 -- ----------------------------
 DROP TABLE IF EXISTS `equipo_estado`;
 CREATE TABLE `equipo_estado`  (
-  `id_estado` int(11) NOT NULL,
+  `id_estado` int(11) NOT NULL AUTO_INCREMENT,
   `estado_equipo` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id_estado`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of equipo_estado
@@ -395,14 +411,14 @@ CREATE TABLE `evento_deportivo`  (
   PRIMARY KEY (`id_evento`) USING BTREE,
   INDEX `FK_regla_evento`(`id_regla_evento`) USING BTREE,
   CONSTRAINT `FK_regla_evento` FOREIGN KEY (`id_regla_evento`) REFERENCES `evento_deportivo_regla` (`id_regla_evento`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 12 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of evento_deportivo
 -- ----------------------------
 INSERT INTO `evento_deportivo` VALUES (1, 'Trece de Marzo', NULL, NULL, '2026-03-03 19:59:22', '2026-03-30 19:59:38', '2020-2021', NULL, 0, NULL, NULL, NULL, NULL);
-INSERT INTO `evento_deportivo` VALUES (2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL);
-INSERT INTO `evento_deportivo` VALUES (3, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL);
+INSERT INTO `evento_deportivo` VALUES (10, 'ytdyd', NULL, NULL, '2026-02-11 05:00:00', '2026-02-25 05:00:00', '675', NULL, 0, NULL, NULL, NULL, NULL);
+INSERT INTO `evento_deportivo` VALUES (11, 'Trece de Marzo', NULL, NULL, '2026-03-05 05:00:00', '2026-03-28 04:00:00', '2025-2026', NULL, 0, NULL, NULL, NULL, NULL);
 
 -- ----------------------------
 -- Table structure for evento_deportivo_regla
@@ -541,7 +557,7 @@ CREATE TABLE `persona`  (
   `genero` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `facultad` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id_persona`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 10 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 17 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of persona
@@ -554,6 +570,7 @@ INSERT INTO `persona` VALUES (5, 'Fer', 'Lopez', '97082354091', 'Femenino', 'Inf
 INSERT INTO `persona` VALUES (6, 'Yurien', 'Rieumont', '78122480621', 'Femenino', 'Industrial');
 INSERT INTO `persona` VALUES (7, 'Yurima', 'Montero', '95042650412', 'Femenino', 'Eléctrica');
 INSERT INTO `persona` VALUES (9, 'Magela', 'Rodriguez', '12081214532', 'Femenino', 'Química');
+INSERT INTO `persona` VALUES (12, 'Pepe', 'Port', '09110921504', 'Masculino', 'Quimica');
 
 -- ----------------------------
 -- Table structure for persona_arbitro
@@ -568,7 +585,7 @@ CREATE TABLE `persona_arbitro`  (
   INDEX `id_deporte`(`id_deporte`) USING BTREE,
   CONSTRAINT `persona_arbitro_ibfk_1` FOREIGN KEY (`id_persona`) REFERENCES `persona` (`id_persona`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `persona_arbitro_ibfk_2` FOREIGN KEY (`id_deporte`) REFERENCES `deporte` (`id_deporte`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of persona_arbitro
@@ -590,11 +607,12 @@ CREATE TABLE `persona_atleta`  (
   INDEX `id_tipo`(`id_tipo`) USING BTREE,
   CONSTRAINT `persona_atleta_ibfk_1` FOREIGN KEY (`id_persona`) REFERENCES `persona` (`id_persona`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `persona_atleta_ibfk_2` FOREIGN KEY (`id_tipo`) REFERENCES `atleta_tipo` (`id_tipo`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of persona_atleta
 -- ----------------------------
+INSERT INTO `persona_atleta` VALUES (1, 2, NULL, NULL, NULL, NULL);
 
 -- ----------------------------
 -- Table structure for reclamacion
@@ -628,7 +646,7 @@ CREATE TABLE `reclamacion_estado`  (
   `id_estado` int(11) NOT NULL AUTO_INCREMENT,
   `nombre_estado` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id_estado`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of reclamacion_estado
@@ -636,6 +654,7 @@ CREATE TABLE `reclamacion_estado`  (
 INSERT INTO `reclamacion_estado` VALUES (1, 'Pendiente');
 INSERT INTO `reclamacion_estado` VALUES (2, 'Aceptada');
 INSERT INTO `reclamacion_estado` VALUES (3, 'Rechazada');
+INSERT INTO `reclamacion_estado` VALUES (4, 'Creado');
 
 -- ----------------------------
 -- Table structure for rol
@@ -653,7 +672,7 @@ CREATE TABLE `rol`  (
 -- ----------------------------
 -- Records of rol
 -- ----------------------------
-INSERT INTO `rol` VALUES (1, 'Vicedecano', 1, NULL, NULL);
+INSERT INTO `rol` VALUES (1, 'Jefe de deporte', 1, NULL, NULL);
 INSERT INTO `rol` VALUES (2, 'Administrador', 1, NULL, NULL);
 INSERT INTO `rol` VALUES (3, 'C_Organizadora', 1, NULL, NULL);
 
@@ -737,7 +756,7 @@ CREATE TABLE `usuarios`  (
   PRIMARY KEY (`id_usuario`) USING BTREE,
   INDEX `id_persona`(`id_persona`) USING BTREE,
   CONSTRAINT `usuarios_ibfk_1` FOREIGN KEY (`id_persona`) REFERENCES `persona` (`id_persona`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of usuarios

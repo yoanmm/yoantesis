@@ -9,6 +9,7 @@
       <sourceFolder url="file://$MODULE_DIR$/deport/database/factories" isTestSource="false" packagePrefix="Database\Factories\" />
       <sourceFolder url="file://$MODULE_DIR$/deport/database/seeders" isTestSource="false" packagePrefix="Database\Seeders\" />
       <sourceFolder url="file://$MODULE_DIR$/deport/tests" isTestSource="true" packagePrefix="Tests\" />
+      <sourceFolder url="file://$MODULE_DIR$/deport/tests" isTestSource="true" />
       <excludeFolder url="file://$MODULE_DIR$/deport/vendor/asm89/stack-cors" />
       <excludeFolder url="file://$MODULE_DIR$/deport/vendor/barryvdh/laravel-dompdf" />
       <excludeFolder url="file://$MODULE_DIR$/deport/vendor/brick/math" />

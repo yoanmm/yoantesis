@@ -1,9 +1,10 @@
 <?php
 /**
-*@author Yoan  
-*@date Fri May 09 13:47:32 GMT-04:00 2025  
-*@time Fri May 09 13:47:32 GMT-04:00 2025  
-*/
+ *@author Yoan
+ *@date Fri May 09 13:47:32 GMT-04:00 2025
+ *@time Fri May 09 13:47:32 GMT-04:00 2025
+ */
+
 namespace Modules\security\Models;
 
 
@@ -48,15 +49,15 @@ class Usuarios extends BaseModel implements
     CanResetPasswordContract,
     JWTSubject
 {
-    use \Illuminate\Auth\Authenticatable, \Illuminate\Foundation\Auth\Access\Authorizable, \Illuminate\Auth\Passwords\CanResetPassword, \Illuminate\Auth\MustVerifyEmail,HasFactory,Notifiable;
- /**
+    use \Illuminate\Auth\Authenticatable, \Illuminate\Foundation\Auth\Access\Authorizable, \Illuminate\Auth\Passwords\CanResetPassword, \Illuminate\Auth\MustVerifyEmail, HasFactory, Notifiable;
+    /**
      * The table associated with the model.
      *
      * @var string
      */
     protected $table = 'usuarios';
 
-   /**
+    /**
      * The connection name for the model.
      *
      * @var string|null
@@ -86,15 +87,15 @@ class Usuarios extends BaseModel implements
      */
     protected $keyType = 'integer';
 
-/**
+    /**
      * The attributes that should be hidden for arrays.
      *
      * @var array
      */
     protected $hidden = ['password'];
 
-    const RELATIONS = ['persona','array_log','array_usuario_rol'];
-/**
+    const RELATIONS = ['persona', 'array_log', 'array_usuario_rol'];
+    /**
      * The number of models to return for pagination.
      *
      * @var int
@@ -102,6 +103,11 @@ class Usuarios extends BaseModel implements
     protected $perPage = 15;
 
     protected $appends = [];
+
+    protected $casts = [
+        'creado' => 'date:Y-m-d',
+        'actualizado' => 'date:Y-m-d',
+    ];
 
     /**
      * Model Class Name
@@ -115,69 +121,77 @@ class Usuarios extends BaseModel implements
      * @var array
      */
     protected $fillable = [
-      'id_usuario',
-      'username',
-      'password',
-      'correo',
-      'creado',
-      'actualizado',
-      'activo',
-      'id_persona'
+        'id_usuario',
+        'username',
+        'password',
+        'correo',
+        'creado',
+        'actualizado',
+        'activo',
+        'id_persona'
     ];
 
-	 /**
+    /**
      * Get the Persona
      */
-	  public function persona()
-		{
-			return $this->belongsTo(Persona::class,'id_persona','id_persona');
-		}
+    public function persona()
+    {
+        return $this->belongsTo(Persona::class, 'id_persona', 'id_persona');
+    }
 
 
-	 /**
+    /**
      * 
      * Get array_log
      */
-	  public function array_log()
-		{
-			return $this->hasMany(Log::class,'id_usuario','id_usuario');
-		}
+    public function array_log()
+    {
+        return $this->hasMany(Log::class, 'id_usuario', 'id_usuario');
+    }
 
-	 /**
+    /**
      * 
      * Get array_usuario_rol
      */
-	  public function array_usuario_rol()
-		{
-			return $this->hasMany(Usuario_rol::class,'id_usuario','id_usuario');
-		}
-
-
-    protected function rules($scenario='create')
+    public function array_usuario_rol()
     {
-          $rules=[
-            'create'=>[
-                'username' =>'nullable|max:255',
-                'password' =>'nullable|max:255',
-                'correo' =>'nullable|max:255',
-                'creado' =>'nullable|date',
-                'actualizado' =>'nullable|date',
-                'activo' =>'nullable|boolean',
-                'id_persona' =>'nullable|exists:'.$this->connection.'.persona,id_persona'
+        return $this->hasMany(Usuario_rol::class, 'id_usuario', 'id_usuario');
+    }
+
+//    public function hasPermission($controller, $action) {
+//        // Buscamos si alguno de los roles del usuario tiene el permiso
+//        return $this->array_usuario_rol()->whereHas('permisos', function($query) use ($controller, $action) {
+//            $query->where('controller', $controller)
+//                ->where('accion', $action)
+//                ->where('habilitado', 1);
+//        })->exists();
+//    }
+
+    protected function rules($scenario = 'create')
+    {
+        $rules = [
+            'create' => [
+                'username' => 'nullable|max:255',
+                'password' => 'nullable|max:255',
+                'correo' => 'nullable|max:255',
+                'creado' => 'nullable|date',
+                'actualizado' => 'nullable|date',
+                'activo' => 'nullable|boolean',
+                'id_persona' => 'nullable|exists:' . $this->connection . '.persona,id_persona'
             ],
-            'update'=>[
-                'id_usuario' =>'required|unique:'.$this->connection.'.usuarios,id_usuario,'.$this->id_usuario.',id_usuario',
-                'username' =>'nullable|max:255',
-                'password' =>'nullable|max:255',
-                'correo' =>'nullable|max:255',
-                'creado' =>'nullable|date',
-                'actualizado' =>'nullable|date',
-                'activo' =>'nullable|boolean',
-                'id_persona' =>'nullable|exists:'.$this->connection.'.persona,id_persona'
+            'update' => [
+                'id_usuario' => 'required|unique:' . $this->connection . '.usuarios,id_usuario,' . $this->id_usuario . ',id_usuario',
+                'username' => 'nullable|max:255',
+                'password' => 'nullable|max:255',
+                'correo' => 'nullable|max:255',
+                'creado' => 'nullable|date',
+                'actualizado' => 'nullable|date',
+                'activo' => 'nullable|boolean',
+                'id_persona' => 'nullable|exists:' . $this->connection . '.persona,id_persona'
             ]
         ];
-        if(!isset($rules[$scenario]))
-            throw new \Exception('Scenario '.$scenario.' not exist');
+        if (!isset($rules[$scenario]))
+            throw new \Exception('Scenario ' . $scenario . ' not exist');
         return $rules[$scenario];
     }
 
@@ -192,7 +206,6 @@ class Usuarios extends BaseModel implements
         static::creating(function (Model $model) {
             $model->password = Hash::make($model->password);
         });
-
     }
     public function getAuthPassword()
     {
@@ -208,11 +221,29 @@ class Usuarios extends BaseModel implements
     }
 
     /**
+     * Obtiene los nombres de los roles asociados al usuario.
+     */
+    public function getRoles()
+    {
+        // Cargamos la relación 'rol' dentro de 'array_usuario_rol'
+        // y extraemos solo el nombre.
+        return $this->array_usuario_rol->map(function ($item) {
+            // Asumiendo que el modelo Usuario_rol tiene una relación 'rol'
+            // y esta tiene un atributo 'nombre' o 'name'
+            return $item->rol ? $item->rol->nombre_rol : null;
+        })->filter()->values()->toArray();
+    }
+    /**
      * @inheritDoc
      */
     public function getJWTCustomClaims()
     {
-        return ['username'=>$this->username];
+        return [
+            'username' => $this->username, //
+            'correo'   => $this->correo,   // Usamos 'correo' que es el campo en tu tabla
+            'facultad' => $this->persona->facultad,
+            'roles'    => $this->getRoles(),
+        ];
     }
 }
 

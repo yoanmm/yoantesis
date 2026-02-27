@@ -1,16 +1,9 @@
 export const columns = [
     {
-        title: 'ID Compromiso',
-        dataIndex: 'id_compromiso',
+        title: 'Participantes',
+        dataIndex: 'delegacion_evento.nombre',
         align:'center',
-        key: 'id_compromiso',
-        sorter: (a, b) => a.id_compromiso - b.id_compromiso
-    },
-    {
-        title: 'Delegación Evento',
-        dataIndex: 'delegacion_evento.nombre_delegacion_evento',
-        align:'center',
-        key: 'delegacion_evento.nombre_delegacion_evento',
+        key: 'delegacion_evento.nombre',
         sorter: (a, b) => a.delegacion_evento && b.delegacion_evento ? 
             (a.delegacion_evento.nombre_delegacion_evento > b.delegacion_evento.nombre_delegacion_evento) - 
             (a.delegacion_evento.nombre_delegacion_evento < b.delegacion_evento.nombre_delegacion_evento) : 0

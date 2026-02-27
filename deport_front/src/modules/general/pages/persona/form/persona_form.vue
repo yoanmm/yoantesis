@@ -18,15 +18,28 @@
         </tc-form-item>
         <tc-form-item class="form-group mb-0 col-md-6 px-3">
           <label>Género</label>
-          <tc-autocomplete placeholder="Seleccione el Género" name="genero" ref="genero" :successFeed="false" idKey="id"
-            textKey="text" v-model="persona.genero" :dataSource="genero" />
+          <tc-autocomplete 
+              placeholder="Seleccione el Género" 
+              name="genero" ref="genero" 
+              :successFeed="false" 
+              idKey="id"
+              textKey="text" 
+              v-model="persona.genero" 
+              :dataSource="genero" />
         </tc-form-item>
 
         <tc-form-item class="form-group mb-0 col-md-6 px-3">
           <label>Facultad</label>
-          <tc-autocomplete placeholder="Seleccione el Delegacion" name="id_delegacion" ref="select_delegacion"
-            :successFeed="false" idKey="nombre_delegacion" textKey="nombre_delegacion" :defaultValue="persona.facultad"
-            v-model="persona.facultad" :url="mb.statics('Delegacion').select_2_url" />
+          <tc-autocomplete 
+              placeholder="Seleccione el Delegacion" 
+              name="id_delegacion" 
+              ref="select_delegacion"
+              :successFeed="false" 
+              idKey="nombre_delegacion" 
+              textKey="nombre_delegacion" 
+              :defaultValue="persona.facultad"
+              v-model="persona.facultad" 
+              :url="mb.statics('Delegacion').select_2_url" />
         </tc-form-item>
       </tc-form>
     </div>
