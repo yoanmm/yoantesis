@@ -36,11 +36,7 @@
     <div>
       <a-modal
         @cancel="onCloseModal"
-        :title="
-          selected_compromiso_participacion.get_id()
-            ? 'Actualizar compromiso de participacion'
-            : 'Añadir compromiso de participacion'
-        "
+        :title="selected_compromiso_participacion.get_id()? 'Actualizar compromiso de participacion': 'Añadir compromiso de participacion'"
         class="modal-form"
         width="55rem"
         :visible="show_modal_form"

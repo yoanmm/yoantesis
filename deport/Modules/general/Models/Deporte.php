@@ -201,6 +201,17 @@ class Deporte extends BaseModel
         return $rules[$scenario];
     }
 
+
+
+    /**
+ * Poner todos los deportes como inactivos (activo = 0).
+ */
+public static function desactivarTodos()
+{
+    return self::query()->update(['activo' => 0]);
+}
+
+
  protected static function boot()
     {
         parent::boot();

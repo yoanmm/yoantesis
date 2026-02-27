@@ -26,47 +26,11 @@
         "path": "/general/evento_deportivo_list"
       },
       {
-        "name": "competencia_list",
+        "name": "compromiso_participacion_list",
         "module": "management",
-        "caption": "Competencias",
+        "caption": "Compromiso",
         "icon": "",
-        "path": "/general/competencia_list"
-      },
-      
-      {
-        "name": "equipo_atleta_list",
-        "module": "management",
-        "caption": "Atletas por Equipo",
-        "icon": "",
-        "path": "/general/equipo_atleta_list"
-      },
-      {
-        "name": "persona_atleta_list",
-        "module": "management",
-        "caption": "Atletas",
-        "icon": "",
-        "path": "/general/persona_atleta_list"
-      },
-      {
-        "name": "persona_arbitro_list",
-        "module": "management",
-        "caption": "Árbitros",
-        "icon": "",
-        "path": "/general/persona_arbitro_list"
-      },
-      {
-        "name": "equipo_list",
-        "module": "management",
-        "caption": "Equipos",
-        "icon": "",
-        "path": "/general/equipo_list"
-      },
-      {
-        "name": "juego_list",
-        "module": "management",
-        "caption": "Juegos",
-        "icon": "",
-        "path": "/general/juego_list"
+        "path": "/general/compromiso_participacion_list"
       },
       {
         "name": "congresillo_deporte_list",
@@ -76,18 +40,53 @@
         "path": "/general/congresillo_deporte_list"
       },
       {
-        "name": "compromiso_participacion_list",
-        "module": "management",
-        "caption": "Compromiso",
-        "icon": "",
-        "path": "/general/compromiso_participacion_list"
-      },
-      {
         "name": "congresillo_asistencia_list",
         "module": "management",
         "caption": "Asistencia",
         "icon": "zmdi zmdi-assignment-check",
         "path": "/general/congresillo_asistencia_list"
+      },
+      {
+        "name": "competencia_list",
+        "module": "management",
+        "caption": "Competencias",
+        "icon": "",
+        "path": "/general/competencia_list"
+      },
+      {
+        "name": "equipo_list",
+        "module": "management",
+        "caption": "Equipos",
+        "icon": "",
+        "path": "/general/equipo_list"
+      },
+      {
+        "name": "persona_atleta_list",
+        "module": "management",
+        "caption": "Atletas",
+        "icon": "",
+        "path": "/general/persona_atleta_list"
+      },
+      {
+        "name": "equipo_atleta_list",
+        "module": "management",
+        "caption": "Atletas por Equipo",
+        "icon": "",
+        "path": "/general/equipo_atleta_list"
+      },
+      {
+        "name": "persona_arbitro_list",
+        "module": "management",
+        "caption": "Árbitros",
+        "icon": "",
+        "path": "/general/persona_arbitro_list"
+      },
+      {
+        "name": "juego_list",
+        "module": "management",
+        "caption": "Juegos",
+        "icon": "",
+        "path": "/general/juego_list"
       }
     ]
   },
@@ -125,25 +124,18 @@
         "path": "/general/atleta_estado_list"
       },
       {
-        "name": "atleta_tipo_list",
+        "name": "equipo_estado_list",
         "module": "config",
-        "caption": "Tipo de atleta",
+        "caption": "Estado del equipo",
         "icon": "",
-        "path": "/general/atleta_tipo_list"
+        "path": "/general/equipo_estado_list"
       },
       {
-        "name": "cancha_list",
+        "name": "reclamacion_estado_list",
         "module": "config",
-        "caption": "Canchas",
+        "caption": "Estado de reclamación",
         "icon": "",
-        "path": "/general/cancha_list"
-      },
-      {
-        "name": "delegacion_list",
-        "module": "management",
-        "caption": "Delegaciones",
-        "icon": "",
-        "path": "/general/delegacion_list"
+        "path": "/general/reclamacion_estado_list"
       },
       {
         "name": "delegacion_tipo_list",
@@ -153,11 +145,11 @@
         "path": "/general/delegacion_tipo_list"
       },
       {
-        "name": "deporte_list",
+        "name": "atleta_tipo_list",
         "module": "config",
-        "caption": "Deportes",
+        "caption": "Tipo de atleta",
         "icon": "",
-        "path": "/general/deporte_list"
+        "path": "/general/atleta_tipo_list"
       },
       {
         "name": "deporte_categoria_puntuacion_list",
@@ -167,18 +159,18 @@
         "path": "/general/deporte_categoria_puntuacion_list"
       },
       {
-        "name": "equipo_estado_list",
-        "module": "config",
-        "caption": "Estado del equipo",
-        "icon": "",
-        "path": "/general/equipo_estado_list"
-      },
-      {
         "name": "juego_fase_list",
         "module": "config",
         "caption": "Fase del juego",
         "icon": "",
         "path": "/general/juego_fase_list"
+      },
+      {
+        "name": "cancha_list",
+        "module": "config",
+        "caption": "Canchas",
+        "icon": "",
+        "path": "/general/cancha_list"
       },
       {
         "name": "persona_list",
@@ -188,11 +180,18 @@
         "path": "/general/persona_list"
       },
       {
-        "name": "reclamacion_estado_list",
+        "name": "delegacion_list",
         "module": "config",
-        "caption": "Estado de reclamación",
+        "caption": "Delegaciones",
         "icon": "",
-        "path": "/general/reclamacion_estado_list"
+        "path": "/general/delegacion_list"
+      },
+      {
+        "name": "deporte_list",
+        "module": "config",
+        "caption": "Deportes",
+        "icon": "",
+        "path": "/general/deporte_list"
       }
     ]
   },
@@ -207,20 +206,6 @@
         "caption": "Trazas",
         "icon": "",
         "path": "/security/log_list"
-      },
-      {
-        "name": "permisos_list",
-        "module": "security",
-        "caption": "Permisos",
-        "icon": "",
-        "path": "/security/permisos_list"
-      },
-      {
-        "name": "rol_list",
-        "module": "security",
-        "caption": "Roles",
-        "icon": "",
-        "path": "/security/rol_list"
       },
       {
         "name": "usuarios_list",
