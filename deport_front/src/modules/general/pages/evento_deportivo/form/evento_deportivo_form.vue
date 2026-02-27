@@ -6,12 +6,12 @@
 
     <div class="steps-content">
       <component
-          v-for="(s, idx) in steps"
-          :is="s.component"
-          :key="idx"
-          v-show="current === idx"
-          :ref="'step' + idx"
-          :model="evento"
+        v-for="(s, idx) in steps"
+        :is="s.component"
+        :key="idx"
+        v-show="current === idx"
+        :ref="'step' + idx"
+        :model="evento"
       />
     </div>
 
@@ -41,7 +41,7 @@ export default {
   components: { StepOne, StepTwo, StepThree },
   props: {
     model: { type: Object, default: () => ({}) },
-    modal: { type: Boolean, default: false }
+    modal: { type: Boolean, default: false },
   },
   data() {
     return {
@@ -60,29 +60,32 @@ export default {
       this.evento = mb.instance("Evento_deportivo", this.model);
     }
   },
-    watch: {
-      model: {
-        handler(newVal) {
-          if (newVal && Object.keys(newVal).length) {
-            this.evento = mb.instance("Evento_deportivo", newVal);
-          } else {
-            this.evento = mb.instance("Evento_deportivo");
-          }
-        },
-        immediate: true,
-        deep: true
-      }
+  watch: {
+    model: {
+      handler(newVal) {
+        if (newVal && Object.keys(newVal).length) {
+          this.evento = mb.instance("Evento_deportivo", newVal);
+        } else {
+          this.evento = mb.instance("Evento_deportivo");
+        }
+      },
+      immediate: true,
+      deep: true,
     },
+  },
   methods: {
     getStepComponent(index) {
-      const ref = this.$refs['step' + index];
+      const ref = this.$refs["step" + index];
       return Array.isArray(ref) ? ref[0] : ref;
     },
 
     next() {
       const comp = this.getStepComponent(this.current);
-      if (comp && comp.$refs && comp.$refs.form && !comp.$refs.form.validate()) {
-        return;
+      if (comp && comp.$refs && comp.$refs.form && typeof comp.$refs.form.validate === "function") {
+        if (!comp.$refs.form.validate()) return;
+      }
+      if (comp && typeof comp.validate === "function") {
+        if (!comp.validate()) return;
       }
       this.current++;
     },
@@ -92,6 +95,10 @@ export default {
     },
 
     async save_model() {
+      const stepThreeComp = this.getStepComponent(2);
+      if (stepThreeComp && typeof stepThreeComp.validate === "function" && !stepThreeComp.validate()) {
+        return;
+      }
       try {
         this.loading = true;
 
@@ -109,7 +116,7 @@ export default {
         // 2. Guardar Evento Principal
         let id_evento = this.evento.get_id() || stepOneData.id_evento;
         const esEdicion = !!id_evento;
-        const method = esEdicion ? 'put' : 'post';
+        const method = esEdicion ? "put" : "post";
         let url = this.evento.url;
 
         let response = null;
@@ -119,7 +126,7 @@ export default {
             url: url,
             method: method,
             data: stepOneFormData,
-            headers: { 'Content-Type': 'multipart/form-data' }
+            headers: { "Content-Type": "multipart/form-data" },
           });
         } else {
           this.evento = mb.instance("Evento_deportivo", stepOneData);
@@ -160,8 +167,8 @@ export default {
 
         if (!id_evento) {
           this.$notification.error({
-            message: 'Error de Datos',
-            description: 'El evento se creó pero no se pudo recuperar el ID. No se guardaron las relaciones.'
+            message: "Error de Datos",
+            description: "El evento se creó pero no se pudo recuperar el ID. No se guardaron las relaciones.",
           });
           this.loading = false;
           return;
@@ -173,11 +180,13 @@ export default {
 
         // Delegaciones
         if (idsDelegaciones.length > 0) {
-          const promesasDelegacion = idsDelegaciones.map(id_delegacion => {
-            return mb.instance("Delegacion_evento", {
-              id_evento: id_evento,
-              id_delegacion: id_delegacion,
-            }).save();
+          const promesasDelegacion = idsDelegaciones.map((id_delegacion) => {
+            return mb
+              .instance("Delegacion_evento", {
+                id_evento: id_evento,
+                id_delegacion: id_delegacion,
+              })
+              .save();
           });
           await Promise.all(promesasDelegacion);
         }
@@ -188,17 +197,14 @@ export default {
           const respuestaDeportes = await mb.statics("Deporte").list();
           const listaDeportesBD = respuestaDeportes.data || []; // Ajustar según la estructura de tu respuesta
 
-
           // 2. Procesar la actualización masiva
-          const promesasDeporte = listaDeportesBD.map(deporteBD => {
-
+          const promesasDeporte = listaDeportesBD.map((deporteBD) => {
             // Verificamos si este deporte específico debe estar activo o no
             const debeEstarActivo = idsDeportes.includes(deporteBD.id_deporte) ? 1 : 0;
 
             // Solo disparamos el save si el estado actual en la BD es distinto al que queremos poner
             // Esto evita peticiones innecesarias si el deporte ya estaba en 0 o ya estaba en 1
             if (deporteBD.activo !== debeEstarActivo) {
-
               let deporte = mb.instance("Deporte", deporteBD);
               deporte.activo = debeEstarActivo;
 
@@ -212,8 +218,8 @@ export default {
         }
 
         this.$message.success("Evento guardado correctamente.");
-        this.$emit('success');
-        this.$emit('close');
+        this.$emit("success");
+        this.$emit("close");
 
         // Limpieza
         this.current = 0;
@@ -221,7 +227,6 @@ export default {
         if (stepTwoComp && stepTwoComp.resetTable) stepTwoComp.resetTable();
         if (stepThreeComp && stepThreeComp.resetTable) stepThreeComp.resetTable();
         if (stepOneComp && stepOneComp.reset) stepOneComp.reset();
-
       } catch (error) {
         console.error("Error:", error);
         utils.process_error(error);
@@ -239,7 +244,7 @@ export default {
       if (s1 && s1.reset) s1.reset();
       if (s2 && s2.resetTable) s2.resetTable();
       if (s3 && s3.resetTable) s3.resetTable();
-    }
+    },
   },
 };
 </script>
@@ -255,5 +260,7 @@ export default {
   text-align: center;
   padding: 20px;
 }
-.steps-action { margin-top: 24px; }
+.steps-action {
+  margin-top: 24px;
+}
 </style>

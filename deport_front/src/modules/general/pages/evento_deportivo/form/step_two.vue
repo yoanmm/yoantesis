@@ -1,13 +1,14 @@
 <template>
   <div>
     <deporte_table
-        :columns="columns"
-        table_name="Deporte"
-        id_table="id_deporte"
-        ref="deporte_table"
-        :params_search="params_search"
-        :paginate="false"
-        :rowSelection="{ selectedRowKeys: selectedRowKeys, onChange: onSelectChange }"
+      :columns="columns"
+      table_name="Deporte"
+      id_table="id_deporte"
+      ref="deporte_table"
+      :params_search="params_search"
+      :paginate="false"
+      :rowSelection="{ selectedRowKeys: selectedRowKeys, onChange: onSelectChange }"
+      :show_export="false"
     />
   </div>
 </template>
@@ -20,14 +21,14 @@ export default {
   name: "StepTwo",
   components: { deporte_table },
   props: {
-    model: { type: Object, default: () => ({}) }
+    model: { type: Object, default: () => ({}) },
   },
   data() {
     return {
       mb,
-      columns: mb.statics("Deporte").columns.filter(c =>
-          ['nombre_deporte', 'genero', 'individual'].includes(c.dataIndex || c.key)
-      ),
+      columns: mb
+        .statics("Deporte")
+        .columns.filter((c) => ["nombre_deporte", "genero", "individual"].includes(c.dataIndex || c.key)),
       params_search: { relations: ["categoria", "deporte_padre", "regla"] },
       selectedRowKeys: [],
     };
@@ -41,7 +42,7 @@ export default {
         this.$refs.deporte_table.load_data();
       }
       if (this.model && this.model.deportes) {
-        this.selectedRowKeys = this.model.deportes.map(d => d.id_deporte || d);
+        this.selectedRowKeys = this.model.deportes.map((d) => d.id_deporte || d);
       }
     },
 
@@ -69,17 +70,28 @@ export default {
         this.$refs.deporte_table.selectedRowKeys = []; // Reset visual forzado
         this.$refs.deporte_table.load_data();
       }
-    }
+    },
+    validate() {
+      const selected = this.getData();
+      if (!selected || selected.length === 0) {
+        this.$notification?.error?.({
+          message: "Selección requerida",
+          description: "Debes seleccionar al menos un deporte para continuar.",
+        });
+        return false;
+      }
+      return true;
+    },
   },
   watch: {
     model: {
       handler(val) {
         if (val && val.deportes) {
-          this.selectedRowKeys = val.deportes.map(d => d.id_deporte || d);
+          this.selectedRowKeys = val.deportes.map((d) => d.id_deporte || d);
         }
       },
-      deep: true
-    }
-  }
+      deep: true,
+    },
+  },
 };
 </script>

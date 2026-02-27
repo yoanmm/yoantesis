@@ -1,5 +1,5 @@
 <template>
-  <a-config-provider>
+   <a-config-provider :locale="es_ES">
     <div>
       <Home v-if="auth"/>
       <LoginLayout v-if="!auth"/>
