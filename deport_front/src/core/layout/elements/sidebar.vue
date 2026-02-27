@@ -57,12 +57,23 @@ export default {
           "/general/congresillo_deporte_list",
           "/general/compromiso_participacion_list",
           "/general/deporte_categoria_puntuacion_list",
-          "/general/congresillo_asistencia_list"
+          "/general/congresillo_asistencia_list",
+          "/general/atleta_estado_list",
+          "/general/equipo_estado_list",
+          "/general/reclamacion_estado_list",
+          "/general/delegacion_tipo_list",
+          "/general/atleta_tipo_list",
+          "/general/juego_fase_list",
+          "/general/cancha_list",
+          "/general/persona_list",
+          "/general/delegacion_list",
+          "/general/deporte_list"
         ],
         "Jefe de Deporte": [
           "/general/calendario",
           "/general/equipo_atleta_list",
-          "/general/persona_atleta_list"
+          "/general/persona_atleta_list",
+          "/general/equipo_list"
         ]
       };
 
