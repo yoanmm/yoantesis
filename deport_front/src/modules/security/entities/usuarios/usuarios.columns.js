@@ -7,14 +7,14 @@ export const columns = [
 
     sorter: (a, b) => (a.username > b.username) - (a.username < b.username),
   },
-  // {
-  //   title: "Contraseña",
-  //   dataIndex: "password",
-  //   align: "center",
-  //   key: "password",
+  {
+    title: 'Contraseña',
+    dataIndex: 'password',
+    align: 'center',
+    key: 'password',
 
-  //   sorter: (a, b) => (a.password > b.password) - (a.password < b.password),
-  // },
+     sorter: (a, b) => (a.password > b.password) - (a.password < b.password),
+   },
   {
     title: "Correo",
     dataIndex: "correo",

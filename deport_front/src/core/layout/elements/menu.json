@@ -91,27 +91,6 @@
     ]
   },
   {
-    "caption": "Comisión disciplinaria",
-    "modules": "['dicipline']",
-    "icon": "zmdi zmdi-library",
-    "routes": [
-      {
-        "name": "sancion_list",
-        "module": "dicipline",
-        "caption": "Sanciones",
-        "icon": "",
-        "path": "/general/sancion_list"
-      },
-      {
-        "name": "reclamacion_list",
-        "module": "general",
-        "caption": "Reclamaciones",
-        "icon": "",
-        "path": "/general/reclamacion_list"
-      }
-    ]
-  },
-  {
     "caption": "Configuración",
     "modules": "['config']",
     "icon": "zmdi zmdi-settings",

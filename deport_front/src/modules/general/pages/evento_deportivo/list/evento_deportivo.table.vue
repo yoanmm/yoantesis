@@ -75,19 +75,13 @@
        />
     </a>
 
-    <slot :slot="'id_evento'" slot-scope='record' name='id_evento' :record='record'/>
     <slot :slot="'nombre_evento'" slot-scope='record' name='nombre_evento' :record='record'/>
-    <slot :slot="'descripcion_evento'" slot-scope='record' name='descripcion_evento' :record='record'/>
-    <slot :slot="'logo'" slot-scope='record' name='logo' :record='record'/>
     <slot :slot="'fecha_inicio'" slot-scope='record' name='fecha_inicio' :record='record'/>
     <slot :slot="'fecha_fin'" slot-scope='record' name='fecha_fin' :record='record'/>
     <slot :slot="'curso'" slot-scope='record' name='curso' :record='record'/>
-    <slot :slot="'edicion_evento'" slot-scope='record' name='edicion_evento' :record='record'/>
     <slot :slot="'terminado'" slot-scope='record' name='terminado' :record='record'/>
-    <slot :slot="'resultado_edicion'" slot-scope='record' name='resultado_edicion' :record='record'/>
-    <slot :slot="'descripcion_delegaciones'" slot-scope='record' name='descripcion_delegaciones' :record='record'/>
-    <slot :slot="'id_regla_evento'" slot-scope='record' name='id_regla_evento' :record='record'/>
-  </a-table>
+    <slot :slot="'reglamento'" slot-scope='record' name='reglamento' :record='record'/>
+    </a-table>
 </template>
 
 <script>
