@@ -37,12 +37,22 @@ export default {
     this.loadData();
   },
   methods: {
-    loadData() {
+    async loadData() {
       if (this.$refs.delegacion_table) {
-        this.$refs.delegacion_table.load_data();
+        await this.$refs.delegacion_table.load_data();
+        const tabla = this.$refs.delegacion_table;
+        const activos = (tabla.data || [])
+          .filter((d) => Number(d.activo) === 1 || d.activo === true)
+          .map((d) => d.id_delegacion);
+        this.selectedRowKeys = activos;
+        tabla.selectedRowKeys = activos;
       }
       if (this.model && this.model.delegaciones) {
-        this.selectedRowKeys = this.model.delegaciones.map((d) => d.id_delegacion || d);
+        const preseleccion = this.model.delegaciones.map((d) => d.id_delegacion || d);
+        this.selectedRowKeys = preseleccion;
+        if (this.$refs.delegacion_table) {
+          this.$refs.delegacion_table.selectedRowKeys = preseleccion;
+        }
       }
     },
 

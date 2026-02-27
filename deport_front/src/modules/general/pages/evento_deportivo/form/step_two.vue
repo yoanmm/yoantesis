@@ -1,16 +1,9 @@
 <template>
   <div>
-    <deporte_table
-      :columns="columns"
-      table_name="Deporte"
-      id_table="id_deporte"
-      ref="deporte_table"
-      :params_search="params_search"
-      :paginate="false"
-      :rowSelection="{ selectedRowKeys: selectedRowKeys, onChange: onSelectChange }"
-      :show_export="false"
-      
-      ><!-- SLOT PARA LA COLUMNA INDIVIDUAL -->
+    <deporte_table :columns="columns" table_name="Deporte" id_table="id_deporte" ref="deporte_table"
+      :params_search="params_search" :paginate="false"
+      :rowSelection="{ selectedRowKeys: selectedRowKeys, onChange: onSelectChange }" :show_export="false">
+      <!-- SLOT PARA LA COLUMNA INDIVIDUAL -->
       <template #individual="{ record }">
         <div style="text-align:center;">
           <template v-if="record === 1">
@@ -51,10 +44,18 @@ export default {
   methods: {
     loadData() {
       if (this.$refs.deporte_table) {
-        this.$refs.deporte_table.load_data();
+        this.$refs.deporte_table.load_data().then(() => {
+          const tabla = this.$refs.deporte_table;
+          if (!tabla || !tabla.data) return;
+          const activos = tabla.data
+            .filter(d => Number(d.activo) === 1)
+            .map(d => d.id_deporte);
+          this.selectedRowKeys = activos;
+          tabla.selectedRowKeys = activos;
+        });
       }
       if (this.model && this.model.deportes) {
-        this.selectedRowKeys = this.model.deportes.map((d) => d.id_deporte || d);
+        this.selectedRowKeys = this.model.deportes.map(d => d.id_deporte || d);
       }
     },
 
