@@ -1,9 +1,15 @@
 <template>
   <div>
-    <deporte_table :columns="columns" table_name="Deporte" id_table="id_deporte" ref="deporte_table"
-      :params_search="params_search" :paginate="false"
-      :rowSelection="{ selectedRowKeys: selectedRowKeys, onChange: onSelectChange }" :show_export="false">
-      <!-- SLOT PARA LA COLUMNA INDIVIDUAL -->
+    <deporte_table
+        v-model="selectedRowKeys"
+        :columns="columns"
+        table_name="Deporte"
+        id_table="id_deporte"
+        ref="deporte_table"
+        :params_search="params_search"
+        :paginate="false"
+        :show_export="false"
+    >
       <template #individual="{ record }">
         <div style="text-align:center;">
           <template v-if="record === 1">
@@ -32,61 +38,54 @@ export default {
     return {
       mb,
       columns: mb
-        .statics("Deporte")
-        .columns.filter((c) => ["nombre_deporte", "genero", "individual"].includes(c.dataIndex || c.key)),
+          .statics("Deporte")
+          .columns.filter((c) => ["nombre_deporte", "genero", "individual"].includes(c.dataIndex || c.key)),
       params_search: { relations: ["categoria", "deporte_padre", "regla"] },
       selectedRowKeys: [],
+      isInitialized: false // Flag para asegurar que la carga inicial ocurra solo una vez
     };
   },
-  mounted() {
-    this.loadData();
-  },
   methods: {
-    loadData() {
+    async loadData() {
       if (this.$refs.deporte_table) {
-        this.$refs.deporte_table.load_data().then(() => {
-          const tabla = this.$refs.deporte_table;
-          if (!tabla || !tabla.data) return;
-          const activos = tabla.data
-            .filter(d => Number(d.activo) === 1)
-            .map(d => d.id_deporte);
-          this.selectedRowKeys = activos;
-          tabla.selectedRowKeys = activos;
-        });
-      }
-      if (this.model && this.model.deportes) {
-        this.selectedRowKeys = this.model.deportes.map(d => d.id_deporte || d);
+        await this.$refs.deporte_table.load_data();
+        await this.syncSelection();
       }
     },
 
-    onSelectChange(selectedRowKeys) {
-      this.selectedRowKeys = selectedRowKeys;
+    async syncSelection() {
+      // Si el modelo tiene un ID de evento, significa que estamos EDITANDO
+      if (this.model && this.model.id_evento !== undefined) {
+        try {
+          // Buscamos deportes que ya tienen el valor activo = 1 en BD
+          const param = { attr: { activo: 1 } };
+          const deportes = await mb.statics("Deporte").list(param);
+          let ids = deportes.data.map(item => item.id_deporte);
+          this.selectedRowKeys = [...ids];
+        } catch (error) {
+          console.error("Error al sincronizar selección:", error);
+        }
+      } else {
+        // Si no hay ID de evento, es una CREACIÓN: deben estar todos desmarcados
+        this.selectedRowKeys = [];
+      }
+      this.isInitialized = true;
     },
 
     getData() {
-      // PLAN A: Usar lo que capturamos con el evento
-      if (this.selectedRowKeys && this.selectedRowKeys.length > 0) {
-        return this.selectedRowKeys;
-      }
-
-      // PLAN B: Intentar leer directamente de la tabla (por si el evento falló)
-      if (this.$refs.deporte_table && this.$refs.deporte_table.selectedRowKeys) {
-        return this.$refs.deporte_table.selectedRowKeys;
-      }
-
-      return [];
+      // Recoge los que quedaron marcados al final al enviar el formulario
+      return this.selectedRowKeys;
     },
 
     resetTable() {
       this.selectedRowKeys = [];
       if (this.$refs.deporte_table) {
-        this.$refs.deporte_table.selectedRowKeys = []; // Reset visual forzado
         this.$refs.deporte_table.load_data();
       }
     },
+
     validate() {
-      const selected = this.getData();
-      if (!selected || selected.length === 0) {
+      if (this.selectedRowKeys.length === 0) {
         this.$notification?.error?.({
           message: "Selección requerida",
           description: "Debes seleccionar al menos un deporte para continuar.",
@@ -96,15 +95,21 @@ export default {
       return true;
     },
   },
+
   watch: {
-    model: {
-      handler(val) {
-        if (val && val.deportes) {
-          this.selectedRowKeys = val.deportes.map((d) => d.id_deporte || d);
+    // Vigilamos específicamente el ID del evento para disparar la carga inicial
+    'model.id_evento': {
+      handler(newVal) {
+        if (!this.isInitialized) {
+          this.syncSelection();
         }
       },
-      deep: true,
-    },
+      immediate: true
+    }
   },
+
+  mounted() {
+    this.loadData();
+  }
 };
 </script>

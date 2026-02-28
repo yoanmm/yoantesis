@@ -140,7 +140,7 @@ export default {
         }
 
         // =================================================================
-        // --- CAPTURA DEL ID CORREGIDA ---
+        // --- CAPTURA DEL ID  ---
         // =================================================================
 
         if (!esEdicion) {
@@ -179,7 +179,7 @@ export default {
         // --- GUARDAR RELACIONES ---
         // =================================================================
 
-        // 1. Delegaciones: Limpiar
+        // Delegaciones: Limpiar
         if (esEdicion) {
           const response = await axios_api({
             url: "general/delegacion_evento/delete_evento_delgacion",
@@ -214,11 +214,16 @@ export default {
           // 2. Procesar la actualización masiva
           const promesasDeporte = listaDeportesBD.map((deporteBD) => {
             // Verificamos si este deporte específico debe estar activo o no
+            // console.log(deporteBD.id_deporte);
             const debeEstarActivo = idsDeportes.includes(deporteBD.id_deporte) ? 1 : 0;
 
             // Solo disparamos el save si el estado actual en la BD es distinto al que queremos poner
             // Esto evita peticiones innecesarias si el deporte ya estaba en 0 o ya estaba en 1
+            // console.log(deporteBD.activo);
+            // console.log(debeEstarActivo);
+            // console.log(deporteBD.activo !== debeEstarActivo)
             if (deporteBD.activo !== debeEstarActivo) {
+              // console.log("entro a actualizar");
               let deporte = mb.instance("Deporte", deporteBD);
               deporte.activo = debeEstarActivo;
 
