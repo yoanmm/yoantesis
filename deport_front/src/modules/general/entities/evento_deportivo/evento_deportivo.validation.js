@@ -24,10 +24,8 @@ import * as mb from "@/helpers/loaders/model.load"
           required
         },
         curso: {
-          required
         },
         edicion_evento: {
-          required
         },
         terminado: {
           integer,
@@ -41,7 +39,6 @@ import * as mb from "@/helpers/loaders/model.load"
           integer,
         },
         reglamento: {
-
         },
       },
     }

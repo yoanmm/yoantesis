@@ -24,11 +24,11 @@
               v-model="competencia.id_evento"
               :url="mb.statics('Evento_deportivo').select_2_url"
             />
-            <a-button type="dashed"
+            <!--<a-button type="dashed"
                       icon="plus"
                       class="dashed-primary rounded mt-1 ml-2"
                       @click="openModalCreateevento">
-            </a-button>
+            </a-button>-->
           </div>
         </tc-form-item>
 
@@ -96,8 +96,9 @@
 
       <tc-form-item class="form-group px-3 col-12">
         <label>Resultado competencia</label>
-        <tc-input :text_area="true" size="medium" name="resultado_competencia" v-model="competencia.resultado_competencia"/>
+        <tc-input :text_area="true" size="small" name="resultado_competencia" v-model="competencia.resultado_competencia"/>
       </tc-form-item>
+      
       </tc-form>
     </div>
     <div class="card-footer p-0">

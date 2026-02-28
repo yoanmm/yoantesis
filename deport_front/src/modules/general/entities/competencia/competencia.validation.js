@@ -12,14 +12,11 @@ import * as mb from "@/helpers/loaders/model.load"
       competencia: {
         id_evento: {
           integer,
+          required,
         },
         id_deporte: {
           integer,
-          required
-        },
-        id_supervisor: {
-          integer,
-          required
+          required,
         },
         resultado_competencia: {
           maxLength: maxLength(65535),
@@ -28,6 +25,7 @@ import * as mb from "@/helpers/loaders/model.load"
           integer,
         },
         fin_inscripcion: {
+          required,
         },
       },
     }
