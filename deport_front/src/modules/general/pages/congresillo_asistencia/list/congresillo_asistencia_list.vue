@@ -10,12 +10,12 @@
           <span>General</span>
         </a-breadcrumb-item>
         <a-breadcrumb-item>
-          <span>Congresillo_asistencia</span>
+          <span>Asistencia al congresillo</span>
         </a-breadcrumb-item>
       </a-breadcrumb>
     </div>
     <div class="row col-md-6">
-      <h3>Listado de Congresillo_asistencia</h3>
+      <h3>Asistencia al Congresillo</h3>
     </div>
     <div class="container">
       <div>
@@ -38,9 +38,7 @@
         @cancel="onCloseModal"
         :title="
           selected_congresillo_asistencia.get_id()
-            ? 'Actualizar congresillo_asistencia'
-            : 'Añadir congresillo_asistencia'
-        "
+            ? 'Actualizar asistencia': 'Añadir asistencia'"
         class="modal-form"
         width="55rem"
         :visible="show_modal_form"

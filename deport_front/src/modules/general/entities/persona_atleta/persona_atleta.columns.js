@@ -1,7 +1,7 @@
   export const columns = [
     {
       title: 'Persona',
-      dataIndex: 'persona.nombre',
+      dataIndex: 'persona.nombre_completo',
       align:'center',
       key: 'persona.nombre',
 
@@ -14,14 +14,6 @@
       key: 'tipo.tipo_atleta',
 
       sorter: (a, b) =>  a.tipo && b.tipo?(a.tipo.tipo_atleta > b.tipo.tipo_atleta)-(a.tipo.tipo_atleta < b.tipo.tipo_atleta):0
-    },
-    {
-      title: 'Foto',
-      dataIndex: 'foto',
-      align:'center',
-      key: 'foto',
-
-      sorter: (a, b) =>  (a.foto > b.foto)-(a.foto < b.foto)
     },
     {
       title: 'Tamaño',
@@ -38,14 +30,6 @@
       key: 'peso',
 
       sorter: (a, b) => a.peso - b.peso
-    },
-    {
-      title: 'Facultad',
-      dataIndex: 'facultad',
-      align:'center',
-      key: 'facultad',
-
-      sorter: (a, b) =>  (a.facultad > b.facultad)-(a.facultad < b.facultad)
     },
     {
       title: 'Acciones',

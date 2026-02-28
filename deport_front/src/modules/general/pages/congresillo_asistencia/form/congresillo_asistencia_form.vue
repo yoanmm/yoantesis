@@ -10,11 +10,8 @@
         ref="form"
         class="form-row"
       >
+
       <tc-form-item class="form-group mb-0 col-md-6 px-3">
-        <label>Representante</label>
-        <tc-input placeholder='Ingrese el valor' name='representante' v-model="congresillo_asistencia.representante"></tc-input>
-      </tc-form-item>
-        <tc-form-item class="form-group mb-0 col-md-6 px-3">
           <label>Delegacion</label>
           <div class="d-flex flex-row">
             <tc-autocomplete
@@ -28,28 +25,27 @@
               v-model="congresillo_asistencia.id_delegacion"
               :url="mb.statics('Delegacion').select_2_url"
             />
-            <a-button type="dashed"
-                      icon="plus"
-                      class="dashed-primary rounded mt-1 ml-2"
-                      @click="openModalCreatedelegacion">
-            </a-button>
           </div>
         </tc-form-item>
 
-        <a-modal
-          @cancel="showModalCreatedelegacion = false"
-          v-if="showModalCreatedelegacion"
-          class="modal-form"
-          :title="'Añadir Delegacion'"
-          :visible="true"
-          :header="null"
-          :footer="null"
-          :maskClosable="false"
-        >
-          <delegacion_form :model="null" :modal="true" @close_modal="delegacionAdded"/>
-        </a-modal>
+      <tc-form-item class="form-group mb-0 col-md-6 px-3">
+          <label>Representante</label>
+          <tc-autocomplete 
+              placeholder="Seleccione el representante" 
+              name="id_persona" 
+              ref="select_persona"
+              :successFeed="false" 
+              idKey="id_persona" 
+              textKey="nombre_completo" 
+              :defaultValue="congresillo_asistencia.representante"
+              v-model="congresillo_asistencia.representante" 
+              :url="mb.statics('Persona').select_2_url" 
+              :disabled="!congresillo_asistencia.id_delegacion"/>
+              
+        </tc-form-item>
+
         <tc-form-item class="form-group mb-0 col-md-6 px-3">
-          <label>Congresillo_deporte</label>
+          <label>Congresillo</label>
           <div class="d-flex flex-row">
             <tc-autocomplete
               placeholder="Seleccione el Congresillo_deporte"
@@ -57,16 +53,11 @@
               ref="select_congresillo"
               :successFeed="false"
               idKey="id_congresillo"
-              textKey="fecha_congresillo"
+              textKey="id_competencia"
               :defaultValue="congresillo_asistencia.id_congresillo"
               v-model="congresillo_asistencia.id_congresillo"
               :url="mb.statics('Congresillo_deporte').select_2_url"
             />
-            <a-button type="dashed"
-                      icon="plus"
-                      class="dashed-primary rounded mt-1 ml-2"
-                      @click="openModalCreatecongresillo">
-            </a-button>
           </div>
         </tc-form-item>
 
@@ -149,6 +140,7 @@ export default {
 
   mounted: function() {
     this.congresillo_asistencia = mb.instance( 'Congresillo_asistencia',this.model);
+    this.loadPersonas();
   },
   components: {
     delegacion_form,

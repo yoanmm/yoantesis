@@ -45,10 +45,10 @@
     <!--      </div>-->
     <!--    </tc-form-item>-->
 
-    <tc-form-item class="form-group mb-0 col-md-12 px-3">
+    <!--<tc-form-item class="form-group mb-0 col-md-12 px-3">
       <label>Reglamento (Archivo)</label>
       <input type="file" accept=".pdf,.doc,.docx,.png,.jpg" @change="handleFileUpload" class="form-control" />
-    </tc-form-item>
+    </tc-form-item>-->
   </tc-form>
 </template>
 
@@ -93,7 +93,6 @@ export default {
         return date;
       };
 
-      // Aquí ocurre la MAGIA: Convertimos true/false a 1/0
       return {
         ...e,
         fecha_inicio: formatDate(e.fecha_inicio),

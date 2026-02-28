@@ -132,14 +132,14 @@ class Equipo_atleta extends BaseModel
             'create'=>[
                 'id_equipo' =>'required|exists:'.$this->connection.'.equipo,id_equipo',
                 'id_atleta' =>'required|exists:'.$this->connection.'.persona_atleta,id_atleta',
-                'id_estado_atleta' =>'required|exists:'.$this->connection.'.atleta_estado,id_estado',
+                'id_estado_atleta' =>'nullable|exists:'.$this->connection.'.atleta_estado,id_estado',
                 'capitan' =>'nullable|boolean',
                 'subcapitan' =>'nullable|boolean'
             ],
             'update'=>[
                 'id_equipo' =>'required|exists:'.$this->connection.'.equipo,id_equipo',
                 'id_atleta' =>'required|exists:'.$this->connection.'.persona_atleta,id_atleta',
-                'id_estado_atleta' =>'required|exists:'.$this->connection.'.atleta_estado,id_estado',
+                'id_estado_atleta' =>'nullable|exists:'.$this->connection.'.atleta_estado,id_estado',
                 'capitan' =>'nullable|boolean',
                 'subcapitan' =>'nullable|boolean'
             ]

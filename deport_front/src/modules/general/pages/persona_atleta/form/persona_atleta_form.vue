@@ -20,33 +20,15 @@
               @change="personSelected"
               :successFeed="false"
               idKey="id_persona"
-              textKey="nombre"
+              textKey="nombre_completo"
               :defaultValue="persona_atleta.id_persona"
               v-model="persona_atleta.id_persona"
               :url="mb.statics('Persona').select_2_url"
             />
-            <a-button type="dashed"
-                      icon="plus"
-                      class="dashed-primary rounded mt-1 ml-2"
-                      @click="openModalCreatepersona">
-            </a-button>
           </div>
         </tc-form-item>
-
-        <a-modal
-          @cancel="showModalCreatepersona = false"
-          v-if="showModalCreatepersona"
-          class="modal-form"
-          :title="'Añadir Persona'"
-          :visible="true"
-          :header="null"
-          :footer="null"
-          :maskClosable="false"
-        >
-          <persona_form :model="null" :modal="true" @close_modal="personaAdded"/>
-        </a-modal>
         <tc-form-item class="form-group mb-0 col-md-6 px-3">
-          <label>Atleta_tipo</label>
+          <label>Tipo de atleta</label>
           <div class="d-flex flex-row">
             <tc-autocomplete
               placeholder="Seleccione el Atleta_tipo"
@@ -59,36 +41,18 @@
               v-model="persona_atleta.id_tipo"
               :url="mb.statics('Atleta_tipo').select_2_url"
             />
-            <a-button type="dashed"
-                      icon="plus"
-                      class="dashed-primary rounded mt-1 ml-2"
-                      @click="openModalCreatetipo">
-            </a-button>
           </div>
         </tc-form-item>
-
-        <a-modal
-          @cancel="showModalCreatetipo = false"
-          v-if="showModalCreatetipo"
-          class="modal-form"
-          :title="'Añadir Atleta_tipo'"
-          :visible="true"
-          :header="null"
-          :footer="null"
-          :maskClosable="false"
-        >
-          <atleta_tipo_form :model="null" :modal="true" @close_modal="tipoAdded"/>
-        </a-modal>
-      <tc-form-item class="form-group mb-0 col-md-6 px-3">
-        <label>Foto</label>
+        <!--<tc-form-item class="form-group mb-0 col-md-6 px-3">
+       <label>Foto</label>
         <tc-input placeholder='Ingrese el valor' name='foto' v-model="persona_atleta.foto"></tc-input>
-      </tc-form-item>
+        </tc-form-item>-->
       <tc-form-item class="form-group mb-0 col-md-6 px-3">
-        <label>Tamaño</label>
+        <label>Tamaño en Cm</label>
         <tc-input placeholder='Ingrese el valor'   type_car='dec'  name='tamaño' v-model="persona_atleta.tamaño"></tc-input>
       </tc-form-item>
       <tc-form-item class="form-group mb-0 col-md-6 px-3">
-        <label>Peso</label>
+        <label>Peso en Kg</label>
         <tc-input placeholder='Ingrese el valor'   type_car='dec'  name='peso' v-model="persona_atleta.peso"></tc-input>
       </tc-form-item>
       </tc-form>

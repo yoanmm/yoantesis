@@ -67,11 +67,9 @@
        />
     </a>
 
-    <!-- Slots específicos para compromiso_participacion según las propiedades de la BD -->
     <slot :slot="'id_compromiso'" slot-scope='record' name='id_compromiso' :record='record'/>
     <slot :slot="'id_delegacion_evento'" slot-scope='record' name='id_delegacion_evento' :record='record'/>
     <slot :slot="'id_deporte'" slot-scope='record' name='id_deporte' :record='record'/>
-    <!-- Agrega más slots si hay otras columnas en la tabla -->
     
   </a-table>
 </template>

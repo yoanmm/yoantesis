@@ -11,7 +11,7 @@
         class="form-row"
       >
       <tc-form-item class="form-group mb-0 col-md-6 px-3">
-        <label>Nombre_equipo</label>
+        <label>Nombre</label>
         <tc-input placeholder='Ingrese el valor' name='nombre_equipo' v-model="equipo.nombre_equipo"></tc-input>
       </tc-form-item>
         <tc-form-item class="form-group mb-0 col-md-6 px-3">
@@ -23,31 +23,13 @@
               ref="select_competencia"
               :successFeed="false"
               idKey="id_competencia"
-              textKey="id_evento"
+              textKey="id_deporte"
               :defaultValue="equipo.id_competencia"
               v-model="equipo.id_competencia"
               :url="mb.statics('Competencia').select_2_url"
             />
-            <a-button type="dashed"
-                      icon="plus"
-                      class="dashed-primary rounded mt-1 ml-2"
-                      @click="openModalCreatecompetencia">
-            </a-button>
           </div>
         </tc-form-item>
-
-        <a-modal
-          @cancel="showModalCreatecompetencia = false"
-          v-if="showModalCreatecompetencia"
-          class="modal-form"
-          :title="'Añadir Competencia'"
-          :visible="true"
-          :header="null"
-          :footer="null"
-          :maskClosable="false"
-        >
-          <competencia_form :model="null" :modal="true" @close_modal="competenciaAdded"/>
-        </a-modal>
         <tc-form-item class="form-group mb-0 col-md-6 px-3">
           <label>Delegacion</label>
           <div class="d-flex flex-row">
@@ -62,28 +44,10 @@
               v-model="equipo.id_delegacion"
               :url="mb.statics('Delegacion').select_2_url"
             />
-            <a-button type="dashed"
-                      icon="plus"
-                      class="dashed-primary rounded mt-1 ml-2"
-                      @click="openModalCreatedelegacion">
-            </a-button>
           </div>
         </tc-form-item>
-
-        <a-modal
-          @cancel="showModalCreatedelegacion = false"
-          v-if="showModalCreatedelegacion"
-          class="modal-form"
-          :title="'Añadir Delegacion'"
-          :visible="true"
-          :header="null"
-          :footer="null"
-          :maskClosable="false"
-        >
-          <delegacion_form :model="null" :modal="true" @close_modal="delegacionAdded"/>
-        </a-modal>
         <tc-form-item class="form-group mb-0 col-md-6 px-3">
-          <label>Equipo_estado</label>
+          <label>Estado</label>
           <div class="d-flex flex-row">
             <tc-autocomplete
               placeholder="Seleccione el Equipo_estado"
@@ -96,26 +60,8 @@
               v-model="equipo.id_estado"
               :url="mb.statics('Equipo_estado').select_2_url"
             />
-            <a-button type="dashed"
-                      icon="plus"
-                      class="dashed-primary rounded mt-1 ml-2"
-                      @click="openModalCreateestado">
-            </a-button>
           </div>
         </tc-form-item>
-
-        <a-modal
-          @cancel="showModalCreateestado = false"
-          v-if="showModalCreateestado"
-          class="modal-form"
-          :title="'Añadir Equipo_estado'"
-          :visible="true"
-          :header="null"
-          :footer="null"
-          :maskClosable="false"
-        >
-          <equipo_estado_form :model="null" :modal="true" @close_modal="estadoAdded"/>
-        </a-modal>
       </tc-form>
     </div>
     <div class="card-footer p-0">

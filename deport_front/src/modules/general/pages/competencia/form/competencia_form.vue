@@ -90,13 +90,16 @@
         <tc-form-item class="form-group mb-0 col-md-6 px-3">
           <label>Fin de inscripcion</label>
           <div class="d-flex flex-row">
-            <tc-date-picker name="fin_inscripcion" v-model="competencia.fin_inscripcion"></tc-date-picker>
+            <tc-date-picker name="fin_inscripcion" v-model="competencia.fin_inscripcion"
+             :disabled-date="disabledStartDate"
+             show-time format = "YYYY-MM-DD HH:mm"
+            ></tc-date-picker>
           </div>
         </tc-form-item>
 
       <tc-form-item class="form-group px-3 col-12">
         <label>Resultado competencia</label>
-        <tc-input :text_area="true" size="small" name="resultado_competencia" v-model="competencia.resultado_competencia"/>
+        <tc-input :text_area="true" size="small" name="resultado_competencia" v-model="competencia.resultado_competencia" row="4"/>
       </tc-form-item>
       
       </tc-form>
@@ -176,6 +179,11 @@ export default {
     evento_deportivo_form,
   },
   methods: {
+
+    disabledStartDate(current) {
+      // No permitir fechas anteriores a hoy
+      return current && current < moment().startOf("day");
+    },
       openModalCreatedeporte() {
         this.showModalCreatedeporte = true;
       },

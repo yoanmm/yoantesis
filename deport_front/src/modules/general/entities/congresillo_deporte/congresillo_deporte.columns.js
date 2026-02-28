@@ -9,7 +9,7 @@
     },
     {
       title: 'Competencia',
-      dataIndex: 'competencia.id_competencia',
+      dataIndex: 'competencia.id_deporte',
       align:'center',
       key: 'competencia.id_competencia',
 

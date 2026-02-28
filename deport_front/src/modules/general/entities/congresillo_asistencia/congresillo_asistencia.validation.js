@@ -11,12 +11,15 @@ import * as mb from "@/helpers/loaders/model.load"
     export const validations = {
       congresillo_asistencia: {
         representante: {
+          required,
         },
         id_delegacion: {
           integer,
+          required,
         },
         id_congresillo: {
           integer,
+          required,
         },
       },
     }

@@ -1,13 +1,5 @@
   export const columns = [
     {
-      title: 'Id Equipo Atleta',
-      dataIndex: 'id_equipo_atleta',
-      align:'center',
-      key: 'id_equipo_atleta',
-
-      sorter: (a, b) => a.id_equipo_atleta - b.id_equipo_atleta
-    },
-    {
       title: 'Equipo',
       dataIndex: 'equipo.nombre_equipo',
       align:'center',
@@ -17,11 +9,11 @@
     },
     {
       title: 'Atleta',
-      dataIndex: 'atleta.foto',
+      dataIndex: 'atleta.id_atleta',
       align:'center',
-      key: 'atleta.foto',
+      key: 'atleta.id_atleta',
 
-      sorter: (a, b) =>  a.atleta && b.atleta?(a.atleta.foto > b.atleta.foto)-(a.atleta.foto < b.atleta.foto):0
+      sorter: (a, b) =>  a.atleta && b.atleta?(a.atleta.nombre > b.atleta.nombre)-(a.atleta.nombre < b.atleta.nombre):0
     },
     {
       title: 'Estado',
@@ -36,7 +28,7 @@
       dataIndex: 'capitan',
       align:'center',
       key: 'capitan',
-
+      scopedSlots: { customRender: 'capitan' },
       sorter: (a, b) => a.capitan - b.capitan
     },
     {
@@ -44,7 +36,7 @@
       dataIndex: 'subcapitan',
       align:'center',
       key: 'subcapitan',
-
+      scopedSlots: { customRender: 'subcapitan' },
       sorter: (a, b) => a.subcapitan - b.subcapitan
     },
     {

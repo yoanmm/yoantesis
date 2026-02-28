@@ -24,7 +24,7 @@
       sorter: (a, b) =>  (a.resultado_competencia > b.resultado_competencia)-(a.resultado_competencia < b.resultado_competencia)
     },*/
     {
-      title: 'Fin_inscripcion',
+      title: 'Fin de inscripcion',
       dataIndex: 'fin_inscripcion',
       align:'center',
       key: 'fin_inscripcion',

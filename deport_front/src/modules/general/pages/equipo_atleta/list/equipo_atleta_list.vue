@@ -2,7 +2,7 @@
   <div>
     <div class="row row-breadcrumb">
       <div class=" row col-md-6">
-        <h3>Listado de Equipo_atleta</h3>
+        <h3>Atletas por Equipo</h3>
       </div>
       <a-breadcrumb>
         <a-breadcrumb-item href="">
@@ -13,7 +13,7 @@
           <span>General</span>
         </a-breadcrumb-item>
         <a-breadcrumb-item>
-          <span>Equipo_atleta</span>
+          <span>Atletas por Equipo</span>
         </a-breadcrumb-item>
       </a-breadcrumb>
     </div>
@@ -37,7 +37,7 @@
     <div>
       <a-modal
         @cancel="onCloseModal"
-        :title="selected_equipo_atleta.get_id() ? 'Actualizar equipo_atleta' : 'Añadir equipo_atleta'"
+        :title="selected_equipo_atleta.get_id() ? 'Actualizar al equipo' : 'Añadir Atleta al equipo'"
         class="modal-form"
         width="55rem"
         :visible="show_modal_form"
@@ -50,14 +50,39 @@
         <equipo_atleta_form :modal="true" :model="selected_equipo_atleta" />
       </a-modal>
       <div style="margin-left: 15px">
-        <equipo_atleta_table
-          :columns="columns"
-          table_name="Equipo_atleta"
-          id_table="id_equipo_atleta"
-          ref="equipo_atleta_table"
-          :params_search="params_search"
-          :paginate="paginate"
-        />
+       <equipo_atleta_table
+  :columns="columns"
+  table_name="Equipo_atleta"
+  id_table="id_equipo_atleta"
+  ref="equipo_atleta_table"
+  :params_search="params_search"
+  :paginate="paginate"
+>
+  <!-- Slot para CAPITÁN -->
+  <template #capitan="{ record }">
+    <div style="text-align:center;">
+      <template v-if="record == 1">
+        <a-icon type="check" style="font-size:15px;color:#52c41a;" />
+      </template>
+      <template v-else>
+        <a-icon type="close" style="font-size:15px;color:#ff4d4f;" />
+      </template>
+    </div>
+  </template>
+
+  <!-- Slot para SUBCAPITÁN -->
+  <template #subcapitan="{ record }">
+    <div style="text-align:center;">
+      <template v-if="record == 1">
+        <a-icon type="check" style="font-size:15px;color:#52c41a;" />
+      </template>
+      <template v-else>
+        <a-icon type="close" style="font-size:15px;color:#ff4d4f;" />
+      </template>
+    </div>
+  </template>
+</equipo_atleta_table>
+
       </div>
     </div>
   </div>

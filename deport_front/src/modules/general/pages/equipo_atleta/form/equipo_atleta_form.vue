@@ -24,26 +24,10 @@
               v-model="equipo_atleta.id_equipo"
               :url="mb.statics('Equipo').select_2_url"
             />
-            <a-button type="dashed"
-                      icon="plus"
-                      class="dashed-primary rounded mt-1 ml-2"
-                      @click="openModalCreateequipo">
-            </a-button>
           </div>
         </tc-form-item>
 
-        <a-modal
-          @cancel="showModalCreateequipo = false"
-          v-if="showModalCreateequipo"
-          class="modal-form"
-          :title="'Añadir Equipo'"
-          :visible="true"
-          :header="null"
-          :footer="null"
-          :maskClosable="false"
-        >
-          <equipo_form :model="null" :modal="true" @close_modal="equipoAdded"/>
-        </a-modal>
+        
         <tc-form-item class="form-group mb-0 col-md-6 px-3">
           <label>Atleta<span class='required_field'>*</span></label>
           <div class="d-flex flex-row">
@@ -58,26 +42,10 @@
               v-model="equipo_atleta.id_atleta"
               :url="mb.statics('Persona_atleta').select_2_url"
             />
-            <a-button type="dashed"
-                      icon="plus"
-                      class="dashed-primary rounded mt-1 ml-2"
-                      @click="openModalCreateatleta">
-            </a-button>
+            
           </div>
         </tc-form-item>
 
-        <a-modal
-          @cancel="showModalCreateatleta = false"
-          v-if="showModalCreateatleta"
-          class="modal-form"
-          :title="'Añadir Persona_atleta'"
-          :visible="true"
-          :header="null"
-          :footer="null"
-          :maskClosable="false"
-        >
-          <persona_atleta_form :model="null" :modal="true" @close_modal="atletaAdded"/>
-        </a-modal>
         <tc-form-item class="form-group mb-0 col-md-6 px-3">
           <label>Estado del Atleta<span class='required_field'>*</span></label>
           <div class="d-flex flex-row">
@@ -92,26 +60,9 @@
               v-model="equipo_atleta.id_estado_atleta"
               :url="mb.statics('Atleta_estado').select_2_url"
             />
-            <a-button type="dashed"
-                      icon="plus"
-                      class="dashed-primary rounded mt-1 ml-2"
-                      @click="openModalCreateestado_atleta">
-            </a-button>
           </div>
         </tc-form-item>
 
-        <a-modal
-          @cancel="showModalCreateestado_atleta = false"
-          v-if="showModalCreateestado_atleta"
-          class="modal-form"
-          :title="'Añadir Atleta_estado'"
-          :visible="true"
-          :header="null"
-          :footer="null"
-          :maskClosable="false"
-        >
-          <atleta_estado_form :model="null" :modal="true" @close_modal="estado_atletaAdded"/>
-        </a-modal>
         <tc-form-item class="form-group mb-0 col-md-6 px-3">
           <label>¿Es Capitán?</label>
           <div>

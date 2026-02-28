@@ -16,14 +16,15 @@ import * as mb from "@/helpers/loaders/model.load"
           required
         },
         id_tipo: {
-          integer,
         },
         foto: {
         },
         tamaño: {
+          required,
           decimal,
         },
         peso: {
+          required,
           decimal,
         },
         

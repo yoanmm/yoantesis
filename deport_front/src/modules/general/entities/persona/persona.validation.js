@@ -28,7 +28,6 @@ export const validations = {
       required,
     },
     facultad: {
-      required
     }
   },
 }

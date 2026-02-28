@@ -74,6 +74,7 @@
     <slot :slot="'id_competencia'" slot-scope='record' name='id_competencia' :record='record'/>
     <slot :slot="'id_fase'" slot-scope='record' name='id_fase' :record='record'/>
     <slot :slot="'id_cancha'" slot-scope='record' name='id_cancha' :record='record'/>
+    <slot :slot="'id_supervisor'" slot-scope='record' name='id_supervisor' :record='record'/>
   </a-table>
 </template>
 

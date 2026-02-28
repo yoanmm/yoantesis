@@ -58,26 +58,8 @@
               v-model="persona_arbitro.id_deporte"
               :url="mb.statics('Deporte').select_2_url"
             />
-            <a-button type="dashed"
-                      icon="plus"
-                      class="dashed-primary rounded mt-1 ml-2"
-                      @click="openModalCreatedeporte">
-            </a-button>
           </div>
         </tc-form-item>
-
-        <a-modal
-          @cancel="showModalCreatedeporte = false"
-          v-if="showModalCreatedeporte"
-          class="modal-form"
-          :title="'Añadir Deporte'"
-          :visible="true"
-          :header="null"
-          :footer="null"
-          :maskClosable="false"
-        >
-          <deporte_form :model="null" :modal="true" @close_modal="deporteAdded"/>
-        </a-modal>
       </tc-form>
     </div>
     <div class="card-footer p-0">

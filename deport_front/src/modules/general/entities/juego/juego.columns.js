@@ -8,7 +8,7 @@
       sorter: (a, b) => a.fecha_inicio - b.fecha_inicio
     },
     {
-      title: 'Fin',
+      title: 'Hora de Fin',
       dataIndex: 'fecha_fin',
       align:'center',
       key: 'fecha_fin',
@@ -16,18 +16,17 @@
       sorter: (a, b) => a.fecha_fin - b.fecha_fin
     },
     {
-      title: 'Descripcion',
-      dataIndex: 'descripcion_juego',
-      align:'center',
-      key: 'descripcion_juego',
-
-      sorter: (a, b) =>  (a.descripcion_juego > b.descripcion_juego)-(a.descripcion_juego < b.descripcion_juego)
+      title: 'Supervisor',
+      dataIndex: 'id_supervisor',
+      align: 'center',
+      key: 'id_supervisor',
+      sorter: (a, b) => a.id_supervisor - b.id_supervisor
     },
     {
       title: 'Competencia',
       dataIndex: 'competencia.id_competencia',
       align:'center',
-      key: 'competencia.id_competencia',
+      key: 'competencia.id_deporte',
 
       sorter: (a, b) => a.competencia && b.competencia?a.competencia.id_competencia - b.competencia.id_competencia:0
     },

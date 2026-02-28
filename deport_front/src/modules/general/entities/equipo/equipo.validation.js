@@ -23,7 +23,6 @@ import * as mb from "@/helpers/loaders/model.load"
         },
         id_estado: {
           integer,
-          required
         },
       },
     }

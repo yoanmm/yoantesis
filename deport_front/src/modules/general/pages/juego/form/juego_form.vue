@@ -10,23 +10,39 @@
         ref="form"
         class="form-row"
       >
-        <tc-form-item class="form-group mb-0 col-md-6 px-3">
-          <label>Fecha_inicio</label>
-          <div class="d-flex flex-row">
-            <tc-date-picker name="fecha_inicio" v-model="juego.fecha_inicio"></tc-date-picker>
-          </div>
-        </tc-form-item>
-        <tc-form-item class="form-group mb-0 col-md-6 px-3">
-          <label>Fecha_fin</label>
-          <div class="d-flex flex-row">
-            <tc-date-picker name="fecha_fin" v-model="juego.fecha_fin"></tc-date-picker>
-          </div>
-        </tc-form-item>
-      <tc-form-item class="form-group mb-0 col-md-6 px-3">
+        <!-- Fecha + Hora (Inicio) -->
+<tc-form-item class="form-group mb-3 col-md-6 px-3">
+  <label>Fecha de inicio</label>
+  <div class="d-flex flex-row">
+    <tc-date-picker 
+      name="fecha_inicio" 
+      v-model="juego.fecha_inicio" 
+      type="datetime"          
+      format="YYYY-MM-DD HH:mm"
+      :show-time="true"
+    />
+  </div>
+</tc-form-item>
+
+<!-- Solo Hora (Fin) -->
+<tc-form-item class="form-group mb-3 col-md-6 px-3">
+  <label>Hora de fin</label>
+  <div class="d-flex flex-row">
+    <tc-date-picker 
+      name="fecha_fin" 
+      v-model="juego.fecha_fin" 
+      type="time"              
+      format="HH:mm"         
+      :show-time="true"
+    />
+  </div>
+</tc-form-item>
+
+      <!--<tc-form-item class="form-group mb-0 col-md-6 px-3">
         <label>Descripcion_juego</label>
         <tc-input placeholder='Ingrese el valor' name='descripcion_juego' v-model="juego.descripcion_juego"></tc-input>
-      </tc-form-item>
-        <tc-form-item class="form-group mb-0 col-md-6 px-3">
+      </tc-form-item>-->
+        <tc-form-item class="form-group mb-6 col-md-6 px-3">
           <label>Competencia</label>
           <div class="d-flex flex-row">
             <tc-autocomplete
@@ -35,32 +51,14 @@
               ref="select_competencia"
               :successFeed="false"
               idKey="id_competencia"
-              textKey="id_evento"
+              textKey="id_deporte"
               :defaultValue="juego.id_competencia"
               v-model="juego.id_competencia"
               :url="mb.statics('Competencia').select_2_url"
             />
-            <a-button type="dashed"
-                      icon="plus"
-                      class="dashed-primary rounded mt-1 ml-2"
-                      @click="openModalCreatecompetencia">
-            </a-button>
           </div>
         </tc-form-item>
-
-        <a-modal
-          @cancel="showModalCreatecompetencia = false"
-          v-if="showModalCreatecompetencia"
-          class="modal-form"
-          :title="'Añadir Competencia'"
-          :visible="true"
-          :header="null"
-          :footer="null"
-          :maskClosable="false"
-        >
-          <competencia_form :model="null" :modal="true" @close_modal="competenciaAdded"/>
-        </a-modal>
-        <tc-form-item class="form-group mb-0 col-md-6 px-3">
+        <tc-form-item class="form-group mb-6 col-md-6 px-3">
           <label>Juego_fase</label>
           <div class="d-flex flex-row">
             <tc-autocomplete
@@ -74,27 +72,9 @@
               v-model="juego.id_fase"
               :url="mb.statics('Juego_fase').select_2_url"
             />
-            <a-button type="dashed"
-                      icon="plus"
-                      class="dashed-primary rounded mt-1 ml-2"
-                      @click="openModalCreatefase">
-            </a-button>
           </div>
         </tc-form-item>
-
-        <a-modal
-          @cancel="showModalCreatefase = false"
-          v-if="showModalCreatefase"
-          class="modal-form"
-          :title="'Añadir Juego_fase'"
-          :visible="true"
-          :header="null"
-          :footer="null"
-          :maskClosable="false"
-        >
-          <juego_fase_form :model="null" :modal="true" @close_modal="faseAdded"/>
-        </a-modal>
-        <tc-form-item class="form-group mb-0 col-md-6 px-3">
+        <tc-form-item class="form-group mb-3 col-md-6 px-3">
           <label>Cancha</label>
           <div class="d-flex flex-row">
             <tc-autocomplete
@@ -108,26 +88,25 @@
               v-model="juego.id_cancha"
               :url="mb.statics('Cancha').select_2_url"
             />
-            <a-button type="dashed"
-                      icon="plus"
-                      class="dashed-primary rounded mt-1 ml-2"
-                      @click="openModalCreatecancha">
-            </a-button>
+          </div>
+        </tc-form-item>
+        <tc-form-item class="form-group mb-3 col-md-6 px-3">
+          <label>Supervisor</label>
+           <div class="d-flex flex-row">
+            <tc-autocomplete
+              placeholder="Seleccione el Supervisor"
+              name="id_supervisor"
+              ref="select_supervisor"
+              :successFeed="false"
+              idKey="id_supervisor"
+              textKey="id_supervisor"   
+              :defaultValue="juego.id_supervisor"
+              v-model="juego.id_supervisor"
+              :url="mb.statics('Persona_arbitro').select_2_url"
+            />
           </div>
         </tc-form-item>
 
-        <a-modal
-          @cancel="showModalCreatecancha = false"
-          v-if="showModalCreatecancha"
-          class="modal-form"
-          :title="'Añadir Cancha'"
-          :visible="true"
-          :header="null"
-          :footer="null"
-          :maskClosable="false"
-        >
-          <cancha_form :model="null" :modal="true" @close_modal="canchaAdded"/>
-        </a-modal>
       </tc-form>
     </div>
     <div class="card-footer p-0">
@@ -249,12 +228,19 @@ export default {
        }
       },
     save_model(and_new=false) {
-      if (this.$refs.form.validate()) {
-        this.loading = true;
-        const accion=this.juego.get_id() ? "actualizado" : "añadido";
-        this.juego
-          .save()
-          .then((response) => {
+  if (this.$refs.form.validate()) {
+    this.loading = true;
+
+    // Normaliza fechas con tu helper
+    this.juego.fecha_inicio = this.juego.fecha_inicio
+      ? moment(this.juego.fecha_inicio).format('YYYY-MM-DD HH:mm:ss')
+      : null;
+    this.juego.fecha_fin = this.juego.fecha_fin
+      ? moment(this.juego.fecha_fin).format('YYYY-MM-DD HH:mm:ss')
+      : null;
+
+    const accion = this.juego.get_id() ? "actualizado" : "añadido";
+    this.juego.save().then((response) => {
             if(utils.process_response(response,accion)) {
               if (!this.model && !and_new && this.modal) {
 

@@ -11,7 +11,7 @@
         class="form-row"
       >
         <tc-form-item class="form-group mb-0 col-md-6 px-3">
-          <label>Fecha_congresillo</label>
+          <label>Fecha del congresillo</label>
           <div class="d-flex flex-row">
             <tc-date-picker name="fecha_congresillo" v-model="congresillo_deporte.fecha_congresillo"></tc-date-picker>
           </div>
@@ -25,16 +25,11 @@
               ref="select_competencia"
               :successFeed="false"
               idKey="id_competencia"
-              textKey="id_evento"
+              textKey="id_deporte"  
               :defaultValue="congresillo_deporte.id_competencia"
               v-model="congresillo_deporte.id_competencia"
               :url="mb.statics('Competencia').select_2_url"
             />
-            <a-button type="dashed"
-                      icon="plus"
-                      class="dashed-primary rounded mt-1 ml-2"
-                      @click="openModalCreatecompetencia">
-            </a-button>
           </div>
         </tc-form-item>
 

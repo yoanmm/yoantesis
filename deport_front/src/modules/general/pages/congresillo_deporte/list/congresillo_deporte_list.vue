@@ -36,7 +36,7 @@
     <div>
       <a-modal
         @cancel="onCloseModal"
-        :title="selected_congresillo_deporte.get_id() ? 'Actualizar congresillo_deporte' : 'Añadir congresillo_deporte'"
+        :title="selected_congresillo_deporte.get_id() ? 'Actualizar congresillo' : 'Añadir congresillo'"
         class="modal-form"
         width="55rem"
         :visible="show_modal_form"
