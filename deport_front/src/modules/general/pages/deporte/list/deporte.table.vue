@@ -1,13 +1,13 @@
 <template>
   <a-table
-      :columns="columns"
-      :rowKey="(record) => record[id_table]"
-      :dataSource="data"
-      :rowSelection="show_selection ? rowSelection : null"
-      :loading="loading"
-      :pagination="pagination.$data"
-      :scroll="{ x: '100%' }"
-      @change="change_table"
+    :columns="columns"
+    :rowKey="(record) => record[id_table]"
+    :dataSource="data"
+    :rowSelection="show_selection ? rowSelection : null"
+    :loading="loading"
+    :pagination="pagination.$data"
+    :scroll="{ x: '100%' }"
+    @change="change_table"
   >
     <template slot="title">
       <div class="row" v-if="visible_heading">
@@ -15,13 +15,13 @@
           <div class="input-group mb-3">
             <a-tooltip placement="topLeft" title="Buscar..">
               <tc-input
-                  type="text"
-                  class="form-control-filter"
-                  v-model="filter"
-                  placeholder="Buscar"
-                  aria-label
-                  :debounce="paginate"
-                  @input="update_filter_debounce"
+                type="text"
+                class="form-control-filter"
+                v-model="filter"
+                placeholder="Buscar"
+                aria-label
+                :debounce="paginate"
+                @input="update_filter_debounce"
               />
             </a-tooltip>
             <a-tooltip placement="topLeft" title="Limpiar Filtros" style="margin-left: 10px;">
@@ -51,18 +51,26 @@
     </template>
     <a slot="action" v-if="visible_actions" slot-scope="record" href="javascript:;">
       <action_buttons
-          :object="record"
-          :visible_view="visible_view"
-          :visible_edit="visible_edit"
-          :visible_delete="visible_delete"
-          :v_instance="self"
-          :class_name="selected_model.class_name()"
+        :object="record"
+        :visible_view="visible_view"
+        :visible_edit="visible_edit"
+        :visible_delete="visible_delete"
+        :v_instance="self"
+        :class_name="selected_model.class_name()"
       />
     </a>
 
-    <template v-for="slotName in Object.keys($scopedSlots)">
-      <slot :name="slotName" :slot="slotName" slot-scope="record" :record="record" />
-    </template>
+    <slot :slot="'id_deporte'" slot-scope="record" name="id_deporte" :record="record" />
+    <slot :slot="'nombre_deporte'" slot-scope="record" name="nombre_deporte" :record="record" />
+    <slot :slot="'max_atleta'" slot-scope="record" name="max_atleta" :record="record" />
+    <slot :slot="'min_atleta'" slot-scope="record" name="min_atleta" :record="record" />
+    <slot :slot="'icono_deporte'" slot-scope="record" name="icono_deporte" :record="record" />
+    <slot :slot="'genero'" slot-scope="record" name="genero" :record="record" />
+    <slot :slot="'individual'" slot-scope="record" name="individual" :record="record" />
+    <slot :slot="'id_categoria'" slot-scope="record" name="id_categoria" :record="record" />
+    <slot :slot="'id_regla'" slot-scope="record" name="id_regla" :record="record" />
+    <slot :slot="'id_deporte_padre'" slot-scope="record" name="id_deporte_padre" :record="record" />
+    <slot :slot="'reglamento'" slot-scope="record" name="reglamento" :record="record" />
   </a-table>
 </template>
 
@@ -81,30 +89,92 @@ export default {
       load_data: this.load_data,
     };
   },
+  inject: {
+    close_modal: {
+      default: () => {},
+    },
+    show_form: {
+      default: () => {},
+    },
+    setSelectedDeporte: {
+      default: () => {},
+    },
+  },
   props: {
-    value: { type: Array, default: () => [] }, // Propiedad para v-model
-    columns: { type: Array, default: () => [] },
-    show_selection: { type: Boolean, default: true },
-    type_selection: { type: String, default: "checkbox" },
-    hide_default_selection: { type: Boolean, default: true },
-    params_search: { type: Object, default: () => ({}) },
-    paginate: { type: Boolean, default: false },
-    visible_heading: { type: Boolean, default: true },
-    load_init: { type: Boolean, default: true },
-    table_name: { type: String, default: "" },
-    url: { type: String, default: null },
-    id_table: { type: String, default: "" },
-    visible_actions: { type: Boolean, default: true },
-    visible_edit: { type: Boolean, default: true },
-    visible_delete: { type: Boolean, default: true },
-    visible_view: { type: Boolean, default: false },
-    static_data: { type: Array, default: null },
-    show_export: { type: Boolean, default: true },
+    columns: {
+      type: Array,
+      default: () => [],
+    },
+    show_selection: {
+      type: Boolean,
+      default: true,
+    },
+    type_selection: {
+      type: String,
+      default: "checkbox",
+    },
+    hide_default_selection: {
+      type: Boolean,
+      default: true,
+    },
+    params_search: {
+      type: Object,
+      default: () => {},
+    },
+    paginate: {
+      type: Boolean,
+      default: false,
+    },
+    visible_heading: {
+      type: Boolean,
+      default: true,
+    },
+    load_init: {
+      type: Boolean,
+      default: true,
+    },
+    table_name: {
+      type: String,
+      default: "",
+    },
+    url: {
+      type: String,
+      default: null,
+    },
+    id_table: {
+      type: String,
+      default: "",
+    },
+
+    visible_actions: {
+      type: Boolean,
+      default: true,
+    },
+    visible_edit: {
+      type: Boolean,
+      default: true,
+    },
+    visible_delete: {
+      type: Boolean,
+      default: true,
+    },
+    visible_view: {
+      type: Boolean,
+      default: false,
+    },
+    static_data: {
+      type: Array,
+      default: null,
+    },
+    show_export: {
+      type: Boolean,
+      default: true,
+    },
   },
   data() {
     return {
       text_select: "Seleccionar todo",
-      selectedRowKeys: this.value || [], // Sincronizado con v-model
+      selectedRowKeys: [],
       list: [],
       page: 1,
       pageSize: 10,
@@ -117,24 +187,23 @@ export default {
       filter_debounce: "",
       show_modal_form: false,
       page_params_search: {},
-      self: null
     };
   },
   computed: {
     page_params() {
       return {
-        pagination: { page: this.page, pageSize: this.pageSize },
+        pagination: {
+          page: this.page,
+          pageSize: this.pageSize,
+        },
       };
     },
     rowSelection() {
+      const { selectedRowKeys } = this;
       return {
-        selectedRowKeys: this.selectedRowKeys,
+        selectedRowKeys,
         type: this.type_selection,
         hideDefaultSelections: this.hide_default_selection,
-        onChange: (selectedRowKeys) => {
-          this.selectedRowKeys = selectedRowKeys;
-          this.$emit('input', selectedRowKeys); // Emite el cambio al v-model del padre
-        },
         selections: [
           {
             key: "all-data",
@@ -143,49 +212,113 @@ export default {
               if (this.selectedRowKeys.length === this.data.length) {
                 this.selectedRowKeys = [];
               } else {
-                this.selectedRowKeys = this.data.map((e) => e[this.id_table]);
+                this.selectedRowKeys = this.data.map((e) => {
+                  return e[this.id_table];
+                });
               }
-              this.$emit('input', this.selectedRowKeys);
             },
           },
         ],
+        onSelection: this.onSelection,
+        onChange: this.onChange,
       };
     },
   },
   watch: {
-    value(newVal) {
-      this.selectedRowKeys = newVal || []; // Reacciona a cambios externos del padre
-    },
     filter: function() {
       if (!this.paginate) {
         this.data = this.list.data.filter(this.filter_data);
         this.pagination.total = this.data.length;
       }
     },
-    params_search() {
+    params_search(newValue, oldValue) {
       this.load_data();
     },
-    filter_debounce: function(value) {
+    filter_debounce: function(value, oldValue) {
       if (this.paginate) {
-        this.page_params_search = { ...mb.statics(this.table_name).filter_params(value, this.columns) };
+        this.page_params_search = { ...mb.statics(this.table_name).filter_params(this.filter_debounce, this.columns) };
         this.load_data();
+      }
+    },
+    selectedRowKeys: function() {
+      if (this.selectedRowKeys.length === this.data.length) {
+        this.text_select = "Desseleccionar todo";
+      } else {
+        this.text_select = "Seleccionar todo";
       }
     },
   },
   methods: {
     params() {
       return this.paginate
-          ? { ...this.page_params_search, ...this.page_params, ...this.orderby_params, ...this.params_search }
-          : this.params_search;
+        ? { ...this.page_params_search, ...this.page_params, ...this.orderby_params, ...this.params_search }
+        : this.params_search;
     },
-    exportToExcel() { utils.exportToExcelVinstance(this); },
-    update_filter_debounce(newVal) { this.filter_debounce = newVal; },
-    filter_data(object) { return utils.filter_object_column(object, this.filter, this.columns); },
+    exportToExcel() {
+      utils.exportToExcelVinstance(this);
+    },
+    update_filter_debounce(newVal) {
+      this.filter_debounce = newVal;
+    },
+    exportToCSV() {
+      utils.exportToCSV(this);
+    },
+    filter_data(object) {
+      return utils.filter_object_column(object, this.filter, this.columns);
+    },
+    onChange: function(selectedRowKeys) {
+      this.selectedRowKeys = selectedRowKeys;
+    },
+    showDeleteConfirm() {
+      if (this.selectedRowKeys.length === 0) {
+        utils.openNotificationWithIcon(
+          "error",
+          "Eliminar elementos seleccionados",
+          "Debe seleccionar al menos un elemento",
+        );
+        return;
+      }
+      let _this = this;
+      this.$confirm({
+        title: "Eliminar elementos seleccionados?",
+        icon: "delete",
+        // icon:()=>{return ( <a-icon type="delete" style="color:red"/> )},
+        okText: "Si",
+        okType: "danger",
+        class: "delete_confirm",
+        cancelText: "No",
+        async onOk() {
+          try {
+            const response = await mb.statics(this.table_name).delete_by_ids(_this.selectedRowKeys);
+            utils.process_response(response, "deleted");
+            _this.selectedRowKeys = [];
+            _this.load_data();
+          } catch (error) {
+            utils.process_error(error);
+            _this.selectedRowKeys = [];
+          }
+        },
+        onCancel() {},
+      });
+    },
+    change_table(pagination, filters, sorter) {
+      if (this.paginate) {
+        this.page = pagination.current;
+        this.pageSize = pagination.pageSize;
+        if (JSON.stringify(sorter) !== "{}") {
+          const asc_desc = sorter.order === "ascend" ? "asc" : "desc";
+          this.orderby_params.orderby = [];
+          this.orderby_params.orderby.push({ [sorter.field]: asc_desc });
+        }
+        this.load_data();
+      }
+    },
     async load_data() {
       if (this.static_data) return 0;
       try {
         this.loading = true;
-        this.list = this.url == null
+        this.list =
+          this.url == null
             ? await mb.statics(this.table_name).list(this.params())
             : await mb.statics(this.table_name).custom("get", this.url, this.params());
         this.data = this.paginate ? this.list.data.data : this.list.data.filter(this.filter_data);
@@ -196,16 +329,10 @@ export default {
         this.loading = false;
       }
     },
-    change_table(pagination, filters, sorter) {
-      if (this.paginate) {
-        this.page = pagination.current;
-        this.pageSize = pagination.pageSize;
-        if (JSON.stringify(sorter) !== "{}") {
-          const asc_desc = sorter.order === "ascend" ? "asc" : "desc";
-          this.orderby_params.orderby = [{ [sorter.field]: asc_desc }];
-        }
-        this.load_data();
-      }
+    onEditing(model) {
+      this.selected_model = mb.instance(this.table_name, model);
+      this.setSelectedDeporte(this.selected_model);
+      this.show_form();
     },
   },
   mounted() {
@@ -214,3 +341,5 @@ export default {
   },
 };
 </script>
+
+<style scoped></style>
