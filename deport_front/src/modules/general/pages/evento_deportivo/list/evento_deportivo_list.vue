@@ -63,7 +63,7 @@
         >
           <template #terminado="{ record }">
             <div style="text-align:center;">
-              <template v-if="record.terminado == 1 || record.terminado === true">
+              <template v-if="record === 1 || record === true">
                 <a-icon type="check" style="font-size:15px;color:#52c41a;" />
               </template>
               <template v-else>
